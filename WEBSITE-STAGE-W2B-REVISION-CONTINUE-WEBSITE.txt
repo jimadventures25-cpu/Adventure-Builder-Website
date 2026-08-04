@@ -1,0 +1,7 @@
+Adventure Builder Website Stage W2B Revision
+
+- Replaced the old signed-in account panel actions.
+- Added Continue on Website.
+- Kept Open the App as an optional action.
+- Added a future Account settings entry.
+- Preserved shared Supabase login/session behaviour.

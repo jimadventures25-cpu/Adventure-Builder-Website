@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Adventure Builder brings navigation, camping, hiking and trip planning together in one adventure app.">
+  <meta name="theme-color" content="#0b0d0f">
+  <title>Adventure Builder | Your Adventure Starts Here</title>
+  <link rel="icon" href="images/adventure-builder-logo.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Adventure Builder home">
+      <img src="images/adventure-builder-logo.png" alt="Adventure Builder logo">
+      <span>Adventure Builder</span>
+    </a>
+
+    <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#explore">Explore</a>
+      <a href="#camping">Camping</a>
+      <a href="#hiking">Walking &amp; Hiking</a>
+      <a href="#vanlife">Van Life</a>
+      <a href="#planner">Trip Planner</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#journal">Journal</a>
+      <a href="#passport">Passport</a>
+      <a href="#community">Community</a>
+    </nav>
+
+    <div class="account-actions" id="account-actions">
+      <button class="header-link" id="open-login" type="button">Log in</button>
+      <button class="header-register" id="open-register" type="button">Register</button>
+      <button class="account-chip" id="account-chip" type="button" hidden>
+        <span class="account-avatar" id="account-avatar">A</span>
+        <span id="account-label">My account</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-compact" id="home" aria-label="Adventure Builder overview">
+      <span class="sr-only">Adventure Builder — plan, navigate, explore and discover. Road trips, campsites, navigation, hiking, photography and community.</span>
+    </section>
+
+    <section class="hero-intro">
+      <p class="eyebrow">Plan. Navigate. Explore. Discover.</p>
+      <h1>Your <span>Adventure</span> Starts Here</h1>
+      <p>One growing adventure app for road trips, campervans, camping, hiking, discovery and smarter navigation.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="https://adventure-builder-app.netlify.app" target="_blank" rel="noopener">Launch Adventure Builder</a>
+        <a class="button button-secondary" href="#community">Join the Community</a>
+      </div>
+    </section>
+
+    <section class="section category-hub" id="explore">
+      <div class="section-heading"><p class="eyebrow">Discover somewhere new</p><h2>Explore</h2><p>Find hidden gems, viewpoints, beaches, castles, forests, lakes and other places worth adding to an adventure.</p></div>
+      <div class="category-layout">
+        <div class="category-copy"><span class="category-icon">🗺️</span><h3>Build an Explore Adventure</h3><p>Collect places, save favourites and turn discoveries into a future trip. Content saved here will later appear in the matching Explore area of the app.</p><button class="button button-primary design-button" type="button" data-category="Explore">Design Explore Adventure</button></div>
+        <div class="category-features"><span>Hidden gems</span><span>Scenic places</span><span>Saved locations</span><span>Favourite discoveries</span><span>Photos and notes</span><span>Community recommendations</span></div>
+      </div>
+    </section>
+
+    <section class="section category-hub category-alt" id="camping">
+      <div class="section-heading"><p class="eyebrow">Stay under the stars</p><h2>Camping</h2><p>Keep campsite information, reviews, photos and camping adventures together in their correct area.</p></div>
+      <div class="category-layout">
+        <div class="category-copy"><span class="category-icon">🏕️</span><h3>Build a Camping Adventure</h3><p>Plan a campsite visit, save useful stops and keep camping photos and memories attached to the same adventure.</p><button class="button button-primary design-button" type="button" data-category="Camping">Design Camping Adventure</button></div>
+        <div class="category-features"><span>Campsites</span><span>Overnight stops</span><span>Reviews</span><span>Camping favourites</span><span>Facilities</span><span>Camping photos</span></div>
+      </div>
+    </section>
+
+    <section class="section category-hub" id="hiking">
+      <div class="section-heading"><p class="eyebrow">Take the trail</p><h2>Walking &amp; Hiking</h2><p>Walking routes, trail information and hiking memories will stay together here and in the app.</p></div>
+      <div class="category-layout">
+        <div class="category-copy"><span class="category-icon">🥾</span><h3>Build a Hiking Adventure</h3><p>Create a walking idea with distance, difficulty, places to visit, photos and personal notes.</p><button class="button button-primary design-button" type="button" data-category="Walking and Hiking">Design Hiking Adventure</button></div>
+        <div class="category-features"><span>Walking routes</span><span>Trail difficulty</span><span>Distance</span><span>Elevation</span><span>Hiking photos</span><span>Saved trails</span></div>
+      </div>
+    </section>
+
+    <section class="section category-hub category-alt" id="vanlife">
+      <div class="section-heading"><p class="eyebrow">Life on the road</p><h2>Van Life</h2><p>Plan campervan and motorhome trips with overnight stops, service points and community knowledge.</p></div>
+      <div class="category-layout">
+        <div class="category-copy"><span class="category-icon">🚐</span><h3>Build a Van Life Adventure</h3><p>Keep van-friendly places, trip plans and road memories organised in one matching category.</p><button class="button button-primary design-button" type="button" data-category="Van Life">Design Van Life Adventure</button></div>
+        <div class="category-features"><span>Overnight stops</span><span>Water points</span><span>Waste facilities</span><span>Parking</span><span>Van-life tips</span><span>Saved road trips</span></div>
+      </div>
+    </section>
+
+    <section class="section category-hub" id="planner">
+      <div class="section-heading"><p class="eyebrow">Bring it all together</p><h2>Trip Planner</h2><p>Build a complete adventure using saved places from the other website and app categories.</p></div>
+      <div class="category-layout">
+        <div class="category-copy"><span class="category-icon">📅</span><h3>Design Your Adventure</h3><p>Create an itinerary, choose dates, add stops and prepare everything before opening the trip in the app.</p><button class="button button-primary design-button" type="button" data-category="Trip Planner">Design an Adventure</button></div>
+        <div class="category-features"><span>Itinerary</span><span>Saved places</span><span>Dates and times</span><span>Packing list</span><span>Trip budget</span><span>Travel timeline</span></div>
+      </div>
+    </section>
+
+    <section class="section category-hub category-alt" id="gallery">
+      <div class="section-heading"><p class="eyebrow">Your adventure in pictures</p><h2>Gallery</h2><p>Photos uploaded through the app will be able to appear here through the shared Adventure Builder account.</p></div>
+      <div class="category-layout">
+        <div class="category-copy"><span class="category-icon">📸</span><h3>Adventure Gallery</h3><p>View your uploads, organise albums and decide whether each photo is private or shared publicly.</p><button class="button button-primary design-button" type="button" data-category="Gallery">Open Gallery Area</button></div>
+        <div class="category-features"><span>Photo uploads</span><span>Albums</span><span>Videos</span><span>Privacy controls</span><span>Featured photos</span><span>Community gallery</span></div>
+      </div>
+    </section>
+
+    <section class="section category-hub" id="journal">
+      <div class="section-heading"><p class="eyebrow">Remember every journey</p><h2>Adventure Journal</h2><p>Keep trip notes, photographs and memories attached to the adventure they belong to.</p></div>
+      <div class="category-layout">
+        <div class="category-copy"><span class="category-icon">📖</span><h3>Create a Journal Entry</h3><p>Write on the website or in the app and, once connected through Supabase, see the same entry in both places.</p><button class="button button-primary design-button" type="button" data-category="Adventure Journal">Create Journal Entry</button></div>
+        <div class="category-features"><span>Trip diary</span><span>Photos and videos</span><span>Visited places</span><span>Personal notes</span><span>Dates</span><span>Shared stories</span></div>
+      </div>
+    </section>
+
+    <section class="section category-hub category-alt" id="passport">
+      <div class="section-heading"><p class="eyebrow">Collect your adventures</p><h2>Adventure Passport</h2><p>Future QR stamps, badges and achievements will have their own dedicated home.</p></div>
+      <div class="category-layout">
+        <div class="category-copy"><span class="category-icon">🏆</span><h3>Open Adventure Passport</h3><p>See visited locations, QR stamps, points and achievement progress in one organised category.</p><button class="button button-primary design-button" type="button" data-category="Adventure Passport">Open Passport Area</button></div>
+        <div class="category-features"><span>QR stamps</span><span>Points</span><span>Achievements</span><span>Badges</span><span>Visited places</span><span>Challenges</span></div>
+      </div>
+    </section>
+
+    <section class="section download-section" id="download">
+      <div class="section-heading"><p class="eyebrow">Move from computer to phone</p><h2>Get Adventure Builder on Your Phone</h2><p>On a computer, scan Adventure Builder's own QR code. On a phone, use the direct app button.</p></div>
+      <div class="download-card">
+        <div class="qr-panel desktop-download"><img src="images/adventure-builder-app-qr.png" alt="QR code that opens Adventure Builder on a phone"><strong>Scan with your phone camera</strong><small>This QR code is stored inside the website and does not rely on an external QR service.</small></div>
+        <div class="download-actions"><h3>Continue your adventure</h3><p>Open the app directly, email the link to yourself, or stay on the website.</p><a class="button button-primary" href="https://adventure-builder-app.netlify.app" target="_blank" rel="noopener">Open / Download Adventure Builder</a><a class="button button-secondary" href="mailto:?subject=Adventure%20Builder%20app&amp;body=Open%20Adventure%20Builder%20on%20your%20phone%3A%20https%3A%2F%2Fadventure-builder-app.netlify.app">Email Me the App Link</a><a class="text-link" href="#home">Stay on Website</a></div>
+      </div>
+    </section>
+
+    <section class="section community-section" id="community">
+      <div class="section-heading"><p class="eyebrow">Join the journey</p><h2>Adventure Builder Community</h2><p>Follow the development, share ideas and help shape what comes next.</p></div>
+      <div class="community-grid">
+        <a class="community-card" href="https://www.facebook.com/groups/1511217973638788" target="_blank" rel="noopener"><span class="community-icon">👥</span><strong>Facebook Group</strong><small>Join the discussion</small></a>
+        <a class="community-card" href="https://www.facebook.com/profile.php?id=100075900377744" target="_blank" rel="noopener"><span class="community-icon">📘</span><strong>Facebook Page</strong><small>Follow project updates</small></a>
+        <a class="community-card" href="https://www.youtube.com/@Adventure-Builder" target="_blank" rel="noopener"><span class="community-icon">▶️</span><strong>YouTube</strong><small>Watch the build journey</small></a>
+      </div>
+    </section>
+
+    <section class="cta-section"><div><p class="eyebrow">Ready to explore?</p><h2>Open Adventure Builder</h2><p>Use the same account on the website and in the Adventure Builder app.</p></div><a class="button button-primary" href="#download">Get the App</a></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
+    <div class="footer-links"><a href="#home">Home</a><a href="#explore">Explore</a><a href="#camping">Camping</a><a href="#planner">Trip Planner</a><a href="#gallery">Gallery</a><a href="#community">Community</a><a href="#download">Get the App</a></div>
+    <p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p>
+  </footer>
+
+  <div class="auth-overlay" id="auth-overlay" hidden>
+    <section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+      <button class="auth-close" id="auth-close" type="button" aria-label="Close account window">×</button>
+      <div class="auth-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><small>One account for the website and app</small></div></div>
+
+      <div id="auth-signed-out">
+        <div class="auth-tabs" role="tablist">
+          <button id="login-tab" class="auth-tab active" type="button" role="tab" aria-selected="true">Log in</button>
+          <button id="register-tab" class="auth-tab" type="button" role="tab" aria-selected="false">Register</button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <h2 id="auth-title">Welcome back</h2>
+          <p>Log in with your Adventure Builder account.</p>
+          <label>Email<input id="login-email" name="email" type="email" autocomplete="email" required></label>
+          <label>Password<input id="login-password" name="password" type="password" autocomplete="current-password" minlength="6" required></label>
+          <button class="button button-primary auth-submit" type="submit">Log in</button>
+        </form>
+
+        <form id="register-form" class="auth-form" hidden>
+          <h2>Create your account</h2>
+          <p>Register here, then use the same details in the app.</p>
+          <label>Your name<input id="register-name" name="name" type="text" autocomplete="name" maxlength="60" required></label>
+          <label>Email<input id="register-email" name="email" type="email" autocomplete="email" required></label>
+          <label>Password<input id="register-password" name="password" type="password" autocomplete="new-password" minlength="6" required></label>
+          <label>Confirm password<input id="register-confirm" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required></label>
+          <label class="checkbox-row"><input id="register-terms" type="checkbox" required><span>I agree to the Adventure Builder terms and privacy policy.</span></label>
+          <button class="button button-primary auth-submit" type="submit">Create account</button>
+        </form>
+      </div>
+
+      <div id="auth-signed-in" class="account-panel" hidden>
+        <div class="account-avatar account-avatar-large" id="panel-avatar">A</div>
+        <p class="eyebrow">Adventure Builder account</p>
+        <h2 id="panel-name">Welcome</h2>
+        <p id="panel-email"></p>
+        <p class="account-choice-copy">Choose how you would like to continue.</p>
+        <div class="account-choice-actions">
+          <button class="button button-primary" id="continue-website" type="button">Continue on Website</button>
+          <a class="button button-secondary" href="https://adventure-builder-app.netlify.app" target="_blank" rel="noopener">Open the App</a>
+        </div>
+        <button class="account-settings-link" id="account-settings" type="button">Account settings</button>
+        <button class="button button-secondary auth-submit logout-button" id="logout-button" type="button">Log out</button>
+      </div>
+
+      <p class="auth-status" id="auth-status" aria-live="polite"></p>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

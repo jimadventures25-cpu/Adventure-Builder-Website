@@ -1,0 +1,9 @@
+Adventure Builder Website — Stage W3 Category Navigation
+
+Built:
+- Replaced old four-link menu with clickable matching app categories.
+- Added a correspondent website area for every category.
+- Added Design/Open buttons to each category framework.
+- Added locally stored Adventure Builder QR code.
+- Added PC-to-phone app handoff and email-link option.
+- Preserved Supabase login, registration and My Account module.

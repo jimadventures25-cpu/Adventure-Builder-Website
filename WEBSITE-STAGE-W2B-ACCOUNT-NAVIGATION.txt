@@ -1,0 +1,6 @@
+Adventure Builder Website Stage W2B
+
+- Fixed My Account appearing while signed out.
+- Signed-out navigation now shows Log in and Register only.
+- Signed-in navigation now shows the account control only.
+- Replaced the old visibility handling instead of layering another UI patch.

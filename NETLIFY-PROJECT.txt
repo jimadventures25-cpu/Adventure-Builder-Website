@@ -1,0 +1,4 @@
+PROJECT TYPE: WEBSITE ONLY
+DOMAIN: adventurebuilder.co.uk
+NETLIFY PROJECT: Existing Adventure Builder website project
+DO NOT DEPLOY TO: app.adventurebuilder.co.uk
