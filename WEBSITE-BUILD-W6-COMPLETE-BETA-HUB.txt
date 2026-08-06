@@ -1,0 +1,20 @@
+Adventure Builder Website Build W6 — Complete Beta Hub
+
+Built:
+- Home page story section
+- True multi-page navigation retained
+- Private account-gated Community page
+- Community reads the app's existing Supabase stories table and story-photos bucket
+- Adventure Studio page and navigation tab
+- Studio upload, preview, timeline, local project save and project-plan export
+- Beta access messaging: Community and Studio free to registered testers
+- Trail Planner retained inside the website
+- Suggested trail POIs through a modular Netlify function using OpenStreetMap/Overpass data
+- Selected POIs can be inserted as trail waypoints and included in the transfer points sent to the app
+- Future Basic/Premium structure remains messaging only and is not enforced during beta
+
+Important live requirements:
+- Netlify environment variable VALHALLA_BASE_URL must point to the Adventure Builder Valhalla server.
+- Supabase RLS must allow authenticated users to read stories where visibility=public.
+- Authenticated users require signed read access to story-photos.
+- Full rendered video export is not claimed in this beta website build; Studio currently creates and saves project plans with local media preview.

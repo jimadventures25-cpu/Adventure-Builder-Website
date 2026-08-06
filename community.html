@@ -31,6 +31,7 @@
       <a href="journal.html">Journal</a>
       <a href="passport.html">Passport</a>
       <a href="community.html">Community</a>
+      <a href="studio.html">Studio</a>
     </nav>
 
     <div class="account-actions" id="account-actions">
@@ -43,20 +44,31 @@
     </div>
   </header>
   <main>
-    <section class="section standalone-page community-section" id="community">
-      <div class="section-heading"><p class="eyebrow">Join the journey</p><h2>Adventure Builder Community</h2><p>Follow the development, share ideas and help shape what comes next.</p></div>
-      <div class="community-grid">
-        <a class="community-card" href="https://www.facebook.com/groups/1511217973638788" target="_blank" rel="noopener"><span class="community-icon">👥</span><strong>Facebook Group</strong><small>Join the discussion</small></a>
-        <a class="community-card" href="https://www.facebook.com/profile.php?id=100075900377744" target="_blank" rel="noopener"><span class="community-icon">📘</span><strong>Facebook Page</strong><small>Follow project updates</small></a>
-        <a class="community-card" href="https://www.youtube.com/@Adventure-Builder" target="_blank" rel="noopener"><span class="community-icon">▶️</span><strong>YouTube</strong><small>Watch the build journey</small></a>
+    <section class="section standalone-page private-feature-page" id="community">
+      <div class="section-heading"><p class="eyebrow">Private beta community</p><h1>Adventure Builder Community</h1><p>The same member community on the website and in the app. Photographs and stories posted through the app appear here for signed-in beta testers.</p></div>
+      <div class="beta-access-banner"><strong>Free during beta</strong><span>Community access is free for every registered Adventure Builder tester. Future membership locks are prepared but switched off.</span></div>
+
+      <section class="member-gate" id="community-gate">
+        <span>🔒</span><h2>Members only</h2><p>Create a free Adventure Builder account or log in to view the private community.</p>
+        <div><button class="button button-primary" data-open-auth="register" type="button">Create Free Account</button><button class="button button-secondary" data-open-auth="login" type="button">Log In</button></div>
+      </section>
+
+      <div id="community-members-area" hidden>
+        <div class="community-toolbar">
+          <div><p class="eyebrow">Explore together</p><h2>Latest Adventures</h2><p>Posts are loaded from the same Supabase community used by the app.</p></div>
+          <div class="community-toolbar-actions"><button class="button button-secondary" id="community-refresh" type="button">Refresh</button><a class="button button-primary" id="community-open-app" href="https://adventure-builder-app.netlify.app" target="_blank" rel="noopener">Create Post in App</a></div>
+        </div>
+        <div class="community-filter-row"><input id="community-search" type="search" placeholder="Search adventures, places or members"><select id="community-category"><option value="">All categories</option><option>Walking</option><option>Coastal</option><option>Nature</option><option>Road trip</option><option>Campervan</option><option>Family</option><option>History</option><option>Other</option></select></div>
+        <p class="feature-status" id="community-status" aria-live="polite">Preparing your private community…</p>
+        <div class="website-community-feed" id="community-feed"></div>
       </div>
     </section>
-
-    <section class="cta-section"><div><p class="eyebrow">Ready to explore?</p><h2>Open Adventure Builder</h2><p>Use the same account on the website and in the Adventure Builder app.</p></div><a class="button button-primary" href="index.html#download">Get the App</a></section>
+    <section class="cta-section"><div><p class="eyebrow">Take the community with you</p><h2>Open Adventure Builder</h2><p>Capture and upload your adventure from the app, then view it here on the larger screen.</p></div><a class="button button-primary" href="https://adventure-builder-app.netlify.app" target="_blank" rel="noopener">Open the App</a></section>
   </main>
   <footer class="site-footer">
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
-    <div class="footer-links"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="camping.html">Camping</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a><a href="index.html#download">Get the App</a></div>
+    <div class="footer-links"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="camping.html">Camping</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
+      <a href="studio.html">Studio</a><a href="index.html#download">Get the App</a></div>
     <p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p>
   </footer>
   <div class="auth-overlay" id="auth-overlay" hidden>
@@ -111,5 +123,6 @@
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/community-web.js"></script>
 </body>
 </html>

@@ -1,0 +1,26 @@
+Adventure Builder Website — Stage W5 Trail Planner
+
+Built
+- Interactive trail-planning map opens directly within the Walking & Hiking website page.
+- Tap the map to place start, finish and optional waypoints.
+- Drag markers to adjust the trail.
+- Valhalla pedestrian routing through a protected Netlify function.
+- Distance and estimated walking time summary.
+- Local beta Save Trail control.
+- Open in Adventure Builder App transfer button using the selected planning points.
+- Responsive desktop and phone layout.
+
+Protected split
+- Website: discover, plan, save and transfer trails.
+- App: live GPS navigation, recording, rerouting and safety.
+
+Deployment requirement
+- Copy the app project's VALHALLA_BASE_URL into the website Netlify project's environment variables.
+- If the server uses an API key, also copy VALHALLA_API_KEY and VALHALLA_API_KEY_HEADER.
+
+Checks
+- Trail Planner JavaScript syntax: PASS
+- Netlify Trail Route function syntax: PASS
+- Shared Valhalla library syntax: PASS
+- Walking page structure and local references: PASS
+- ZIP integrity: PASS

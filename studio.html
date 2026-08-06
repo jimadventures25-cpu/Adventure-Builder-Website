@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Adventure Builder brings navigation, camping, hiking and trip planning together in one adventure app.">
+  <meta name="description" content="Create travel videos, photo stories and social content in Adventure Studio.">
   <meta name="theme-color" content="#0b0d0f">
-  <title>Adventure Builder | Your Adventure Starts Here</title>
+  <title>Adventure Studio | Adventure Builder</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body data-page="index">
+<body data-page="studio">
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="Adventure Builder home">
       <img src="images/adventure-builder-logo.png" alt="Adventure Builder logo">
@@ -44,44 +44,29 @@
     </div>
   </header>
   <main>
-    <section class="hero hero-compact" id="home" aria-label="Adventure Builder overview">
-      <span class="sr-only">Adventure Builder — plan, navigate, explore and discover. Road trips, campsites, navigation, hiking, photography and community.</span>
-    </section>
-
-    <section class="hero-intro">
-      <p class="eyebrow">Plan. Navigate. Explore. Discover.</p>
-      <h1>Your <span>Adventure</span> Starts Here</h1>
-      <p>One growing adventure app for road trips, campervans, camping, hiking, discovery and smarter navigation.</p>
-      <div class="hero-actions">
-        <a class="button button-primary" href="https://adventure-builder-app.netlify.app" target="_blank" rel="noopener">Launch Adventure Builder</a>
-        <a class="button button-secondary" href="community.html">Join the Community</a>
+    <section class="section standalone-page private-feature-page" id="studio">
+      <div class="section-heading"><p class="eyebrow">Create after the adventure</p><h1>Adventure Studio</h1><p>A desktop-friendly creative workspace for arranging travel photographs and video clips, writing captions and preparing social content.</p></div>
+      <div class="beta-access-banner"><strong>Premium later · free during beta</strong><span>Adventure Studio is unlocked for every registered beta tester while we build and test it.</span></div>
+      <section class="member-gate" id="studio-gate"><span>🎬</span><h2>Sign in to enter the Studio</h2><p>Use the same free beta account as the Adventure Builder app.</p><div><button class="button button-primary" data-open-auth="register" type="button">Create Free Account</button><button class="button button-secondary" data-open-auth="login" type="button">Log In</button></div></section>
+      <div id="studio-members-area" hidden>
+        <div class="studio-workspace">
+          <aside class="studio-sidebar">
+            <label class="studio-upload" for="studio-media"><span>＋</span><strong>Add photos or video clips</strong><small>Files remain on this device in this beta workspace.</small></label><input id="studio-media" type="file" accept="image/*,video/*" multiple hidden>
+            <label>Project name<input id="studio-project-name" maxlength="80" placeholder="Our weekend adventure"></label>
+            <label>Format<select id="studio-format"><option value="landscape">YouTube · 16:9</option><option value="portrait">Shorts / Reels · 9:16</option><option value="square">Social post · 1:1</option></select></label>
+            <label>Title<input id="studio-title" maxlength="80" placeholder="Adventure title"></label>
+            <label>Caption<textarea id="studio-caption" rows="6" maxlength="1500" placeholder="Tell the story of your adventure…"></textarea></label>
+            <div class="studio-buttons"><button class="button button-primary" id="studio-save" type="button">Save Project</button><button class="button button-secondary" id="studio-export" type="button">Export Project Plan</button></div>
+            <p class="feature-status" id="studio-status">Add media to begin.</p>
+          </aside>
+          <section class="studio-canvas-area">
+            <div class="studio-preview" id="studio-preview"><div><span>🎞️</span><strong>Your preview appears here</strong><small>Select a photo or video from the timeline.</small></div></div>
+            <div class="studio-timeline-heading"><h2>Project Timeline</h2><button class="text-button" id="studio-clear" type="button">Clear project</button></div>
+            <div class="studio-timeline" id="studio-timeline"><p>No media added yet.</p></div>
+          </section>
+        </div>
       </div>
     </section>
-
-    <section class="section home-story-section" aria-labelledby="home-story-title">
-      <div class="home-story-card">
-        <p class="eyebrow">More than a route from A to B</p>
-        <h2 id="home-story-title">Your Adventure Starts Here</h2>
-        <p class="home-story-question">Imagine waking up on a Saturday morning with one simple question…</p>
-        <blockquote>Where should we go today?</blockquote>
-        <p>Adventure Builder is designed to help answer that question. Whether you travel by campervan, motorhome, caravan, car or on foot, it helps you discover remarkable places, plan unforgettable journeys and keep the memories afterwards.</p>
-        <p>Choose a destination—or let Adventure Builder inspire you. Plan scenic drives and walking trails on the website, save them to your account, then continue in the app when it is time to travel.</p>
-        <p>Discover hidden beaches, peaceful countryside, mountain walks, family attractions, campsites, overnight stops and places you may never have found on your own.</p>
-        <p>Save favourites, build your Adventure Passport, record your journey and share the moments that made it special with the private Adventure Builder Community.</p>
-        <p class="home-story-emphasis">Adventure Builder is not only about getting somewhere. It is about discovering everything in between.</p>
-        <div class="home-story-actions"><a class="button button-primary" href="explore.html">Start Exploring</a><a class="button button-secondary" href="walking-hiking.html">Plan a Trail</a></div>
-      </div>
-    </section>
-
-    <section class="section download-section" id="download">
-      <div class="section-heading"><p class="eyebrow">Move from computer to phone</p><h2>Get Adventure Builder on Your Phone</h2><p>On a computer, scan Adventure Builder's own QR code. On a phone, use the direct app button.</p></div>
-      <div class="download-card">
-        <div class="qr-panel desktop-download"><img src="images/adventure-builder-app-qr.png" alt="QR code that opens Adventure Builder on a phone"><strong>Scan with your phone camera</strong><small>This QR code is stored inside the website and does not rely on an external QR service.</small></div>
-        <div class="download-actions"><h3>Continue your adventure</h3><p>Open the app directly, email the link to yourself, or stay on the website.</p><a class="button button-primary" href="https://adventure-builder-app.netlify.app" target="_blank" rel="noopener">Open / Download Adventure Builder</a><a class="button button-secondary" href="mailto:?subject=Adventure%20Builder%20app&amp;body=Open%20Adventure%20Builder%20on%20your%20phone%3A%20https%3A%2F%2Fadventure-builder-app.netlify.app">Email Me the App Link</a><a class="text-link" href="index.html">Stay on Website</a></div>
-      </div>
-    </section>
-
-    <section class="cta-section"><div><p class="eyebrow">Ready to explore?</p><h2>Open Adventure Builder</h2><p>Use the same account on the website and in the Adventure Builder app.</p></div><a class="button button-primary" href="index.html#download">Get the App</a></section>
   </main>
   <footer class="site-footer">
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
@@ -141,5 +126,6 @@
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/studio-web.js"></script>
 </body>
 </html>

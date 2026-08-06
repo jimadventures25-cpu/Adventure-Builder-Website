@@ -26,6 +26,7 @@
   };
 
   const hasConfig = Boolean(window.supabase?.createClient && config.SUPABASE_URL && config.SUPABASE_PUBLISHABLE_KEY);
+  let currentSession = null;
   const client = hasConfig
     ? window.supabase.createClient(config.SUPABASE_URL, config.SUPABASE_PUBLISHABLE_KEY, {
         auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
@@ -74,6 +75,8 @@
   }
 
   function renderSession(session) {
+    currentSession = session || null;
+    window.dispatchEvent(new CustomEvent('adventurebuilder:auth', { detail: { session: currentSession, user: currentSession?.user || null, client } }));
     const user = session?.user || null;
     const signedIn = Boolean(user);
 
@@ -166,6 +169,12 @@
     const { error } = await client.auth.signOut();
     if (error) return setStatus(error.message, 'error');
     setStatus('You are logged out.', 'success');
+  });
+
+  window.ADVENTURE_BUILDER_AUTH = { client, getSession: () => currentSession, open: openDialog };
+  document.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-open-auth]');
+    if (button) openDialog(button.dataset.openAuth || 'login');
   });
 
   renderSession(null);
