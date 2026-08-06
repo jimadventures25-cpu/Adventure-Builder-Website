@@ -1,0 +1,26 @@
+Adventure Builder Website — Stage W4 Multi-Page Navigation
+
+Purpose
+- Replace the single long scrolling website navigation with real separate pages.
+
+Pages created
+- Home: index.html
+- Explore: explore.html
+- Camping: camping.html
+- Walking & Hiking: walking-hiking.html
+- Van Life: van-life.html
+- Trip Planner: trip-planner.html
+- Gallery: gallery.html
+- Journal: journal.html
+- Passport: passport.html
+- Community: community.html
+
+Protected
+- Website account/login/register system retained on every page.
+- Shared header, footer, branding, Supabase configuration and mobile menu retained.
+- App project was not included or modified.
+
+Navigation behaviour
+- Every top tab now loads a separate HTML page instead of scrolling down index.html.
+- The current page tab is highlighted.
+- Mobile navigation closes after choosing a page.

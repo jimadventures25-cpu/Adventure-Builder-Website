@@ -17,20 +17,17 @@
     });
   });
 
-  const observedSections = navLinks
-    .map((link) => document.querySelector(link.getAttribute('href')))
-    .filter(Boolean);
-
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible) return;
-      navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`));
-    }, { rootMargin: '-25% 0px -60% 0px', threshold: [0.05, 0.25, 0.6] });
-    observedSections.forEach((section) => observer.observe(section));
-  }
+  const page = document.body.dataset.page || 'index';
+  const pageFiles = {
+    index: 'index.html', explore: 'explore.html', camping: 'camping.html',
+    'walking-hiking': 'walking-hiking.html', 'van-life': 'van-life.html',
+    'trip-planner': 'trip-planner.html', gallery: 'gallery.html',
+    journal: 'journal.html', passport: 'passport.html', community: 'community.html'
+  };
+  navLinks.forEach((link) => {
+    const target = link.getAttribute('href')?.split('#')[0] || 'index.html';
+    link.classList.toggle('active', target === pageFiles[page]);
+  });
 
   const toast = document.createElement('div');
   toast.className = 'category-toast';
