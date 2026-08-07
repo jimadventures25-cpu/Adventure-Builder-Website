@@ -1,0 +1,38 @@
+Adventure Builder Video Studio V2 — Shared Website/App Stage
+
+Built from the current Photo Studio parity working copies.
+
+Working beta features
+- Multi-video import
+- Clip timeline
+- Select, reorder and delete clips
+- Trim start/end
+- Split clip at current playhead
+- Duplicate clips
+- 0.5x / 1x / 1.5x / 2x speed
+- Clip volume and mute
+- 16:9 / 9:16 / 1:1 preview formats
+- Adventure title overlay
+- Adventure, cinematic, sunset, forest, black & white and memory looks
+- Automatic sequential Adventure Movie preview
+- Adventure route overlay preview
+- Adventure Builder trip stamp
+- Automatic chapter suggestions
+- Project-plan JSON export
+
+Architecture
+- Same video-studio-v2 core is used by website and app.
+- Desktop uses side panels + full timeline.
+- Mobile automatically collapses to a touch-friendly single-column layout.
+- Existing navigation/GPS/routing files were not edited.
+- Legacy app Video Studio is visually retired rather than deleting its files, protecting rollback.
+
+Next isolated modules
+- Rendered MP4/WebM export and encoding
+- Transitions
+- Music library
+- Voice-over recording
+- Animated GPS route replay
+- Subtitles
+- Stabilisation
+- Automatic highlight selection

@@ -1,0 +1,21 @@
+Adventure Builder Big Update W10 — Adventure Finder
+
+- Replaced the standalone Camping section with Adventure Finder.
+- Camping is now one stay/adventure type inside Adventure Finder.
+- Area search (Lake District, Peak District, Yorkshire Dales, Scottish Highlands, Cornwall, New Forest, Anywhere)
+- Stay/base filters: Campsite, Campervan Site, Permitted Overnight Stop
+- Dog/tent/van/family/quiet filters
+- Nearby-experience filters: waterfalls, sunset/sunrise, walks, paddling, lakes, mountains, beaches, forest, wildlife, photography, cafés, pubs
+- Facilities: showers, toilets, water, electric
+- Adventure Match score + explanation
+- Filtered map preview
+- Save idea + Build Adventure hand-off placeholder
+- Preferences persist locally
+- Maximum travel-time control prepared for live routing
+- Website/app parity
+- camping.html retained only as a compatibility redirect
+- App home/menu now expose Adventure Finder
+- Satnav/GPS/rerouting/voice code not changed
+
+Prototype data policy:
+This build deliberately uses fictional, clearly labelled demo stay profiles. It does not present invented campsite or overnight-stop facts as real. The next data stage should connect current real campsites, POIs, map/routing data and verified overnight-permission evidence.

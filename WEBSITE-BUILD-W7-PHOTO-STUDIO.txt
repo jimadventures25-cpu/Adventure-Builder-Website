@@ -1,0 +1,25 @@
+Adventure Builder Website — Build W7 Photo Studio
+
+Added a functional Adventure Builder Photo Studio to the existing Studio page.
+Shared feature design matches the mobile app version.
+
+Working beta tools:
+- Local photo upload (JPG/PNG/WebP)
+- Brightness, contrast, colour, warmth and soft blur
+- Original, square, 16:9 and 9:16 centre crop
+- Rotate and horizontal/vertical flip
+- Coastal, sunset, forest, vintage and black-and-white looks
+- Photo caption
+- Adventure sticker
+- Adventure Builder date stamp
+- Hold-for-original comparison
+- PNG export
+
+Privacy:
+- Images remain in the browser/device and are not uploaded by this module.
+
+Next isolated smart-tools stage:
+- Healing/object removal
+- Sky replacement
+- Portrait retouching
+- Automatic route/location stamps

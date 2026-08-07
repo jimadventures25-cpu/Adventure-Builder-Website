@@ -8,6 +8,8 @@
   <title>Adventure Studio | Adventure Builder</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/photo-studio.css">
+  <link rel="stylesheet" href="css/video-studio-v2.css">
 </head>
 <body data-page="studio">
   <header class="site-header">
@@ -23,14 +25,17 @@
     <nav class="site-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="explore.html">Explore</a>
-      <a href="camping.html">Camping</a>
+      <a href="adventures.html">Adventures</a>
+      <a href="paddling.html">Paddle &amp; Kayak</a>
+      <a href="adventure-finder.html">Adventure Finder</a>
       <a href="walking-hiking.html">Walking &amp; Hiking</a>
       <a href="van-life.html">Van Life</a>
       <a href="trip-planner.html">Trip Planner</a>
       <a href="gallery.html">Gallery</a>
       <a href="journal.html">Journal</a>
       <a href="passport.html">Passport</a>
-      <a href="community.html">Community</a>
+      <a href="community.html">Community</a><a href="partners.html">Partners</a>
+      <a href="partners.html">Partners</a>
       <a href="studio.html">Studio</a>
     </nav>
 
@@ -49,6 +54,131 @@
       <div class="beta-access-banner"><strong>Premium later · free during beta</strong><span>Adventure Studio is unlocked for every registered beta tester while we build and test it.</span></div>
       <section class="member-gate" id="studio-gate"><span>🎬</span><h2>Sign in to enter the Studio</h2><p>Use the same free beta account as the Adventure Builder app.</p><div><button class="button button-primary" data-open-auth="register" type="button">Create Free Account</button><button class="button button-secondary" data-open-auth="login" type="button">Log In</button></div></section>
       <div id="studio-members-area" hidden>
+        
+<section class="ab-photo-studio" aria-labelledby="ab-photo-title">
+  <header class="ab-photo-head">
+    <div><h2 id="ab-photo-title">📸 Adventure Builder Photo Studio</h2><p>Edit travel photos with the same tools on the website and in the app.</p></div>
+    <span class="ab-photo-badge">Shared Web + App Editor · Beta</span>
+  </header>
+  <div class="ab-photo-shell">
+    <aside class="ab-photo-tools">
+      <label class="ab-photo-upload">＋ Add photograph<input id="ab-photo-file" type="file" accept="image/jpeg,image/png,image/webp"></label>
+      <div class="ab-photo-group">
+        <div class="ab-photo-group-title"><span>Adjust</span><button class="ab-photo-btn" id="ab-photo-reset" type="button">Reset</button></div>
+        <label>Brightness <output data-photo-output="brightness">100%</output><input data-photo-adjust="brightness" type="range" min="40" max="160" value="100"></label>
+        <label>Contrast <output data-photo-output="contrast">100%</output><input data-photo-adjust="contrast" type="range" min="40" max="180" value="100"></label>
+        <label>Colour <output data-photo-output="saturate">100%</output><input data-photo-adjust="saturate" type="range" min="0" max="200" value="100"></label>
+        <label>Warmth <output data-photo-output="warmth">0%</output><input data-photo-adjust="warmth" type="range" min="0" max="60" value="0"></label>
+        <label>Soft blur <output data-photo-output="blur">0 px</output><input data-photo-adjust="blur" type="range" min="0" max="8" step=".5" value="0"></label>
+      </div>
+      <div class="ab-photo-group">
+        <span class="ab-photo-group-title">Crop &amp; transform</span>
+        <div class="ab-photo-row"><button class="ab-photo-btn is-active" data-photo-crop="original" type="button">Original</button><button class="ab-photo-btn" data-photo-crop="square" type="button">1:1 Square</button><button class="ab-photo-btn" data-photo-crop="landscape" type="button">16:9</button><button class="ab-photo-btn" data-photo-crop="portrait" type="button">9:16</button></div>
+        <div class="ab-photo-row"><button class="ab-photo-btn" data-photo-rotate-left type="button">↶ Rotate</button><button class="ab-photo-btn" data-photo-rotate-right type="button">Rotate ↷</button><button class="ab-photo-btn" data-photo-flip-x type="button">↔ Flip</button><button class="ab-photo-btn" data-photo-flip-y type="button">↕ Flip</button></div>
+      </div>
+    </aside>
+    <div class="ab-photo-canvas-wrap">
+      <canvas id="ab-photo-canvas" width="1200" height="800" aria-label="Photo editing preview"></canvas>
+      <div class="ab-photo-empty" id="ab-photo-empty"><div><strong>Your adventure photo appears here</strong><span>Add a JPG, PNG or WebP image to start editing.</span></div></div>
+      <button class="ab-photo-before ab-photo-btn" id="ab-photo-before" type="button">Hold for original</button>
+    </div>
+    <aside class="ab-photo-side">
+      <h3>Adventure tools</h3>
+      <div class="ab-photo-group">
+        <span class="ab-photo-group-title">One-tap looks</span>
+        <div class="ab-photo-presets">
+          <button class="ab-photo-btn is-active" data-photo-preset="none" type="button">Original</button>
+          <button class="ab-photo-btn" data-photo-preset="coastal" type="button">🌊 Coastal</button>
+          <button class="ab-photo-btn" data-photo-preset="sunset" type="button">🌅 Sunset</button>
+          <button class="ab-photo-btn" data-photo-preset="forest" type="button">🌲 Forest</button>
+          <button class="ab-photo-btn" data-photo-preset="vintage" type="button">🎞 Vintage</button>
+          <button class="ab-photo-btn" data-photo-preset="bw" type="button">◐ B&amp;W</button>
+        </div>
+      </div>
+      <div class="ab-photo-group">
+        <label>Caption on photo<input id="ab-photo-text" type="text" maxlength="70" placeholder="Our Lake District adventure"></label>
+        <label>Adventure sticker<select id="ab-photo-sticker"><option value="">None</option><option>📍</option><option>🚐</option><option>🥾</option><option>🏕️</option><option>🌊</option><option>🏔️</option><option>🌲</option><option>☀️</option><option>📸</option></select></label>
+        <label><span><input id="ab-photo-stamp" type="checkbox"> Add Adventure Builder date stamp</span></label>
+      </div>
+      <div class="ab-photo-group">
+        <button class="ab-photo-btn ab-photo-primary" id="ab-photo-export" type="button">Export edited photo</button>
+        <p class="ab-photo-status" id="ab-photo-status">Add a photograph to begin. Your image stays on this device.</p>
+      </div>
+      <div class="ab-photo-coming"><strong>Next smart-tools module</strong><br>Healing/object removal, sky replacement, portrait retouching and automatic route/location stamps are deliberately isolated for the next stage so this stable editor does not depend on AI services.</div>
+    </aside>
+  </div>
+</section>
+
+        
+<section class="ab-video-studio" id="adventure-video-studio" aria-labelledby="ab-video-title-heading">
+  <header class="ab-video-head">
+    <div><h2 id="ab-video-title-heading">🎬 Adventure Builder Video Studio</h2><p>A clean travel-first editor with the same core tools on website and app.</p></div>
+    <span class="ab-video-badge">Shared Web + App Studio · Beta</span>
+  </header>
+  <div class="ab-video-layout">
+    <aside class="ab-video-left">
+      <h3>Media &amp; clip tools</h3>
+      <label class="ab-video-upload">＋ Add video clips<input id="ab-video-file" type="file" accept="video/*" multiple></label>
+      <div class="ab-video-group">
+        <div class="ab-video-grid2"><button class="ab-video-btn" id="ab-video-split" type="button">✂ Split</button><button class="ab-video-btn" id="ab-video-duplicate" type="button">⧉ Duplicate</button></div>
+        <label>Trim start<input id="ab-video-start" type="range" min="0" max="1" step=".05" value="0"></label>
+        <label>Trim end<input id="ab-video-end" type="range" min="0" max="1" step=".05" value="1"></label>
+        <label>Speed<select id="ab-video-speed"><option value=".5">0.5× Slow</option><option value="1" selected>1× Normal</option><option value="1.5">1.5×</option><option value="2">2× Fast</option></select></label>
+        <label>Clip volume<input id="ab-video-volume" type="range" min="0" max="100" value="100"></label>
+      </div>
+      <div class="ab-video-group">
+        <label>Video format<select id="ab-video-format"><option value="landscape">YouTube · 16:9</option><option value="portrait">Shorts / Reels · 9:16</option><option value="square">Square · 1:1</option></select></label>
+        <label>Adventure title<input id="ab-video-title" type="text" maxlength="70" placeholder="Our Lake District Adventure"></label>
+        <label>Look<select id="ab-video-style"><option value="original">Original</option><option value="adventure">Adventure</option><option value="cinematic">Cinematic</option><option value="sunset">Sunset</option><option value="forest">Forest</option><option value="bw">Black &amp; White</option><option value="memory">Memory</option></select></label>
+      </div>
+      <div class="ab-video-group">
+        <span style="font-weight:800;font-size:.86rem">Quick edit</span>
+        <div class="ab-video-tool-list"><button class="ab-video-btn" id="ab-video-mute" type="button">🔇 Mute</button><button class="ab-video-btn" id="ab-video-auto" type="button">✨ Adventure Movie</button></div>
+      </div>
+    </aside>
+
+    <section class="ab-video-main">
+      <div class="ab-video-preview-wrap">
+        <div class="ab-video-preview-frame" id="ab-video-frame">
+          <video id="ab-video-preview" playsinline preload="metadata" hidden></video>
+          <div class="ab-video-empty" id="ab-video-empty"><div><strong>Your adventure film appears here</strong><span>Add video clips, then trim, split, style and preview them.</span></div></div>
+          <div class="ab-video-overlay-title" id="ab-video-overlay-title"></div>
+          <div class="ab-video-route-card" id="ab-video-route-card"><strong>📍 Adventure Route</strong><br>Start → Scenic Stop → Summit → Camp<br>12.4 km · 640 m climbed</div>
+          <div class="ab-video-stamp" id="ab-video-stamp">ADVENTURE BUILDER · TRIP MEMORY</div>
+        </div>
+        <div class="ab-video-controls"><button class="ab-video-btn" id="ab-video-back" type="button">−5s</button><button class="ab-video-btn ab-video-primary" id="ab-video-play" type="button">▶ / ❚❚</button><button class="ab-video-btn" id="ab-video-forward" type="button">+5s</button><span class="ab-video-time" id="ab-video-time">0:00 / 0:00</span></div>
+      </div>
+      <div class="ab-video-timeline-wrap">
+        <div class="ab-video-timeline-head"><strong>Timeline</strong><span id="ab-video-summary">No clips added</span></div>
+        <div class="ab-video-timeline" id="ab-video-timeline"></div>
+        <div class="ab-video-tracks" aria-label="Project tracks">
+          <div class="ab-video-track"><span>🎥 Video</span><div class="ab-video-track-line"><i style="width:82%"></i></div></div>
+          <div class="ab-video-track"><span>🔤 Titles</span><div class="ab-video-track-line"><i style="width:38%"></i></div></div>
+          <div class="ab-video-track"><span>🎵 Music</span><div class="ab-video-track-line"><i style="width:64%"></i></div></div>
+          <div class="ab-video-track"><span>🎙 Voice</span><div class="ab-video-track-line"><i style="width:26%"></i></div></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="ab-video-right">
+      <h3>Adventure tools</h3>
+      <div class="ab-video-group">
+        <button class="ab-video-btn" id="ab-video-route-toggle" type="button">🗺 Route overlay</button>
+        <button class="ab-video-btn" id="ab-video-stamp-toggle" type="button">🏅 Adventure stamp</button>
+      </div>
+      <div class="ab-video-group">
+        <span style="font-weight:800;font-size:.86rem">Auto chapters</span>
+        <div class="ab-video-chapters" id="ab-video-chapters"></div>
+      </div>
+      <div class="ab-video-group">
+        <button class="ab-video-btn ab-video-primary" id="ab-video-export" type="button">Export project plan</button>
+        <p class="ab-video-status" id="ab-video-status">Add clips to begin. Video files stay on this device.</p>
+      </div>
+      <div class="ab-video-note"><strong>Next isolated modules</strong><br>Rendered MP4 export/encoding, transitions, music library, voice-over recording, animated GPS route replay, subtitles, stabilisation and automatic highlight selection.</div>
+    </aside>
+  </div>
+</section>
+
         <div class="studio-workspace">
           <aside class="studio-sidebar">
             <label class="studio-upload" for="studio-media"><span>＋</span><strong>Add photos or video clips</strong><small>Files remain on this device in this beta workspace.</small></label><input id="studio-media" type="file" accept="image/*,video/*" multiple hidden>
@@ -70,7 +200,7 @@
   </main>
   <footer class="site-footer">
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
-    <div class="footer-links"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="camping.html">Camping</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
+    <div class="footer-links"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
       <a href="studio.html">Studio</a><a href="index.html#download">Get the App</a></div>
     <p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p>
   </footer>
@@ -127,5 +257,7 @@
   <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
   <script src="js/studio-web.js"></script>
+  <script src="js/photo-studio.js"></script>
+  <script src="js/video-studio-v2.js"></script>
 </body>
 </html>

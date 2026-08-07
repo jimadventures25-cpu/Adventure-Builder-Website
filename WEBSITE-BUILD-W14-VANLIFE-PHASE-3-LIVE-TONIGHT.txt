@@ -1,0 +1,44 @@
+Adventure Builder Big Update W14 — Vanlife Phase 3 Live Tonight Data
+
+LIVE DATA ADDED
+- Search by town, area or postcode.
+- "Near me" search using device geolocation.
+- Search radius: 10 / 25 / 50 km.
+- Live OpenStreetMap data through Overpass.
+- Explicit place geocoding through Nominatim (only after Search; no autocomplete).
+- 10-minute local cache to reduce public API load.
+- Secondary Overpass endpoint fallback.
+
+ONLY THESE OVERNIGHT-CAPABLE MAPPED TYPES ARE REQUESTED
+- tourism=caravan_site
+- tourism=camp_site + motorhome=yes
+- tourism=camp_site + caravans=yes
+- amenity=parking + motorhome_stopover=yes
+
+SAFETY / PERMISSION HANDLING
+- Ordinary amenity=parking records are NOT shown.
+- access=no and access=private records are excluded from the search result.
+- Every result shows the evidence level derived from its OSM tags.
+- Results never claim that OpenStreetMap is an official legal guarantee.
+- Users are told to check signs, operator rules, max-stay and current local restrictions.
+- If live APIs fail, Adventure Builder shows an error and does NOT silently substitute fictional stops.
+
+RESULT INFORMATION
+- Real OSM name/operator when mapped.
+- Straight-line distance from search origin.
+- Toilets, showers, drinking water, waste disposal, power, fee and opening-hours tags when present.
+- OSM record link.
+- Map link.
+- Listed website and phone when mapped.
+- Save live stop locally.
+
+ATTRIBUTION
+- © OpenStreetMap contributors displayed in the UI.
+
+PROTECTED
+- Satnav, GPS movement, rerouting and voice-navigation logic were not changed.
+- Van vehicle-routing restrictions remain separate; real road restriction integration is a future routing stage.
+
+TESTING
+- JavaScript syntax and package integrity checked locally.
+- Live API network calls require deployed-browser testing because the build environment has no outbound network access.

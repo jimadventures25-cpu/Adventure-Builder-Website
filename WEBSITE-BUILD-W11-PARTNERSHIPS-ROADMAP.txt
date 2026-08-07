@@ -1,0 +1,39 @@
+Adventure Builder Big Update W11 — Adventure Finder Partnerships & Booking Roadmap
+
+Added
+- Adventure Finder staged rollout (Stages 1–9)
+- Dedicated website Partnerships page
+- Partners link in website navigation
+- Partner/Campsite area in both app copies
+- Register partnership interest prototype
+- Local draft saving only — no fake sending
+- Future verification model:
+  Mapped
+  Website Confirmed
+  Owner Verified
+  Adventure Builder Verified
+
+Booking rollout
+Stage 3 — Book Direct:
+- official campsite website/booking link
+- Adventure Builder does not take payment
+
+Stage 4 — Owner Portal:
+- claim listing
+- facilities/photos/details
+
+Stage 5 — Verification:
+- transparent source/status badges
+
+Stage 6 — Book with Adventure Builder:
+- only after approved campsite/booking-system integration
+- live availability/price/terms required
+
+Data policy
+- Real campsite/POI data comes before live booking.
+- Overnight use is never assumed from ordinary parking data.
+- Partner claims require evidence/owner confirmation.
+- Current Adventure Finder demo records remain clearly labelled as DEMO.
+
+Protected
+- Satnav, GPS, routing, rerouting and voice-navigation modules were not changed.

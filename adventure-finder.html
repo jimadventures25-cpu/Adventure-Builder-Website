@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Find campsites, vanlife bases and adventure stays by area, interests, nearby places and facilities with Adventure Builder.">
+  <meta name="theme-color" content="#0b0d0f">
+  <title>Adventure Finder | Adventure Builder</title>
+  <link rel="icon" href="images/adventure-builder-logo.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/adventure-finder.css">
+  <link rel="stylesheet" href="css/partners.css">
+</head>
+<body data-page="adventure-finder">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Adventure Builder home">
+      <img src="images/adventure-builder-logo.png" alt="Adventure Builder logo">
+      <span>Adventure Builder</span>
+    </a>
+
+    <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="explore.html">Explore</a>
+      <a href="adventures.html">Adventures</a>
+      <a href="paddling.html">Paddle &amp; Kayak</a>
+      <a href="adventure-finder.html">Adventure Finder</a>
+      <a href="walking-hiking.html">Walking &amp; Hiking</a>
+      <a href="van-life.html">Van Life</a>
+      <a href="trip-planner.html">Trip Planner</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="journal.html">Journal</a>
+      <a href="passport.html">Passport</a>
+      <a href="community.html">Community</a><a href="partners.html">Partners</a>
+      <a href="partners.html">Partners</a>
+      <a href="studio.html">Studio</a>
+    </nav>
+
+    <div class="account-actions" id="account-actions">
+      <button class="header-link" id="open-login" type="button">Log in</button>
+      <button class="header-register" id="open-register" type="button">Register</button>
+      <button class="account-chip" id="account-chip" type="button" hidden>
+        <span class="account-avatar" id="account-avatar">A</span>
+        <span id="account-label">My account</span>
+      </button>
+    </div>
+  </header>
+  <main><section class="section standalone-page"><div class="section-heading"><p class="eyebrow">Your next adventure starts here</p><h2>Adventure Finder</h2><p>Choose the area and the experience you want. Adventure Builder matches the base to the adventure around it.</p></div>
+<section class="ab-finder" data-adventure-finder>
+  <header class="af-hero">
+    <p class="eyebrow">Find the experience, not just the place</p>
+    <h1>🌍 Adventure Finder</h1>
+    <p>Choose an area, tell Adventure Builder what kind of adventure you want, and only see stays or permitted overnight options that fit the experience around them.</p>
+  </header>
+  <div class="af-layout">
+    <aside class="af-builder">
+      <div class="af-step"><h3>1. Where do you want the adventure?</h3><p>Type an area such as Lake District, Peak District or Cornwall. Use Anywhere to browse.</p><input class="af-input" data-af-area value="Lake District" list="af-areas" aria-label="Adventure area"><datalist id="af-areas"><option>Anywhere</option><option>Lake District</option><option>Peak District</option><option>Yorkshire Dales</option><option>Scottish Highlands</option><option>Cornwall</option><option>New Forest</option></datalist></div>
+      <div class="af-step"><h3>2. What kind of base?</h3><select class="af-select" data-af-stay><option>Any stay</option><option>Campsite</option><option>Campervan Site</option><option>Permitted Overnight Stop</option></select></div>
+      
+      <div class="af-step">
+        <h3>2A. Use My Van profile?</h3>
+        <p>Adventure Finder can use your saved van height, length and weight to improve vanlife matches.</p>
+        <label style="display:flex;align-items:center;gap:8px;color:var(--af-muted);font-size:.8rem">
+          <input data-af-use-van type="checkbox" style="width:auto"> Use My Van when matching
+        </label>
+        <div class="af-demo" data-af-van-summary style="margin-top:8px"></div>
+      </div>
+      <div class="af-step"><h3>3. Who / what needs to fit?</h3><div class="af-chips"><button class="af-chip" data-af-choice="dog" aria-pressed="false" type="button">🐕 Dog friendly</button><button class="af-chip" data-af-choice="tent" aria-pressed="false" type="button">⛺ Tent</button><button class="af-chip" data-af-choice="van" aria-pressed="false" type="button">🚐 Van friendly</button><button class="af-chip" data-af-choice="family" aria-pressed="false" type="button">👨‍👩‍👧 Family</button><button class="af-chip" data-af-choice="quiet" aria-pressed="false" type="button">🤫 Quiet</button></div></div>
+      <div class="af-step"><h3>4. What do you want nearby?</h3><div class="af-chips"><button class="af-chip" data-af-choice="waterfall" aria-pressed="false" type="button">💦 Waterfalls</button><button class="af-chip" data-af-choice="sunset" aria-pressed="false" type="button">🌅 Sunset views</button><button class="af-chip" data-af-choice="sunrise" aria-pressed="false" type="button">🌄 Sunrise</button><button class="af-chip" data-af-choice="hiking" aria-pressed="false" type="button">🥾 Walks</button><button class="af-chip" data-af-choice="paddle" aria-pressed="false" type="button">🛶 Paddle</button><button class="af-chip" data-af-choice="lake" aria-pressed="false" type="button">🏞️ Lakes</button><button class="af-chip" data-af-choice="mountain" aria-pressed="false" type="button">🏔️ Mountains</button><button class="af-chip" data-af-choice="beach" aria-pressed="false" type="button">🌊 Beaches</button><button class="af-chip" data-af-choice="forest" aria-pressed="false" type="button">🌲 Forest</button><button class="af-chip" data-af-choice="wildlife" aria-pressed="false" type="button">🐦 Wildlife</button><button class="af-chip" data-af-choice="photo" aria-pressed="false" type="button">📸 Photography</button><button class="af-chip" data-af-choice="cafe" aria-pressed="false" type="button">☕ Café</button><button class="af-chip" data-af-choice="pub" aria-pressed="false" type="button">🍺 Pub</button></div></div>
+      <div class="af-step"><h3>5. Facilities</h3><div class="af-chips"><button class="af-chip" data-af-choice="showers" aria-pressed="false" type="button">🚿 Showers</button><button class="af-chip" data-af-choice="toilets" aria-pressed="false" type="button">🚻 Toilets</button><button class="af-chip" data-af-choice="water" aria-pressed="false" type="button">🚰 Water</button><button class="af-chip" data-af-choice="electric" aria-pressed="false" type="button">⚡ Electric</button></div></div>
+      <div class="af-step"><h3>6. Maximum travel time</h3><select class="af-select" data-af-drive><option>30 minutes</option><option>1 hour</option><option selected>2 hours</option><option>3 hours</option><option>No limit</option></select><p>Travel-time filtering is prepared for the live routing stage.</p></div>
+      <div class="af-actions"><button class="af-btn" data-af-clear type="button">Clear</button><button class="af-btn primary" data-af-search type="button">Find My Adventure</button></div>
+      <p data-af-status aria-live="polite" style="color:var(--af-muted);font-size:.74rem"></p>
+    </aside>
+    <section class="af-results">
+      <div class="af-demo"><strong>Prototype search:</strong> the matching engine works now using clearly labelled demo profiles. Live campsite/POI/route data will replace these examples in the data-integration stage.</div>
+      <div class="af-summary" id="af-results-heading" data-af-results-heading><div><h3>Your Adventure Matches</h3><p data-af-summary></p></div><span class="af-count" data-af-count></span></div>
+      <div class="af-map" aria-label="Illustrative Adventure Finder map preview"><span class="af-map-label">Filtered map preview · matching bases only</span><span class="af-pin a">🏕️</span><span class="af-pin b">🚐</span><span class="af-pin c">🏕️</span><span class="af-pin d">📍</span><span class="af-map-note">Live stage: real map pins + POIs + travel-time radius.</span></div>
+      <div class="af-list" data-af-results></div>
+      <div class="af-safety">Overnight parking and vanlife stops must be clearly distinguished from ordinary car parks. Adventure Builder should only present overnight use as permitted when reliable current evidence says it is allowed; users should still check signs, access rules and local restrictions before staying.</div>
+    </section>
+  </div>
+</section>
+</section>
+<section class="ab-partners" id="adventure-finder-roadmap">
+  <header class="abp-head">
+    <h2>🏕️ Adventure Finder — Staged Rollout</h2>
+    <p>Adventure Finder will grow from real discovery and direct booking links into verified owner listings and, later, optional booking inside Adventure Builder.</p>
+  </header>
+  <div class="abp-body">
+    <div class="abp-roadmap">
+      <article class="abp-stage active"><span>Stage 1 · Current</span><b>🌍 Adventure Finder</b><p>Experience-first search, area filters and Adventure Match.</p></article>
+      <article class="abp-stage"><span>Stage 2</span><b>🗺️ Real Adventure Database</b><p>Real campsites, POIs, trails, launch points and verified overnight-use evidence.</p></article>
+      <article class="abp-stage"><span>Stage 3</span><b>🔗 Book Direct</b><p>Official website, phone and campsite booking links from each listing.</p></article>
+      <article class="abp-stage"><span>Stage 4</span><b>🏕️ Owner Portal</b><p>Campsite owners claim and maintain their listing, photos and facilities.</p></article>
+      <article class="abp-stage"><span>Stage 5</span><b>⭐ Verification</b><p>Mapped, Website Confirmed, Owner Verified and Adventure Builder Verified statuses.</p></article>
+      <article class="abp-stage"><span>Stage 6</span><b>🧾 Book with Adventure Builder</b><p>Live availability and in-platform booking only where a campsite provides an approved integration.</p></article>
+      <article class="abp-stage"><span>Stage 7</span><b>✨ Smart Adventure Planner</b><p>Build a complete trip from interests, time, travel radius and nearby experiences.</p></article>
+      <article class="abp-stage"><span>Stage 8</span><b>🌐 Adventure Network</b><p>Community and partner discoveries connected across the UK and Ireland.</p></article>
+      <article class="abp-stage"><span>Stage 9</span><b>🤝 Local Partners</b><p>Cafés, pubs, hire companies, attractions, outdoor shops and activity providers.</p></article>
+    </div>
+  </div>
+</section>
+
+</main>
+  <footer class="site-footer">
+    <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
+    <div class="footer-links"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
+      <a href="studio.html">Studio</a><a href="index.html#download">Get the App</a></div>
+    <p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p>
+  </footer>
+  <div class="auth-overlay" id="auth-overlay" hidden>
+    <section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+      <button class="auth-close" id="auth-close" type="button" aria-label="Close account window">×</button>
+      <div class="auth-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><small>One account for the website and app</small></div></div>
+
+      <div id="auth-signed-out">
+        <div class="auth-tabs" role="tablist">
+          <button id="login-tab" class="auth-tab active" type="button" role="tab" aria-selected="true">Log in</button>
+          <button id="register-tab" class="auth-tab" type="button" role="tab" aria-selected="false">Register</button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <h2 id="auth-title">Welcome back</h2>
+          <p>Log in with your Adventure Builder account.</p>
+          <label>Email<input id="login-email" name="email" type="email" autocomplete="email" required></label>
+          <label>Password<input id="login-password" name="password" type="password" autocomplete="current-password" minlength="6" required></label>
+          <button class="button button-primary auth-submit" type="submit">Log in</button>
+        </form>
+
+        <form id="register-form" class="auth-form" hidden>
+          <h2>Create your account</h2>
+          <p>Register here, then use the same details in the app.</p>
+          <label>Your name<input id="register-name" name="name" type="text" autocomplete="name" maxlength="60" required></label>
+          <label>Email<input id="register-email" name="email" type="email" autocomplete="email" required></label>
+          <label>Password<input id="register-password" name="password" type="password" autocomplete="new-password" minlength="6" required></label>
+          <label>Confirm password<input id="register-confirm" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required></label>
+          <label class="checkbox-row"><input id="register-terms" type="checkbox" required><span>I agree to the Adventure Builder terms and privacy policy.</span></label>
+          <button class="button button-primary auth-submit" type="submit">Create account</button>
+        </form>
+      </div>
+
+      <div id="auth-signed-in" class="account-panel" hidden>
+        <div class="account-avatar account-avatar-large" id="panel-avatar">A</div>
+        <p class="eyebrow">Adventure Builder account</p>
+        <h2 id="panel-name">Welcome</h2>
+        <p id="panel-email"></p>
+        <p class="account-choice-copy">Choose how you would like to continue.</p>
+        <div class="account-choice-actions">
+          <button class="button button-primary" id="continue-website" type="button">Continue on Website</button>
+          <a class="button button-secondary" href="https://adventure-builder-app.netlify.app" target="_blank" rel="noopener">Open the App</a>
+        </div>
+        <button class="account-settings-link" id="account-settings" type="button">Account settings</button>
+        <button class="button button-secondary auth-submit logout-button" id="logout-button" type="button">Log out</button>
+      </div>
+
+      <p class="auth-status" id="auth-status" aria-live="polite"></p>
+    </section>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/adventure-finder.js"></script>
+  <script src="js/partners.js"></script>
+</body>
+</html>

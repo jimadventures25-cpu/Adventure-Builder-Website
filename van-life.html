@@ -8,6 +8,9 @@
   <title>Van Life | Adventure Builder</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/vanlife-flagship.css">
+  <link rel="stylesheet" href="css/vanlife-live-stops.css">
+  <link rel="stylesheet" href="css/vanlife-phases-4-10.css">
 </head>
 <body data-page="van-life">
   <header class="site-header">
@@ -23,14 +26,17 @@
     <nav class="site-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="explore.html">Explore</a>
-      <a href="camping.html">Camping</a>
+      <a href="adventures.html">Adventures</a>
+      <a href="paddling.html">Paddle &amp; Kayak</a>
+      <a href="adventure-finder.html">Adventure Finder</a>
       <a href="walking-hiking.html">Walking &amp; Hiking</a>
       <a href="van-life.html">Van Life</a>
       <a href="trip-planner.html">Trip Planner</a>
       <a href="gallery.html">Gallery</a>
       <a href="journal.html">Journal</a>
       <a href="passport.html">Passport</a>
-      <a href="community.html">Community</a>
+      <a href="community.html">Community</a><a href="partners.html">Partners</a>
+      <a href="partners.html">Partners</a>
       <a href="studio.html">Studio</a>
     </nav>
 
@@ -43,20 +49,192 @@
       </button>
     </div>
   </header>
-  <main>
-    <section class="section standalone-page category-hub category-alt" id="vanlife">
-      <div class="section-heading"><p class="eyebrow">Life on the road</p><h2>Van Life</h2><p>Plan campervan and motorhome trips with overnight stops, service points and community knowledge.</p></div>
-      <div class="category-layout">
-        <div class="category-copy"><span class="category-icon">🚐</span><h3>Build a Van Life Adventure</h3><p>Keep van-friendly places, trip plans and road memories organised in one matching category.</p><button class="button button-primary design-button" type="button" data-category="Van Life">Design Van Life Adventure</button></div>
-        <div class="category-features"><span>Overnight stops</span><span>Water points</span><span>Waste facilities</span><span>Parking</span><span>Van-life tips</span><span>Saved road trips</span></div>
+  <main><section class="section standalone-page"><div class="section-heading"><p class="eyebrow">Flagship Adventure Builder experience</p><h2>Adventure Builder Vanlife</h2><p>Where Adventure Builder began — now built as a complete platform rather than a small feature.</p></div>
+<section class="ab-vanlife" data-ab-vanlife>
+  <header class="av-hero">
+    <p class="eyebrow">Flagship experience · where Adventure Builder began</p>
+    <h1>🚐 Adventure Builder Vanlife</h1>
+    <p>A complete vanlife platform inside Adventure Builder: your vehicle, tonight's stop, route needs, essential services, basecamp, trips and memories in one place.</p>
+    <div class="av-tabs">
+      <button class="av-tab is-active" data-av-tab="home" type="button">🚐 Vanlife Home</button>
+      <button class="av-tab" data-av-tab="myvan" type="button">🛠 My Van</button>
+      <button class="av-tab" data-av-tab="tonight" type="button">🌙 Tonight</button>
+      <button class="av-tab" data-av-tab="map" type="button">🗺 Vanlife Map</button>
+      <button class="av-tab" data-av-tab="basecamp" type="button">🏕 Basecamp</button>
+      <button class="av-tab" data-av-tab="trips" type="button">📖 Trips</button>
+      <button class="av-tab" data-av-tab="roadmap" type="button">🧭 Roadmap</button>
+    </div>
+  </header>
+  <div class="av-body">
+    <section class="av-view" data-av-view="home">
+      <div class="av-stats">
+        <div class="av-stat"><small>Vehicle height</small><strong data-av-stat="height">—</strong><span>Future route restrictions</span></div>
+        <div class="av-stat"><small>Fresh water tank</small><strong data-av-stat="water">—</strong><span>Water planning</span></div>
+        <div class="av-stat"><small>Leisure battery</small><strong data-av-stat="battery">—</strong><span>Off-grid planning</span></div>
+        <div class="av-stat"><small>Travellers</small><strong data-av-stat="people">—</strong><span>Trip setup</span></div>
+      </div>
+      <div class="av-grid">
+        <article class="av-tonight"><h3>🌙 Find Me Somewhere Tonight</h3><p>Tell Adventure Builder what tonight needs to look like, then show only suitable overnight options.</p><button class="av-btn primary" type="button" data-av-tab-jump="tonight" onclick="this.closest('[data-ab-vanlife]').querySelector('[data-av-tab=tonight]').click()">Find Tonight's Stop</button></article>
+        <article class="av-card"><h3>Vanlife essentials</h3><div class="av-tools"><button class="av-tool" type="button"><span>🚰</span><strong>Water</strong><small>Find refill points</small></button><button class="av-tool" type="button"><span>🚽</span><strong>Waste</strong><small>Disposal points</small></button><button class="av-tool" type="button"><span>⛽</span><strong>Fuel / LPG</strong><small>Fuel & gas</small></button><button class="av-tool" type="button"><span>🚿</span><strong>Showers</strong><small>Nearby facilities</small></button><button class="av-tool" type="button"><span>🧺</span><strong>Laundry</strong><small>Laundrettes</small></button><button class="av-tool" type="button"><span>📐</span><strong>Leveller</strong><small>Vehicle setup</small></button></div></article>
+      </div>
+    <div class="av-note" style="margin-top:12px"><strong>Phase 2 connected:</strong> Adventure Finder is now connected to My Van. Turn on “Use My Van when matching” to include saved height, length and weight in the Adventure Match prototype.</div></section>
+
+    <section class="av-view" data-av-view="myvan" hidden>
+      <div class="av-grid">
+        <form class="av-card av-form" data-av-profile>
+          <h3>My Van</h3>
+          <div class="av-form-grid"><label>Van name<input name="name" placeholder="Adventure Bus"></label><label>Make / model<input name="model"></label></div>
+          <div class="av-form-grid"><label>Height (m)<input name="height" type="number" step=".01" min="0"></label><label>Width (m)<input name="width" type="number" step=".01" min="0"></label></div>
+          <div class="av-form-grid"><label>Length (m)<input name="length" type="number" step=".01" min="0"></label><label>Weight (kg)<input name="weight" type="number" step="1" min="0"></label></div>
+          <div class="av-form-grid"><label>Fresh water (L)<input name="water" type="number" min="0"></label><label>Waste tank (L)<input name="waste" type="number" min="0"></label></div>
+          <div class="av-form-grid"><label>Leisure battery (Ah)<input name="battery" type="number" min="0"></label><label>Travellers<input name="people" type="number" min="1" value="1"></label></div>
+          <label>Fuel type<select name="fuel"><option>Diesel</option><option>Petrol</option><option>Electric</option><option>Hybrid</option></select></label>
+          <button class="av-btn primary" type="submit">Save My Van</button><p class="av-status" data-av-profile-status></p>
+        </form>
+        <article class="av-card"><h3>Vehicle health & kit</h3><div class="av-checks"><label class="av-check"><input type="checkbox"> MOT / inspection</label><label class="av-check"><input type="checkbox"> Insurance</label><label class="av-check"><input type="checkbox"> Service</label><label class="av-check"><input type="checkbox"> Tyres</label><label class="av-check"><input type="checkbox"> Levelling ramps</label><label class="av-check"><input type="checkbox"> Hook-up cable</label><label class="av-check"><input type="checkbox"> Outdoor chairs</label><label class="av-check"><input type="checkbox"> Paddle / bikes</label></div></article>
       </div>
     </section>
 
-    <section class="cta-section"><div><p class="eyebrow">Ready to explore?</p><h2>Open Adventure Builder</h2><p>Use the same account on the website and in the Adventure Builder app.</p></div><a class="button button-primary" href="index.html#download">Get the App</a></section>
-  </main>
+    <section class="av-view" data-av-view="tonight" hidden>
+      <article class="av-tonight">
+        <h3>🌙 Find Me Somewhere Tonight</h3>
+        <p>Prototype filters now. Live stage will use real, current, permission-aware stop data.</p>
+<div class="av-live-search">
+  <div class="av-live-head">
+    <div><h4>🌍 Live Tonight Search</h4><p>Real mapped caravan sites, motorhome-tagged campsites and motorhome stopovers from OpenStreetMap.</p></div>
+  </div>
+  <div class="av-live-grid">
+    <input data-av-live-place type="search" placeholder="Town, area or postcode — e.g. Keswick">
+    <select data-av-live-radius aria-label="Search radius"><option value="10">10 km</option><option value="25" selected>25 km</option><option value="50">50 km</option></select>
+    <button class="av-btn primary" data-av-live-search type="button">Search area</button>
+    <button class="av-btn" data-av-live-nearby type="button">📍 Near me</button>
+  </div>
+  <p class="av-status" data-av-live-status>Search an area or use your current location.</p>
+  <p class="av-live-source" data-av-live-stamp>Data attribution: © OpenStreetMap contributors. Location text search uses Nominatim only when you press Search; no autocomplete.</p>
+  <div class="av-live-warn"><strong>Permission status matters:</strong> a mapped campsite/caravan site or motorhome stopover is useful evidence, but rules can change. Check current signs, operator information, access, max-stay and local restrictions before staying. Ordinary car parks are excluded unless they are specifically tagged as a motorhome stopover.</div>
+  <div class="av-live-list" data-av-live-results></div>
+</div>
+
+        <div class="av-chips"><button class="av-chip" data-av-choice aria-pressed="false" type="button">🐕 Dog friendly</button><button class="av-chip" data-av-choice aria-pressed="false" type="button">🤫 Quiet</button><button class="av-chip" data-av-choice aria-pressed="false" type="button">🌅 Sunset</button><button class="av-chip" data-av-choice aria-pressed="false" type="button">🚻 Toilets</button><button class="av-chip" data-av-choice aria-pressed="false" type="button">🚰 Water</button><button class="av-chip" data-av-choice aria-pressed="false" type="button">⚡ Electric</button><button class="av-chip" data-av-choice aria-pressed="false" type="button">🚿 Shower</button><button class="av-chip" data-av-choice aria-pressed="false" type="button">🛶 Paddle nearby</button><button class="av-chip" data-av-choice aria-pressed="false" type="button">🍺 Pub nearby</button></div>
+        <button class="av-btn primary" data-av-tonight-search type="button" style="margin-top:12px">Search Tonight</button><p class="av-status" data-av-tonight-status></p>
+        <div class="av-results" data-av-tonight-results></div>
+      </article>
+      <div class="av-note" style="margin-top:12px">Ordinary car parks are never automatically treated as legal or safe overnight stops. Future live results must carry a clear evidence/status label such as Official Site, Aire, Council Confirmed, Owner Verified, Community Reported or Unverified.</div>
+    </section>
+
+    <section class="av-view" data-av-view="map" hidden>
+      <div class="av-grid">
+        <article class="av-card"><h3>Vanlife Map</h3><div class="av-map"><span class="av-map-label">Prototype layers</span><span class="av-pin p1">🚰</span><span class="av-pin p2">🚐</span><span class="av-pin p3">⛽</span></div></article>
+        <article class="av-card"><h3>Map layers</h3><div class="av-tools"><button class="av-tool"><span>🚰</span><strong>Water</strong></button><button class="av-tool"><span>🚽</span><strong>Waste</strong></button><button class="av-tool"><span>⚡</span><strong>Hook-up</strong></button><button class="av-tool"><span>⛽</span><strong>Fuel / LPG</strong></button><button class="av-tool"><span>🚿</span><strong>Showers</strong></button><button class="av-tool"><span>🧺</span><strong>Laundry</strong></button><button class="av-tool"><span>🏕️</span><strong>Campsites</strong></button><button class="av-tool"><span>🚐</span><strong>Aires</strong></button><button class="av-tool"><span>🥾</span><strong>Walks</strong></button></div></article>
+      </div>
+    </section>
+
+    <section class="av-view" data-av-view="basecamp" hidden>
+      <div class="av-grid">
+        <article class="av-card"><h3>🏕 Your Basecamp</h3><p>Once a stop is selected, Adventure Builder can turn it into the centre of the next day's adventure.</p><div class="av-basecamp"><div class="av-base"><strong>🌅 Sunset</strong><small>Best nearby viewpoint</small></div><div class="av-base"><strong>🌄 Sunrise</strong><small>Tomorrow morning</small></div><div class="av-base"><strong>🥾 Walks</strong><small>Trails from base</small></div><div class="av-base"><strong>🛶 Paddle</strong><small>Launch points</small></div><div class="av-base"><strong>☕ Food</strong><small>Cafés & pubs</small></div><div class="av-base"><strong>🛒 Supplies</strong><small>Shops & fuel</small></div></div></article>
+        <article class="av-card"><h3>Tomorrow from Basecamp</h3><p>Future live version can combine weather, route length, your vehicle, dog/family preferences and nearby POIs into a suggested day.</p><div class="av-note">Basecamp is the bridge between where you sleep and what adventure you have next.</div></article>
+      </div>
+    </section>
+
+    <section class="av-view" data-av-view="trips" hidden>
+      <div class="av-grid">
+        <form class="av-card av-form" data-av-trip-form><h3>Save a Vanlife Trip</h3><label>Trip name<input name="name" required placeholder="Scottish Highlands Tour"></label><label>Area<input name="area" placeholder="North Coast / Highlands"></label><label>Nights<input name="nights" type="number" min="1" value="2"></label><label>Notes<textarea name="notes" placeholder="Stops, costs, photos, routes, memories..."></textarea></label><button class="av-btn primary" type="submit">Save Trip</button><p class="av-status" data-av-trip-status></p></form>
+        <article class="av-card"><h3>My Vanlife Trips</h3><div data-av-trips></div></article>
+      </div>
+    </section>
+
+    <section class="av-view" data-av-view="roadmap" hidden>
+      <article class="av-card"><h3>Adventure Builder Vanlife Roadmap</h3><div class="av-roadmap">
+        <div class="av-stage active"><b>Phase 1 · Foundation</b><small>My Van, dimensions, tanks, battery, equipment and vehicle reminders.</small></div>
+        <div class="av-stage active"><b>Phase 2 · Vanlife Adventure Finder</b><small>CONNECTED — Adventure Finder can now use the saved van profile for matching.</small></div>
+        <div class="av-stage active"><b>Phase 3 · Tonight</b><small>LIVE DATA CONNECTED — OSM caravan sites, motorhome campsites and tagged stopovers.</small></div>
+        <div class="av-stage active"><b>Phase 4 · Vanlife Map</b><small>BUILT — live service layers via OpenStreetMap.</small></div>
+        <div class="av-stage active"><b>Phase 5 · Basecamp</b><small>BUILT — saved Basecamp + nearby live POIs.</small></div>
+        <div class="av-stage active"><b>Phase 6 · Community</b><small>BUILT FOUNDATION — local submissions + pending-review workflow.</small></div>
+        <div class="av-stage active"><b>Phase 7 · Trips</b><small>BUILT FOUNDATION — trips + budget logging.</small></div>
+        <div class="av-stage active"><b>Phase 8 · Smart Assistant</b><small>BUILT FOUNDATION — preference-based trip suggestions.</small></div>
+        <div class="av-stage active"><b>Phase 9 · Partners</b><small>BUILT FOUNDATION — partner prospect system linked to partnership roadmap.</small></div>
+        <div class="av-stage active"><b>Phase 10 · Vanlife Network</b><small>BUILT FOUNDATION — connected workflow + network summary.</small></div>
+      
+<section class="av-phase-panel" data-av-phase4>
+  <h4>🗺 Phase 4 — Live Vanlife Map</h4>
+  <p>Choose the services you need and search live OpenStreetMap data around your current location.</p>
+  <div class="av-service-grid">
+    <button class="av-service" data-av-service="water" aria-pressed="true"><span>🚰</span><strong>Water</strong><small>Drinking water</small></button>
+    <button class="av-service" data-av-service="waste" aria-pressed="true"><span>🚽</span><strong>Waste</strong><small>Dump stations</small></button>
+    <button class="av-service" data-av-service="fuel" aria-pressed="true"><span>⛽</span><strong>Fuel</strong><small>Fuel stations</small></button>
+    <button class="av-service" data-av-service="lpg" aria-pressed="false"><span>🔥</span><strong>LPG</strong><small>LPG tagged fuel</small></button>
+    <button class="av-service" data-av-service="shower" aria-pressed="false"><span>🚿</span><strong>Showers</strong><small>Mapped showers</small></button>
+    <button class="av-service" data-av-service="laundry" aria-pressed="false"><span>🧺</span><strong>Laundry</strong><small>Laundry shops</small></button>
+    <button class="av-service" data-av-service="toilets" aria-pressed="false"><span>🚻</span><strong>Toilets</strong><small>Public toilets</small></button>
+    <button class="av-service" data-av-service="supermarket" aria-pressed="false"><span>🛒</span><strong>Food</strong><small>Supermarkets</small></button>
+    <button class="av-service" data-av-service="ev" aria-pressed="false"><span>🔌</span><strong>EV Charge</strong><small>Charging stations</small></button>
+  </div>
+  <button class="av-btn primary" data-av-services-nearby type="button" style="margin-top:10px">Search services near me</button>
+  <div class="av-live-results" data-av-service-results></div>
+  <p class="av-small-note">Live map data can be incomplete or outdated. Confirm access, opening hours and availability before relying on a service.</p>
+</section>
+
+<section class="av-phase-panel" data-av-phase5>
+  <h4>🏕 Phase 5 — Basecamp</h4>
+  <div class="av-two">
+    <div><p data-av-basecamp-summary></p><button class="av-btn" data-av-base-current type="button">📍 Use current location as Basecamp</button><button class="av-btn primary" data-av-base-explore type="button">Explore around Basecamp</button></div>
+    <div><p>Basecamp connects tonight's stop to tomorrow's adventure: food, water, viewpoints, attractions and essential services nearby.</p></div>
+  </div>
+  <div class="av-base-results" data-av-base-results></div>
+</section>
+
+<section class="av-phase-panel" data-av-phase6>
+  <h4>👥 Phase 6 — Vanlife Community</h4>
+  <div class="av-two">
+    <form class="av-community-form" data-av-community-form>
+      <input name="name" required placeholder="Place / discovery name">
+      <select name="type"><option>Overnight stop report</option><option>Water point</option><option>Waste point</option><option>Viewpoint</option><option>Café / pub</option><option>Road access note</option><option>Other</option></select>
+      <textarea name="notes" placeholder="Useful details. Avoid personal/private information."></textarea>
+      <button class="av-btn primary" type="submit">Submit for review</button><p class="av-status" data-av-community-status></p>
+    </form>
+    <div><p>Community contributions are saved as <strong>pending review</strong> first. Public publication/moderation is a later backend stage.</p><div class="av-community-list" data-av-community-list></div></div>
+  </div>
+</section>
+
+<section class="av-phase-panel" data-av-phase7>
+  <h4>📖 Phase 7 — Vanlife Trips & Budget</h4>
+  <div class="av-two">
+    <div><p>Add trip costs so fuel, campsite fees, food and activities stay with the adventure.</p><div class="av-budget-row"><input data-av-budget-item placeholder="Fuel / campsite / food"><input data-av-budget-amount type="number" step=".01" placeholder="£"><button class="av-btn" data-av-budget-add type="button">Add</button></div><div class="av-budget-list" data-av-budget-list></div></div>
+    <div class="av-kpi"><small>Trip costs logged</small><strong data-av-budget-total>£0.00</strong><span class="av-small-note">Photo/video/journal linking remains separate shared modules, ready to connect to trip IDs later.</span></div>
+  </div>
+</section>
+
+<section class="av-phase-panel" data-av-phase8>
+  <h4>✨ Phase 8 — Smart Vanlife Assistant</h4>
+  <div class="av-two">
+    <div class="av-form"><label>Nights<input data-av-assistant-nights type="number" min="1" value="2"></label><label>Trip style<select data-av-assistant-style><option>Relaxed</option><option>Scenic</option><option>Walking-focused</option><option>Water adventure</option><option>Road trip</option></select></label><label class="av-check"><input data-av-assistant-dog type="checkbox"> Travelling with dog</label><label class="av-check"><input data-av-assistant-paddle type="checkbox"> Want paddling</label><label class="av-check"><input data-av-assistant-quiet type="checkbox"> Prefer quiet stops</label><button class="av-btn primary" data-av-assistant-run type="button">Build suggestion</button></div>
+    <div class="av-assistant-output" data-av-assistant-output>Choose preferences and build a Vanlife suggestion.</div>
+  </div>
+</section>
+
+<section class="av-phase-panel" data-av-phase9>
+  <h4>🤝 Phase 9 — Vanlife Partners</h4>
+  <div class="av-two">
+    <form class="av-community-form" data-av-partner-form><input name="name" required placeholder="Business name"><select name="type"><option>Campsite / Aire</option><option>Garage / Repair</option><option>Fuel / LPG</option><option>Outdoor Shop</option><option>Equipment Hire</option><option>Attraction</option><option>Café / Pub</option></select><textarea name="notes" placeholder="Why this partner could help vanlifers"></textarea><button class="av-btn primary" type="submit">Save partner prospect</button><p class="av-status" data-av-partner-status></p></form>
+    <div><p>This connects to the wider Adventure Builder Partnerships roadmap. These records are local prospects only until a real partner backend is connected.</p><div data-av-partner-list></div></div>
+  </div>
+</section>
+
+<section class="av-phase-panel" data-av-phase10>
+  <h4>🌐 Phase 10 — Vanlife Network</h4>
+  <div class="av-network-flow"><div class="av-network-step"><span>🌍</span><strong>Find</strong></div><div class="av-network-step"><span>🌙</span><strong>Tonight</strong></div><div class="av-network-step"><span>🧭</span><strong>Navigate</strong></div><div class="av-network-step"><span>🏕</span><strong>Basecamp</strong></div><div class="av-network-step"><span>🥾</span><strong>Explore</strong></div><div class="av-network-step"><span>📸</span><strong>Create</strong></div><div class="av-network-step"><span>📖</span><strong>Remember</strong></div><div class="av-network-step"><span>👥</span><strong>Share</strong></div></div>
+  <div class="av-three" style="margin-top:12px"><div class="av-kpi"><small>Saved trips</small><strong data-av-net-trips>0</strong></div><div class="av-kpi"><small>Saved live stops</small><strong data-av-net-stops>0</strong></div><div class="av-kpi"><small>Community drafts</small><strong data-av-net-community>0</strong></div><div class="av-kpi"><small>Partner prospects</small><strong data-av-net-partners>0</strong></div><div class="av-kpi"><small>Logged trip costs</small><strong data-av-net-cost>£0.00</strong></div></div>
+  <button class="av-btn" data-av-network-refresh type="button" style="margin-top:10px">Refresh network summary</button>
+</section>
+</div></article>
+    </section>
+  </div>
+</section>
+</section></main>
   <footer class="site-footer">
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
-    <div class="footer-links"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="camping.html">Camping</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
+    <div class="footer-links"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
       <a href="studio.html">Studio</a><a href="index.html#download">Get the App</a></div>
     <p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p>
   </footer>
@@ -112,5 +290,8 @@
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/vanlife-flagship.js"></script>
+  <script src="js/vanlife-live-stops.js"></script>
+  <script src="js/vanlife-phases-4-10.js"></script>
 </body>
 </html>

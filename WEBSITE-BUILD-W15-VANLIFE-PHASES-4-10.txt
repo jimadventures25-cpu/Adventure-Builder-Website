@@ -1,0 +1,71 @@
+Adventure Builder Big Update W15 — Vanlife Phases 4–10
+
+PHASE 4 — VANLIFE MAP
+Built live service-layer search around current location using OpenStreetMap/Overpass:
+- drinking water
+- sanitary dump stations
+- fuel
+- LPG-tagged fuel
+- showers
+- laundry
+- toilets
+- supermarkets
+- EV charging
+- expandable shared query engine
+
+PHASE 5 — BASECAMP
+Built Basecamp foundation:
+- save current location as Basecamp
+- Basecamp persistence
+- live nearby cafés, pubs, supermarkets, viewpoints, attractions, water and toilets
+- connects stop location to next-day exploration
+
+PHASE 6 — VANLIFE COMMUNITY
+Built moderation-first foundation:
+- community submissions
+- categories for stops, water, waste, viewpoints, cafés/pubs and access notes
+- all submissions start as "pending review"
+- local-device storage only until backend moderation is connected
+
+PHASE 7 — VANLIFE TRIPS
+Extended Trips with:
+- trip budget logging
+- running total
+- compatible with existing saved-trip module
+- photo/video/journal linking remains ready for later account/backend IDs
+
+PHASE 8 — SMART VANLIFE ASSISTANT
+Built rule-based planning foundation:
+- nights
+- trip style
+- dog
+- paddling
+- quiet-stop preference
+- Basecamp-aware suggested workflow
+This is not presented as generative AI or live booking.
+
+PHASE 9 — VANLIFE PARTNERS
+Built local partner prospect system:
+- campsite/aire
+- garage/repair
+- fuel/LPG
+- outdoor shop
+- hire
+- attraction
+- café/pub
+Designed to connect to existing Adventure Builder Partnerships roadmap later.
+
+PHASE 10 — VANLIFE NETWORK
+Built connected workflow and summary:
+Find → Tonight → Navigate → Basecamp → Explore → Create → Remember → Share
+Network summary counts saved trips, live stops, community drafts, partner prospects and trip costs.
+
+IMPORTANT LIMITATIONS
+- Phases 4–10 are functional foundations.
+- Public community publishing, cloud account sync, partner CRM, live booking, authoritative legal stop verification and live road-restriction routing still need backend/data-provider integrations.
+- OpenStreetMap service data can be incomplete/outdated and users are warned to verify.
+- No fictional fallback locations/services are silently inserted when live data fails.
+- Satnav GPS, rerouting and voice-navigation logic were not modified.
+
+WEBSITE / APP PARITY
+- Same modules deployed to website, app root and /app copy.

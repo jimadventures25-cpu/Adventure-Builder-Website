@@ -1,0 +1,41 @@
+Adventure Builder Big Update — Adventure Hub + Paddle/Kayak
+
+ADVENTURE HUB
+- New Adventure Builder-style activity system (not speed/racing focused)
+- Adventure Dashboard
+- Explorer Score based on exploration and memories
+- Adventure Feed
+- Relive My Adventure story timeline
+- Adventure Passport categories
+- Adventure Collections
+- Add completed adventures
+- Activity types: hiking, cycling, road trips, camping, paddleboarding, kayaking, photography, exploring, dog walking and fishing
+- Distance, photo and water-adventure totals
+- Local-device persistence for this beta stage
+
+PADDLEBOARD & KAYAK
+- Dedicated Paddle & Kayak area on website and app
+- Illustrative water-route preview
+- Launch / stop concept
+- Manual wind + gust conditions guide
+- Offshore-wind caution
+- Float-plan builder and local save
+- Pre-launch checklist
+- Paddle/Kayak adventures feed into Adventure Hub and Explorer Score
+- Explicit safety wording: forecast/conditions guide does not replace authoritative local information, training or judgement
+
+WEBSITE / APP PARITY
+- Same core adventure-hub.css + adventure-hub.js design/behaviour in both.
+- New website pages: adventures.html and paddling.html
+- Website navigation updated.
+- App menu/home entries added.
+- App root and /app/ copies updated.
+- Satnav, routing, rerouting, GPS and voice-navigation modules were not edited.
+
+NEXT LIVE-DATA STAGES
+- Real route recording
+- Verified launch points / access notes
+- Live weather, wind, tide/flow sources
+- Route-linked photo/video memories
+- Community discovery submissions/moderation
+- Shared cloud sync via account

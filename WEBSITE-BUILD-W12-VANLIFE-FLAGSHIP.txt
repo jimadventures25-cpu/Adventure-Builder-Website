@@ -1,0 +1,52 @@
+Adventure Builder Big Update W12 — Flagship Vanlife Foundation
+
+Vanlife is now treated as a flagship Adventure Builder platform, not a small sub-feature.
+
+Built in this stage
+- Adventure Builder Vanlife home
+- My Van profile
+  - name / make-model
+  - height / width / length / weight
+  - fresh water / waste tank
+  - leisure battery
+  - travellers
+  - fuel type
+- Vehicle health / equipment checklist
+- Find Me Somewhere Tonight prototype
+- Tonight preference filters
+- Explicit permission/evidence rule for overnight stops
+- Prototype Vanlife Map
+  - water
+  - waste
+  - hook-up
+  - fuel/LPG
+  - showers
+  - laundry
+  - campsites
+  - aires
+  - walks
+- Basecamp concept
+- Saved Vanlife Trips
+- 10-phase Vanlife development roadmap
+- Website home highlight
+- Website Vanlife page rebuilt around flagship module
+- App home/menu entry
+- Root and /app/ copies updated
+- Website/app parity preserved
+
+Important
+- Tonight results are clearly marked DEMO.
+- Real overnight stop claims will require current permission/status evidence.
+- Vehicle dimensions are stored now so future routing can use them, but this stage does not alter navigation/routing logic.
+- Satnav, GPS, rerouting and voice-navigation modules were not changed.
+
+Next phases
+2. Vanlife Adventure Finder integration
+3. Real Tonight stop data
+4. Real service/map layers
+5. Basecamp live POIs/weather
+6. Community
+7. Trip cost/media integration
+8. Smart Vanlife Assistant
+9. Partners
+10. Vanlife Network

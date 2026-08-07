@@ -1,0 +1,27 @@
+Adventure Builder Big Update W13 — Vanlife Phase 2: Adventure Finder Integration
+
+Built
+- Adventure Finder now reads the saved Adventure Builder Vanlife "My Van" profile.
+- New "Use My Van when matching" switch in Adventure Finder.
+- Van height, length and weight are used in the prototype matching score.
+- Demo places now contain demo vehicle limits so the integration can be tested.
+- Adventure Match increases for van-friendly places that fit the saved profile.
+- Adventure Match is reduced where the saved van exceeds demo limits.
+- Result cards explain the vehicle fit/mismatch.
+- Van profile summary appears directly inside Adventure Finder.
+- Adventure Finder preferences remember whether Vanlife profile matching is enabled.
+- Build Adventure now stores a Trip Planner hand-off object containing:
+  - selected place
+  - Adventure Finder preferences
+  - Vanlife profile (when enabled)
+- Vanlife roadmap marks Phase 2 as connected.
+- Website and app use the same Adventure Finder logic.
+
+Important
+- Vehicle restrictions in this phase are clearly DEMO values.
+- This phase does not alter real satnav routing.
+- Future live routing must use authoritative road restriction data for height, width, weight and access.
+- Satnav, GPS, rerouting and voice-navigation modules remain untouched.
+
+Next Vanlife phase
+Phase 3 — real "Find Me Somewhere Tonight" stop data with permission/status evidence.

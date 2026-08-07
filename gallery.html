@@ -8,6 +8,7 @@
   <title>Gallery | Adventure Builder</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/gallery-safety.css">
 </head>
 <body data-page="gallery">
   <header class="site-header">
@@ -23,14 +24,17 @@
     <nav class="site-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="explore.html">Explore</a>
-      <a href="camping.html">Camping</a>
+      <a href="adventures.html">Adventures</a>
+      <a href="paddling.html">Paddle &amp; Kayak</a>
+      <a href="adventure-finder.html">Adventure Finder</a>
       <a href="walking-hiking.html">Walking &amp; Hiking</a>
       <a href="van-life.html">Van Life</a>
       <a href="trip-planner.html">Trip Planner</a>
       <a href="gallery.html">Gallery</a>
       <a href="journal.html">Journal</a>
       <a href="passport.html">Passport</a>
-      <a href="community.html">Community</a>
+      <a href="community.html">Community</a><a href="partners.html">Partners</a>
+      <a href="partners.html">Partners</a>
       <a href="studio.html">Studio</a>
     </nav>
 
@@ -43,20 +47,95 @@
       </button>
     </div>
   </header>
-  <main>
-    <section class="section standalone-page category-hub category-alt" id="gallery">
-      <div class="section-heading"><p class="eyebrow">Your adventure in pictures</p><h2>Gallery</h2><p>Photos uploaded through the app will be able to appear here through the shared Adventure Builder account.</p></div>
-      <div class="category-layout">
-        <div class="category-copy"><span class="category-icon">📸</span><h3>Adventure Gallery</h3><p>View your uploads, organise albums and decide whether each photo is private or shared publicly.</p><button class="button button-primary design-button" type="button" data-category="Gallery">Open Gallery Area</button></div>
-        <div class="category-features"><span>Photo uploads</span><span>Albums</span><span>Videos</span><span>Privacy controls</span><span>Featured photos</span><span>Community gallery</span></div>
+  <main><section class="section standalone-page"><div class="section-heading"><p class="eyebrow">Memories · privacy · safety</p><h2>Adventure Builder Gallery</h2><p>A safer place to organise and share outdoor memories.</p></div>
+<section class="ab-gallery" id="adventure-gallery" data-ab-gallery>
+  <header class="ag-hero">
+    <p class="eyebrow">Adventure memories with privacy and safety built in</p>
+    <h1>📷 Adventure Builder Gallery</h1>
+    <p>Organise photos and videos, choose exactly who can see them, protect sensitive locations, report problems and turn approved memories into Adventure Stories.</p>
+    <div class="ag-tabs">
+      <button class="ag-tab is-active" data-ag-tab="gallery" type="button">📷 Gallery</button>
+      <button class="ag-tab" data-ag-tab="upload" type="button">＋ Add Memory</button>
+      <button class="ag-tab" data-ag-tab="safety" type="button">🛡 Safety Check</button>
+      <button class="ag-tab" data-ag-tab="moderation" type="button">⚖ Moderation</button>
+      <button class="ag-tab" data-ag-tab="map" type="button">🗺 Memory Map</button>
+      <button class="ag-tab" data-ag-tab="trusted" type="button">🏅 Trusted</button>
+      <button class="ag-tab" data-ag-tab="stories" type="button">📖 Stories</button>
+    </div>
+  </header>
+  <div class="ag-body">
+
+    <section class="ag-view" data-ag-view="gallery">
+      <div class="ag-grid">
+        <article class="ag-card"><h3>Adventure Memories</h3><p>Your photos and videos stay organised by adventure while privacy and safety metadata travel with each item.</p><div class="ag-gallery-grid" data-ag-gallery-grid></div></article>
+        <aside class="ag-card"><h3>Gallery safety rules</h3><div class="ag-safety">Exact GPS coordinates are never treated as public by default. Private, Friends and Community visibility are explicit choices.</div><div class="ag-warning" style="margin-top:10px">Sensitive wildlife locations, private addresses, children, registration plates, restricted-access places and hazardous locations should be reviewed before community publishing.</div></aside>
       </div>
     </section>
 
-    <section class="cta-section"><div><p class="eyebrow">Ready to explore?</p><h2>Open Adventure Builder</h2><p>Use the same account on the website and in the Adventure Builder app.</p></div><a class="button button-primary" href="index.html#download">Get the App</a></section>
-  </main>
+    <section class="ag-view" data-ag-view="upload" hidden>
+      <div class="ag-grid">
+        <form class="ag-card ag-form" data-ag-upload-form>
+          <h3>Add a photo or video</h3>
+          <div class="ag-drop"><label class="ag-btn primary">Choose photos / videos<input data-ag-file type="file" accept="image/*,video/*" multiple></label><p data-ag-file-count>No files selected</p></div>
+          <div class="ag-form-grid"><label>Title<input name="title" maxlength="80"></label><label>Album / adventure<input name="album" maxlength="80" placeholder="Lake District Weekend"></label></div>
+          <h4>Who can see it?</h4>
+          <div class="ag-privacy"><button class="is-active" data-ag-privacy="private" type="button">🔒 Private<br><small>Only me</small></button><button data-ag-privacy="friends" type="button">👥 Friends<br><small>Approved people</small></button><button data-ag-privacy="community" type="button">🌍 Community<br><small>Public after checks</small></button></div>
+          <label>Location sharing<select name="locationMode"><option value="hidden">Hide location</option><option value="approximate">Show approximate area</option><option value="exact">Show exact location</option></select></label>
+          <div class="ag-form-grid"><label>Child/family visible?<select name="child"><option value="no">No / unsure</option><option value="yes">Yes</option></select></label><label>Vehicle plate visible?<select name="plate"><option value="no">No / unsure</option><option value="yes">Yes</option></select></label></div>
+          <div class="ag-form-grid"><label>House/address visible?<select name="address"><option value="no">No / unsure</option><option value="yes">Yes</option></select></label><label>Sensitive wildlife location?<select name="wildlife"><option value="no">No</option><option value="yes">Yes</option></select></label></div>
+          <label>Potentially hazardous/restricted location?<select name="hazard"><option value="no">No / unsure</option><option value="yes">Yes</option></select></label>
+          <button class="ag-btn primary" type="submit">Save to Gallery</button><p class="ag-status" data-ag-upload-status></p>
+          <p class="ag-status">Prototype note: this stage stores gallery metadata locally. It does not upload media bytes or publish content to a server yet.</p>
+        </form>
+        <article class="ag-card"><h3>Future privacy tools</h3><div class="ag-checklist"><label class="ag-check"><input type="checkbox" disabled> Blur faces automatically</label><label class="ag-check"><input type="checkbox" disabled> Blur vehicle plates</label><label class="ag-check"><input type="checkbox" disabled> Blur house numbers</label><label class="ag-check"><input type="checkbox" disabled> Strip EXIF/GPS on public export</label></div><p>These need image-processing modules and will be added separately rather than pretending they already run.</p></article>
+      </div>
+    </section>
+
+    <section class="ag-view" data-ag-view="safety" hidden>
+      <div class="ag-grid">
+        <article class="ag-card"><h3>Publish Safety Check</h3><p>Select anything that applies before publishing to the community.</p><div class="ag-checklist">
+          <label class="ag-check"><input data-ag-safety-check value="Exact GPS/location could reveal a sensitive place" type="checkbox"> Exact location shown</label>
+          <label class="ag-check"><input data-ag-safety-check value="A child's face or identifying information may be visible" type="checkbox"> Child/family visible</label>
+          <label class="ag-check"><input data-ag-safety-check value="Vehicle registration plate may be visible" type="checkbox"> Registration plate visible</label>
+          <label class="ag-check"><input data-ag-safety-check value="Home address, gate code or private access information may be visible" type="checkbox"> Private address/access visible</label>
+          <label class="ag-check"><input data-ag-safety-check value="Wildlife or nesting location may need location protection" type="checkbox"> Sensitive wildlife</label>
+          <label class="ag-check"><input data-ag-safety-check value="Cliff, fast water, quarry, railway, military/restricted or other hazardous location" type="checkbox"> Hazardous/restricted location</label>
+        </div><button class="ag-btn primary" data-ag-safety-run type="button" style="margin-top:10px">Run Safety Check</button><div data-ag-safety-output style="margin-top:10px"></div></article>
+        <article class="ag-card"><h3>Adventure safety labels</h3><div class="ag-meta"><span class="ag-tag warn">⚠ Cliff edge</span><span class="ag-tag warn">🌊 Strong current</span><span class="ag-tag warn">🌧 Flood risk</span><span class="ag-tag warn">🚫 Restricted access</span><span class="ag-tag warn">🪖 Military land</span><span class="ag-tag warn">🏗 Quarry</span><span class="ag-tag warn">🚂 Railway</span><span class="ag-tag warn">🦉 Sensitive wildlife</span></div><p>Live hazard checks will need authoritative map/safety datasets. These labels are the moderation model, not live hazard detection yet.</p></article>
+      </div>
+    </section>
+
+    <section class="ag-view" data-ag-view="moderation" hidden>
+      <div class="ag-grid">
+        <article class="ag-card"><h3>Moderation Queue</h3><p>Community content with manual safety flags can be reviewed before approval.</p><div class="ag-moderation-list" data-ag-moderation-list></div></article>
+        <article class="ag-card"><h3>Reports</h3><p>Report photo/video, user, comment, dangerous location or false information. This prototype demonstrates the queue locally.</p><div class="ag-report-list" data-ag-report-list></div></article>
+      </div>
+    </section>
+
+    <section class="ag-view" data-ag-view="map" hidden>
+      <div class="ag-grid">
+        <article class="ag-card"><h3>Interactive Memory Map</h3><div class="ag-map"><span class="ag-map-label">Privacy-safe prototype map</span><span class="ag-pin p1">📸</span><span class="ag-pin p2">🌅</span><span class="ag-pin p3">🛶</span><span class="ag-pin p4">🚐</span></div></article>
+        <article class="ag-card"><h3>Map filters</h3><select class="ag-btn" data-ag-map-filter><option>All memories</option><option>Walking</option><option>Vanlife</option><option>Camping</option><option>Paddleboarding</option><option>Kayaking</option><option>Fishing</option><option>Photography</option><option>Sunsets</option><option>Wildlife</option><option>Waterfalls</option><option>Historic sites</option><option>Beaches</option></select><p class="ag-status" data-ag-map-status>Public map pins will use approximate locations unless exact sharing is explicitly approved.</p></article>
+      </div>
+    </section>
+
+    <section class="ag-view" data-ag-view="trusted" hidden>
+      <div class="ag-grid">
+        <article class="ag-card"><h3>Trusted Community</h3><div class="ag-badges"><div class="ag-badge"><span>📸</span><strong>Verified Photographer</strong><small>Future verified role</small></div><div class="ag-badge"><span>🧭</span><strong>Verified Explorer</strong><small>Future verified role</small></div><div class="ag-badge"><span>🏕️</span><strong>Verified Campsite</strong><small>Business verification</small></div><div class="ag-badge"><span>⭐</span><strong>Trusted Contributor</strong><small>Quality community history</small></div><div class="ag-badge"><span>🤝</span><strong>Community Helper</strong><small>Helpful reporting/support</small></div><div class="ag-badge"><span>📍</span><strong>Local Guide</strong><small>Local knowledge</small></div></div></article>
+        <article class="ag-card ag-form"><h3>Contributor role</h3><label>Role<select data-ag-trust-role><option>Explorer</option><option>Photographer</option><option>Local Guide</option><option>Community Helper</option><option>Campsite / Business</option></select></label><button class="ag-btn primary" data-ag-trust-save type="button">Save interest</button><p class="ag-status" data-ag-trust-status>Verification requires a future real account/admin workflow.</p></article>
+      </div>
+    </section>
+
+    <section class="ag-view" data-ag-view="stories" hidden>
+      <div class="ag-card"><h3>Adventure Stories</h3><div class="ag-story-flow"><div class="ag-story-step"><span>🗺️</span><strong>Route</strong></div><div class="ag-story-step"><span>📷</span><strong>Gallery</strong></div><div class="ag-story-step"><span>🎥</span><strong>Video</strong></div><div class="ag-story-step"><span>📖</span><strong>Journal</strong></div><div class="ag-story-step"><span>🌦️</span><strong>Weather</strong></div><div class="ag-story-step"><span>🏕️</span><strong>Stay</strong></div><div class="ag-story-step"><span>🏅</span><strong>Passport</strong></div><div class="ag-story-step"><span>👥</span><strong>Share</strong></div></div><div class="ag-story-list" data-ag-story-list style="margin-top:12px"></div></div>
+    </section>
+
+  </div>
+</section>
+</section></main>
   <footer class="site-footer">
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
-    <div class="footer-links"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="camping.html">Camping</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
+    <div class="footer-links"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
       <a href="studio.html">Studio</a><a href="index.html#download">Get the App</a></div>
     <p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p>
   </footer>
@@ -112,5 +191,6 @@
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/gallery-safety.js"></script>
 </body>
 </html>

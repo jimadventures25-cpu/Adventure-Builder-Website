@@ -1,0 +1,59 @@
+Adventure Builder Big Update W16 — Gallery + Safety Management (Stages 1–7)
+
+STAGE 1 — SMART GALLERY
+- Gallery for photo/video memories
+- Albums/adventure names
+- Local metadata storage
+- Photo/video type recognition
+- Gallery cards and story hand-off
+
+STAGE 2 — PRIVACY & SAFETY
+- Private / Friends / Community visibility
+- Hide location / approximate location / exact location
+- Manual flags for children/family, vehicle plates, addresses, sensitive wildlife and hazardous locations
+- Exact location is NOT public by default
+- Future blur-face, blur-plate, blur-house-number and EXIF stripping controls shown as disabled/planned rather than falsely claimed as active
+
+STAGE 3 — COMMUNITY SAFETY
+- Report gallery item
+- Moderation queue
+- Pending / approved / rejected states
+- Report queue foundation
+- All moderation currently local-device only until backend/admin workflow is connected
+
+STAGE 4 — ADVENTURE SAFETY
+- Publish Safety Check
+- Safety label model for cliffs, strong currents, flood risk, restricted access, military land, quarries, railways and sensitive wildlife
+- Clearly marked as a moderation model, not live hazard detection
+
+STAGE 5 — TRUSTED COMMUNITY
+- Verified Photographer
+- Verified Explorer
+- Verified Campsite
+- Trusted Contributor
+- Community Helper
+- Local Guide
+- Contributor interest workflow
+- Real verification remains pending future account/admin backend
+
+STAGE 6 — INTERACTIVE GALLERY MAP
+- Privacy-safe prototype map
+- Filters for walking, vanlife, camping, paddling, kayaking, fishing, photography, sunsets, wildlife, waterfalls, historic sites and beaches
+- Public exact-location publishing intentionally not enabled by default
+
+STAGE 7 — ADVENTURE STORIES
+- Gallery memories can be added to Adventure Stories
+- Story flow prepared to connect Route, Gallery, Video, Journal, Weather, Stay, Passport and Share
+
+WEBSITE / APP PARITY
+- Same Gallery + Safety Management module on website, app root and /app copy.
+- Website Gallery page rebuilt.
+- App menu/home card added.
+- Website homepage highlight added.
+
+IMPORTANT LIMITATIONS
+- This stage stores gallery metadata locally; it does not upload media bytes to a server.
+- Face/plate/address blurring is not yet active.
+- Public community publishing and cloud moderation need backend/admin integration.
+- Live hazard/restricted-land checks need authoritative datasets.
+- No satnav, GPS, rerouting or voice-navigation code was changed.

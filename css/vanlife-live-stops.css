@@ -1,0 +1,22 @@
+
+/* Vanlife Phase 3 — live OSM Tonight search */
+.av-live-search{margin-top:14px;border:1px solid #3a5057;border-radius:14px;background:#131d20;padding:14px}
+.av-live-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.av-live-head h4{margin:0}.av-live-head p{margin:4px 0 0;color:var(--v-muted);font-size:.76rem}
+.av-live-grid{display:grid;grid-template-columns:1fr auto auto;gap:8px}
+.av-live-grid input,.av-live-grid select{width:100%;border:1px solid #42555b;border-radius:9px;background:#0f171a;color:#fff;padding:9px 10px}
+.av-live-source{margin-top:9px;color:var(--v-muted);font-size:.7rem;line-height:1.45}
+.av-live-source a{color:#ffd0a5}
+.av-live-list{display:grid;gap:10px;margin-top:12px}
+.av-live-card{border:1px solid #35494f;border-radius:13px;background:#172226;padding:12px}
+.av-live-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.av-live-top h4{margin:0}.av-live-top small{color:var(--v-muted)}
+.av-live-status{display:inline-block;margin-top:5px;border-radius:999px;padding:4px 7px;font-size:.66rem;font-weight:800}
+.av-live-status.strong{background:#183b27;color:#c7f0d2;border:1px solid #356c49}
+.av-live-status.medium{background:#3a321d;color:#f3dfaa;border:1px solid #6e5d2c}
+.av-live-status.info{background:#1c3238;color:#cae6ec;border:1px solid #37616b}
+.av-live-distance{white-space:nowrap;color:#ffd0a5;font-weight:800;font-size:.8rem}
+.av-live-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}.av-live-tag{border:1px solid #3e5259;border-radius:999px;padding:4px 7px;font-size:.67rem;color:#dce5e7}
+.av-live-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.av-live-empty{padding:18px;border:1px dashed #4a5e64;border-radius:10px;color:var(--v-muted);text-align:center}
+.av-live-warn{margin-top:10px;border-left:4px solid #e2b84f;background:#2d291c;border-radius:8px;padding:9px 10px;color:#eee2bd;font-size:.7rem;line-height:1.45}
+@media(max-width:700px){.av-live-grid{grid-template-columns:1fr 1fr}.av-live-grid input{grid-column:1/-1}.av-live-head{display:block}}

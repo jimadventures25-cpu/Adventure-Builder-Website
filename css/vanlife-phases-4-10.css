@@ -1,0 +1,20 @@
+
+/* Adventure Builder Vanlife Phases 4–10 */
+.av-phase-panel{margin-top:14px;border:1px solid #3a4e54;border-radius:14px;background:#131d20;padding:14px}
+.av-phase-panel h4{margin:0 0 7px}.av-phase-panel p{color:var(--v-muted);font-size:.78rem;line-height:1.5}
+.av-service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.av-service{min-height:76px;border:1px solid #3d5056;border-radius:10px;background:#162125;color:#fff;padding:9px;cursor:pointer;text-align:left}.av-service[aria-pressed="true"]{border-color:#f08a35;background:#4a2b15}.av-service span{display:block;font-size:1.35rem}.av-service small{display:block;color:var(--v-muted);margin-top:3px}
+.av-live-results,.av-base-results,.av-community-list,.av-network-list{display:grid;gap:9px;margin-top:10px}
+.av-item{border:1px solid #35494f;border-radius:12px;background:#172226;padding:11px}.av-item h4{margin:0}.av-item small{color:var(--v-muted)}
+.av-item-top{display:flex;justify-content:space-between;gap:10px}.av-distance{white-space:nowrap;color:#ffd0a5;font-weight:800;font-size:.76rem}
+.av-item-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.av-item-tag{border:1px solid #405159;border-radius:999px;padding:4px 7px;font-size:.66rem;color:#dce5e7}
+.av-item-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+.av-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.av-three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.av-kpi{border:1px solid #36494f;border-radius:12px;background:#162125;padding:12px}.av-kpi strong{display:block;font-size:1.25rem}.av-kpi small{color:var(--v-muted)}
+.av-assistant-output{white-space:pre-wrap;border:1px dashed #4a5c62;border-radius:10px;padding:11px;background:#10181b;color:#d7e1e3;min-height:110px;font-size:.77rem;line-height:1.5}
+.av-community-form{display:grid;gap:9px}.av-community-form input,.av-community-form select,.av-community-form textarea{width:100%;border:1px solid #43555b;border-radius:9px;background:#0f171a;color:#fff;padding:9px 10px}.av-community-form textarea{min-height:80px;resize:vertical}
+.av-moderation{font-size:.67rem;border-radius:999px;padding:4px 7px;border:1px solid #5a5140;color:#f2dbab;background:#332d1d}.av-moderation.approved{border-color:#3b6949;background:#183b27;color:#c8f0d2}
+.av-budget-row{display:grid;grid-template-columns:1.4fr .6fr auto;gap:7px;margin-top:7px}.av-budget-row input{width:100%;border:1px solid #43555b;border-radius:8px;background:#0f171a;color:#fff;padding:8px}.av-budget-list{display:grid;gap:6px;margin-top:9px}
+.av-network-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.av-network-step{border:1px solid #3a4d53;border-radius:10px;background:#162125;padding:10px;text-align:center}.av-network-step span{display:block;font-size:1.3rem}.av-network-step strong{display:block;font-size:.76rem;margin-top:4px}
+.av-small-note{font-size:.7rem;color:var(--v-muted);line-height:1.45}
+@media(max-width:900px){.av-service-grid{grid-template-columns:repeat(3,1fr)}.av-network-flow{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:650px){.av-service-grid{grid-template-columns:repeat(2,1fr)}.av-two,.av-three{grid-template-columns:1fr}.av-network-flow{grid-template-columns:repeat(2,1fr)}.av-budget-row{grid-template-columns:1fr .7fr auto}}

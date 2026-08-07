@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Record trip notes, photographs and memories in the Adventure Builder journal.">
+  <meta name="description" content="Find campsites, vanlife bases and adventure stays by area, interests, nearby places and facilities with Adventure Builder.">
   <meta name="theme-color" content="#0b0d0f">
-  <title>Journal | Adventure Builder</title>
+  <title>Partnerships | Adventure Builder</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/adventure-finder.css">
+  <link rel="stylesheet" href="css/partners.css">
 </head>
-<body data-page="journal">
+<body data-page="partners">
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="Adventure Builder home">
       <img src="images/adventure-builder-logo.png" alt="Adventure Builder logo">
@@ -46,17 +48,70 @@
       </button>
     </div>
   </header>
-  <main>
-    <section class="section standalone-page category-hub" id="journal">
-      <div class="section-heading"><p class="eyebrow">Remember every journey</p><h2>Adventure Journal</h2><p>Keep trip notes, photographs and memories attached to the adventure they belong to.</p></div>
-      <div class="category-layout">
-        <div class="category-copy"><span class="category-icon">📖</span><h3>Create a Journal Entry</h3><p>Write on the website or in the app and, once connected through Supabase, see the same entry in both places.</p><button class="button button-primary design-button" type="button" data-category="Adventure Journal">Create Journal Entry</button></div>
-        <div class="category-features"><span>Trip diary</span><span>Photos and videos</span><span>Visited places</span><span>Personal notes</span><span>Dates</span><span>Shared stories</span></div>
-      </div>
-    </section>
+  <main><section class="section standalone-page"><div class="section-heading"><p class="eyebrow">Campsites · stays · outdoor businesses</p><h2>Adventure Builder Partnerships</h2><p>Help travellers discover your business as part of a complete adventure.</p></div>
+<section class="ab-partners">
+  <header class="abp-head">
+    <h2>🤝 Partner with Adventure Builder</h2>
+    <p>Adventure Builder is being built to help people find the right base for the adventure they want — not simply another list of campsites.</p>
+  </header>
+  <div class="abp-body">
+    <div class="abp-grid">
+      <article class="abp-card">
+        <h3>For campsite &amp; stay owners</h3>
+        <p>Future owner tools will let you claim your listing, confirm facilities, add photos, link your official booking page and eventually connect live availability where supported.</p>
+        <div class="abp-badges"><span class="abp-badge">🗺️ Mapped</span><span class="abp-badge">🌐 Website Confirmed</span><span class="abp-badge">🏕️ Owner Verified</span><span class="abp-badge">⭐ AB Verified</span></div>
+      </article>
+      <article class="abp-card">
+        <h3>Why Adventure Finder is different</h3>
+        <p>A traveller can search for something like <strong>dog friendly + waterfalls + sunset viewpoints + paddleboarding</strong>. Adventure Builder then matches the stay to the experiences around it.</p>
+        <div class="abp-note">Partner listings will not be allowed to claim facilities, access or overnight permission without evidence or owner confirmation.</div>
+      </article>
+    </div>
+    <div class="abp-grid" style="margin-top:14px">
+      <article class="abp-card">
+        <h3>Planned partner options</h3>
+        <p>Free verified listing, official direct-booking link, listing management, availability integration, offers/events and later partner analytics.</p>
+        <p><strong>Stage 3 comes first:</strong> Adventure Builder can send people directly to the campsite's official booking page without taking payment itself.</p>
+      </article>
+      <form class="abp-card abp-form" data-ab-partner-form>
+        <h3>Register partnership interest</h3>
+        <div class="abp-form-grid">
+          <label>Business / campsite<input name="business" required maxlength="100"></label>
+          <label>Your name<input name="name" required maxlength="80"></label>
+        </div>
+        <div class="abp-form-grid">
+          <label>Email<input name="email" type="email" required></label>
+          <label>Business type<select name="type"><option>Campsite</option><option>Campervan / Motorhome Site</option><option>Glamping / Cabin</option><option>Activity Provider</option><option>Café / Pub</option><option>Outdoor Business</option><option>Other</option></select></label>
+        </div>
+        <label>Website / booking page<input name="website" type="url" placeholder="https://"></label>
+        <label>What are you interested in?<textarea name="message" placeholder="Claiming a listing, Book Direct, future booking integration, local partnership..."></textarea></label>
+        <button class="abp-btn primary" type="submit">Save enquiry draft</button>
+        <p class="abp-status" data-ab-partner-status aria-live="polite">This prototype saves the enquiry on this device only. It does not send anything yet.</p>
+      </form>
+    </div>
+  </div>
+</section>
 
-    <section class="cta-section"><div><p class="eyebrow">Ready to explore?</p><h2>Open Adventure Builder</h2><p>Use the same account on the website and in the Adventure Builder app.</p></div><a class="button button-primary" href="index.html#download">Get the App</a></section>
-  </main>
+<section class="ab-partners" id="adventure-finder-roadmap">
+  <header class="abp-head">
+    <h2>🏕️ Adventure Finder — Staged Rollout</h2>
+    <p>Adventure Finder will grow from real discovery and direct booking links into verified owner listings and, later, optional booking inside Adventure Builder.</p>
+  </header>
+  <div class="abp-body">
+    <div class="abp-roadmap">
+      <article class="abp-stage active"><span>Stage 1 · Current</span><b>🌍 Adventure Finder</b><p>Experience-first search, area filters and Adventure Match.</p></article>
+      <article class="abp-stage"><span>Stage 2</span><b>🗺️ Real Adventure Database</b><p>Real campsites, POIs, trails, launch points and verified overnight-use evidence.</p></article>
+      <article class="abp-stage"><span>Stage 3</span><b>🔗 Book Direct</b><p>Official website, phone and campsite booking links from each listing.</p></article>
+      <article class="abp-stage"><span>Stage 4</span><b>🏕️ Owner Portal</b><p>Campsite owners claim and maintain their listing, photos and facilities.</p></article>
+      <article class="abp-stage"><span>Stage 5</span><b>⭐ Verification</b><p>Mapped, Website Confirmed, Owner Verified and Adventure Builder Verified statuses.</p></article>
+      <article class="abp-stage"><span>Stage 6</span><b>🧾 Book with Adventure Builder</b><p>Live availability and in-platform booking only where a campsite provides an approved integration.</p></article>
+      <article class="abp-stage"><span>Stage 7</span><b>✨ Smart Adventure Planner</b><p>Build a complete trip from interests, time, travel radius and nearby experiences.</p></article>
+      <article class="abp-stage"><span>Stage 8</span><b>🌐 Adventure Network</b><p>Community and partner discoveries connected across the UK and Ireland.</p></article>
+      <article class="abp-stage"><span>Stage 9</span><b>🤝 Local Partners</b><p>Cafés, pubs, hire companies, attractions, outdoor shops and activity providers.</p></article>
+    </div>
+  </div>
+</section>
+</section></main>
   <footer class="site-footer">
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
     <div class="footer-links"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
@@ -115,5 +170,7 @@
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/adventure-finder.js"></script>
+  <script src="js/partners.js"></script>
 </body>
 </html>
