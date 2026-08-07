@@ -1,0 +1,77 @@
+Adventure Builder Big Update W19 — Navigation & Editor Cleanup
+
+USER REQUEST
+Go through the website/app files, put features under the correct tabs, remove duplicate editing programs, and keep only the new editors.
+
+ADVENTURE STUDIO
+- One Adventure Studio concept retained.
+- Photo editing is now labelled "Adventure Studio — Photo Editor".
+- Video editing is now labelled "Adventure Studio — Video Editor".
+- Website Adventure Studio now has Photo Editor / Video Editor tabs.
+- App has one main "Adventure Studio" menu entry, with Photo Editor / Video Editor switching inside the studio.
+- Removed the older duplicate app video editor section (`#video-studio`).
+- Removed old `video-studio.js`.
+- Removed old `video-studio-tools.js`.
+- Removed old `video-studio-tools.css`.
+- Kept the newer `video-studio-v2.js` / `video-studio-v2.css`.
+- Kept the current Photo Editor (`photo-studio.js` / `photo-studio.css`).
+
+WEBSITE MAIN NAVIGATION NORMALIZED
+Home
+Adventure Finder
+Adventures
+Trip Planner
+Walking & Hiking
+Paddle & Kayak
+Vanlife
+Adventure Passport
+Gallery
+Journal
+Adventure Studio
+Community
+Partners
+
+- Removed duplicated Partners entries.
+- Explore remains removed from main navigation.
+- Renamed Studio to Adventure Studio.
+- Normalized Vanlife wording.
+
+APP MAIN MENU REGROUPED
+Start
+- Home
+- Navigate
+- Plan a trip
+- AI Adventure Builder
+
+Discover
+- Adventure Finder
+- Adventure Stays
+- Explore Europe
+
+Your Adventure
+- Adventure Builder Vanlife
+- Adventure Hub
+- Paddle & Kayak
+- My Adventures
+- Adventure Passport
+
+Create & Remember
+- Adventure Studio
+- Gallery & Safety
+
+Community & Partners
+- Community
+- Partners
+
+Tools
+- Adventure Tools
+- Downloads
+
+App
+- Settings
+- Development Roadmap
+
+PROTECTED
+- Explore functionality files were not deleted.
+- Adventure Finder, Passport, Gallery, Vanlife and other modules remain intact.
+- Satnav/GPS/rerouting/voice-navigation code was not modified.

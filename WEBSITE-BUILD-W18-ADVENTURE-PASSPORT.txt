@@ -1,0 +1,72 @@
+Adventure Builder Big Update W18 — Adventure Passport
+
+BUILT
+- Passport Home
+- Unique local Adventure Builder passport number
+- Explorer name + home region
+- Member since
+- Stamp count
+- Adventure count
+- Regions visited
+- Explorer level + progress bar
+
+PASSPORT PAGES
+- Real passport-book visual style
+- Stamps displayed on pages
+- Blank spaces / expanding-page concept
+
+STAMP SYSTEM
+- Location/region/date/type
+- Rarity: Common, Explorer, Rare, Epic, Legendary, Limited Edition
+- Notes
+- Verification field
+- Manual prototype stamps clearly distinguished from future verified stamps
+
+COLLECTIONS
+- Lake District
+- Vanlife
+- Water Adventures
+- Historic Explorer
+- National Parks
+- Sunrise & Sunset
+
+CHALLENGES
+- 10 Waterfalls
+- 5 Coastal Walks
+- 25 Sunrises
+- 20 Castles
+- Safety rule built into challenge design
+
+PASSPORT MAP
+- Privacy-safe prototype
+- Designed to connect to Gallery privacy controls later
+
+LOGBOOK
+- Each stamp becomes part of a lifetime Adventure Logbook
+- Prepared to connect routes, Gallery, Video Studio, Journal, stays and Adventure Stories
+
+QR PASSPORT STOPS
+- Adventure Builder QR format recognition: ABP1:ABP-...
+- Prepared for QR Studio-issued codes
+- Future server verification model:
+  - active token
+  - signed-in user
+  - GPS proximity
+  - duplicate-claim prevention
+  - revoked/replaced codes
+  - event/date restrictions
+  - anti-abuse checks
+
+WEBSITE / APP
+- Website Passport page rebuilt
+- Website nav renamed to Adventure Passport
+- Homepage Passport highlight
+- App main/home Adventure Passport card
+- App menu entry
+- Same module in app root and /app copy
+
+IMPORTANT
+- Current Passport data is local-device prototype data.
+- Real public stamp verification still requires the Adventure Builder backend.
+- QR recognition does not falsely award a real stamp yet.
+- No satnav/GPS/rerouting/voice-navigation logic changed.

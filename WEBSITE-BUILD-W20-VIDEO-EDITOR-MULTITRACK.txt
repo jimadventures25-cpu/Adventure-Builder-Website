@@ -1,0 +1,27 @@
+Adventure Builder Big Update W20 — Video Editor Multi-Track Upgrade
+
+Added to the existing Adventure Studio Video Editor on website and app:
+- Multiple video tracks (3 initially, expandable to 6)
+- Multiple text tracks (4 initially, expandable to 8)
+- Sticker layer
+- Drag and resize text/stickers directly on preview
+- Bring forward / send backward / duplicate / delete overlays
+- Timeline zoom
+- Undo / redo foundation
+- Clip track assignment
+- Transitions: cut, crossfade, fade-black, dissolve, slide left/right, zoom, wipe
+- Transition duration
+- Effects: brightness, contrast, saturation, blur, vignette
+- Existing visual looks retained
+- Templates: Adventure Recap, Vanlife Weekend, Walking Adventure, Paddle Trip, Travel Highlights, YouTube Short, Facebook/Reel, Photo Slideshow
+- Exported project JSON now carries track, transition, effects and overlay positioning data
+
+Cleanup:
+- Removed leftover old generic website studio workspace.
+- Did not create another editor.
+- Existing Video Editor V2 was upgraded in place.
+- Satnav/GPS/rerouting/voice code untouched.
+
+Important:
+- Browser preview and project editing are built.
+- Final composited MP4 encoding is not falsely claimed complete; that remains a future isolated rendering/export module.

@@ -1,93 +1,56 @@
 
 (() => {
 'use strict';
-const root=document.querySelector('.ab-photo-studio'); if(!root) return;
-const canvas=document.getElementById('ab-photo-canvas'),ctx=canvas.getContext('2d',{alpha:false});
-const input=document.getElementById('ab-photo-file'),empty=document.getElementById('ab-photo-empty'),status=document.getElementById('ab-photo-status');
-const out={brightness:document.querySelector('[data-photo-output="brightness"]'),contrast:document.querySelector('[data-photo-output="contrast"]'),saturate:document.querySelector('[data-photo-output="saturate"]'),warmth:document.querySelector('[data-photo-output="warmth"]'),blur:document.querySelector('[data-photo-output="blur"]')};
-const controls=[...document.querySelectorAll('[data-photo-adjust]')];
-let image=null, objectUrl='', rotation=0, flipX=1, flipY=1, crop='original', originalName='adventure-photo';
-const state={brightness:100,contrast:100,saturate:100,warmth:0,blur:0,filter:'none',text:'',sticker:'',stamp:false};
-
-function setStatus(msg){if(status) status.textContent=msg;}
-function fitSize(w,h,max=2200){const s=Math.min(1,max/Math.max(w,h));return [Math.max(1,Math.round(w*s)),Math.max(1,Math.round(h*s))];}
-function cropRect(w,h){
-  let ratio=0;
-  if(crop==='square') ratio=1;
-  if(crop==='landscape') ratio=16/9;
-  if(crop==='portrait') ratio=9/16;
-  if(!ratio) return {sx:0,sy:0,sw:w,sh:h};
-  const current=w/h;
-  if(current>ratio){const sw=h*ratio;return {sx:(w-sw)/2,sy:0,sw,sh:h};}
-  const sh=w/ratio;return {sx:0,sy:(h-sh)/2,sw:w,sh};
-}
-function filterString(){
-  let sep=state.warmth;
-  if(state.filter==='coastal') return `brightness(${state.brightness+5}%) contrast(${state.contrast+4}%) saturate(${state.saturate+18}%) sepia(${sep}%) blur(${state.blur}px)`;
-  if(state.filter==='sunset') return `brightness(${state.brightness+2}%) contrast(${state.contrast+5}%) saturate(${state.saturate+22}%) sepia(${Math.min(45,sep+18)}%) blur(${state.blur}px)`;
-  if(state.filter==='forest') return `brightness(${state.brightness}%) contrast(${state.contrast+8}%) saturate(${state.saturate+12}%) hue-rotate(-7deg) sepia(${sep}%) blur(${state.blur}px)`;
-  if(state.filter==='bw') return `brightness(${state.brightness}%) contrast(${state.contrast+12}%) saturate(0%) sepia(0%) blur(${state.blur}px)`;
-  if(state.filter==='vintage') return `brightness(${state.brightness}%) contrast(${state.contrast-4}%) saturate(${Math.max(0,state.saturate-18)}%) sepia(${Math.min(55,sep+28)}%) blur(${state.blur}px)`;
-  return `brightness(${state.brightness}%) contrast(${state.contrast}%) saturate(${state.saturate}%) sepia(${sep}%) blur(${state.blur}px)`;
-}
-function drawOverlay(w,h){
-  ctx.save();ctx.filter='none';
-  const pad=Math.max(18,Math.round(w*.025));
-  if(state.text){
-    const fs=Math.max(24,Math.round(w*.045));ctx.font=`800 ${fs}px system-ui,sans-serif`;ctx.textAlign='center';ctx.textBaseline='bottom';
-    ctx.lineWidth=Math.max(4,fs*.12);ctx.strokeStyle='rgba(0,0,0,.58)';ctx.strokeText(state.text,w/2,h-pad);
-    ctx.fillStyle='#fff';ctx.fillText(state.text,w/2,h-pad);
-  }
-  if(state.sticker){const fs=Math.max(42,Math.round(w*.09));ctx.font=`${fs}px sans-serif`;ctx.textAlign='right';ctx.textBaseline='top';ctx.fillText(state.sticker,w-pad,pad);}
-  if(state.stamp){
-    const boxW=Math.min(w*.48,520),boxH=Math.max(70,h*.10),x=pad,y=h-boxH-pad;
-    ctx.fillStyle='rgba(12,20,22,.78)';ctx.fillRect(x,y,boxW,boxH);
-    ctx.strokeStyle='#f08a35';ctx.lineWidth=Math.max(3,w*.003);ctx.strokeRect(x,y,boxW,boxH);
-    ctx.fillStyle='#fff';ctx.textAlign='left';ctx.textBaseline='top';ctx.font=`800 ${Math.max(18,w*.025)}px system-ui,sans-serif`;ctx.fillText('ADVENTURE BUILDER',x+18,y+13);
-    ctx.fillStyle='#ffd0a5';ctx.font=`600 ${Math.max(14,w*.017)}px system-ui,sans-serif`;ctx.fillText(new Date().toLocaleDateString('en-GB'),x+18,y+Math.max(42,boxH*.55));
-  }
-  ctx.restore();
-}
-function render(){
-  if(!image) return;
-  const r=cropRect(image.naturalWidth,image.naturalHeight);
-  let [w,h]=fitSize(r.sw,r.sh);
-  const turns=((rotation%360)+360)%360,swap=turns===90||turns===270;
-  canvas.width=swap?h:w;canvas.height=swap?w:h;
-  ctx.save();ctx.fillStyle='#111';ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.translate(canvas.width/2,canvas.height/2);ctx.rotate(rotation*Math.PI/180);ctx.scale(flipX,flipY);ctx.filter=filterString();
-  ctx.drawImage(image,r.sx,r.sy,r.sw,r.sh,-w/2,-h/2,w,h);ctx.restore();
-  drawOverlay(canvas.width,canvas.height);
-}
-function loadFile(file){
-  if(!file||!file.type.startsWith('image/')){setStatus('Choose a JPG, PNG or WebP photograph.');return;}
-  if(objectUrl) URL.revokeObjectURL(objectUrl); objectUrl=URL.createObjectURL(file); originalName=(file.name||'adventure-photo').replace(/\.[^.]+$/,'');
-  const im=new Image(); im.onload=()=>{image=im;empty.hidden=true;reset(false);render();setStatus(`${file.name} loaded · edits stay on this device until you export.`);}; im.onerror=()=>setStatus('This image could not be opened.'); im.src=objectUrl;
-}
-function reset(doRender=true){
-  Object.assign(state,{brightness:100,contrast:100,saturate:100,warmth:0,blur:0,filter:'none',text:'',sticker:'',stamp:false});rotation=0;flipX=1;flipY=1;crop='original';
-  controls.forEach(c=>{const k=c.dataset.photoAdjust;c.value=({brightness:100,contrast:100,saturate:100,warmth:0,blur:0})[k]}); 
-  Object.entries(out).forEach(([k,o])=>{if(o)o.value=(k==='blur'?'0 px':(k==='warmth'?'0%':'100%'));});
-  const text=document.getElementById('ab-photo-text');if(text)text.value='';
-  document.querySelectorAll('[data-photo-preset]').forEach(b=>b.classList.toggle('is-active',b.dataset.photoPreset==='none'));
-  document.querySelectorAll('[data-photo-crop]').forEach(b=>b.classList.toggle('is-active',b.dataset.photoCrop==='original'));
-  const stamp=document.getElementById('ab-photo-stamp');if(stamp)stamp.checked=false;
-  if(doRender)render();
-}
-input?.addEventListener('change',()=>loadFile(input.files?.[0]));
-controls.forEach(c=>c.addEventListener('input',()=>{const k=c.dataset.photoAdjust;state[k]=Number(c.value);if(out[k])out[k].value=k==='blur'?`${state[k]} px`:`${state[k]}%`;render();}));
-document.querySelectorAll('[data-photo-preset]').forEach(b=>b.addEventListener('click',()=>{state.filter=b.dataset.photoPreset;document.querySelectorAll('[data-photo-preset]').forEach(x=>x.classList.toggle('is-active',x===b));render();}));
-document.querySelectorAll('[data-photo-crop]').forEach(b=>b.addEventListener('click',()=>{crop=b.dataset.photoCrop;document.querySelectorAll('[data-photo-crop]').forEach(x=>x.classList.toggle('is-active',x===b));render();}));
-document.querySelector('[data-photo-rotate-left]')?.addEventListener('click',()=>{rotation-=90;render();});
-document.querySelector('[data-photo-rotate-right]')?.addEventListener('click',()=>{rotation+=90;render();});
-document.querySelector('[data-photo-flip-x]')?.addEventListener('click',()=>{flipX*=-1;render();});
-document.querySelector('[data-photo-flip-y]')?.addEventListener('click',()=>{flipY*=-1;render();});
-document.getElementById('ab-photo-text')?.addEventListener('input',e=>{state.text=e.target.value.trim();render();});
-document.getElementById('ab-photo-sticker')?.addEventListener('change',e=>{state.sticker=e.target.value;render();});
-document.getElementById('ab-photo-stamp')?.addEventListener('change',e=>{state.stamp=e.target.checked;render();});
-document.getElementById('ab-photo-reset')?.addEventListener('click',()=>{reset();setStatus('Edits reset to the original photograph.');});
-document.getElementById('ab-photo-before')?.addEventListener('pointerdown',()=>{if(!image)return;const old={...state};Object.assign(state,{brightness:100,contrast:100,saturate:100,warmth:0,blur:0,filter:'none',text:'',sticker:'',stamp:false});render();root.dataset.beforeState=JSON.stringify(old);});
-function restoreBefore(){if(!root.dataset.beforeState)return;Object.assign(state,JSON.parse(root.dataset.beforeState));delete root.dataset.beforeState;render();}
-document.getElementById('ab-photo-before')?.addEventListener('pointerup',restoreBefore);document.getElementById('ab-photo-before')?.addEventListener('pointerleave',restoreBefore);
-document.getElementById('ab-photo-export')?.addEventListener('click',()=>{if(!image){setStatus('Add a photograph before exporting.');return;}render();canvas.toBlob(blob=>{if(!blob)return;const a=document.createElement('a');const url=URL.createObjectURL(blob);a.href=url;a.download=`${originalName}-adventure-builder.png`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);setStatus('Edited photo exported as PNG.');},'image/png',.94);});
+const root=document.querySelector('.ab-photo-studio');if(!root)return;
+const $=id=>document.getElementById(id);
+const canvas=$('ab-photo-canvas'),overlay=$('ab-photo-overlay-canvas'),ctx=canvas.getContext('2d',{willReadFrequently:true}),octx=overlay.getContext('2d');
+const input=$('ab-photo-file'),empty=$('ab-photo-empty'),status=$('ab-photo-status'),wrap=$('ab-photo-canvas-wrap'),readout=$('ab-photo-cursor-readout');
+let image=null,base=null,working=null,objectUrl='',name='adventure-photo',rotation=0,straighten=0,flipX=1,flipY=1,crop='original',tool='pan',selection=null,lasso=[],dragStart=null,cloneSource=null,drawing=false,history=[],redo=[],before=false;
+const state={exposure:0,brightness:100,contrast:100,saturate:100,warmth:0,blur:0,filter:'none',text:'',sticker:'',stamp:false};
+const out={};document.querySelectorAll('[data-photo-output]').forEach(x=>out[x.dataset.photoOutput]=x);
+const setStatus=s=>{if(status)status.textContent=s};
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const fit=(w,h,max=2200)=>{const s=Math.min(1,max/Math.max(w,h));return [Math.max(1,Math.round(w*s)),Math.max(1,Math.round(h*s))]};
+function snapshot(){if(!working)return;history.push({data:working.getContext('2d').getImageData(0,0,working.width,working.height),w:working.width,h:working.height,rotation,straighten,flipX,flipY,crop,state:{...state}});if(history.length>20)history.shift();redo=[]}
+function restore(s){if(!s)return;const c=document.createElement('canvas');c.width=s.w;c.height=s.h;c.getContext('2d').putImageData(s.data,0,0);working=c;rotation=s.rotation;straighten=s.straighten;flipX=s.flipX;flipY=s.flipY;crop=s.crop;Object.assign(state,s.state);syncControls();render()}
+function undo(){if(history.length<2)return setStatus('Nothing more to undo.');redo.push(history.pop());restore(history.at(-1));setStatus('Undo.')}function redoIt(){if(!redo.length)return setStatus('Nothing to redo.');const s=redo.pop();history.push(s);restore(s);setStatus('Redo.')}
+function syncControls(){for(const k of ['exposure','brightness','contrast','saturate','warmth','blur']){const el=document.querySelector(`[data-photo-adjust="${k}"]`);if(el)el.value=state[k]}$('ab-photo-straighten').value=straighten;updateOutputs()}
+function updateOutputs(){if(out.exposure)out.exposure.textContent=(state.exposure/20).toFixed(1);if(out.brightness)out.brightness.textContent=state.brightness+'%';if(out.contrast)out.contrast.textContent=state.contrast+'%';if(out.saturate)out.saturate.textContent=state.saturate+'%';if(out.warmth)out.warmth.textContent=state.warmth+'%';if(out.blur)out.blur.textContent=state.blur+' px';$('ab-photo-straighten-value').textContent=Number(straighten).toFixed(1)+'°'}
+function cropRect(w,h){let r=0;if(crop==='square')r=1;if(crop==='landscape')r=16/9;if(crop==='portrait')r=9/16;if(!r)return{sx:0,sy:0,sw:w,sh:h};const cr=w/h;if(cr>r){const sw=h*r;return{sx:(w-sw)/2,sy:0,sw,sh:h}}const sh=w/r;return{sx:0,sy:(h-sh)/2,sw:w,sh}}
+function filterString(){const exp=100+state.exposure;let sep=state.warmth;if(state.filter==='coastal')return`brightness(${state.brightness+5+state.exposure}%) contrast(${state.contrast+4}%) saturate(${state.saturate+18}%) sepia(${sep}%) blur(${state.blur}px)`;if(state.filter==='sunset')return`brightness(${state.brightness+2+state.exposure}%) contrast(${state.contrast+5}%) saturate(${state.saturate+30}%) sepia(${Math.min(50,sep+14)}%) blur(${state.blur}px)`;if(state.filter==='forest')return`brightness(${state.brightness+state.exposure}%) contrast(${state.contrast+8}%) saturate(${state.saturate+14}%) hue-rotate(-8deg) sepia(${sep}%) blur(${state.blur}px)`;if(state.filter==='vintage')return`brightness(${state.brightness-4+state.exposure}%) contrast(${state.contrast-4}%) saturate(${Math.max(0,state.saturate-25)}%) sepia(${Math.min(60,sep+25)}%) blur(${state.blur}px)`;if(state.filter==='bw')return`brightness(${state.brightness+state.exposure}%) contrast(${state.contrast+12}%) grayscale(100%) blur(${state.blur}px)`;return`brightness(${state.brightness+state.exposure}%) contrast(${state.contrast}%) saturate(${state.saturate}%) sepia(${sep}%) blur(${state.blur}px)`}
+function transformSize(sw,sh){const a=((rotation+straighten)%360)*Math.PI/180;const q=Math.abs(Math.round(rotation/90)%2);if(Math.abs(straighten)<.01)return q?[sh,sw]:[sw,sh];const ca=Math.abs(Math.cos(a)),sa=Math.abs(Math.sin(a));return[Math.ceil(sw*ca+sh*sa),Math.ceil(sw*sa+sh*ca)]}
+function render(showOriginal=false){if(!working)return;const r=cropRect(working.width,working.height),sz=transformSize(r.sw,r.sh);canvas.width=overlay.width=Math.max(1,sz[0]);canvas.height=overlay.height=Math.max(1,sz[1]);ctx.save();ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#111';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.translate(canvas.width/2,canvas.height/2);ctx.rotate((rotation+straighten)*Math.PI/180);ctx.scale(flipX,flipY);ctx.filter=showOriginal?'none':filterString();ctx.drawImage(working,r.sx,r.sy,r.sw,r.sh,-r.sw/2,-r.sh/2,r.sw,r.sh);ctx.restore();ctx.filter='none';if(!showOriginal)drawDecorations();drawSelection();sizeOverlay();empty.hidden=true}
+function sizeOverlay(){overlay.style.width=canvas.clientWidth+'px';overlay.style.height=canvas.clientHeight+'px'}
+function drawDecorations(){if(state.text){ctx.save();ctx.font=`bold ${Math.max(24,canvas.width*.035)}px sans-serif`;ctx.textAlign='center';ctx.fillStyle='white';ctx.shadowColor='black';ctx.shadowBlur=8;ctx.fillText(state.text,canvas.width/2,canvas.height*.9);ctx.restore()}if(state.sticker){ctx.save();ctx.font=`${Math.max(34,canvas.width*.055)}px sans-serif`;ctx.fillText(state.sticker,canvas.width*.075,canvas.height*.13);ctx.restore()}if(state.stamp){ctx.save();ctx.font=`bold ${Math.max(16,canvas.width*.018)}px sans-serif`;ctx.fillStyle='rgba(255,255,255,.9)';ctx.textAlign='right';ctx.fillText(`ADVENTURE BUILDER · ${new Date().toLocaleDateString('en-GB')}`,canvas.width*.96,canvas.height*.96);ctx.restore()}}
+function canvasPoint(e){const r=overlay.getBoundingClientRect();return{x:(e.clientX-r.left)*overlay.width/r.width,y:(e.clientY-r.top)*overlay.height/r.height}}
+function toWorking(p){const r=cropRect(working.width,working.height);const cx=canvas.width/2,cy=canvas.height/2,a=-(rotation+straighten)*Math.PI/180;let x=(p.x-cx)*flipX,y=(p.y-cy)*flipY;const rx=x*Math.cos(a)-y*Math.sin(a),ry=x*Math.sin(a)+y*Math.cos(a);return{x:rx+r.sw/2+r.sx,y:ry+r.sh/2+r.sy}}
+function maskAllows(x,y){if(!selection)return true;if(selection.type==='rect')return x>=selection.x&&x<=selection.x+selection.w&&y>=selection.y&&y<=selection.y+selection.h;if(selection.type==='poly'){let inside=false;const pts=selection.points;for(let i=0,j=pts.length-1;i<pts.length;j=i++){const xi=pts[i].x,yi=pts[i].y,xj=pts[j].x,yj=pts[j].y;if(((yi>y)!=(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi+1e-9)+xi))inside=!inside}return inside}if(selection.type==='color'){const d=working.getContext('2d').getImageData(clamp(Math.round(x),0,working.width-1),clamp(Math.round(y),0,working.height-1),1,1).data;const c=selection.color,t=selection.tolerance;return Math.hypot(d[0]-c[0],d[1]-c[1],d[2]-c[2])<=t*4}return true}
+function drawSelection(){octx.clearRect(0,0,overlay.width,overlay.height);octx.save();octx.strokeStyle='#f08a35';octx.lineWidth=Math.max(2,overlay.width/600);octx.setLineDash([10,7]);if(selection?.type==='rect'){const a=workingToCanvas({x:selection.x,y:selection.y}),b=workingToCanvas({x:selection.x+selection.w,y:selection.y+selection.h});octx.strokeRect(a.x,a.y,b.x-a.x,b.y-a.y)}if(selection?.type==='poly'&&selection.points.length>1){octx.beginPath();selection.points.map(workingToCanvas).forEach((p,i)=>i?octx.lineTo(p.x,p.y):octx.moveTo(p.x,p.y));octx.closePath();octx.stroke()}if(selection?.type==='color'){octx.fillStyle='rgba(240,138,53,.15)';octx.fillRect(0,0,overlay.width,overlay.height);octx.strokeRect(2,2,overlay.width-4,overlay.height-4)}if(tool==='clone'&&cloneSource){const p=workingToCanvas(cloneSource);octx.setLineDash([]);octx.beginPath();octx.arc(p.x,p.y,12,0,Math.PI*2);octx.stroke()}octx.restore()}
+function workingToCanvas(p){const r=cropRect(working.width,working.height);let x=(p.x-r.sx-r.sw/2)*flipX,y=(p.y-r.sy-r.sh/2)*flipY,a=(rotation+straighten)*Math.PI/180;return{x:x*Math.cos(a)-y*Math.sin(a)+canvas.width/2,y:x*Math.sin(a)+y*Math.cos(a)+canvas.height/2}}
+function brushAt(p,mode){const wctx=working.getContext('2d',{willReadFrequently:true}),size=+$('ab-photo-brush-size').value,soft=+$('ab-photo-brush-softness').value/100,op=+$('ab-photo-brush-opacity').value/100;if(!maskAllows(p.x,p.y))return;wctx.save();wctx.globalAlpha=op;if(mode==='brush'){const g=wctx.createRadialGradient(p.x,p.y,size*.15,p.x,p.y,size/2);const col=$('ab-photo-brush-colour').value;g.addColorStop(0,col);g.addColorStop(Math.max(.05,1-soft),col);g.addColorStop(1,col+'00');wctx.fillStyle=g;wctx.beginPath();wctx.arc(p.x,p.y,size/2,0,Math.PI*2);wctx.fill()}else if((mode==='clone'||mode==='heal')&&cloneSource){const sx=clamp(cloneSource.x-size/2,0,working.width-size),sy=clamp(cloneSource.y-size/2,0,working.height-size);const temp=document.createElement('canvas');temp.width=temp.height=size;temp.getContext('2d').drawImage(working,sx,sy,size,size,0,0,size,size);wctx.globalAlpha=mode==='heal'?op*.55:op;wctx.beginPath();wctx.arc(p.x,p.y,size/2,0,Math.PI*2);wctx.clip();wctx.drawImage(temp,p.x-size/2,p.y-size/2)}wctx.restore();render()}
+function applyGradient(a,b){const wctx=working.getContext('2d'),pa=toWorking(a),pb=toWorking(b),op=+$('ab-photo-gradient-opacity').value/100;wctx.save();const g=wctx.createLinearGradient(pa.x,pa.y,pb.x,pb.y);g.addColorStop(0,$('ab-photo-gradient-a').value);g.addColorStop(1,$('ab-photo-gradient-b').value);wctx.globalAlpha=op;wctx.fillStyle=g;if(selection?.type==='rect')wctx.fillRect(selection.x,selection.y,selection.w,selection.h);else{wctx.fillRect(0,0,working.width,working.height)}wctx.restore();snapshot();render()}
+function setTool(t){tool=t;document.querySelectorAll('[data-photo-tool]').forEach(b=>b.classList.toggle('is-active',b.dataset.photoTool===t));const help={pan:'Pointer mode.',brush:'Paint directly on the image.',clone:'Click once to set clone source, then paint elsewhere.',heal:'Click once to set source, then softly blend over blemishes.',gradient:'Drag across the image to apply a colour/light gradient.',marquee:'Drag a rectangular selection.',lasso:'Draw around the area to select.',wand:'Click a colour to select similar pixels.'}[t];readout.textContent=t[0].toUpperCase()+t.slice(1);$('ab-photo-tool-help').textContent=help}
+function loadFile(f){if(!f)return;if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=URL.createObjectURL(f);name=f.name.replace(/\.[^.]+$/,'')||'adventure-photo';const img=new Image();img.onload=()=>{image=img;const [w,h]=fit(img.naturalWidth,img.naturalHeight);base=document.createElement('canvas');base.width=w;base.height=h;base.getContext('2d').drawImage(img,0,0,w,h);working=document.createElement('canvas');working.width=w;working.height=h;working.getContext('2d').drawImage(base,0,0);history=[];redo=[];snapshot();render();setStatus(`${f.name} loaded. ${w}×${h} working copy; original stays unchanged.`)};img.src=objectUrl}
+function reset(){if(!base)return;working=document.createElement('canvas');working.width=base.width;working.height=base.height;working.getContext('2d').drawImage(base,0,0);rotation=0;straighten=0;flipX=flipY=1;crop='original';selection=null;cloneSource=null;Object.assign(state,{exposure:0,brightness:100,contrast:100,saturate:100,warmth:0,blur:0,filter:'none',text:'',sticker:'',stamp:false});$('ab-photo-text').value='';$('ab-photo-sticker').value='';$('ab-photo-stamp').checked=false;document.querySelectorAll('[data-photo-preset]').forEach(x=>x.classList.toggle('is-active',x.dataset.photoPreset==='none'));document.querySelectorAll('[data-photo-crop]').forEach(x=>x.classList.toggle('is-active',x.dataset.photoCrop==='original'));syncControls();snapshot();render();setStatus('Photo reset to the original working image.')}
+function autoEnhance(){state.exposure=8;state.brightness=104;state.contrast=108;state.saturate=112;state.warmth=4;syncControls();snapshot();render();setStatus('Local auto-enhance applied.')}
+function skyBoost(){if(!working)return;const wctx=working.getContext('2d'),h=working.height*.45,g=wctx.createLinearGradient(0,0,0,h);g.addColorStop(0,'rgba(40,105,190,.20)');g.addColorStop(1,'rgba(255,255,255,0)');wctx.fillStyle=g;wctx.fillRect(0,0,working.width,h);snapshot();render();setStatus('Sky boost applied to the upper part of the photo.')}
+function portraitSoften(){if(!working)return;const wctx=working.getContext('2d');const src=document.createElement('canvas');src.width=working.width;src.height=working.height;src.getContext('2d').drawImage(working,0,0);wctx.save();wctx.globalAlpha=.22;wctx.filter='blur(3px)';if(selection?.type==='rect'){wctx.beginPath();wctx.rect(selection.x,selection.y,selection.w,selection.h);wctx.clip()}wctx.drawImage(src,0,0);wctx.restore();snapshot();render();setStatus('Local soften applied. Use a selection first to limit the area.')}
+function objectRemove(){if(!working)return;setTool('heal');cloneSource=null;setStatus('Object remove mode: click a clean nearby source area once, then paint over the unwanted object. This is local healing, not generative AI.')}
+function exportPhoto(){if(!working)return setStatus('Add a photograph first.');render();const a=document.createElement('a');a.href=canvas.toDataURL('image/jpeg',.94);a.download=`${name}-adventure-builder.jpg`;a.click();setStatus('Edited photo exported as JPEG.')}
+input?.addEventListener('change',()=>{loadFile(input.files?.[0]);input.value=''});
+document.querySelectorAll('[data-photo-adjust]').forEach(el=>el.addEventListener('input',()=>{state[el.dataset.photoAdjust]=+el.value;updateOutputs();render()}));document.querySelectorAll('[data-photo-adjust]').forEach(el=>el.addEventListener('change',snapshot));
+document.querySelectorAll('[data-photo-crop]').forEach(b=>b.addEventListener('click',()=>{crop=b.dataset.photoCrop;document.querySelectorAll('[data-photo-crop]').forEach(x=>x.classList.toggle('is-active',x===b));snapshot();render()}));
+document.querySelector('[data-photo-rotate-left]')?.addEventListener('click',()=>{rotation-=90;snapshot();render()});document.querySelector('[data-photo-rotate-right]')?.addEventListener('click',()=>{rotation+=90;snapshot();render()});document.querySelector('[data-photo-flip-x]')?.addEventListener('click',()=>{flipX*=-1;snapshot();render()});document.querySelector('[data-photo-flip-y]')?.addEventListener('click',()=>{flipY*=-1;snapshot();render()});
+$('ab-photo-straighten')?.addEventListener('input',e=>{straighten=+e.target.value;updateOutputs();render()});$('ab-photo-straighten')?.addEventListener('change',snapshot);
+document.querySelectorAll('[data-photo-tool]').forEach(b=>b.addEventListener('click',()=>setTool(b.dataset.photoTool)));
+for(const [id,outid,suffix] of [['ab-photo-brush-size','ab-photo-brush-size-value',' px'],['ab-photo-brush-softness','ab-photo-brush-soft-value','%'],['ab-photo-brush-opacity','ab-photo-brush-opacity-value','%'],['ab-photo-wand-tolerance','ab-photo-wand-value',''],['ab-photo-gradient-opacity','ab-photo-gradient-opacity-value','%']])$(id)?.addEventListener('input',e=>$(outid).textContent=e.target.value+suffix);
+document.querySelectorAll('[data-photo-preset]').forEach(b=>b.addEventListener('click',()=>{state.filter=b.dataset.photoPreset;document.querySelectorAll('[data-photo-preset]').forEach(x=>x.classList.toggle('is-active',x===b));snapshot();render()}));
+$('ab-photo-text')?.addEventListener('input',e=>{state.text=e.target.value;render()});$('ab-photo-sticker')?.addEventListener('change',e=>{state.sticker=e.target.value;snapshot();render()});$('ab-photo-stamp')?.addEventListener('change',e=>{state.stamp=e.target.checked;snapshot();render()});
+$('ab-photo-select-all')?.addEventListener('click',()=>{if(!working)return;selection={type:'rect',x:0,y:0,w:working.width,h:working.height};render();setStatus('Whole image selected.')});$('ab-photo-clear-selection')?.addEventListener('click',()=>{selection=null;lasso=[];render();setStatus('Selection cleared.')});
+$('ab-photo-smart-auto')?.addEventListener('click',autoEnhance);$('ab-photo-smart-sky')?.addEventListener('click',skyBoost);$('ab-photo-smart-portrait')?.addEventListener('click',portraitSoften);$('ab-photo-smart-object')?.addEventListener('click',objectRemove);$('ab-photo-reset')?.addEventListener('click',reset);$('ab-photo-export')?.addEventListener('click',exportPhoto);$('ab-photo-undo')?.addEventListener('click',undo);$('ab-photo-redo')?.addEventListener('click',redoIt);
+const beforeBtn=$('ab-photo-before');const showBefore=()=>{if(base){before=true;const save=working;working=base;render(true);working=save}};const endBefore=()=>{before=false;render()};beforeBtn?.addEventListener('pointerdown',showBefore);beforeBtn?.addEventListener('pointerup',endBefore);beforeBtn?.addEventListener('pointerleave',endBefore);
+overlay.addEventListener('pointerdown',e=>{if(!working)return;const p=canvasPoint(e),w=toWorking(p);dragStart=p;drawing=true;overlay.setPointerCapture?.(e.pointerId);if(tool==='clone'||tool==='heal'){if(!cloneSource){cloneSource=w;drawing=false;setStatus(`${tool==='clone'?'Clone':'Heal'} source set. Now paint over the target area.`);render();return}brushAt(w,tool)}else if(tool==='brush')brushAt(w,'brush');else if(tool==='lasso'){lasso=[w]}else if(tool==='wand'){const d=working.getContext('2d').getImageData(clamp(Math.round(w.x),0,working.width-1),clamp(Math.round(w.y),0,working.height-1),1,1).data;selection={type:'color',color:[d[0],d[1],d[2]],tolerance:+$('ab-photo-wand-tolerance').value};drawing=false;render();setStatus('Magic Wand colour selection active.')}});
+overlay.addEventListener('pointermove',e=>{if(!drawing||!working)return;const p=canvasPoint(e),w=toWorking(p);if(tool==='brush'||tool==='clone'||tool==='heal')brushAt(w,tool);else if(tool==='marquee'){const a=toWorking(dragStart);selection={type:'rect',x:Math.min(a.x,w.x),y:Math.min(a.y,w.y),w:Math.abs(w.x-a.x),h:Math.abs(w.y-a.y)};render()}else if(tool==='lasso'){lasso.push(w);selection={type:'poly',points:[...lasso]};render()}else if(tool==='gradient'){octx.clearRect(0,0,overlay.width,overlay.height);octx.strokeStyle='#f08a35';octx.lineWidth=3;octx.beginPath();octx.moveTo(dragStart.x,dragStart.y);octx.lineTo(p.x,p.y);octx.stroke()}});
+overlay.addEventListener('pointerup',e=>{if(!drawing)return;const p=canvasPoint(e);if(tool==='brush'||tool==='clone'||tool==='heal'){snapshot();setStatus(`${tool} stroke saved.`)}else if(tool==='gradient'){applyGradient(dragStart,p)}else if(tool==='marquee'||tool==='lasso'){snapshot();render();setStatus(`${tool==='marquee'?'Marquee':'Lasso'} selection active.`)}drawing=false;dragStart=null});
+window.addEventListener('resize',()=>{if(working){render();sizeOverlay()}});setTool('pan');updateOutputs();
 })();

@@ -8,6 +8,7 @@
   <title>Passport | Adventure Builder</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/adventure-passport.css">
 </head>
 <body data-page="passport">
   <header class="site-header">
@@ -22,19 +23,18 @@
 
     <nav class="site-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
-      <a href="explore.html">Explore</a>
-      <a href="adventures.html">Adventures</a>
-      <a href="paddling.html">Paddle &amp; Kayak</a>
       <a href="adventure-finder.html">Adventure Finder</a>
-      <a href="walking-hiking.html">Walking &amp; Hiking</a>
-      <a href="van-life.html">Van Life</a>
+      <a href="adventures.html">Adventures</a>
       <a href="trip-planner.html">Trip Planner</a>
+      <a href="walking-hiking.html">Walking &amp; Hiking</a>
+      <a href="paddling.html">Paddle &amp; Kayak</a>
+      <a href="van-life.html">Vanlife</a>
+      <a href="passport.html">Adventure Passport</a>
       <a href="gallery.html">Gallery</a>
       <a href="journal.html">Journal</a>
-      <a href="passport.html">Passport</a>
-      <a href="community.html">Community</a><a href="partners.html">Partners</a>
+      <a href="studio.html">Adventure Studio</a>
+      <a href="community.html">Community</a>
       <a href="partners.html">Partners</a>
-      <a href="studio.html">Studio</a>
     </nav>
 
     <div class="account-actions" id="account-actions">
@@ -46,20 +46,126 @@
       </button>
     </div>
   </header>
-  <main>
-    <section class="section standalone-page category-hub category-alt" id="passport">
-      <div class="section-heading"><p class="eyebrow">Collect your adventures</p><h2>Adventure Passport</h2><p>Future QR stamps, badges and achievements will have their own dedicated home.</p></div>
-      <div class="category-layout">
-        <div class="category-copy"><span class="category-icon">🏆</span><h3>Open Adventure Passport</h3><p>See visited locations, QR stamps, points and achievement progress in one organised category.</p><button class="button button-primary design-button" type="button" data-category="Adventure Passport">Open Passport Area</button></div>
-        <div class="category-features"><span>QR stamps</span><span>Points</span><span>Achievements</span><span>Badges</span><span>Visited places</span><span>Challenges</span></div>
+  <main><section class="section standalone-page"><div class="section-heading"><p class="eyebrow">Collect · remember · explore</p><h2>Adventure Passport</h2><p>Your personal record of adventures, stamps, collections and challenges.</p></div>
+<section class="ab-passport" id="adventure-passport" data-ab-passport>
+  <header class="ap-hero">
+    <p class="eyebrow">Your lifetime record of adventure</p>
+    <h1>🛂 Adventure Passport</h1>
+    <p>Collect stamps, complete regional collections, track challenges and build a visual passport that grows with every adventure.</p>
+    <div class="ap-tabs">
+      <button class="ap-tab is-active" data-ap-tab="home" type="button">🛂 Passport Home</button>
+      <button class="ap-tab" data-ap-tab="pages" type="button">📖 Passport Pages</button>
+      <button class="ap-tab" data-ap-tab="stamps" type="button">📍 Stamps</button>
+      <button class="ap-tab" data-ap-tab="collections" type="button">🗂 Collections</button>
+      <button class="ap-tab" data-ap-tab="challenges" type="button">🏅 Challenges</button>
+      <button class="ap-tab" data-ap-tab="map" type="button">🗺 Passport Map</button>
+      <button class="ap-tab" data-ap-tab="logbook" type="button">📚 Logbook</button>
+      <button class="ap-tab" data-ap-tab="qr" type="button">🔳 QR Stops</button>
+    </div>
+  </header>
+  <div class="ap-body">
+
+    <section class="ap-view" data-ap-view="home">
+      <div class="ap-grid">
+        <article class="ap-cover">
+          <div class="ap-cover-mark">🧭</div>
+          <h3>ADVENTURE BUILDER</h3>
+          <p>ADVENTURE PASSPORT</p>
+          <p class="ap-passport-no" data-ap-passport-no></p>
+          <strong data-ap-name>Adventure Explorer</strong>
+          <small>Member since <span data-ap-member-since></span></small>
+        </article>
+        <article class="ap-card">
+          <h3>Your Passport</h3>
+          <div class="ap-stats">
+            <div class="ap-stat"><small>Stamps</small><strong data-ap-stamps-count>0</strong></div>
+            <div class="ap-stat"><small>Adventures</small><strong data-ap-adventures-count>0</strong></div>
+            <div class="ap-stat"><small>Regions</small><strong data-ap-regions-count>0</strong></div>
+            <div class="ap-stat"><small>Explorer level</small><strong data-ap-level>Level 1</strong></div>
+          </div>
+          <h4 style="margin-top:14px">Level progress</h4>
+          <div class="ap-progress"><span data-ap-progress-bar style="width:0%"></span></div>
+          <form class="ap-form" data-ap-profile-form style="margin-top:14px">
+            <label>Explorer name<input name="name" placeholder="Adventure Explorer"></label>
+            <label>Home region (optional)<input name="homeRegion" placeholder="North West England"></label>
+            <button class="ap-btn primary" type="submit">Save Passport Profile</button>
+            <p class="ap-status" data-ap-profile-status></p>
+          </form>
+        </article>
       </div>
     </section>
 
-    <section class="cta-section"><div><p class="eyebrow">Ready to explore?</p><h2>Open Adventure Builder</h2><p>Use the same account on the website and in the Adventure Builder app.</p></div><a class="button button-primary" href="index.html#download">Get the App</a></section>
-  </main>
+    <section class="ap-view" data-ap-view="pages" hidden>
+      <div class="ap-book">
+        <article class="ap-page"><h4>Adventure Passport — Page 1</h4><div class="ap-stamps" data-ap-stamps></div></article>
+        <article class="ap-page"><h4>Adventure Passport — Page 2</h4><div class="ap-stamps"><div class="ap-empty">New pages unlock as your passport grows</div><div class="ap-empty">Future stamp</div><div class="ap-empty">Future stamp</div><div class="ap-empty">Future stamp</div></div></article>
+      </div>
+    </section>
+
+    <section class="ap-view" data-ap-view="stamps" hidden>
+      <div class="ap-grid">
+        <form class="ap-card ap-form" data-ap-stamp-form>
+          <h3>Add / test a Passport Stamp</h3>
+          <div class="ap-form-grid"><label>Stamp name<input name="name" required placeholder="Aira Force"></label><label>Region<input name="region" placeholder="Lake District"></label></div>
+          <div class="ap-form-grid"><label>Adventure type<select name="type"><option>Viewpoint</option><option>Waterfall</option><option>Trail</option><option>Campsite</option><option>Vanlife Stop</option><option>Paddle</option><option>Kayak</option><option>Beach</option><option>Castle</option><option>Historic Site</option><option>National Park</option><option>Sunrise</option><option>Sunset</option></select></label><label>Rarity<select name="rarity"><option>Common</option><option>Explorer</option><option>Rare</option><option>Epic</option><option>Legendary</option><option>Limited Edition</option></select></label></div>
+          <div class="ap-form-grid"><label>Date<input name="date" type="date"></label><label>Stamp icon<input name="icon" maxlength="4" value="🛂"></label></div>
+          <label>Notes<textarea name="notes" placeholder="What made this adventure special?"></textarea></label>
+          <label>Verification<select name="verified"><option value="no">Manual / unverified</option><option value="yes">Verified test entry</option></select></label>
+          <button class="ap-btn primary" type="submit">Add Stamp</button><p class="ap-status" data-ap-stamp-status></p>
+        </form>
+        <article class="ap-card">
+          <h3>Stamp rarity</h3>
+          <div class="ap-rarity"><div class="ap-rarity-item"><span>⚪</span><strong>Common</strong></div><div class="ap-rarity-item"><span>🟢</span><strong>Explorer</strong></div><div class="ap-rarity-item"><span>🔵</span><strong>Rare</strong></div><div class="ap-rarity-item"><span>🟣</span><strong>Epic</strong></div><div class="ap-rarity-item"><span>🟡</span><strong>Legendary</strong></div><div class="ap-rarity-item"><span>🔴</span><strong>Limited Edition</strong></div></div>
+          <div class="ap-safety" style="margin-top:12px">Real public stamps should come from verified GPS, Adventure Builder QR stops, completed routes, approved partners or events. Manual test stamps are for the prototype only.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="ap-view" data-ap-view="collections" hidden>
+      <div class="ap-card"><h3>Collections</h3><p>Regional and activity collections give explorers a reason to discover new places rather than repeatedly visiting the same location.</p><div class="ap-collections" data-ap-collections></div></div>
+    </section>
+
+    <section class="ap-view" data-ap-view="challenges" hidden>
+      <div class="ap-card"><h3>Adventure Challenges</h3><div class="ap-collections" data-ap-challenges></div><div class="ap-safety" style="margin-top:12px">Challenges must never reward trespass, unsafe access, speeding, dangerous water conditions or risky behaviour.</div></div>
+    </section>
+
+    <section class="ap-view" data-ap-view="map" hidden>
+      <div class="ap-grid">
+        <article class="ap-card"><h3>Passport Map</h3><div class="ap-map"><span class="ap-pin p1">🛂</span><span class="ap-pin p2">🌅</span><span class="ap-pin p3">🚐</span><span class="ap-pin p4">🛶</span></div></article>
+        <article class="ap-card"><h3>Map privacy</h3><p>The public passport map should use privacy controls from the Gallery system. Exact personal trip locations do not need to be public.</p><div class="ap-safety">Future map version can show collected regions, official Passport Stops and approved public memories without exposing a user's private travel history.</div></article>
+      </div>
+    </section>
+
+    <section class="ap-view" data-ap-view="logbook" hidden>
+      <div class="ap-card"><h3>Adventure Logbook</h3><p>Each stamp becomes a doorway back into the route, photos, videos, journal, stay and story from that adventure.</p><div class="ap-logbook-list" data-ap-logbook-list></div></div>
+    </section>
+
+    <section class="ap-view" data-ap-view="qr" hidden>
+      <div class="ap-grid">
+        <article class="ap-card">
+          <h3>Official Adventure Builder QR Stops</h3>
+          <p>QR Studio creates codes using the Adventure Builder format <code>ABP1:ABP-…</code>. The app recognises the format here, while the production backend will verify the token, GPS distance, account and duplicate claims.</p>
+          <div class="ap-form"><label>Test QR payload<input data-ap-qr-code placeholder="ABP1:ABP-..."></label><button class="ap-btn primary" data-ap-qr-demo type="button">Check Adventure Builder Format</button><p class="ap-status" data-ap-qr-status></p></div>
+        </article>
+        <article class="ap-card">
+          <h3>Future verified stamp methods</h3>
+          <div class="ap-collections">
+            <div class="ap-collection"><strong>🔳 QR Stop</strong><small>Official Adventure Builder plaque</small></div>
+            <div class="ap-collection"><strong>📍 GPS Visit</strong><small>Approved location proximity</small></div>
+            <div class="ap-collection"><strong>🥾 Completed Route</strong><small>Route completion evidence</small></div>
+            <div class="ap-collection"><strong>🤝 Partner Stop</strong><small>Verified partner location</small></div>
+            <div class="ap-collection"><strong>🎉 Event Stamp</strong><small>Limited date/event code</small></div>
+            <div class="ap-collection"><strong>🏅 Challenge</strong><small>Completion-based reward</small></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+</section>
+</section></main>
   <footer class="site-footer">
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
-    <div class="footer-links"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
+    <div class="footer-links"><a href="index.html">Home</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
       <a href="studio.html">Studio</a><a href="index.html#download">Get the App</a></div>
     <p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p>
   </footer>
@@ -115,5 +221,6 @@
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/adventure-passport.js"></script>
 </body>
 </html>

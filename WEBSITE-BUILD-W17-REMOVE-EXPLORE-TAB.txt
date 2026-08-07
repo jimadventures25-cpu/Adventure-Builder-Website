@@ -1,0 +1,20 @@
+Adventure Builder Big Update W17 — Remove Standalone Explore Tab
+
+CHANGE
+- Removed the standalone Explore tab/link from the website main navigation.
+- Removed the standalone Explore card/tab from the app main/home navigation.
+- Kept Explore functionality itself intact.
+
+EXPLORE FEATURES STILL AVAILABLE THROUGH
+- Adventure Finder
+- Vanlife / Basecamp
+- Trail Planner
+- Adventure Hub
+- Gallery / Adventure Stories
+- Other connected discovery flows
+
+IMPORTANT
+- explore.html and related Explore code were NOT deleted.
+- This is a navigation cleanup only.
+- Satnav, GPS, rerouting and voice-navigation code were not changed.
+- Website and app remain aligned.

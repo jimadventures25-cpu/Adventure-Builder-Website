@@ -41,3 +41,32 @@
 .ab-video-chapters{display:grid;gap:6px}.ab-video-chapter{display:flex;gap:8px;align-items:center;padding:7px 8px;border:1px solid #334047;border-radius:8px;background:#141b1f;font-size:.74rem}.ab-video-chapter b{color:#ffd0a5}
 @media(max-width:1050px){.ab-video-layout{grid-template-columns:210px minmax(0,1fr)}.ab-video-right{grid-column:1/-1;border-left:0;border-top:1px solid var(--vline);display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.ab-video-right>h3{grid-column:1/-1}.ab-video-right .ab-video-group{border-bottom:0;padding:0}}
 @media(max-width:720px){.ab-video-studio{border-radius:14px}.ab-video-head p{font-size:.78rem}.ab-video-badge{display:none}.ab-video-layout{display:flex;flex-direction:column;min-height:0}.ab-video-main{order:1}.ab-video-left{order:2;border-right:0;border-top:1px solid var(--vline)}.ab-video-right{order:3;display:block}.ab-video-preview-wrap{min-height:330px;padding:10px}.ab-video-preview-frame{width:100%}.ab-video-tool-list{grid-template-columns:repeat(2,1fr)}.ab-video-clip{flex-basis:145px}.ab-video-route-card{left:10px;top:10px;max-width:72%;font-size:.68rem}.ab-video-stamp{right:10px;bottom:10px}}
+
+
+/* W20 — Adventure Studio Video Editor multi-track upgrade */
+.ab-video-group-title{font-weight:900;font-size:.86rem;display:block;margin-bottom:8px}
+.ab-video-check{display:flex!important;align-items:center;gap:8px!important}.ab-video-check input{width:auto!important}
+.ab-video-overlay-stage{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:8}
+.ab-video-overlay-item{position:absolute;left:38%;top:18%;min-width:42px;min-height:34px;max-width:80%;padding:7px 10px;border:1px dashed transparent;border-radius:8px;cursor:move;user-select:none;touch-action:none;pointer-events:auto;display:flex;align-items:center;justify-content:center}
+.ab-video-overlay-item.is-selected{border-color:#f08a35;background:rgba(0,0,0,.18)}
+.ab-video-overlay-item[data-overlay-kind="text"]{color:#fff;font-weight:800;text-shadow:0 1px 3px #000;font-size:clamp(14px,2vw,24px)}
+.ab-video-overlay-item[data-text-style="bold"]{font-weight:950;font-size:clamp(18px,2.5vw,30px)}
+.ab-video-overlay-item[data-text-style="caption"]{background:rgba(0,0,0,.62)}
+.ab-video-overlay-item[data-text-style="outline"]{text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000}
+.ab-video-overlay-item[data-overlay-kind="sticker"]{font-size:42px;padding:4px}
+.ab-video-resize-handle{position:absolute;width:14px;height:14px;right:-7px;bottom:-7px;border-radius:50%;background:#f08a35;border:2px solid #111;cursor:nwse-resize}
+.ab-video-sticker-palette{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.ab-video-sticker-palette button{min-height:40px;border:1px solid #3d5056;border-radius:9px;background:#172226;color:#fff;font-size:1.25rem;cursor:pointer}
+.ab-video-help{font-size:.7rem!important;color:#9fb0b5!important}
+.ab-video-track-controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:9px 0}.ab-video-track-controls label{display:flex;align-items:center;gap:7px;font-size:.72rem;color:#afbdc1}.ab-video-track-controls input{width:120px}
+.ab-video-multitracks{display:grid;gap:6px;overflow-x:auto;padding-bottom:5px}
+.ab-video-mtrack{display:grid;grid-template-columns:105px minmax(520px,1fr);gap:8px;align-items:stretch;min-height:48px}
+.ab-video-mtrack-label{border:1px solid #35484e;border-radius:8px;background:#11191c;padding:7px;font-size:.7rem;display:flex;align-items:center;position:sticky;left:0;z-index:2}
+.ab-video-mtrack-lane{position:relative;border:1px solid #35484e;border-radius:8px;background:repeating-linear-gradient(90deg,#141e21 0,#141e21 49px,#1c292d 50px);min-height:48px;overflow:hidden}
+.ab-video-mclip,.ab-video-overlay-block{display:inline-flex;vertical-align:top;height:38px;margin:4px 2px;padding:5px 7px;border:1px solid #5a7279;border-radius:7px;background:#25383e;color:#fff;overflow:hidden;cursor:pointer;font-size:.66rem;align-items:center}
+.ab-video-mclip{min-width:90px;max-width:260px}.ab-video-mclip.is-selected,.ab-video-overlay-block.is-selected{border-color:#f08a35;box-shadow:inset 0 0 0 1px #f08a35}.ab-video-mclip small{display:block;color:#b6c4c8}
+.ab-video-overlay-block{border-color:#80633c;background:#3d3020}
+.ab-video-transition-badge{font-size:.6rem;border:1px solid #6a5c44;border-radius:999px;padding:2px 5px;margin-left:4px;color:#e8d5b6}
+.ab-video-preview-frame.is-vignette:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:7;box-shadow:inset 0 0 70px 25px rgba(0,0,0,.65)}
+.ab-video-preview-frame.fx-crossfade video{animation:abFxCross .45s ease}.ab-video-preview-frame.fx-slide-left video{animation:abFxLeft .45s ease}.ab-video-preview-frame.fx-slide-right video{animation:abFxRight .45s ease}.ab-video-preview-frame.fx-zoom video{animation:abFxZoom .45s ease}
+@keyframes abFxCross{from{opacity:.15}to{opacity:1}}@keyframes abFxLeft{from{transform:translateX(12%);opacity:.2}to{transform:none;opacity:1}}@keyframes abFxRight{from{transform:translateX(-12%);opacity:.2}to{transform:none;opacity:1}}@keyframes abFxZoom{from{transform:scale(1.08);opacity:.4}to{transform:scale(1);opacity:1}}
+@media(max-width:700px){.ab-video-mtrack{grid-template-columns:82px minmax(450px,1fr)}.ab-video-track-controls input{width:90px}}

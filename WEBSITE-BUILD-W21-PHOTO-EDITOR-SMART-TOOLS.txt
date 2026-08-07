@@ -1,0 +1,59 @@
+Adventure Builder Big Update W21 — Photo Editor Smart Tools
+
+STAGE 1 — CROP, STRAIGHTEN & GLOBAL ADJUSTMENTS
+- Original / 1:1 / 16:9 / 9:16 crop modes
+- Straighten slider from -15° to +15°
+- Rotate left/right
+- Flip horizontal/vertical
+- Exposure
+- Brightness
+- Contrast
+- Saturation
+- Warmth
+- Soft blur
+- Existing one-tap looks retained
+
+STAGE 2 — BRUSH & GRADIENT
+- Brush tool
+- Colour picker
+- Adjustable brush size
+- Adjustable softness
+- Adjustable opacity
+- Gradient tool
+- Two gradient colours
+- Adjustable gradient opacity
+- Drag direction directly across photo
+
+STAGE 3 — SELECTION TOOLS
+- Rectangular Marquee
+- Freehand Lasso
+- Magic Wand colour selection
+- Adjustable Magic Wand tolerance
+- Select All
+- Clear Selection
+- Selection overlay on image
+
+STAGE 4 — CLONE & HEALING
+- Clone source point
+- Paint cloned pixels over target
+- Healing mode with softer blending
+- Brush size / opacity shared with clone/heal
+- Object Remove smart action switches into guided healing workflow
+
+STAGE 5 — SMART TOOLS
+- Local Auto Enhance
+- Local Sky Boost
+- Local Portrait Soften
+- Guided Object Remove / Healing
+- Honest limitation: these are browser/local image-processing tools, not generative AI scene understanding
+- Future advanced generative replacement / true AI sky and portrait recognition remain isolated future modules
+
+OTHER
+- Undo / redo foundation
+- Hold-for-original comparison
+- Captions / stickers / Adventure Builder date stamp retained
+- JPEG export retained
+- Same Photo Editor on website, app root and /app copy
+- No duplicate photo editor created
+- Video Editor W20 retained
+- Satnav/GPS/rerouting/voice code untouched

@@ -1,0 +1,7 @@
+
+/* Adventure Studio: one creative workspace, one editor per tab */
+.ab-studio-switch{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0;padding:8px;border:1px solid #35484e;border-radius:14px;background:#11191c}
+.ab-studio-switch button{min-height:44px;border:1px solid #43565c;border-radius:10px;background:#202d31;color:#fff;padding:9px 14px;font-weight:800;cursor:pointer}
+.ab-studio-switch button.is-active{background:#f08a35;border-color:#f08a35;color:#111}
+[data-ab-studio-panel][hidden]{display:none!important}
+.ab-studio-note{margin:8px 0 14px;color:#aebcc0;font-size:.8rem}

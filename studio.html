@@ -9,6 +9,7 @@
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/photo-studio.css">
+  <link rel="stylesheet" href="css/adventure-studio-tabs.css">
   <link rel="stylesheet" href="css/video-studio-v2.css">
 </head>
 <body data-page="studio">
@@ -24,19 +25,18 @@
 
     <nav class="site-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
-      <a href="explore.html">Explore</a>
-      <a href="adventures.html">Adventures</a>
-      <a href="paddling.html">Paddle &amp; Kayak</a>
       <a href="adventure-finder.html">Adventure Finder</a>
-      <a href="walking-hiking.html">Walking &amp; Hiking</a>
-      <a href="van-life.html">Van Life</a>
+      <a href="adventures.html">Adventures</a>
       <a href="trip-planner.html">Trip Planner</a>
+      <a href="walking-hiking.html">Walking &amp; Hiking</a>
+      <a href="paddling.html">Paddle &amp; Kayak</a>
+      <a href="van-life.html">Vanlife</a>
+      <a href="passport.html">Adventure Passport</a>
       <a href="gallery.html">Gallery</a>
       <a href="journal.html">Journal</a>
-      <a href="passport.html">Passport</a>
-      <a href="community.html">Community</a><a href="partners.html">Partners</a>
+      <a href="studio.html">Adventure Studio</a>
+      <a href="community.html">Community</a>
       <a href="partners.html">Partners</a>
-      <a href="studio.html">Studio</a>
     </nav>
 
     <div class="account-actions" id="account-actions">
@@ -53,37 +53,82 @@
       <div class="section-heading"><p class="eyebrow">Create after the adventure</p><h1>Adventure Studio</h1><p>A desktop-friendly creative workspace for arranging travel photographs and video clips, writing captions and preparing social content.</p></div>
       <div class="beta-access-banner"><strong>Premium later · free during beta</strong><span>Adventure Studio is unlocked for every registered beta tester while we build and test it.</span></div>
       <section class="member-gate" id="studio-gate"><span>🎬</span><h2>Sign in to enter the Studio</h2><p>Use the same free beta account as the Adventure Builder app.</p><div><button class="button button-primary" data-open-auth="register" type="button">Create Free Account</button><button class="button button-secondary" data-open-auth="login" type="button">Log In</button></div></section>
-      <div id="studio-members-area" hidden>
+      <div id="studio-members-area" hidden data-ab-adventure-studio>
+<div class="ab-studio-switch" role="tablist" aria-label="Adventure Studio editor"><button type="button" class="is-active" data-ab-studio-tab="photo" role="tab">📸 Photo Editor</button><button type="button" data-ab-studio-tab="video" role="tab">🎬 Video Editor</button></div><p class="ab-studio-note">One Adventure Studio with one Photo Editor and one Video Editor — no duplicate editing programs.</p>
         
-<section class="ab-photo-studio" aria-labelledby="ab-photo-title">
+<section class="ab-photo-studio" data-ab-studio-panel="photo" aria-labelledby="ab-photo-title">
   <header class="ab-photo-head">
-    <div><h2 id="ab-photo-title">📸 Adventure Builder Photo Studio</h2><p>Edit travel photos with the same tools on the website and in the app.</p></div>
-    <span class="ab-photo-badge">Shared Web + App Editor · Beta</span>
+    <div><h2 id="ab-photo-title">📸 Adventure Studio — Photo Editor</h2><p>Crop, paint, select, heal, clone, grade and prepare adventure photographs on website and app.</p></div>
+    <span class="ab-photo-badge">Shared Web + App Editor · W21</span>
   </header>
   <div class="ab-photo-shell">
     <aside class="ab-photo-tools">
       <label class="ab-photo-upload">＋ Add photograph<input id="ab-photo-file" type="file" accept="image/jpeg,image/png,image/webp"></label>
+
       <div class="ab-photo-group">
-        <div class="ab-photo-group-title"><span>Adjust</span><button class="ab-photo-btn" id="ab-photo-reset" type="button">Reset</button></div>
+        <div class="ab-photo-group-title"><span>Global adjustments</span><button class="ab-photo-btn" id="ab-photo-reset" type="button">Reset</button></div>
+        <label>Exposure <output data-photo-output="exposure">0.0</output><input data-photo-adjust="exposure" type="range" min="-100" max="100" value="0"></label>
         <label>Brightness <output data-photo-output="brightness">100%</output><input data-photo-adjust="brightness" type="range" min="40" max="160" value="100"></label>
         <label>Contrast <output data-photo-output="contrast">100%</output><input data-photo-adjust="contrast" type="range" min="40" max="180" value="100"></label>
-        <label>Colour <output data-photo-output="saturate">100%</output><input data-photo-adjust="saturate" type="range" min="0" max="200" value="100"></label>
+        <label>Saturation <output data-photo-output="saturate">100%</output><input data-photo-adjust="saturate" type="range" min="0" max="200" value="100"></label>
         <label>Warmth <output data-photo-output="warmth">0%</output><input data-photo-adjust="warmth" type="range" min="0" max="60" value="0"></label>
         <label>Soft blur <output data-photo-output="blur">0 px</output><input data-photo-adjust="blur" type="range" min="0" max="8" step=".5" value="0"></label>
       </div>
+
       <div class="ab-photo-group">
-        <span class="ab-photo-group-title">Crop &amp; transform</span>
-        <div class="ab-photo-row"><button class="ab-photo-btn is-active" data-photo-crop="original" type="button">Original</button><button class="ab-photo-btn" data-photo-crop="square" type="button">1:1 Square</button><button class="ab-photo-btn" data-photo-crop="landscape" type="button">16:9</button><button class="ab-photo-btn" data-photo-crop="portrait" type="button">9:16</button></div>
+        <span class="ab-photo-group-title">Crop &amp; Straighten</span>
+        <div class="ab-photo-row"><button class="ab-photo-btn is-active" data-photo-crop="original" type="button">Original</button><button class="ab-photo-btn" data-photo-crop="square" type="button">1:1</button><button class="ab-photo-btn" data-photo-crop="landscape" type="button">16:9</button><button class="ab-photo-btn" data-photo-crop="portrait" type="button">9:16</button></div>
+        <label>Straighten <output id="ab-photo-straighten-value">0°</output><input id="ab-photo-straighten" type="range" min="-15" max="15" step=".1" value="0"></label>
         <div class="ab-photo-row"><button class="ab-photo-btn" data-photo-rotate-left type="button">↶ Rotate</button><button class="ab-photo-btn" data-photo-rotate-right type="button">Rotate ↷</button><button class="ab-photo-btn" data-photo-flip-x type="button">↔ Flip</button><button class="ab-photo-btn" data-photo-flip-y type="button">↕ Flip</button></div>
       </div>
+
+      <div class="ab-photo-group">
+        <span class="ab-photo-group-title">Brush</span>
+        <div class="ab-photo-tool-tabs">
+          <button class="ab-photo-btn is-active" data-photo-tool="pan" type="button">Pointer</button>
+          <button class="ab-photo-btn" data-photo-tool="brush" type="button">Brush</button>
+          <button class="ab-photo-btn" data-photo-tool="clone" type="button">Clone</button>
+          <button class="ab-photo-btn" data-photo-tool="heal" type="button">Heal</button>
+          <button class="ab-photo-btn" data-photo-tool="gradient" type="button">Gradient</button>
+        </div>
+        <label>Brush colour<input id="ab-photo-brush-colour" type="color" value="#f08a35"></label>
+        <label>Size <output id="ab-photo-brush-size-value">32 px</output><input id="ab-photo-brush-size" type="range" min="2" max="180" value="32"></label>
+        <label>Softness <output id="ab-photo-brush-soft-value">50%</output><input id="ab-photo-brush-softness" type="range" min="0" max="100" value="50"></label>
+        <label>Opacity <output id="ab-photo-brush-opacity-value">70%</output><input id="ab-photo-brush-opacity" type="range" min="5" max="100" value="70"></label>
+        <p class="ab-photo-help" id="ab-photo-tool-help">Choose Brush, Clone, Heal or Gradient, then work directly on the image.</p>
+      </div>
     </aside>
-    <div class="ab-photo-canvas-wrap">
+
+    <div class="ab-photo-canvas-wrap" id="ab-photo-canvas-wrap">
       <canvas id="ab-photo-canvas" width="1200" height="800" aria-label="Photo editing preview"></canvas>
+      <canvas id="ab-photo-overlay-canvas" width="1200" height="800" aria-label="Selection and tool overlay"></canvas>
       <div class="ab-photo-empty" id="ab-photo-empty"><div><strong>Your adventure photo appears here</strong><span>Add a JPG, PNG or WebP image to start editing.</span></div></div>
       <button class="ab-photo-before ab-photo-btn" id="ab-photo-before" type="button">Hold for original</button>
+      <div class="ab-photo-cursor-readout" id="ab-photo-cursor-readout">Pointer</div>
     </div>
+
     <aside class="ab-photo-side">
-      <h3>Adventure tools</h3>
+      <h3>Selections &amp; smart tools</h3>
+
+      <div class="ab-photo-group">
+        <span class="ab-photo-group-title">Selection tools</span>
+        <div class="ab-photo-tool-tabs">
+          <button class="ab-photo-btn" data-photo-tool="marquee" type="button">▭ Marquee</button>
+          <button class="ab-photo-btn" data-photo-tool="lasso" type="button">〰 Lasso</button>
+          <button class="ab-photo-btn" data-photo-tool="wand" type="button">✨ Magic Wand</button>
+        </div>
+        <label>Magic Wand tolerance <output id="ab-photo-wand-value">32</output><input id="ab-photo-wand-tolerance" type="range" min="5" max="100" value="32"></label>
+        <div class="ab-photo-row"><button class="ab-photo-btn" id="ab-photo-select-all" type="button">Select all</button><button class="ab-photo-btn" id="ab-photo-clear-selection" type="button">Clear</button></div>
+        <p class="ab-photo-help">Brush, gradient and smart adjustments respect the current selection where possible.</p>
+      </div>
+
+      <div class="ab-photo-group">
+        <span class="ab-photo-group-title">Gradient lighting</span>
+        <div class="ab-photo-grid2"><label>Colour 1<input id="ab-photo-gradient-a" type="color" value="#f08a35"></label><label>Colour 2<input id="ab-photo-gradient-b" type="color" value="#182a4a"></label></div>
+        <label>Gradient opacity <output id="ab-photo-gradient-opacity-value">35%</output><input id="ab-photo-gradient-opacity" type="range" min="0" max="100" value="35"></label>
+        <p class="ab-photo-help">Choose Gradient, then drag across the photo to set direction and length.</p>
+      </div>
+
       <div class="ab-photo-group">
         <span class="ab-photo-group-title">One-tap looks</span>
         <div class="ab-photo-presets">
@@ -95,24 +140,39 @@
           <button class="ab-photo-btn" data-photo-preset="bw" type="button">◐ B&amp;W</button>
         </div>
       </div>
+
+      <div class="ab-photo-group">
+        <span class="ab-photo-group-title">Smart tools</span>
+        <div class="ab-photo-smart-grid">
+          <button class="ab-photo-btn" id="ab-photo-smart-object" type="button">🩹 Object remove</button>
+          <button class="ab-photo-btn" id="ab-photo-smart-sky" type="button">🌤 Sky boost</button>
+          <button class="ab-photo-btn" id="ab-photo-smart-portrait" type="button">🙂 Portrait soften</button>
+          <button class="ab-photo-btn" id="ab-photo-smart-auto" type="button">✨ Auto enhance</button>
+        </div>
+        <p class="ab-photo-help">These W21 tools use local browser image processing. They are useful editing aids, not AI scene understanding.</p>
+      </div>
+
       <div class="ab-photo-group">
         <label>Caption on photo<input id="ab-photo-text" type="text" maxlength="70" placeholder="Our Lake District adventure"></label>
         <label>Adventure sticker<select id="ab-photo-sticker"><option value="">None</option><option>📍</option><option>🚐</option><option>🥾</option><option>🏕️</option><option>🌊</option><option>🏔️</option><option>🌲</option><option>☀️</option><option>📸</option></select></label>
         <label><span><input id="ab-photo-stamp" type="checkbox"> Add Adventure Builder date stamp</span></label>
       </div>
+
       <div class="ab-photo-group">
+        <div class="ab-photo-row"><button class="ab-photo-btn" id="ab-photo-undo" type="button">↶ Undo</button><button class="ab-photo-btn" id="ab-photo-redo" type="button">↷ Redo</button></div>
         <button class="ab-photo-btn ab-photo-primary" id="ab-photo-export" type="button">Export edited photo</button>
         <p class="ab-photo-status" id="ab-photo-status">Add a photograph to begin. Your image stays on this device.</p>
       </div>
-      <div class="ab-photo-coming"><strong>Next smart-tools module</strong><br>Healing/object removal, sky replacement, portrait retouching and automatic route/location stamps are deliberately isolated for the next stage so this stable editor does not depend on AI services.</div>
+
+      <div class="ab-photo-coming"><strong>Smart-tools module active</strong><br>Crop/straighten, brush, clone, healing, marquee/lasso/wand selections, gradient lighting and expanded global sliders are now integrated. Advanced generative object replacement and true AI sky/portrait recognition remain future server/AI modules.</div>
     </aside>
   </div>
 </section>
 
         
-<section class="ab-video-studio" id="adventure-video-studio" aria-labelledby="ab-video-title-heading">
+<section class="ab-video-studio" data-ab-studio-panel="video" id="adventure-video-studio" aria-labelledby="ab-video-title-heading">
   <header class="ab-video-head">
-    <div><h2 id="ab-video-title-heading">🎬 Adventure Builder Video Studio</h2><p>A clean travel-first editor with the same core tools on website and app.</p></div>
+    <div><h2 id="ab-video-title-heading">🎬 Adventure Studio — Video Editor</h2><p>A clean travel-first editor with the same core tools on website and app.</p></div>
     <span class="ab-video-badge">Shared Web + App Studio · Beta</span>
   </header>
   <div class="ab-video-layout">
@@ -131,6 +191,31 @@
         <label>Adventure title<input id="ab-video-title" type="text" maxlength="70" placeholder="Our Lake District Adventure"></label>
         <label>Look<select id="ab-video-style"><option value="original">Original</option><option value="adventure">Adventure</option><option value="cinematic">Cinematic</option><option value="sunset">Sunset</option><option value="forest">Forest</option><option value="bw">Black &amp; White</option><option value="memory">Memory</option></select></label>
       </div>
+      
+      <div class="ab-video-group">
+        <span class="ab-video-group-title">Timeline &amp; layers</span>
+        <div class="ab-video-grid2">
+          <label>Video track<select id="ab-video-track-select"><option value="video-1">Video 1 · Main</option><option value="video-2">Video 2 · B-roll</option><option value="video-3">Video 3 · Overlay</option></select></label>
+          <label>Transition<select id="ab-video-transition"><option value="cut">Cut</option><option value="crossfade">Crossfade</option><option value="fade-black">Fade through black</option><option value="dissolve">Dissolve</option><option value="slide-left">Slide left</option><option value="slide-right">Slide right</option><option value="zoom">Zoom</option><option value="wipe">Wipe</option></select></label>
+        </div>
+        <label>Transition duration <span id="ab-video-transition-value">0.6s</span><input id="ab-video-transition-duration" type="range" min="0" max="2" step=".1" value=".6"></label>
+      </div>
+      <div class="ab-video-group">
+        <span class="ab-video-group-title">Effects</span>
+        <div class="ab-video-grid2">
+          <label>Brightness<input id="ab-video-brightness" type="range" min="50" max="150" value="100"></label>
+          <label>Contrast<input id="ab-video-contrast" type="range" min="50" max="150" value="100"></label>
+          <label>Saturation<input id="ab-video-saturation" type="range" min="0" max="200" value="100"></label>
+          <label>Blur<input id="ab-video-blur" type="range" min="0" max="10" step=".5" value="0"></label>
+        </div>
+        <label class="ab-video-check"><input id="ab-video-vignette" type="checkbox"> Vignette preview</label>
+      </div>
+      <div class="ab-video-group">
+        <span class="ab-video-group-title">Templates</span>
+        <label>Quick template<select id="ab-video-template"><option value="">Choose a template…</option><option value="adventure-recap">Adventure Recap</option><option value="vanlife-weekend">Vanlife Weekend</option><option value="walking-adventure">Walking Adventure</option><option value="paddle-trip">Paddle Trip</option><option value="travel-highlights">Travel Highlights</option><option value="youtube-short">YouTube Short</option><option value="facebook-reel">Facebook / Reel</option><option value="photo-slideshow">Photo Slideshow</option></select></label>
+        <button class="ab-video-btn" id="ab-video-apply-template" type="button">Apply template</button>
+      </div>
+
       <div class="ab-video-group">
         <span style="font-weight:800;font-size:.86rem">Quick edit</span>
         <div class="ab-video-tool-list"><button class="ab-video-btn" id="ab-video-mute" type="button">🔇 Mute</button><button class="ab-video-btn" id="ab-video-auto" type="button">✨ Adventure Movie</button></div>
@@ -143,6 +228,7 @@
           <video id="ab-video-preview" playsinline preload="metadata" hidden></video>
           <div class="ab-video-empty" id="ab-video-empty"><div><strong>Your adventure film appears here</strong><span>Add video clips, then trim, split, style and preview them.</span></div></div>
           <div class="ab-video-overlay-title" id="ab-video-overlay-title"></div>
+          <div class="ab-video-overlay-stage" id="ab-video-overlay-stage" aria-label="Moveable video overlays"></div>
           <div class="ab-video-route-card" id="ab-video-route-card"><strong>📍 Adventure Route</strong><br>Start → Scenic Stop → Summit → Camp<br>12.4 km · 640 m climbed</div>
           <div class="ab-video-stamp" id="ab-video-stamp">ADVENTURE BUILDER · TRIP MEMORY</div>
         </div>
@@ -151,12 +237,15 @@
       <div class="ab-video-timeline-wrap">
         <div class="ab-video-timeline-head"><strong>Timeline</strong><span id="ab-video-summary">No clips added</span></div>
         <div class="ab-video-timeline" id="ab-video-timeline"></div>
-        <div class="ab-video-tracks" aria-label="Project tracks">
-          <div class="ab-video-track"><span>🎥 Video</span><div class="ab-video-track-line"><i style="width:82%"></i></div></div>
-          <div class="ab-video-track"><span>🔤 Titles</span><div class="ab-video-track-line"><i style="width:38%"></i></div></div>
-          <div class="ab-video-track"><span>🎵 Music</span><div class="ab-video-track-line"><i style="width:64%"></i></div></div>
-          <div class="ab-video-track"><span>🎙 Voice</span><div class="ab-video-track-line"><i style="width:26%"></i></div></div>
+
+        <div class="ab-video-track-controls">
+          <button class="ab-video-btn" id="ab-video-add-video-track" type="button">＋ Video track</button>
+          <button class="ab-video-btn" id="ab-video-add-text-track" type="button">＋ Text track</button>
+          <label>Timeline zoom <input id="ab-video-timeline-zoom" type="range" min="70" max="180" value="100"></label>
+          <button class="ab-video-btn" id="ab-video-undo" type="button">↶ Undo</button><button class="ab-video-btn" id="ab-video-redo" type="button">↷ Redo</button>
         </div>
+        <div class="ab-video-multitracks" id="ab-video-multitracks" aria-label="Multi-track timeline"></div>
+
       </div>
     </section>
 
@@ -166,6 +255,28 @@
         <button class="ab-video-btn" id="ab-video-route-toggle" type="button">🗺 Route overlay</button>
         <button class="ab-video-btn" id="ab-video-stamp-toggle" type="button">🏅 Adventure stamp</button>
       </div>
+
+      <div class="ab-video-group">
+        <span class="ab-video-group-title">Text overlays</span>
+        <label>Text<input id="ab-video-text-input" type="text" maxlength="120" placeholder="Add your own text"></label>
+        <div class="ab-video-grid2">
+          <label>Text track<select id="ab-video-text-track"><option value="text-1">Text 1</option><option value="text-2">Text 2</option><option value="text-3">Text 3</option><option value="text-4">Text 4</option></select></label>
+          <label>Style<select id="ab-video-text-style"><option value="clean">Clean</option><option value="bold">Bold</option><option value="caption">Caption</option><option value="outline">Outline</option></select></label>
+        </div>
+        <button class="ab-video-btn" id="ab-video-add-text" type="button">＋ Add text overlay</button>
+      </div>
+      <div class="ab-video-group">
+        <span class="ab-video-group-title">Stickers</span>
+        <div class="ab-video-sticker-palette" id="ab-video-sticker-palette">
+          <button type="button" data-ab-sticker="🧭">🧭</button><button type="button" data-ab-sticker="🥾">🥾</button><button type="button" data-ab-sticker="🚐">🚐</button><button type="button" data-ab-sticker="🏕️">🏕️</button><button type="button" data-ab-sticker="🛶">🛶</button><button type="button" data-ab-sticker="🚴">🚴</button><button type="button" data-ab-sticker="🌅">🌅</button><button type="button" data-ab-sticker="📍">📍</button><button type="button" data-ab-sticker="⭐">⭐</button><button type="button" data-ab-sticker="❤️">❤️</button>
+        </div>
+        <p class="ab-video-help">Add a sticker, then drag it anywhere on the preview. Use its corner handle to resize it.</p>
+      </div>
+      <div class="ab-video-group">
+        <span class="ab-video-group-title">Selected overlay</span>
+        <div class="ab-video-grid2"><button class="ab-video-btn" id="ab-video-overlay-front" type="button">Bring forward</button><button class="ab-video-btn" id="ab-video-overlay-back" type="button">Send backward</button><button class="ab-video-btn" id="ab-video-overlay-duplicate" type="button">Duplicate</button><button class="ab-video-btn" id="ab-video-overlay-delete" type="button">Delete</button></div>
+      </div>
+
       <div class="ab-video-group">
         <span style="font-weight:800;font-size:.86rem">Auto chapters</span>
         <div class="ab-video-chapters" id="ab-video-chapters"></div>
@@ -174,33 +285,18 @@
         <button class="ab-video-btn ab-video-primary" id="ab-video-export" type="button">Export project plan</button>
         <p class="ab-video-status" id="ab-video-status">Add clips to begin. Video files stay on this device.</p>
       </div>
-      <div class="ab-video-note"><strong>Next isolated modules</strong><br>Rendered MP4 export/encoding, transitions, music library, voice-over recording, animated GPS route replay, subtitles, stabilisation and automatic highlight selection.</div>
+      <div class="ab-video-note"><strong>Next isolated modules</strong><br>Final MP4 compositing/encoding, music library, voice-over recording, animated GPS route replay, subtitles and stabilisation remain isolated rendering modules.</div>
     </aside>
   </div>
 </section>
 
-        <div class="studio-workspace">
-          <aside class="studio-sidebar">
-            <label class="studio-upload" for="studio-media"><span>＋</span><strong>Add photos or video clips</strong><small>Files remain on this device in this beta workspace.</small></label><input id="studio-media" type="file" accept="image/*,video/*" multiple hidden>
-            <label>Project name<input id="studio-project-name" maxlength="80" placeholder="Our weekend adventure"></label>
-            <label>Format<select id="studio-format"><option value="landscape">YouTube · 16:9</option><option value="portrait">Shorts / Reels · 9:16</option><option value="square">Social post · 1:1</option></select></label>
-            <label>Title<input id="studio-title" maxlength="80" placeholder="Adventure title"></label>
-            <label>Caption<textarea id="studio-caption" rows="6" maxlength="1500" placeholder="Tell the story of your adventure…"></textarea></label>
-            <div class="studio-buttons"><button class="button button-primary" id="studio-save" type="button">Save Project</button><button class="button button-secondary" id="studio-export" type="button">Export Project Plan</button></div>
-            <p class="feature-status" id="studio-status">Add media to begin.</p>
-          </aside>
-          <section class="studio-canvas-area">
-            <div class="studio-preview" id="studio-preview"><div><span>🎞️</span><strong>Your preview appears here</strong><small>Select a photo or video from the timeline.</small></div></div>
-            <div class="studio-timeline-heading"><h2>Project Timeline</h2><button class="text-button" id="studio-clear" type="button">Clear project</button></div>
-            <div class="studio-timeline" id="studio-timeline"><p>No media added yet.</p></div>
-          </section>
-        </div>
+        
       </div>
     </section>
   </main>
   <footer class="site-footer">
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
-    <div class="footer-links"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
+    <div class="footer-links"><a href="index.html">Home</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
       <a href="studio.html">Studio</a><a href="index.html#download">Get the App</a></div>
     <p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p>
   </footer>
@@ -259,5 +355,6 @@
   <script src="js/studio-web.js"></script>
   <script src="js/photo-studio.js"></script>
   <script src="js/video-studio-v2.js"></script>
+<script src="js/adventure-studio-tabs.js"></script>
 </body>
 </html>
