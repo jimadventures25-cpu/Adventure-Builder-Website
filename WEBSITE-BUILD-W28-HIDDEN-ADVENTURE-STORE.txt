@@ -1,0 +1,42 @@
+Adventure Builder Website W28 — Hidden Adventure Store
+
+Purpose
+- Build the future Adventure Builder shop now without making it public.
+- Admin/owner access only.
+- No public navigation link.
+- No checkout route enabled.
+
+Added
+- shop-admin.html (noindex/nofollow, not linked from public navigation)
+- css/adventure-store-admin.css
+- js/adventure-store-admin.js
+- supabase-adventure-store.sql
+
+Store admin features
+- Dashboard totals and low-stock watch.
+- Product CRUD: name, description, category, SKU, price, compare price, stock, low-stock threshold, weight, sizes, colours, draft/published/archived, featured.
+- Private product image upload (JPG/PNG/WebP up to 5 MB).
+- Category management with starter categories.
+- Private published-product preview.
+- Order-list infrastructure prepared; public checkout intentionally disabled.
+- Launch settings with public and checkout flags defaulting OFF.
+
+Security
+- shop_admins allow-list controls access.
+- Supabase RLS restricts shop tables to authenticated store admins in this build.
+- Product-image Storage bucket is private and admin-only.
+- Public cart/favourite policies are intentionally not enabled.
+- No Shop / Adventure Store link was added to index, footer, sidebar or mobile navigation.
+
+One-time setup
+1. Run supabase-adventure-store.sql in Supabase SQL Editor.
+2. Copy the owner's UUID from Supabase > Authentication > Users.
+3. Run:
+   insert into public.shop_admins(user_id, role)
+   values ('YOUR-USER-UUID', 'owner')
+   on conflict (user_id) do update set role='owner';
+4. Open /shop-admin.html while signed in with that account.
+
+Launch later
+- A future launch build must deliberately add public product SELECT policies, public Store navigation, cart/customer policies and checkout/payment integration.
+- W28 does NOT expose the store publicly.

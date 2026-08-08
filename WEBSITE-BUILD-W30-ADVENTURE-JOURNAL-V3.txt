@@ -1,0 +1,5 @@
+Adventure Builder Website W30 — Adventure Journal V3
+
+Replaced the old placeholder Journal page with the shared Journal V3 system.
+Includes entry creation, GPS location, Open-Meteo weather, optional trip link, photos/video/voice media, stats, ratings, memories, drafts, privacy, timeline search/filter, replay, print/PDF workflow and Passport-memory handoff.
+Run supabase-adventure-journal-v3.sql once for cloud media + V3 fields.

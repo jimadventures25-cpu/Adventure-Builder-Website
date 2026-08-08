@@ -8,13 +8,15 @@
   <title>Adventure Studio | Adventure Builder</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/account-gate.css">
   <link rel="stylesheet" href="css/navigation-shell.css">
   <link rel="stylesheet" href="css/photo-studio.css">
   <link rel="stylesheet" href="css/adventure-studio-tabs.css">
   <link rel="stylesheet" href="css/video-studio-v2.css">
   <link rel="stylesheet" href="css/site-wide-compact-pages.css">
+  <link rel="stylesheet" href="css/studio-workspace-manager.css">
 </head>
-<body data-page="studio">
+<body data-page="studio" data-account-required="true">
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="Adventure Builder home">
       <img src="images/adventure-builder-logo.png" alt="Adventure Builder logo">
@@ -332,11 +334,13 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/account-gate.js"></script>
   <script src="js/navigation-shell.js"></script>
   <script src="js/main.js"></script>
   <script src="js/studio-web.js"></script>
   <script src="js/photo-studio.js"></script>
   <script src="js/video-studio-v2.js"></script>
 <script src="js/adventure-studio-tabs.js"></script>
+<script src="js/studio-workspace-manager.js"></script>
 </body>
 </html>

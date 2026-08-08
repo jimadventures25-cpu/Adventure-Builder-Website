@@ -8,10 +8,12 @@
   <title>Journal | Adventure Builder</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/account-gate.css">
   <link rel="stylesheet" href="css/navigation-shell.css">
   <link rel="stylesheet" href="css/site-wide-compact-pages.css">
+  <link rel="stylesheet" href="css/journal-v3.css">
 </head>
-<body data-page="journal">
+<body data-page="journal" data-account-required="true">
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="Adventure Builder home">
       <img src="images/adventure-builder-logo.png" alt="Adventure Builder logo">
@@ -27,12 +29,33 @@
     </div>
   </header>
   <main>
-    <section class="section standalone-page category-hub" id="journal">
-      <div class="section-heading"><p class="eyebrow">Remember every journey</p><h2>Adventure Journal</h2><p>Keep trip notes, photographs and memories attached to the adventure they belong to.</p></div>
-      <div class="category-layout">
-        <div class="category-copy"><span class="category-icon">📖</span><h3>Create a Journal Entry</h3><p>Write on the website or in the app and, once connected through Supabase, see the same entry in both places.</p><button class="button button-primary design-button" type="button" data-category="Adventure Journal">Create Journal Entry</button></div>
-        <div class="category-features"><span>Trip diary</span><span>Photos and videos</span><span>Visited places</span><span>Personal notes</span><span>Dates</span><span>Shared stories</span></div>
-      </div>
+    <section id="journal">
+<div class="abj-shell" data-ab-journal-v3>
+  <header class="abj-hero"><div><span class="abj-kicker">Your adventure journal</span><h2>Create a Journal Entry</h2><p>Capture the story, photos, video, voice memories, trip details and the moments you want to remember.</p></div></header>
+  <div class="abj-grid">
+    <section class="abj-card abj-form-card">
+      <form id="abj-form">
+        <div class="abj-step"><div class="abj-step-head"><span class="abj-step-no">1</span><h3>Start the entry</h3></div><div class="abj-form-grid">
+          <div class="abj-field"><label for="abj-title">Title</label><input id="abj-title" maxlength="100" required placeholder="A day in the Lake District"></div>
+          <div class="abj-field"><label for="abj-date">Date</label><input id="abj-date" type="date" required></div>
+          <div class="abj-field full"><label for="abj-location">Location</label><div class="abj-inline"><input id="abj-location" maxlength="160" required placeholder="Keswick, Lake District"><button class="abj-btn abj-secondary" id="abj-use-location" type="button">Use My Location</button></div></div>
+          <div class="abj-field"><label for="abj-trip">Linked trip</label><select id="abj-trip"><option value="">Not linked to a trip</option></select></div>
+          <div class="abj-field"><label for="abj-weather">Weather</label><div class="abj-inline"><input id="abj-weather" maxlength="100" placeholder="12°C · sunny"><button class="abj-btn abj-secondary" id="abj-get-weather" type="button">Auto</button></div><small class="abj-weather-note">Automatic weather uses the selected location when available.</small></div>
+          <div class="abj-field"><label for="abj-category">Adventure type</label><select id="abj-category"><option>Road trip</option><option>Walking & Hiking</option><option>Campervan / Motorhome</option><option>Camping</option><option>Paddle & Kayak</option><option>Cycling</option><option>Family</option><option>Nature & Wildlife</option><option>Other</option></select></div>
+          <div class="abj-field"><label for="abj-visibility">Privacy</label><select id="abj-visibility"><option value="private">Private — only me</option><option value="public">Public — share with Community</option></select></div>
+        </div></div>
+        <div class="abj-step"><div class="abj-step-head"><span class="abj-step-no">2</span><h3>Tell the story</h3></div><div class="abj-field"><label for="abj-story">What happened?</label><textarea id="abj-story" maxlength="6000" required placeholder="Today we explored..."></textarea></div><div class="abj-form-grid"><div class="abj-field"><label for="abj-companions">Who came along?</label><input id="abj-companions" maxlength="140" placeholder="Family, friends, pets or just me"></div><div class="abj-field"><label for="abj-tags">Tags</label><input id="abj-tags" maxlength="180" placeholder="waterfall, sunset, campervan"></div></div></div>
+        <div class="abj-step"><div class="abj-step-head"><span class="abj-step-no">3</span><h3>Add memories</h3></div><div class="abj-media-picker"><label for="abj-media"><b>Photos, short videos or voice recordings</b><br><span class="abj-small">Up to 8 files. Videos/voice should be 6 MB or less for reliable cloud upload.</span></label><input id="abj-media" type="file" accept="image/*,video/mp4,video/webm,audio/*" multiple><div class="abj-media-preview" id="abj-media-preview"></div></div></div>
+        <div class="abj-step"><div class="abj-step-head"><span class="abj-step-no">4</span><h3>Adventure details</h3></div><div class="abj-form-grid"><div class="abj-field"><span>Total distance</span><input id="abj-distance" placeholder="124 mi"></div><div class="abj-field"><span>Walking distance</span><input id="abj-walk-distance" placeholder="6.2 mi"></div><div class="abj-field"><span>Driving distance</span><input id="abj-drive-distance" placeholder="118 mi"></div><div class="abj-field"><span>Time outdoors</span><input id="abj-outdoor-time" placeholder="7 h 30 m"></div><div class="abj-field"><span>Highest elevation</span><input id="abj-elevation" placeholder="978 m"></div><div class="abj-field"><span>National parks / counties</span><input id="abj-parks" placeholder="Lake District"></div><div class="abj-field full"><span>Wildlife spotted</span><input id="abj-wildlife" placeholder="Red squirrel, deer"></div></div></div>
+        <div class="abj-step"><div class="abj-step-head"><span class="abj-step-no">5</span><h3>Rate the adventure</h3></div><div class="abj-rating-grid"><div class="abj-field"><label for="abj-overall">Overall Adventure</label><select id="abj-overall"><option value="0">Not rated</option><option value="5">★★★★★ Excellent</option><option value="4">★★★★☆ Great</option><option value="3">★★★☆☆ Good</option><option value="2">★★☆☆☆ Mixed</option><option value="1">★☆☆☆☆ Poor</option></select></div><div class="abj-field"><label for="abj-walking">Walking</label><select id="abj-walking"><option value="0">Not rated</option><option value="5">★★★★★ Excellent</option><option value="4">★★★★☆ Great</option><option value="3">★★★☆☆ Good</option><option value="2">★★☆☆☆ Mixed</option><option value="1">★☆☆☆☆ Poor</option></select></div><div class="abj-field"><label for="abj-photo">Photography</label><select id="abj-photo"><option value="0">Not rated</option><option value="5">★★★★★ Excellent</option><option value="4">★★★★☆ Great</option><option value="3">★★★☆☆ Good</option><option value="2">★★☆☆☆ Mixed</option><option value="1">★☆☆☆☆ Poor</option></select></div><div class="abj-field"><label for="abj-scenery">Scenery</label><select id="abj-scenery"><option value="0">Not rated</option><option value="5">★★★★★ Excellent</option><option value="4">★★★★☆ Great</option><option value="3">★★★☆☆ Good</option><option value="2">★★☆☆☆ Mixed</option><option value="1">★☆☆☆☆ Poor</option></select></div><div class="abj-field"><label for="abj-vanlife">Vanlife</label><select id="abj-vanlife"><option value="0">Not rated</option><option value="5">★★★★★ Excellent</option><option value="4">★★★★☆ Great</option><option value="3">★★★☆☆ Good</option><option value="2">★★☆☆☆ Mixed</option><option value="1">★☆☆☆☆ Poor</option></select></div><div class="abj-field"><label for="abj-family">Family Friendly</label><select id="abj-family"><option value="0">Not rated</option><option value="5">★★★★★ Excellent</option><option value="4">★★★★☆ Great</option><option value="3">★★★☆☆ Good</option><option value="2">★★☆☆☆ Mixed</option><option value="1">★☆☆☆☆ Poor</option></select></div><div class="abj-field"><label for="abj-dog">Dog Friendly</label><select id="abj-dog"><option value="0">Not rated</option><option value="5">★★★★★ Excellent</option><option value="4">★★★★☆ Great</option><option value="3">★★★☆☆ Good</option><option value="2">★★☆☆☆ Mixed</option><option value="1">★☆☆☆☆ Poor</option></select></div></div></div>
+        <div class="abj-step"><div class="abj-step-head"><span class="abj-step-no">6</span><h3>Things I'll remember</h3></div><div class="abj-form-grid"><div class="abj-field"><span>Best moment</span><input id="abj-best" maxlength="220"></div><div class="abj-field"><span>Biggest challenge</span><input id="abj-challenge" maxlength="220"></div><div class="abj-field"><span>Funniest moment</span><input id="abj-funny" maxlength="220"></div><div class="abj-field"><span>Favourite photo</span><input id="abj-favourite-photo" maxlength="220" placeholder="Describe it"></div><div class="abj-field full"><span>Would you visit again?</span><select id="abj-return"><option value="">Not answered</option><option>Definitely</option><option>Maybe</option><option>Probably not</option></select></div></div></div>
+        <div class="abj-actions"><button class="abj-btn abj-secondary" id="abj-save-draft" type="button">Save Draft</button><button class="abj-btn abj-primary" id="abj-publish" type="button">Save Entry</button><button class="abj-btn abj-secondary" id="abj-reset" type="button">New Entry</button></div><p class="abj-status" id="abj-status" aria-live="polite"></p>
+      </form>
+    </section>
+    <section class="abj-card"><h3>Your Journal Timeline</h3><div class="abj-search"><input id="abj-search" type="search" placeholder="Search place, date, trip or tag"><select id="abj-filter"><option value="all">All entries</option><option value="draft">Drafts</option><option value="private">Private</option><option value="public">Public</option></select></div><div class="abj-timeline" id="abj-timeline"></div></section>
+  </div>
+  <dialog class="abj-replay" id="abj-replay"><div class="abj-replay-inner"><div class="abj-replay-stage" id="abj-replay-stage"></div><div class="abj-replay-nav"><button class="abj-btn abj-secondary" id="abj-replay-prev" type="button">Previous</button><span id="abj-replay-count"></span><button class="abj-btn abj-secondary" id="abj-replay-next" type="button">Next</button><button class="abj-btn abj-primary" id="abj-replay-close" type="button">Close</button></div></div></dialog>
+</div>
     </section>
 
     <section class="cta-section"><div><p class="eyebrow">Ready to explore?</p><h2>Open Adventure Builder</h2><p>Use the same account on the website and in the Adventure Builder app.</p></div><a class="button button-primary" href="index.html#download">Get the App</a></section>
@@ -94,7 +117,9 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/account-gate.js"></script>
   <script src="js/navigation-shell.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/journal-v3.js"></script>
 </body>
 </html>

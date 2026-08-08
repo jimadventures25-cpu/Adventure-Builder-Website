@@ -8,10 +8,12 @@
   <title>Trip Planner | Adventure Builder</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/account-gate.css">
   <link rel="stylesheet" href="css/navigation-shell.css">
   <link rel="stylesheet" href="css/site-wide-compact-pages.css">
+  <link rel="stylesheet" href="css/trip-planner-v27.css">
 </head>
-<body data-page="trip-planner">
+<body data-page="trip-planner" data-account-required="true">
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="Adventure Builder home">
       <img src="images/adventure-builder-logo.png" alt="Adventure Builder logo">
@@ -27,11 +29,21 @@
     </div>
   </header>
   <main>
-    <section class="section standalone-page category-hub" id="planner">
-      <div class="section-heading"><p class="eyebrow">Bring it all together</p><h2>Trip Planner</h2><p>Build a complete adventure using saved places from the other website and app categories.</p></div>
-      <div class="category-layout">
-        <div class="category-copy"><span class="category-icon">📅</span><h3>Design Your Adventure</h3><p>Create an itinerary, choose dates, add stops and prepare everything before opening the trip in the app.</p><button class="button button-primary design-button" type="button" data-category="Trip Planner">Design an Adventure</button></div>
-        <div class="category-features"><span>Itinerary</span><span>Saved places</span><span>Dates and times</span><span>Packing list</span><span>Trip budget</span><span>Travel timeline</span></div>
+    <section class="section standalone-page category-hub ab-trip-page" id="planner">
+      <div class="section-heading"><p class="eyebrow">Plan · build · send to app</p><h2>Trip Planner</h2><p>Build the whole adventure here, then continue with the same trip on your phone.</p></div>
+      <div class="ab-trip-layout">
+        <form class="ab-trip-builder" id="ab-trip-form">
+          <div class="ab-trip-progress" aria-label="Trip planning steps"><span class="active">1 Route</span><span>2 Stops</span><span>3 Itinerary</span><span>4 Review</span></div>
+          <section class="ab-trip-card"><h3>Route</h3><div class="ab-trip-grid two"><label>Start<input id="ab-trip-start" required placeholder="Liverpool or current location"></label><label>Destination<input id="ab-trip-destination" required placeholder="Lake District"></label></div><div class="ab-trip-grid three"><label>Trip type<select id="ab-trip-type"><option>Road Trip</option><option>Campervan / Motorhome</option><option>Day Trip</option><option>Walking / Hiking</option><option>Cycling</option><option>Mixed Adventure</option></select></label><label>Route style<select id="ab-trip-route-style"><option value="fastest">Fastest</option><option value="scenic">Scenic</option><option value="economical">Economical</option></select></label><label>Days<input id="ab-trip-days" type="number" min="1" max="30" value="1"></label></div><div class="ab-trip-options"><label><input id="ab-trip-avoid-motorways" type="checkbox"> Avoid motorways</label><label><input id="ab-trip-avoid-tolls" type="checkbox"> Avoid tolls</label><label><input id="ab-trip-avoid-ferries" type="checkbox"> Avoid ferries</label></div></section>
+          <section class="ab-trip-card"><div class="ab-trip-card-head"><div><h3>Stops & points of interest</h3><p>Add places you already know, or use the quick categories as a reminder of what to look for.</p></div><button type="button" class="button button-secondary" id="ab-trip-add-stop">+ Add stop</button></div><div class="ab-trip-pois" id="ab-trip-pois"><button type="button" data-poi="Viewpoint">Viewpoint</button><button type="button" data-poi="Waterfall">Waterfall</button><button type="button" data-poi="Historic site">Historic site</button><button type="button" data-poi="Cafe / Pub">Cafe / Pub</button><button type="button" data-poi="Toilets">Toilets</button><button type="button" data-poi="Parking">Parking</button><button type="button" data-poi="Campsite">Campsite</button><button type="button" data-poi="Lake / Beach">Lake / Beach</button></div><div id="ab-trip-stop-list" class="ab-trip-stop-list"></div></section>
+          <section class="ab-trip-card"><h3>Trip details</h3><div class="ab-trip-grid two"><label>Trip name<input id="ab-trip-name" maxlength="80" placeholder="Lake District Weekend"></label><label>Start date<input id="ab-trip-date" type="date"></label></div><label>Notes<textarea id="ab-trip-notes" rows="3" maxlength="1000" placeholder="Overnight stays, things to pack, booking notes, places not to miss..."></textarea></label></section>
+          <div class="ab-trip-actions"><button class="button button-primary" type="submit">Save Trip</button><button class="button button-secondary" id="ab-trip-new" type="button">New Trip</button></div><p class="ab-trip-status" id="ab-trip-status" aria-live="polite"></p>
+        </form>
+        <aside class="ab-trip-side">
+          <div class="ab-trip-map" aria-label="Trip route preview"><div class="ab-trip-map-route"><span>A</span><i></i><b>Adventure route preview</b><i></i><span>B</span></div><p id="ab-trip-map-copy">Enter a start and destination to build your trip.</p></div>
+          <div class="ab-trip-summary"><h3>Your Trip</h3><dl><div><dt>Days</dt><dd id="ab-trip-summary-days">1</dd></div><div><dt>Stops</dt><dd id="ab-trip-summary-stops">0</dd></div><div><dt>Route</dt><dd id="ab-trip-summary-style">Fastest</dd></div></dl><ol id="ab-trip-timeline"></ol></div>
+          <div class="ab-trip-saved"><div class="ab-trip-card-head"><h3>Saved Trips</h3><button type="button" id="ab-trip-refresh">Refresh</button></div><div id="ab-trip-saved-list"></div></div>
+        </aside>
       </div>
     </section>
 
@@ -94,7 +106,9 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/account-gate.js"></script>
   <script src="js/navigation-shell.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/trip-planner-v27.js"></script>
 </body>
 </html>

@@ -1,0 +1,14 @@
+Adventure Builder Website W29 — Homepage Cleanup
+
+Changes
+- Removed the Adventure Hub promotional card/section from the homepage.
+- Removed the Paddle & Kayak promotional card/section from the homepage.
+- Kept the dedicated Adventures and Paddle & Kayak pages available elsewhere in the website.
+- Preserved W28 Hidden Adventure Store and W27 Unified Trip Planner.
+- No JavaScript feature logic, Supabase authentication, routing, store security or app links were changed.
+
+Tests
+- Homepage no longer contains the removed promotional section.
+- JavaScript syntax checks passed.
+- Local HTML file references checked.
+- ZIP integrity tested.

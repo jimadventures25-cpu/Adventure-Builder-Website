@@ -1,0 +1,17 @@
+Adventure Builder Website — W26 Adventure Studio Workspace Manager
+
+Added to Adventure Studio only:
+- Auto Fit (default) detects available browser workspace and adapts panel sizing.
+- Compact layout gives more space to the photo/video canvas.
+- Standard layout restores original editor proportions.
+- Full Screen uses the browser Fullscreen API when the user clicks it.
+- Reset Layout clears the saved preference and returns to Auto Fit.
+- Preferred layout is remembered locally on the user's device.
+- Layout recalculates on browser resize and device orientation changes.
+
+Implementation:
+- css/studio-workspace-manager.css
+- js/studio-workspace-manager.js
+- studio.html includes only the two new module references.
+- No Photo Editor, Video Editor, Supabase, authentication, navigation, routing or other page logic was changed.
+- Uses native browser APIs; no third-party dependency was required.

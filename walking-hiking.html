@@ -8,11 +8,12 @@
   <title>Walking & Hiking | Adventure Builder</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/account-gate.css">
   <link rel="stylesheet" href="css/navigation-shell.css">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css">
   <link rel="stylesheet" href="css/site-wide-compact-pages.css">
 </head>
-<body data-page="walking-hiking">
+<body data-page="walking-hiking" data-account-required="true">
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="Adventure Builder home">
       <img src="images/adventure-builder-logo.png" alt="Adventure Builder logo">
@@ -131,6 +132,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/account-gate.js"></script>
   <script src="js/navigation-shell.js"></script>
   <script src="js/main.js"></script>
   <script src="js/trail-planner.js"></script>

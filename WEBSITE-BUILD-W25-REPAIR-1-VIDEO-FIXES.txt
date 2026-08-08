@@ -1,0 +1,19 @@
+Adventure Builder Website W25 — Repair 1
+Video review fixes
+
+Observed in the 2026-08-08 website test video:
+- Header image crops contained remnants of the design mockup UI/text.
+- Several feature hubs remained visually dark although the selected direction was white pages.
+- Walking & Hiking Trail Planner heading/secondary controls lost contrast on the new light page.
+- Community empty-state copy became too pale on white.
+- Walking map still occupied more height than necessary.
+
+Repairs:
+- Re-cropped all W25 page header photos to remove mockup UI/text contamination.
+- Converted the main feature hubs to a light/white presentation while preserving orange accents.
+- Kept Adventure Studio's editor workspace dark for editing contrast.
+- Restored Walking & Hiking planner text/control contrast.
+- Corrected Community light-background text contrast.
+- Reduced desktop Walking & Hiking map to 360px height.
+
+Scope: visual CSS/image repair only. No JavaScript, routing, authentication, Supabase, data or feature logic changed.

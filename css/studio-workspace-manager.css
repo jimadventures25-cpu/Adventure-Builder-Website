@@ -1,0 +1,58 @@
+/* Adventure Builder W26 — Adventure Studio Workspace Manager
+   Isolated layout controller for Auto Fit / Compact / Standard / Full Screen. */
+:root{--ab-studio-available-height:760px;--ab-studio-panel-width:250px}
+.ab-studio-workspace-manager{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 12px;padding:10px 12px;border:1px solid #334047;border-radius:12px;background:#11181c;color:#fff}
+.ab-studio-workspace-manager__title{display:flex;align-items:center;gap:8px;font-weight:900;font-size:.9rem}
+.ab-studio-workspace-manager__controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.ab-studio-workspace-manager button{min-height:36px;border:1px solid #3d4b52;border-radius:9px;background:#1d272c;color:#fff;padding:7px 10px;font:inherit;font-size:.78rem;font-weight:800;cursor:pointer}
+.ab-studio-workspace-manager button:hover,.ab-studio-workspace-manager button:focus{border-color:#f08a35;background:#2a2119}
+.ab-studio-workspace-manager button.is-active{border-color:#f08a35;background:#4a2b13;color:#ffd4ad}
+.ab-studio-workspace-manager__status{font-size:.72rem;color:#aeb8bf;min-width:150px;text-align:right}
+
+/* All modes: stop the editors exceeding their available viewport width. */
+#studio-members-area{min-width:0;max-width:100%}
+#studio-members-area .ab-photo-studio,#studio-members-area .ab-video-studio{max-width:100%;margin-left:auto;margin-right:auto}
+#studio-members-area .ab-photo-canvas-wrap,#studio-members-area .ab-video-main{min-width:0}
+
+/* Auto Fit — default. JS supplies viewport-derived variables. */
+#studio-members-area.ab-studio-mode-auto .ab-photo-shell{grid-template-columns:clamp(190px,var(--ab-studio-panel-width),280px) minmax(0,1fr) clamp(190px,var(--ab-studio-panel-width),280px);min-height:min(650px,var(--ab-studio-available-height))}
+#studio-members-area.ab-studio-mode-auto .ab-video-layout{grid-template-columns:clamp(190px,var(--ab-studio-panel-width),235px) minmax(0,1fr) clamp(205px,var(--ab-studio-panel-width),255px);min-height:min(690px,var(--ab-studio-available-height))}
+#studio-members-area.ab-studio-mode-auto .ab-photo-tools,#studio-members-area.ab-studio-mode-auto .ab-photo-side,#studio-members-area.ab-studio-mode-auto .ab-video-left,#studio-members-area.ab-studio-mode-auto .ab-video-right{max-height:var(--ab-studio-available-height)}
+#studio-members-area.ab-studio-mode-auto .ab-photo-canvas-wrap{min-height:clamp(360px,58vh,650px)}
+#studio-members-area.ab-studio-mode-auto .ab-video-preview-wrap{min-height:clamp(320px,48vh,520px)}
+
+/* Compact — more canvas, less chrome. */
+#studio-members-area.ab-studio-mode-compact .ab-photo-head,#studio-members-area.ab-studio-mode-compact .ab-video-head{padding:11px 13px}
+#studio-members-area.ab-studio-mode-compact .ab-photo-head p,#studio-members-area.ab-studio-mode-compact .ab-video-head p,.ab-studio-mode-compact .ab-photo-badge,.ab-studio-mode-compact .ab-video-badge{display:none}
+#studio-members-area.ab-studio-mode-compact .ab-photo-shell{grid-template-columns:190px minmax(0,1fr) 205px;min-height:520px}
+#studio-members-area.ab-studio-mode-compact .ab-video-layout{grid-template-columns:185px minmax(0,1fr) 205px;min-height:540px}
+#studio-members-area.ab-studio-mode-compact .ab-photo-tools,#studio-members-area.ab-studio-mode-compact .ab-photo-side,#studio-members-area.ab-studio-mode-compact .ab-video-left,#studio-members-area.ab-studio-mode-compact .ab-video-right{padding:10px;font-size:.92em}
+#studio-members-area.ab-studio-mode-compact .ab-photo-group,#studio-members-area.ab-studio-mode-compact .ab-video-group{padding:9px 0;gap:6px}
+#studio-members-area.ab-studio-mode-compact .ab-photo-canvas-wrap{min-height:440px}
+#studio-members-area.ab-studio-mode-compact .ab-video-preview-wrap{min-height:360px;padding:10px}
+
+/* Standard — original editor proportions. */
+#studio-members-area.ab-studio-mode-standard .ab-photo-shell{grid-template-columns:minmax(230px,300px) minmax(0,1fr) minmax(230px,300px);min-height:650px}
+#studio-members-area.ab-studio-mode-standard .ab-video-layout{grid-template-columns:235px minmax(0,1fr) 255px;min-height:690px}
+
+/* Full screen editor workspace. */
+#studio-members-area:fullscreen{background:#0b0f11;padding:12px;overflow:auto;color:#fff}
+#studio-members-area:fullscreen .ab-studio-workspace-manager{position:sticky;top:0;z-index:50}
+#studio-members-area.ab-studio-mode-fullscreen{width:100%;max-width:none}
+#studio-members-area.ab-studio-mode-fullscreen .ab-photo-studio,#studio-members-area.ab-studio-mode-fullscreen .ab-video-studio{margin-top:10px;margin-bottom:10px;border-radius:12px}
+#studio-members-area.ab-studio-mode-fullscreen .ab-photo-shell{grid-template-columns:220px minmax(0,1fr) 230px;min-height:calc(100vh - 150px)}
+#studio-members-area.ab-studio-mode-fullscreen .ab-video-layout{grid-template-columns:210px minmax(0,1fr) 225px;min-height:calc(100vh - 150px)}
+#studio-members-area.ab-studio-mode-fullscreen .ab-photo-tools,#studio-members-area.ab-studio-mode-fullscreen .ab-photo-side,#studio-members-area.ab-studio-mode-fullscreen .ab-video-left,#studio-members-area.ab-studio-mode-fullscreen .ab-video-right{max-height:calc(100vh - 150px)}
+
+/* Existing editor breakpoints remain authoritative on narrower screens. */
+@media(max-width:1050px){
+  #studio-members-area.ab-studio-mode-auto .ab-photo-shell,#studio-members-area.ab-studio-mode-standard .ab-photo-shell,#studio-members-area.ab-studio-mode-compact .ab-photo-shell,#studio-members-area.ab-studio-mode-fullscreen .ab-photo-shell{grid-template-columns:220px minmax(0,1fr)}
+  #studio-members-area.ab-studio-mode-auto .ab-video-layout,#studio-members-area.ab-studio-mode-standard .ab-video-layout,#studio-members-area.ab-studio-mode-compact .ab-video-layout,#studio-members-area.ab-studio-mode-fullscreen .ab-video-layout{grid-template-columns:200px minmax(0,1fr)}
+}
+@media(max-width:720px){
+  .ab-studio-workspace-manager{align-items:flex-start;flex-direction:column}
+  .ab-studio-workspace-manager__controls{width:100%}
+  .ab-studio-workspace-manager button{flex:1 1 auto}
+  .ab-studio-workspace-manager__status{text-align:left;min-width:0}
+  #studio-members-area[class*="ab-studio-mode-"] .ab-photo-shell,#studio-members-area[class*="ab-studio-mode-"] .ab-video-layout{display:flex;flex-direction:column;min-height:0}
+}

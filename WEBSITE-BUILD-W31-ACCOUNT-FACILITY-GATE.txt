@@ -1,0 +1,40 @@
+Adventure Builder Website W31 — Account Facility Gate
+
+Purpose
+- Keep the public marketing/home experience viewable without an account.
+- Require an Adventure Builder account before interactive website facilities can be used.
+
+Protected facilities
+- Adventure Finder
+- Adventures
+- Explore
+- Walking & Hiking
+- Paddle & Kayak
+- Vanlife
+- Trip Planner
+- Adventure Passport
+- Gallery
+- Journal
+- Adventure Studio
+- Community
+- Hidden Adventure Store admin
+
+Behaviour
+- Signed-out visitors who open a protected facility see a dedicated Sign in to continue gate.
+- Login and Create account open the existing Supabase Auth interface.
+- Links to protected facilities are intercepted while signed out.
+- The requested facility is remembered and opened after successful authentication.
+- Signed-in users enter protected facilities normally.
+- Logging out while on a protected facility immediately restores the account gate.
+
+Security
+- This browser gate controls user experience only.
+- Private data remains protected by Supabase Row Level Security / Storage policies already used by the feature modules.
+- No service-role key is included in the browser.
+
+Modules
+- css/account-gate.css
+- js/account-gate.js
+
+Protected core
+- No Trip Planner, Journal, Studio, Community, Passport, navigation or store feature logic was rewritten.

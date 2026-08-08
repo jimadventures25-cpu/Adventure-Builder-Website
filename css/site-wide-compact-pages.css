@@ -124,3 +124,55 @@ body[data-page]:not([data-page="index"]) .cta-section .button-primary{color:#111
   body[data-page]:not([data-page="index"]) .standalone-page>.section-heading>p:last-child{font-size:.84rem}
   body[data-page="walking-hiking"] .trail-map-wrap{min-height:310px;max-height:310px}
 }
+
+/* W25 Repair 1 — video review corrections
+   1) clean header crops, 2) true light-page presentation for feature hubs,
+   3) restore readable controls/text on light canvas, 4) keep Studio editor dark. */
+
+/* Light feature hubs to match the selected website direction. */
+body[data-page]:not([data-page="index"]):not([data-page="studio"]) .ab-finder,
+body[data-page]:not([data-page="index"]):not([data-page="studio"]) .ab-hub,
+body[data-page]:not([data-page="index"]):not([data-page="studio"]) .ab-gallery,
+body[data-page]:not([data-page="index"]):not([data-page="studio"]) .ab-passport,
+body[data-page]:not([data-page="index"]):not([data-page="studio"]) .ab-vanlife,
+body[data-page]:not([data-page="index"]):not([data-page="studio"]) .ab-partners{
+  --abx-bg:#fff;--abx-panel:#f7f7f5;--abx-card:#fff;--abx-line:#d9dddf;--abx-text:#17191b;--abx-muted:#5f686d;
+  --af-bg:#fff;--af-panel:#f7f7f5;--af-card:#fff;--af-line:#d9dddf;--af-text:#17191b;--af-muted:#5f686d;
+  --g-bg:#fff;--g-panel:#f7f7f5;--g-card:#fff;--g-line:#d9dddf;--g-text:#17191b;--g-muted:#5f686d;
+  --ap-bg:#fff;--ap-panel:#f7f7f5;--ap-card:#fff;--ap-line:#d9dddf;--ap-text:#17191b;--ap-muted:#5f686d;
+  --v-bg:#fff;--v-panel:#f7f7f5;--v-card:#fff;--v-line:#d9dddf;--v-text:#17191b;--v-muted:#5f686d;
+  --p-bg:#fff;--p-panel:#f7f7f5;--p-line:#d9dddf;--p-text:#17191b;--p-muted:#5f686d;
+  background:#fff!important;color:#17191b!important;border-color:#d9dddf!important;box-shadow:0 10px 28px rgba(18,24,28,.06)
+}
+
+/* Hero strips inside feature modules become subtle light sections rather than a second dark header. */
+body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.af-hero,.ab-hub-hero,.ag-hero,.ap-hero,.av-hero,.abp-head){
+  background:#f4f5f3!important;border-color:#d9dddf!important;color:#17191b!important
+}
+body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.af-hero,.ab-hub-hero,.ag-hero,.ap-hero,.av-hero,.abp-head) :is(h1,h2,h3){color:#17191b!important}
+body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.af-hero,.ab-hub-hero,.ag-hero,.ap-hero,.av-hero,.abp-head) p{color:#596267!important}
+
+/* Light cards and fields across the converted hubs. */
+body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.af-builder,.af-results,.ab-hub-body,.ag-body,.ap-body,.av-body,.abp-body){background:#fff!important;color:#17191b!important}
+body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.abx-stat,.abx-card,.abx-feed-card,.abx-collection,.af-card,.af-result,.ag-card,.ag-memory,.ag-badge,.ag-story-step,.ap-card,.ap-stat,.av-stat,.av-card,.av-result,.av-stage,.av-base,.abp-card,.abp-stage){
+  background:#f8f8f6!important;color:#17191b!important;border-color:#d8dddf!important
+}
+body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.abx-stat,.abx-card,.af-step,.af-summary,.ag-card,.ap-card,.av-card,.abp-card) :is(p,small,label,span){color:#5c666b}
+body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.af-input,.af-select,.abx-form input,.abx-form select,.abx-form textarea,.ag-form input,.ag-form select,.ag-form textarea,.ap-form input,.ap-form select,.ap-form textarea,.av-form input,.av-form select,.av-form textarea,.abp-form input,.abp-form select,.abp-form textarea){
+  background:#fff!important;color:#17191b!important;border-color:#cbd1d4!important
+}
+
+/* Walking planner stays a dark functional tool, but restore contrast lost on the new white page. */
+body[data-page="walking-hiking"] .trail-planner-panel{color:#f7f8f9!important}
+body[data-page="walking-hiking"] .trail-planner-panel h2{color:#fff!important}
+body[data-page="walking-hiking"] .trail-planner-panel :is(p,label,.trail-status){color:#c6c9cc!important}
+body[data-page="walking-hiking"] .trail-planner-panel .button-secondary{color:#f3f4f4!important;border-color:#4b5256!important;background:#15191c!important}
+body[data-page="walking-hiking"] .trail-planner-panel .button-primary{color:#111!important}
+
+/* Community empty/results areas are light on W25, so use dark copy instead of the old pale-on-dark colours. */
+body[data-page="community"] .standalone-page :is(.community-section,.community-feed,.community-empty,.community-status){color:#343a3e}
+body[data-page="community"] .standalone-page .community-empty :is(h2,h3,strong){color:#202427!important}
+body[data-page="community"] .standalone-page .community-empty p{color:#6a7277!important}
+
+/* Tighten the walking map one more step without making route planning cramped. */
+@media(min-width:901px){body[data-page="walking-hiking"] .trail-map-wrap{min-height:360px;max-height:360px}}

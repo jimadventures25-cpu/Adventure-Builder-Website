@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#0b0d0f">
+  <title>Private Adventure Store | Adventure Builder</title>
+  <link rel="icon" href="images/adventure-builder-logo.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/account-gate.css">
+  <link rel="stylesheet" href="css/adventure-store-admin.css">
+</head>
+<body data-page="store-admin" data-account-required="true">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Adventure Builder home"><img src="images/adventure-builder-logo.png" alt="Adventure Builder logo"><span>Adventure Builder</span></a>
+    <div class="account-actions" id="account-actions">
+      <button class="header-link" id="open-login" type="button">Log in</button><button class="header-register" id="open-register" type="button">Register</button>
+      <button class="account-chip" id="account-chip" type="button" hidden><span class="account-avatar" id="account-avatar">A</span><span id="account-label">My account</span></button>
+    </div>
+  </header>
+  <main class="store-shell">
+    <section class="store-gate" id="store-gate">
+      <img src="images/adventure-builder-logo.png" alt=""><p class="eyebrow">Private development area</p><h1 id="store-gate-title">Private Adventure Store</h1><p id="store-gate-copy">Checking access…</p><button class="store-btn primary" id="store-login-btn" type="button" hidden>Log in</button>
+    </section>
+
+    <section class="store-admin" id="store-admin" hidden>
+      <div class="store-topbar"><div><span class="store-private-badge">PRIVATE · NOT PUBLIC</span><h1>Adventure Store</h1><p>Build products, stock and categories now. Public storefront and checkout remain disabled until launch.</p></div><button class="store-btn light" id="store-refresh" type="button">Refresh</button></div>
+      <nav class="store-tabs" aria-label="Store admin"><button class="active" data-store-tab="dashboard" type="button">Dashboard</button><button data-store-tab="products" type="button">Products</button><button data-store-tab="categories" type="button">Categories</button><button data-store-tab="orders" type="button">Orders</button><button data-store-tab="preview" type="button">Private Preview</button><button data-store-tab="settings" type="button">Settings</button></nav>
+
+      <section class="store-panel active" id="store-panel-dashboard">
+        <div class="store-grid"><article class="store-stat"><small>Products</small><strong id="stat-products">0</strong><span>All product records</span></article><article class="store-stat"><small>Published drafts</small><strong id="stat-published">0</strong><span>Visible only in admin preview</span></article><article class="store-stat"><small>Low / no stock</small><strong id="stat-low">0</strong><span>At or below threshold</span></article><article class="store-stat"><small>Orders</small><strong id="stat-orders">0</strong><span>Checkout currently disabled</span></article></div>
+        <div class="store-card"><h2>Stock watch</h2><div class="store-table-wrap"><table class="store-table"><thead><tr><th>Product</th><th>SKU</th><th>Stock</th><th>Status</th></tr></thead><tbody id="low-stock-list"></tbody></table></div></div>
+      </section>
+
+      <section class="store-panel" id="store-panel-products">
+        <form class="store-card" id="product-form"><div class="store-card-head"><div><h2>Add / edit product</h2><p>Products are private even if set to “published” while the public store policy remains off.</p></div></div><input type="hidden" id="product-id">
+          <div class="store-form-grid"><label class="store-field">Product name<input id="product-name" maxlength="120" required></label><label class="store-field">Slug<input id="product-slug" maxlength="100" required></label><label class="store-field full">Description<textarea id="product-description" maxlength="3000"></textarea></label></div>
+          <div class="store-form-grid three"><label class="store-field">Category<select id="product-category"></select></label><label class="store-field">SKU<input id="product-sku" maxlength="60"></label><label class="store-field">Status<select id="product-status"><option value="draft">Draft</option><option value="published">Published (private preview)</option><option value="archived">Archived</option></select></label><label class="store-field">Price (£)<input id="product-price" type="number" min="0" step="0.01" value="0" required></label><label class="store-field">Compare at (£)<input id="product-compare-price" type="number" min="0" step="0.01"></label><label class="store-field">Weight (grams)<input id="product-weight" type="number" min="0"></label><label class="store-field">Stock quantity<input id="product-stock" type="number" min="0" value="0"></label><label class="store-field">Low-stock threshold<input id="product-low-stock" type="number" min="0" value="5"></label><label class="store-checkbox"><input id="product-featured" type="checkbox"> Featured product</label><label class="store-field">Sizes (comma separated)<input id="product-sizes" placeholder="S, M, L, XL"></label><label class="store-field">Colours (comma separated)<input id="product-colours" placeholder="Black, Orange"></label></div>
+          <div class="store-card"><h3>Product image</h3><div class="store-image-row"><img class="store-image-preview empty" id="product-image-preview" alt="No image selected"><div class="store-form-grid"><label class="store-field">Upload image<input id="product-image" type="file" accept="image/jpeg,image/png,image/webp"></label><label class="store-field">Image alt text<input id="product-image-alt" maxlength="160"></label><p class="store-field full">JPG, PNG or WebP · maximum 5 MB · stored in a private Supabase bucket.</p></div></div></div>
+          <div class="store-actions"><button class="store-btn primary" id="product-submit" type="submit">Save Product</button><button class="store-btn light" id="product-reset" type="button">New / Reset</button><button class="store-btn danger" id="product-delete" type="button" hidden>Delete Product</button></div>
+        </form>
+        <div class="store-card"><h2>Products</h2><div class="store-table-wrap"><table class="store-table"><thead><tr><th>Image</th><th>Product</th><th>SKU</th><th>Price</th><th>Stock</th><th>Status</th><th></th></tr></thead><tbody id="product-list"></tbody></table></div></div>
+      </section>
+
+      <section class="store-panel" id="store-panel-categories">
+        <form class="store-card" id="category-form"><h2>Category</h2><input type="hidden" id="category-id"><div class="store-form-grid three"><label class="store-field">Name<input id="category-name" required maxlength="80"></label><label class="store-field">Slug<input id="category-slug" required maxlength="80"></label><label class="store-field">Sort order<input id="category-order" type="number" value="100"></label><label class="store-field full">Description<textarea id="category-description" maxlength="500"></textarea></label><label class="store-checkbox"><input id="category-active" type="checkbox" checked> Active category</label></div><div class="store-actions"><button class="store-btn primary" type="submit">Save Category</button></div></form>
+        <div class="store-card"><h2>Categories</h2><div class="store-table-wrap"><table class="store-table"><thead><tr><th>Name</th><th>Slug</th><th>Order</th><th>State</th><th></th></tr></thead><tbody id="category-list"></tbody></table></div></div>
+      </section>
+
+      <section class="store-panel" id="store-panel-orders"><div class="store-card"><div class="store-card-head"><div><h2>Orders</h2><p>Order infrastructure is prepared, but no public checkout route exists in this build.</p></div></div><div class="store-table-wrap"><table class="store-table"><thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th><th>Created</th></tr></thead><tbody id="order-list"></tbody></table></div></div></section>
+
+      <section class="store-panel" id="store-panel-preview"><div class="store-preview-note">Private admin preview only. There is no Shop link in the public website navigation and no public database read policy.</div><div class="store-preview-grid" id="store-preview-grid" style="margin-top:16px"></div></section>
+
+      <section class="store-panel" id="store-panel-settings"><form class="store-card" id="settings-form"><h2>Store launch controls</h2><p><strong id="launch-state">Public flag OFF · Checkout flag OFF</strong></p><div class="store-form-grid"><label class="store-field">Store name<input id="setting-name" maxlength="80"></label><label class="store-field full">Private/public notice<textarea id="setting-notice" maxlength="500"></textarea></label><label class="store-checkbox"><input id="setting-public" type="checkbox"> Public storefront enabled</label><label class="store-checkbox"><input id="setting-checkout" type="checkbox"> Checkout enabled</label></div><div class="store-preview-note" style="margin-top:14px">Leave both switches OFF while the Adventure Store is being prepared. Database RLS remains admin-only in this build even if these switches are changed.</div><div class="store-actions"><button class="store-btn dark" type="submit">Save Settings</button></div></form></section>
+      <p class="store-status" id="store-status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <div class="auth-overlay" id="auth-overlay" hidden><section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-title"><button class="auth-close" id="auth-close" type="button" aria-label="Close account window">×</button><div class="auth-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><small>Private Adventure Store</small></div></div><div id="auth-signed-out"><div class="auth-tabs" role="tablist"><button id="login-tab" class="auth-tab active" type="button" role="tab" aria-selected="true">Log in</button><button id="register-tab" class="auth-tab" type="button" role="tab" aria-selected="false">Register</button></div><form id="login-form" class="auth-form"><h2 id="auth-title">Store admin login</h2><p>Log in with your Adventure Builder account.</p><label>Email<input id="login-email" name="email" type="email" autocomplete="email" required></label><label>Password<input id="login-password" name="password" type="password" autocomplete="current-password" minlength="6" required></label><button class="button button-primary auth-submit" type="submit">Log in</button></form><form id="register-form" class="auth-form" hidden><h2>Create account</h2><p>Registration does not grant store admin access.</p><label>Your name<input id="register-name" name="name" type="text" autocomplete="name" maxlength="60" required></label><label>Email<input id="register-email" name="email" type="email" autocomplete="email" required></label><label>Password<input id="register-password" name="password" type="password" autocomplete="new-password" minlength="6" required></label><label>Confirm password<input id="register-confirm" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required></label><label class="checkbox-row"><input id="register-terms" type="checkbox" required><span>I agree to the Adventure Builder terms and privacy policy.</span></label><button class="button button-primary auth-submit" type="submit">Create account</button></form></div><div id="auth-signed-in" class="account-panel" hidden><div class="account-avatar account-avatar-large" id="panel-avatar">A</div><p class="eyebrow">Adventure Builder account</p><h2 id="panel-name">Welcome</h2><p id="panel-email"></p><div class="account-choice-actions"><button class="button button-primary" id="continue-website" type="button">Continue</button></div><button class="account-settings-link" id="account-settings" type="button">Account settings</button><button class="button button-secondary auth-submit logout-button" id="logout-button" type="button">Log out</button></div><p class="auth-status" id="auth-status" aria-live="polite"></p></section></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/config.js"></script><script src="js/auth.js"></script>
+  <script src="js/account-gate.js"></script><script src="js/main.js"></script><script src="js/adventure-store-admin.js"></script>
+</body></html>

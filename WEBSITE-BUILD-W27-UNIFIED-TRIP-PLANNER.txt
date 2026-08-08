@@ -1,0 +1,11 @@
+Adventure Builder Website W27 — Unified Trip Planner
+
+Built
+- Replaced the placeholder Trip Planner with a working route/stops/itinerary planner.
+- Added trip type, route style, avoidance options, dates, notes and ordered stops.
+- Added local offline-safe saving plus Supabase sync through adventure_plans when signed in.
+- Added Send to App workflow using the same account/table.
+- Kept all Trip Planner code isolated in trip-planner-v27.css/js.
+
+Supabase
+Run supabase-adventure-plans.sql once to enable cross-device website/app sync.
