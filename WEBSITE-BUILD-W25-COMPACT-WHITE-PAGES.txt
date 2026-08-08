@@ -1,0 +1,25 @@
+Adventure Builder Website W25 — Compact White Pages + Image Headers
+
+Built from W24 Homepage Refinement.
+
+Changes
+- Preserved the existing homepage banner.
+- Interior website pages now use a white/light main content canvas.
+- Replaced oversized blank title areas with compact image-backed page headers.
+- Assigned page-relevant imagery to Adventure Finder, Adventures, Trip Planner, Walking & Hiking, Paddle & Kayak, Vanlife, Community and Partners, with scenic adventure imagery used for record/creative pages.
+- Reduced page title sizes and vertical spacing.
+- Reduced internal module-header padding and title sizes.
+- Reduced the Walking & Hiking map from 610px minimum height to 410px desktop, 360px tablet and 310px phone.
+- Reduced global top-header and sidebar-brand height.
+- Kept the W23 responsive sidebar/mobile navigation.
+
+Protected
+- No JavaScript feature logic changed.
+- No Supabase/auth code changed.
+- No Trail Planner routing logic changed.
+- No Adventure Finder matching logic changed.
+- No Community, Passport, Gallery, Studio, Vanlife or Partner data logic changed.
+
+Implementation
+- New visual override module: css/site-wide-compact-pages.css
+- New page header image assets: images/page-headers/*.jpg

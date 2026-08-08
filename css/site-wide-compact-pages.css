@@ -1,0 +1,126 @@
+/* Adventure Builder Website W25 — compact white pages + image headers
+   Scope: visual layout only. No feature logic, auth, routing or data code changed. */
+
+/* Slimmer global top bar */
+.site-header{min-height:58px;padding-top:6px;padding-bottom:6px;background:#0a0c0e}
+.account-chip,.header-link,.header-register{min-height:38px}
+.ab-sidebar-brand{min-height:72px;padding-top:8px;padding-bottom:8px}
+.ab-sidebar-brand img{width:48px;height:48px}
+body.ab-sidebar-collapsed .ab-sidebar-collapse{top:63px}
+
+/* All interior pages use a light content canvas. Keep the sidebar/header dark. */
+body[data-page]:not([data-page="index"]) main{background:#f6f6f4;color:#17191b}
+body[data-page]:not([data-page="index"]) .standalone-page{
+  min-height:auto;
+  padding:0 clamp(18px,4vw,58px) 52px;
+  background:#fff;
+  color:#17191b;
+}
+
+/* Compact image-backed page header shared by every interior page. */
+body[data-page]:not([data-page="index"]) .standalone-page>.section-heading{
+  --page-header-image:url('../images/page-headers/generic-mountains.jpg');
+  position:relative;
+  isolation:isolate;
+  width:auto;
+  max-width:none;
+  min-height:155px;
+  margin:0 calc(-1 * clamp(18px,4vw,58px)) 26px;
+  padding:27px clamp(24px,5vw,72px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  text-align:left;
+  overflow:hidden;
+  background-image:linear-gradient(90deg,rgba(7,9,10,.86),rgba(7,9,10,.50) 62%,rgba(7,9,10,.30)),var(--page-header-image);
+  background-size:cover;
+  background-position:center;
+  border-bottom:2px solid rgba(255,121,0,.72);
+  color:#fff;
+}
+body[data-page]:not([data-page="index"]) .standalone-page>.section-heading:after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.18));
+}
+body[data-page]:not([data-page="index"]) .standalone-page>.section-heading .eyebrow{
+  margin:0 0 3px;color:#ffad5e;font-size:.74rem;font-weight:850;letter-spacing:.05em;text-transform:none
+}
+body[data-page]:not([data-page="index"]) .standalone-page>.section-heading h1,
+body[data-page]:not([data-page="index"]) .standalone-page>.section-heading h2{
+  margin:0 0 4px!important;
+  max-width:900px;
+  color:#fff!important;
+  font-size:clamp(1.75rem,3vw,2.65rem)!important;
+  line-height:1.05!important;
+  letter-spacing:-.025em;
+  text-shadow:0 2px 18px rgba(0,0,0,.35)
+}
+body[data-page]:not([data-page="index"]) .standalone-page>.section-heading>p:last-child{
+  max-width:850px;margin:0;color:#e9ecee!important;font-size:.94rem;line-height:1.45
+}
+
+/* Page-specific relevant imagery */
+body[data-page="adventure-finder"] .standalone-page>.section-heading{--page-header-image:url('../images/page-headers/finder.jpg')}
+body[data-page="adventures"] .standalone-page>.section-heading{--page-header-image:url('../images/page-headers/adventures.jpg')}
+body[data-page="trip-planner"] .standalone-page>.section-heading{--page-header-image:url('../images/page-headers/trip-planner.jpg')}
+body[data-page="walking-hiking"] .standalone-page>.section-heading{--page-header-image:url('../images/page-headers/walking.jpg')}
+body[data-page="paddling"] .standalone-page>.section-heading{--page-header-image:url('../images/page-headers/paddling.jpg')}
+body[data-page="van-life"] .standalone-page>.section-heading{--page-header-image:url('../images/page-headers/trip-planner.jpg')}
+body[data-page="passport"] .standalone-page>.section-heading{--page-header-image:url('../images/page-headers/generic-mountains.jpg')}
+body[data-page="gallery"] .standalone-page>.section-heading{--page-header-image:url('../images/page-headers/generic-mountains.jpg')}
+body[data-page="journal"] .standalone-page>.section-heading{--page-header-image:url('../images/page-headers/generic-mountains.jpg')}
+body[data-page="studio"] .standalone-page>.section-heading{--page-header-image:url('../images/page-headers/generic-mountains.jpg')}
+body[data-page="community"] .standalone-page>.section-heading{--page-header-image:url('../images/page-headers/adventures.jpg')}
+body[data-page="partners"] .standalone-page>.section-heading{--page-header-image:url('../images/page-headers/finder.jpg')}
+body[data-page="explore"] .standalone-page>.section-heading{--page-header-image:url('../images/page-headers/generic-mountains.jpg')}
+
+/* Trim oversized layouts and keep useful content higher on screen. */
+body[data-page]:not([data-page="index"]) .section{padding-top:52px;padding-bottom:52px}
+body[data-page]:not([data-page="index"]) .standalone-page{padding-top:0}
+body[data-page]:not([data-page="index"]) .category-layout,
+body[data-page]:not([data-page="index"]) .ab-finder,
+body[data-page]:not([data-page="index"]) .ab-hub,
+body[data-page]:not([data-page="index"]) .ab-gallery,
+body[data-page]:not([data-page="index"]) .ab-passport,
+body[data-page]:not([data-page="index"]) .ab-vanlife,
+body[data-page]:not([data-page="index"]) .ab-partners,
+body[data-page]:not([data-page="index"]) .ab-photo-studio,
+body[data-page]:not([data-page="index"]) .ab-video-studio{margin-top:18px;margin-bottom:20px}
+
+/* Dark feature modules retain their readable internal palette on white pages. */
+.category-layout,.member-gate,.beta-access-banner,.community-toolbar,.community-filter-row,
+.ab-finder,.ab-hub,.ab-gallery,.ab-passport,.ab-vanlife,.ab-partners,.ab-photo-studio,.ab-video-studio{color:#f7f8f9}
+
+/* Smaller module headers so the content, not the title, gets the space. */
+.af-hero,.ab-hub-hero,.ag-hero,.ap-hero,.av-hero,.abp-head{padding:18px 22px!important}
+.af-hero h2,.ab-hub-hero h2,.ag-hero h2,.ap-hero h2,.av-hero h2,.abp-head h2{font-size:clamp(1.35rem,2.2vw,1.9rem)!important;line-height:1.12}
+.af-hero p,.ab-hub-hero p,.ag-hero p,.ap-hero p,.av-hero p,.abp-head p{margin-bottom:0;line-height:1.45}
+
+/* Walking/Hiking map was dominating the page: compact it while keeping it usable. */
+body[data-page="walking-hiking"] .trail-planner-shell{grid-template-columns:minmax(250px,320px) minmax(0,1fr);gap:18px;margin-top:16px;align-items:start}
+body[data-page="walking-hiking"] .trail-planner-panel{padding:1.05rem;border-radius:16px}
+body[data-page="walking-hiking"] .trail-map-wrap{min-height:410px;max-height:410px;border-radius:16px}
+body[data-page="walking-hiking"] .trail-poi-section{margin-top:28px}
+body[data-page="walking-hiking"] .trail-feature-strip{margin-top:20px}
+
+/* Light section transitions below the main feature. */
+body[data-page]:not([data-page="index"]) .cta-section{padding:38px clamp(18px,4vw,58px);background:#ececea;color:#17191b;border-color:#d7d7d2}
+body[data-page]:not([data-page="index"]) .cta-section p:last-child{color:#555d62}
+body[data-page]:not([data-page="index"]) .cta-section .button-primary{color:#111}
+
+@media(max-width:900px){
+  .site-header{min-height:56px}
+  body[data-page]:not([data-page="index"]) .standalone-page>.section-heading{min-height:140px;margin-bottom:20px;padding:24px 20px}
+  body[data-page="walking-hiking"] .trail-planner-shell{grid-template-columns:1fr}
+  body[data-page="walking-hiking"] .trail-map-wrap{min-height:360px;max-height:360px;order:1}
+  body[data-page="walking-hiking"] .trail-planner-panel{order:2}
+}
+@media(max-width:520px){
+  body[data-page]:not([data-page="index"]) .standalone-page{padding-inline:14px;padding-bottom:34px}
+  body[data-page]:not([data-page="index"]) .standalone-page>.section-heading{margin-inline:-14px;min-height:126px;padding:20px 16px}
+  body[data-page]:not([data-page="index"]) .standalone-page>.section-heading h1,
+  body[data-page]:not([data-page="index"]) .standalone-page>.section-heading h2{font-size:1.65rem!important}
+  body[data-page]:not([data-page="index"]) .standalone-page>.section-heading>p:last-child{font-size:.84rem}
+  body[data-page="walking-hiking"] .trail-map-wrap{min-height:310px;max-height:310px}
+}
