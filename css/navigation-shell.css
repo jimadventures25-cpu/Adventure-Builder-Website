@@ -1,0 +1,73 @@
+/* Adventure Builder Website W23 — responsive navigation shell
+   Desktop: fixed/collapsible left sidebar.
+   Mobile/tablet: compact bottom navigation + slide-out More menu.
+*/
+:root{--ab-sidebar-w:248px;--ab-nav-h:68px}
+
+.site-header{left:var(--ab-sidebar-w);width:calc(100% - var(--ab-sidebar-w));padding:10px 22px;justify-content:flex-end;transition:left .22s ease,width .22s ease;z-index:1200}
+.site-header .brand{display:none}
+.site-header .account-actions{margin-left:auto}
+
+.ab-site-sidebar{position:fixed;inset:0 auto 0 0;width:var(--ab-sidebar-w);z-index:1250;display:flex;flex-direction:column;background:#0b0d0f;border-right:1px solid rgba(255,255,255,.1);box-shadow:10px 0 32px rgba(0,0,0,.2);transition:width .22s ease,transform .22s ease}
+.ab-sidebar-brand{display:flex;align-items:center;gap:11px;min-height:88px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08);color:#fff;text-decoration:none}
+.ab-sidebar-brand img{width:58px;height:58px;object-fit:contain;flex:0 0 auto}
+.ab-sidebar-brand strong{font-size:1rem;line-height:1.15}
+.ab-sidebar-collapse{margin-left:auto;width:34px;height:34px;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:#15191c;color:#fff;cursor:pointer;font-size:1rem}
+.ab-sidebar-links{display:flex;flex-direction:column;gap:3px;padding:10px 9px;overflow:auto;overscroll-behavior:contain}
+.ab-sidebar-link{display:flex;align-items:center;gap:11px;min-height:39px;padding:8px 10px;border-radius:9px;color:#d9dde0;text-decoration:none;font-size:.87rem;font-weight:750;white-space:nowrap}
+.ab-sidebar-link svg{width:19px;height:19px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ab-sidebar-link:hover{color:#fff;background:rgba(255,255,255,.055)}
+.ab-sidebar-link.active{color:#ff9a35;background:rgba(255,121,0,.13);box-shadow:inset 3px 0 0 #ff7900}
+.ab-sidebar-divider{height:1px;margin:7px 8px;background:rgba(255,255,255,.09)}
+.ab-sidebar-footer{margin-top:auto;padding:10px 9px 14px;border-top:1px solid rgba(255,255,255,.08)}
+.ab-sidebar-footer .ab-sidebar-link{color:#aeb5ba}
+
+body.ab-sidebar-collapsed{--ab-sidebar-w:76px}
+body.ab-sidebar-collapsed .ab-sidebar-brand{justify-content:center;padding-inline:8px}
+body.ab-sidebar-collapsed .ab-sidebar-brand strong,body.ab-sidebar-collapsed .ab-sidebar-link span{display:none}
+body.ab-sidebar-collapsed .ab-sidebar-collapse{position:absolute;top:79px;right:-15px;width:30px;height:30px;border-radius:50%;background:#ff7900;color:#111;border-color:#ff7900}
+body.ab-sidebar-collapsed .ab-sidebar-link{justify-content:center;padding-inline:8px}
+body.ab-sidebar-collapsed .ab-sidebar-link.active{box-shadow:none}
+
+body>main,body>.site-footer{margin-left:var(--ab-sidebar-w);transition:margin-left .22s ease}
+
+.ab-mobile-nav,.ab-mobile-more-backdrop,.ab-mobile-more{display:none}
+
+@media(max-width:900px){
+  :root{--ab-sidebar-w:0px}
+  .ab-site-sidebar{display:none}
+  .site-header{left:0;width:100%;min-height:64px;padding:8px 13px;justify-content:space-between}
+  .site-header .brand{display:flex;min-width:0}
+  .site-header .brand img{width:46px;height:46px}
+  .site-header .brand span{display:none}
+  .site-header .account-actions{margin-left:auto}
+  body>main,body>.site-footer{margin-left:0}
+  body{padding-bottom:76px}
+
+  .ab-mobile-nav{position:fixed;left:8px;right:8px;bottom:8px;z-index:1300;display:grid;grid-template-columns:repeat(5,1fr);padding:5px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(10,12,14,.96);box-shadow:0 12px 35px rgba(0,0,0,.45);backdrop-filter:blur(14px)}
+  .ab-mobile-nav a,.ab-mobile-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:54px;padding:4px 2px;border:0;border-radius:11px;background:transparent;color:#b9c0c5;text-decoration:none;font:inherit;font-size:.68rem;font-weight:800;cursor:pointer}
+  .ab-mobile-nav svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .ab-mobile-nav a.active,.ab-mobile-nav button.active{color:#ff9a35;background:rgba(255,121,0,.12)}
+
+  .ab-mobile-more-backdrop{position:fixed;inset:0;z-index:1310;background:rgba(0,0,0,.58)}
+  .ab-mobile-more-backdrop.open{display:block}
+  .ab-mobile-more{position:fixed;left:8px;right:8px;bottom:8px;z-index:1320;display:block;max-height:min(74vh,620px);padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:20px;background:#101417;box-shadow:0 22px 60px rgba(0,0,0,.58);transform:translateY(calc(100% + 24px));opacity:0;pointer-events:none;transition:transform .22s ease,opacity .22s ease;overflow:auto}
+  .ab-mobile-more.open{transform:translateY(0);opacity:1;pointer-events:auto}
+  .ab-mobile-more-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:4px 5px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .ab-mobile-more-head strong{font-size:1.05rem}.ab-mobile-more-head small{display:block;color:#92999e;margin-top:2px}
+  .ab-mobile-more-close{width:38px;height:38px;border:0;border-radius:50%;background:#242a2f;color:#fff;font-size:1.45rem;cursor:pointer}
+  .ab-mobile-more-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding-top:11px}
+  .ab-mobile-more-grid a{display:flex;align-items:center;gap:10px;min-height:46px;padding:10px;border-radius:10px;color:#e2e6e9;text-decoration:none;font-size:.84rem;font-weight:750;background:#151a1e}
+  .ab-mobile-more-grid a.active{color:#ff9a35;background:rgba(255,121,0,.13)}
+  .ab-mobile-more-grid svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+}
+
+@media(max-width:460px){
+  .header-link{display:none}
+  .header-register{padding:9px 10px}
+  .account-chip{max-width:120px}
+  .ab-mobile-more-grid{grid-template-columns:1fr}
+}
+.ab-sidebar-brand>a{display:flex;align-items:center;color:#fff;text-decoration:none}
+.ab-sidebar-brand>a:nth-child(2){min-width:0}
+body.ab-sidebar-collapsed .ab-sidebar-brand>a:nth-child(2){display:none}

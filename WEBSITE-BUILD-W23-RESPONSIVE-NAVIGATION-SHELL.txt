@@ -1,0 +1,39 @@
+Adventure Builder Website — Build W23 Responsive Navigation Shell
+
+Goal
+- Remove the crowded horizontal tab row from the website.
+- Keep the main page clean while every section remains easy to reach.
+
+Implemented
+- Removed the old horizontal site-nav and hamburger markup from all website pages.
+- Added one modular navigation-shell.css file.
+- Added one modular navigation-shell.js file.
+- Desktop: fixed left sidebar with all website sections and active-page highlight.
+- Desktop: sidebar can collapse to a compact icon rail.
+- Mobile/tablet: compact five-item bottom navigation.
+- Mobile/tablet: More opens a slide-up sheet containing the remaining sections.
+- Existing Login/Register/My Account controls remain in the top header.
+- Uses Adventure Builder's black/orange styling and custom inline SVG line icons; no emoji navigation style.
+
+Protected
+- Authentication/Supabase logic unchanged.
+- Trail Planner routing functions unchanged.
+- Visitor counter unchanged.
+- Adventure Studio/editor logic unchanged.
+- Individual feature modules unchanged.
+
+Testing
+- JavaScript syntax checks.
+- HTML parse checks.
+- CSS/JS local reference checks.
+- Confirmed old site-nav/menu-button markup removed from every page.
+- Confirmed navigation-shell CSS/JS loaded by every HTML page.
+- ZIP integrity check after packaging.
+
+Device checks after deployment
+1. Desktop: confirm left sidebar displays and no crowded top tabs remain.
+2. Collapse/expand sidebar and confirm page content follows it.
+3. Open several sections and confirm orange active-page highlight follows the page.
+4. Phone: confirm bottom navigation appears and desktop sidebar is hidden.
+5. Phone: tap More, open several sections, close with × and by tapping outside.
+6. Confirm Login/Register/My Account still opens normally.
