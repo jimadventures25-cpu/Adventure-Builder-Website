@@ -1,0 +1,18 @@
+Adventure Builder Website Build W22 — Story + Visitor Counter
+
+REPLACED / IMPROVED
+- Replaced the dark Home story presentation with a clean white story section.
+- Kept orange Adventure Builder accents and readable dark text.
+- Added a modular website visitor counter to the footer.
+- Counter displays sitewide Page Views and Unique Visitors.
+- Visitor identity uses a random browser key only; no name/email is collected by this module.
+- Counter fails safely if the Supabase RPC has not been installed.
+
+SETUP REQUIRED ONCE
+- Run supabase-website-visitor-counter.sql in the existing Adventure Builder Supabase project.
+- Then upload/deploy the website ZIP normally.
+
+PROTECTED
+- Website account/authentication flow unchanged.
+- Trail Planner, Community, Passport, Gallery, Vanlife and Studio logic unchanged.
+- App source unchanged by this website build.

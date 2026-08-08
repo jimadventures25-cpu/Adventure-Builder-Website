@@ -96,3 +96,10 @@ body[data-page]:not([data-page="index"]) .section-heading h2{font-size:clamp(2.3
 .trail-poi-section{margin-top:35px;padding:28px;border:1px solid var(--border);border-radius:22px;background:linear-gradient(150deg,#161b1f,#0b0e10)}.trail-poi-heading{display:grid;grid-template-columns:1fr minmax(280px,.7fr);gap:24px}.trail-poi-heading p{color:var(--muted)}.trail-poi-filters{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.trail-poi-filters label{padding:9px;border:1px solid #343b40;border-radius:10px;background:#101417}.trail-poi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.trail-poi-card{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:16px;border:1px solid #343b40;border-radius:15px;background:#101417}.trail-poi-card>span{font-size:1.8rem}.trail-poi-card small{color:var(--orange2);text-transform:capitalize}.trail-poi-card h3{margin:.15rem 0}.trail-poi-card p{color:var(--muted);font-size:.86rem}.trail-poi-card button{grid-column:1/-1;padding:10px;border:0;border-radius:9px;background:var(--orange);font-weight:900;cursor:pointer}
 @media(max-width:900px){.website-community-feed{grid-template-columns:1fr}.studio-workspace{grid-template-columns:1fr}.trail-poi-heading{grid-template-columns:1fr}.trail-poi-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.beta-access-banner{align-items:flex-start;flex-direction:column}.community-filter-row{grid-template-columns:1fr}.studio-preview{min-height:300px}.trail-poi-grid,.trail-poi-filters{grid-template-columns:1fr}.website-community-card>img{height:230px}}
+
+/* Website W22 - Story section white-background refinement */
+.home-story-section{background:#fff!important;color:#15191c!important}
+.home-story-card{background:#fff!important;color:#15191c!important;border:1px solid rgba(15,23,28,.12)!important;box-shadow:0 18px 55px rgba(15,23,28,.10)!important}
+.home-story-card h2,.home-story-card blockquote,.home-story-emphasis{color:#111820!important}
+.home-story-card p{color:#3f484f!important}
+.home-story-card .button-secondary{background:#fff!important;color:#111820!important;border-color:rgba(255,121,0,.65)!important}

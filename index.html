@@ -8,6 +8,7 @@
   <title>Adventure Builder | Your Adventure Starts Here</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/visitor-counter.css">
 </head>
 <body data-page="index">
   <header class="site-header">
@@ -91,6 +92,11 @@
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
     <div class="footer-links"><a href="index.html">Home</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
       <a href="studio.html">Studio</a><a href="index.html#download">Get the App</a></div>
+    <div class="ab-visitor-counter" data-ab-visitor-counter aria-label="Adventure Builder website visitor totals">
+      <div class="ab-visitor-stat"><strong data-ab-page-views>--</strong><span>page views</span></div>
+      <div class="ab-visitor-stat"><strong data-ab-unique-visitors>--</strong><span>unique visitors</span></div>
+      <p class="ab-visitor-status" data-ab-visitor-status aria-live="polite">Loading visitor totals…</p>
+    </div>
     <p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p>
   </footer>
   <div class="auth-overlay" id="auth-overlay" hidden>
@@ -144,6 +150,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/visitor-counter.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
