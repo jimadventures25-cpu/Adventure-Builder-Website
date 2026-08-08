@@ -1,0 +1,132 @@
+/* Adventure Builder Website W24 — homepage vertical-space refinement
+   Scope: homepage only. Keeps the existing banner image and navigation shell unchanged.
+   Goals: smaller header, slimmer intro strip, unboxed story positioned closer to banner. */
+
+body[data-page="index"] .site-header{
+  min-height:54px;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+body[data-page="index"] .site-header .header-link,
+body[data-page="index"] .site-header .header-register{
+  padding-top:7px;
+  padding-bottom:7px;
+}
+body[data-page="index"] .site-header .account-chip{
+  padding-top:4px;
+  padding-bottom:4px;
+}
+body[data-page="index"] .site-header .account-avatar{
+  width:28px;
+  height:28px;
+}
+
+/* Keep the W23 banner artwork exactly as supplied; only remove unnecessary vertical bulk around it. */
+body[data-page="index"] .hero-compact{
+  min-height:clamp(235px,28vw,390px);
+}
+
+/* Slimmer "Your Adventure Starts Here" introduction. */
+body[data-page="index"] .hero-intro{
+  padding:22px clamp(18px,4vw,58px) 24px;
+}
+body[data-page="index"] .hero-intro .eyebrow{
+  margin:0 0 4px;
+  font-size:.76rem;
+}
+body[data-page="index"] .hero-intro h1{
+  margin:0 0 7px;
+  font-size:clamp(1.7rem,3vw,2.75rem);
+  line-height:1;
+}
+body[data-page="index"] .hero-intro>p:not(.eyebrow){
+  max-width:720px;
+  margin:0 auto 13px;
+  font-size:clamp(.9rem,1.2vw,1rem);
+  line-height:1.45;
+}
+body[data-page="index"] .hero-actions{
+  gap:10px;
+}
+body[data-page="index"] .hero-actions .button{
+  min-height:42px;
+  padding:9px 17px;
+  border-radius:9px;
+  font-size:.9rem;
+}
+
+/* Story: no floating/card appearance. It now reads as part of the homepage itself. */
+body[data-page="index"] .home-story-section{
+  padding:34px clamp(20px,5vw,78px) 42px!important;
+  background:#fff!important;
+  color:#15191c!important;
+}
+body[data-page="index"] .home-story-card{
+  max-width:1080px;
+  margin:0 auto;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body[data-page="index"] .home-story-card .eyebrow{
+  margin:0 0 4px;
+  font-size:.78rem;
+  letter-spacing:.08em;
+}
+body[data-page="index"] .home-story-card h2{
+  max-width:800px;
+  margin:.05rem 0 .7rem;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:clamp(1.8rem,3.5vw,3.1rem);
+  line-height:1.02;
+  letter-spacing:-.035em;
+}
+body[data-page="index"] .home-story-card p{
+  max-width:940px;
+  margin:.62rem 0;
+  font-size:1rem;
+  line-height:1.65;
+}
+body[data-page="index"] .home-story-question{
+  margin-top:.35rem!important;
+}
+body[data-page="index"] .home-story-card blockquote{
+  max-width:900px;
+  margin:.8rem 0 1rem;
+  padding:.15rem 0 .15rem 1rem;
+  font-size:clamp(1.45rem,2.5vw,2.2rem);
+  line-height:1.16;
+}
+body[data-page="index"] .home-story-emphasis{
+  max-width:900px!important;
+  margin-top:1rem!important;
+  font-size:1.08rem!important;
+}
+body[data-page="index"] .home-story-actions{
+  margin-top:1rem;
+}
+body[data-page="index"] .home-story-actions .button{
+  min-height:44px;
+  padding:10px 18px;
+  border-radius:9px;
+}
+
+@media(max-width:900px){
+  body[data-page="index"] .site-header{min-height:58px}
+  body[data-page="index"] .hero-compact{min-height:220px}
+  body[data-page="index"] .hero-intro{padding:18px 16px 20px}
+  body[data-page="index"] .home-story-section{padding:26px 18px 34px!important}
+}
+
+@media(max-width:520px){
+  body[data-page="index"] .site-header{min-height:54px}
+  body[data-page="index"] .hero-compact{min-height:190px}
+  body[data-page="index"] .hero-intro h1{font-size:1.65rem}
+  body[data-page="index"] .hero-intro>p:not(.eyebrow){font-size:.88rem}
+  body[data-page="index"] .hero-actions{display:grid;grid-template-columns:1fr 1fr}
+  body[data-page="index"] .hero-actions .button{width:100%;padding-inline:10px;font-size:.78rem}
+  body[data-page="index"] .home-story-card h2{font-size:1.72rem}
+  body[data-page="index"] .home-story-card p{font-size:.94rem}
+}

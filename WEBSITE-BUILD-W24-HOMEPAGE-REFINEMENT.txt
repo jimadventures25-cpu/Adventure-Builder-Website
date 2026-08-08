@@ -1,0 +1,29 @@
+Adventure Builder Website — Build W24 Homepage Refinement
+
+User-approved scope
+- Keep the existing homepage banner artwork.
+- Make the desktop/header area smaller.
+- Make the "Your Adventure Starts Here" intro substantially slimmer.
+- Remove the boxed/card appearance from the homepage story.
+- Move the story visually closer to the banner/intro area.
+- Preserve W23 responsive sidebar/mobile navigation.
+
+Implementation
+- Added css/homepage-refinement.css as an isolated homepage-only module.
+- No existing navigation, authentication, visitor-counter, Trail Planner, Community, Studio or feature JavaScript changed.
+- Existing banner image and hero background declaration were left unchanged.
+- Old W22 story card styling remains available to other contexts but is overridden on body[data-page="index"] by the new module rather than stacking markup patches.
+
+Tests
+- New CSS reference present in index.html.
+- All local CSS/JS references checked.
+- No JavaScript changed.
+- Existing banner file retained.
+- ZIP integrity checked after packaging.
+
+Phone/desktop visual checks after deploy
+1. Header is noticeably shorter.
+2. Existing banner remains the same artwork.
+3. Intro title/action area is compact and no longer dominates the page.
+4. Story begins quickly after the intro and has no surrounding card/border/shadow.
+5. Desktop sidebar and mobile bottom navigation still operate normally.
