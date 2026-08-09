@@ -1,0 +1,16 @@
+Adventure Builder Website — W32 Accident Assistance V1
+
+Implemented
+- Added dedicated Accident Assistance page as a private member facility.
+- Added Accident Assistance to the website navigation.
+- Added six-step core accident record form.
+- Added GPS coordinate capture.
+- Added local device saving with Supabase sync fallback.
+- Added private accident_records SQL with owner-only RLS.
+- Added saved-record list, open/delete/sync controls.
+- Added branded draft Vehicle Accident Record print preview.
+- Added clear safety and no-fault/liability wording.
+- Kept evidence/media and satnav integration for later isolated stages.
+
+Protected
+- Existing Trip Planner, Journal, Store, Community and other modules unchanged except navigation/account-gate registration.

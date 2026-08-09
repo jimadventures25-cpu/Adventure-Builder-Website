@@ -2,6 +2,7 @@
   'use strict';
 
   const PROTECTED_PAGES = new Set([
+    'accident-assistance.html',
     'adventure-finder.html',
     'adventures.html',
     'community.html',
@@ -14,6 +15,7 @@
     'trip-planner.html',
     'van-life.html',
     'walking-hiking.html',
+    'outdoor-skills.html',
     'shop-admin.html'
   ]);
 

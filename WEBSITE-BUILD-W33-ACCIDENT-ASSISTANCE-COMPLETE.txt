@@ -1,0 +1,9 @@
+ADVENTURE BUILDER WEBSITE W33 — ACCIDENT ASSISTANCE COMPLETE
+
+Stages completed:
+- V2 Evidence: photos, video, dashcam, documents; numbered E01...; originals preserved locally and in private Supabase Storage.
+- V3 Offline & Sync: IndexedDB evidence store + local draft store + reconnect sync.
+- V4 Branded Report: same Adventure Builder print / Save-as-PDF layout on website and app.
+- V5 Satnav Link: clean future integration placeholder only; satnav code untouched.
+
+Setup: run supabase-accident-assistance.sql then supabase-accident-assistance-evidence.sql once in Supabase.
