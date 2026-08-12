@@ -3,16 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Discover hidden gems, viewpoints, beaches, castles, forests and remarkable places with Adventure Builder.">
+  <meta name="description" content="Plan paddle board and kayak adventures with launch points, conditions checks, float plans, safety checklists and saved trips in Adventure Builder.">
   <meta name="theme-color" content="#0b0d0f">
-  <title>Explore | Adventure Builder</title>
+  <title>Paddle Board & Kayak | Adventure Builder</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/account-gate.css">
   <link rel="stylesheet" href="css/navigation-shell.css">
-  <link rel="stylesheet" href="css/adventure-hub.css">
   <link rel="stylesheet" href="css/site-wide-compact-pages.css">
-</head>  <link rel="stylesheet" href="css/site-wide-compact-pages.css">
+  <link rel="stylesheet" href="css/paddling.css">
 </head>
 <body data-page="paddling" data-account-required="true">
   <header class="site-header">
@@ -29,133 +28,163 @@
       </button>
     </div>
   </header>
-  <main>
-<section class="section standalone-page"><div class="section-heading"><p class="eyebrow">Adventure on the water</p><h2>Paddleboard &amp; Kayak</h2><p>Route ideas, launch planning, conditions, float plans, safety checks and memories in one place.</p></div>
-<section class="ab-hub" data-ab-adventure-hub>
-  <header class="ab-hub-hero">
-    <p class="eyebrow">Adventure Builder · Your life outdoors</p>
-    <h1>Adventure Hub</h1>
-    <p>Not just an activity tracker. Keep the route, memories, places, photos, video, passport progress and story of every adventure together.</p>
-    <div class="ab-hub-tabs">
-      <button data-ab-tab="dashboard" type="button">🌍 Dashboard</button>
-      <button data-ab-tab="feed" type="button">🧭 Adventures</button>
-      <button data-ab-tab="story" type="button">📖 Relive</button>
-      <button data-ab-tab="passport" type="button">🏅 Passport</button>
-      <button data-ab-tab="add" type="button">＋ Add Adventure</button>
-      <button class="is-active" data-ab-tab="paddle" type="button">🛶 Paddle & Kayak</button>
-    </div>
-  </header>
-  <div class="ab-hub-body">
-    <section class="ab-hub-view" data-ab-view="dashboard" hidden>
-      <div class="abx-stats">
-        <div class="abx-stat"><small>Adventures</small><strong data-ab-stat="adventures">0</strong><span>All activities together</span></div>
-        <div class="abx-stat"><small>Distance explored</small><strong data-ab-stat="distance">0 km</strong><span>Your journey, not a race</span></div>
-        <div class="abx-stat"><small>Photos remembered</small><strong data-ab-stat="photos">0</strong><span>Ready for Photo Studio</span></div>
-        <div class="abx-stat"><small>Water adventures</small><strong data-ab-stat="water">0</strong><span>Paddleboard + kayak</span></div>
+
+  <main class="paddle-page">
+    <section class="paddle-hero">
+      <div>
+        <p class="eyebrow">Adventure on the water</p>
+        <h1>Paddle Board &amp; Kayak</h1>
+        <p>Plan the launch, route, return point, conditions, kit and float plan in one place. Save the plan on this device and open Adventure Builder when you are ready to go.</p>
+        <div class="paddle-hero-actions">
+          <button class="button button-primary" type="button" data-scroll-planner>Plan a water adventure</button>
+          <a class="button button-secondary" href="https://app.adventurebuilder.co.uk" target="_blank" rel="noopener">Open the App</a>
+        </div>
       </div>
-      <div class="abx-grid">
-        <article class="abx-card">
-          <h3>Explorer Score</h3><p>Earn points for getting out, discovering new places and recording memories — not for being the fastest.</p>
-          <div class="abx-score"><div class="abx-score-ring" data-ab-score-ring><strong data-ab-score>0</strong></div><div><b>Adventure Explorer</b><p style="color:var(--abx-muted);font-size:.78rem">New places, camps, paddles, walks and photography all count.</p><div class="abx-progress"><i data-ab-level-progress></i></div></div></div>
-        </article>
-        <article class="abx-card"><h3>Adventure Collections</h3><div class="abx-collections"><div class="abx-collection"><span>🏔️</span><strong>Mountains</strong><small>Your summits</small></div><div class="abx-collection"><span>🌊</span><strong>Water</strong><small>Lakes & coasts</small></div><div class="abx-collection"><span>🚐</span><strong>Road Trips</strong><small>Routes remembered</small></div><div class="abx-collection"><span>💦</span><strong>Waterfalls</strong><small>Places found</small></div><div class="abx-collection"><span>🏰</span><strong>History</strong><small>Castles & ruins</small></div><div class="abx-collection"><span>🌅</span><strong>Sunsets</strong><small>Favourite moments</small></div></div></article>
+      <div class="paddle-hero-card" aria-label="Paddle planning summary">
+        <span class="paddle-hero-icon">🛶</span>
+        <strong>Plan → Check → Paddle → Remember</strong>
+        <small>Designed for paddle boards, kayaks and canoes.</small>
       </div>
     </section>
 
-    <section class="ab-hub-view" data-ab-view="feed" hidden>
-      <div class="abx-grid"><div class="abx-card"><h3>Your Adventure Feed</h3><p>Whole adventures rather than fitness-only posts.</p><div class="abx-feed" data-ab-feed></div></div><aside class="abx-card"><h3>Adventure Builder community idea</h3><p>Share scenic routes, hidden gems, campsites, launch points, viewpoints and memories. Community features should reward useful discoveries rather than speed leaderboards.</p><div class="ab-safety-note">Community information can become outdated. Access rights, water levels, local restrictions and safety conditions should always be checked before travelling.</div></aside></div>
-    </section>
+    <section class="paddle-grid" id="paddle-planner">
+      <article class="paddle-card paddle-card-wide">
+        <div class="paddle-card-heading">
+          <div><p class="eyebrow">1 · Trip</p><h2>Plan your water adventure</h2></div>
+          <span class="paddle-badge">Saved locally</span>
+        </div>
+        <form class="paddle-form" data-paddle-trip-form>
+          <div class="paddle-form-grid three">
+            <label>Activity
+              <select name="activity">
+                <option value="Paddle Board">Paddle Board</option>
+                <option value="Kayak">Kayak</option>
+                <option value="Canoe">Canoe</option>
+              </select>
+            </label>
+            <label>Water type
+              <select name="waterType">
+                <option>Lake / reservoir</option>
+                <option>River</option>
+                <option>Canal</option>
+                <option>Coast / sea</option>
+                <option>Estuary</option>
+              </select>
+            </label>
+            <label>Date<input name="date" type="date"></label>
+          </div>
+          <label>Adventure name<input name="title" maxlength="100" placeholder="Sunset paddle at Windermere"></label>
+          <div class="paddle-form-grid two">
+            <label>Launch point<input name="launchPoint" placeholder="Beach, slipway, car park or place name"></label>
+            <label>Return / exit point<input name="returnPoint" placeholder="Same as launch or another safe exit"></label>
+          </div>
+          <div class="paddle-location-actions">
+            <button class="paddle-mini-btn" type="button" data-use-location="launch">📍 Use my location for launch</button>
+            <button class="paddle-mini-btn" type="button" data-use-location="return">📍 Use my location for return</button>
+            <a class="paddle-mini-btn disabled" data-map-link="launch" target="_blank" rel="noopener" aria-disabled="true">Open launch on map</a>
+            <a class="paddle-mini-btn disabled" data-map-link="return" target="_blank" rel="noopener" aria-disabled="true">Open return on map</a>
+          </div>
+          <input name="launchLat" type="hidden"><input name="launchLon" type="hidden">
+          <input name="returnLat" type="hidden"><input name="returnLon" type="hidden">
+          <div class="paddle-form-grid four">
+            <label>Launch time<input name="launchTime" type="time"></label>
+            <label>Expected back<input name="backTime" type="time"></label>
+            <label>Distance (km)<input name="distance" type="number" min="0" step="0.1" placeholder="0"></label>
+            <label>People<input name="groupSize" type="number" min="1" max="30" value="1"></label>
+          </div>
+          <label>Route / notes<textarea name="routeNotes" rows="4" placeholder="Planned route, landmarks, parking, return point, stops and anything important..."></textarea></label>
+          <p class="paddle-inline-status" data-location-status aria-live="polite"></p>
+        </form>
+      </article>
 
-    <section class="ab-hub-view" data-ab-view="story" hidden>
-      <div class="abx-grid"><article class="abx-card"><h3>Relive My Adventure</h3><p>Adventure Builder turns the journey into a story that can later feed directly into Photo Studio and Adventure Movie.</p><div class="abx-story" data-ab-story></div></article><article class="abx-card"><h3>Story can include</h3><div class="abx-collections"><div class="abx-collection"><span>🗺️</span><strong>Route</strong><small>Where you went</small></div><div class="abx-collection"><span>📸</span><strong>Photos</strong><small>Moments captured</small></div><div class="abx-collection"><span>🎥</span><strong>Video</strong><small>Adventure Movie</small></div><div class="abx-collection"><span>🏕️</span><strong>Stops</strong><small>Camps & cafés</small></div><div class="abx-collection"><span>🌄</span><strong>POIs</strong><small>Views & gems</small></div><div class="abx-collection"><span>🏅</span><strong>Stamp</strong><small>Passport memory</small></div></div></article></div>
-    </section>
+      <article class="paddle-card">
+        <div class="paddle-card-heading"><div><p class="eyebrow">2 · Conditions</p><h2>Conditions check</h2></div></div>
+        <p class="paddle-muted">Enter values from a trusted local forecast. Adventure Builder does not currently fetch live weather or tides on this page.</p>
+        <div class="paddle-form">
+          <div class="paddle-form-grid two">
+            <label>Wind (mph)<input data-paddle-wind type="number" min="0" max="80" value="5"></label>
+            <label>Peak gust (mph)<input data-paddle-gust type="number" min="0" max="100" value="8"></label>
+          </div>
+          <label class="paddle-check"><input data-paddle-offshore type="checkbox"> Wind is blowing away from the safe shore / return direction</label>
+          <label class="paddle-check"><input data-paddle-tide type="checkbox"> Tide / river flow has been checked where relevant</label>
+          <label class="paddle-check"><input data-paddle-water-temp type="checkbox"> Clothing is suitable for the water temperature</label>
+        </div>
+        <div class="paddle-condition-status" data-paddle-status>
+          <strong><span class="paddle-status-light"></span>Enter conditions</strong>
+          <p>Use this as a planning prompt, not a go/no-go decision.</p>
+        </div>
+        <div class="paddle-safety-note">Wind limits vary greatly with skill, craft, location, tide/flow and rescue options. Always use local knowledge and authoritative weather, marine or river information.</div>
+      </article>
 
-    <section class="ab-hub-view" data-ab-view="passport" hidden>
-      <article class="abx-card"><h3>Adventure Passport</h3><p>Your passport grows across every kind of adventure.</p><div class="abx-collections" data-ab-passport></div></article>
-    </section>
+      <article class="paddle-card">
+        <div class="paddle-card-heading"><div><p class="eyebrow">3 · Safety</p><h2>Pre-launch checklist</h2></div><span class="paddle-progress" data-check-progress>0 / 10</span></div>
+        <div class="paddle-checklist" data-paddle-checklist>
+          <label class="paddle-check"><input type="checkbox" value="PFD"> Buoyancy aid / PFD fitted</label>
+          <label class="paddle-check"><input type="checkbox" value="Leash"> Suitable leash used where appropriate</label>
+          <label class="paddle-check"><input type="checkbox" value="Comms"> Phone / communication protected and charged</label>
+          <label class="paddle-check"><input type="checkbox" value="Clothing"> Clothing suitable for water temperature</label>
+          <label class="paddle-check"><input type="checkbox" value="Forecast"> Forecast checked</label>
+          <label class="paddle-check"><input type="checkbox" value="Access"> Access and local restrictions checked</label>
+          <label class="paddle-check"><input type="checkbox" value="Exits"> Safe return / exit points known</label>
+          <label class="paddle-check"><input type="checkbox" value="Contact"> Trusted person knows the plan</label>
+          <label class="paddle-check"><input type="checkbox" value="Kit"> Repair / emergency kit appropriate to trip</label>
+          <label class="paddle-check"><input type="checkbox" value="Hydration"> Water / food packed for the trip</label>
+        </div>
+      </article>
 
-    <section class="ab-hub-view" data-ab-view="add" hidden>
-      <div class="abx-grid"><form class="abx-card abx-form" data-ab-add-form><h3>Add a completed adventure</h3><div class="abx-form-grid"><label>Adventure type<select name="type"><option value="hike">🥾 Hike</option><option value="cycle">🚴 Cycle</option><option value="road">🚐 Road trip</option><option value="camp">🏕️ Camping</option><option value="paddle">🏄 Paddleboard</option><option value="kayak">🛶 Kayak</option><option value="photo">📸 Photography</option><option value="explore">🧭 Explore</option><option value="dog">🐕 Dog walk</option><option value="fishing">🎣 Fishing</option></select></label><label>Date<input name="date" type="date"></label></div><label>Adventure name<input name="title" maxlength="80" placeholder="Sunset paddle at Windermere" required></label><div class="abx-form-grid"><label>Distance (km)<input name="distance" type="number" min="0" step=".1" value="0"></label><label>Photos taken<input name="photos" type="number" min="0" step="1" value="0"></label></div><label class="ab-check"><input name="newPlace" type="checkbox"> This was a new place for me</label><button class="abx-btn primary" type="submit">Add to Adventure Hub</button><p class="abx-form-status" data-ab-form-status aria-live="polite"></p></form><article class="abx-card"><h3>Choose your kind of adventure</h3><div class="abx-activity-types"><button class="abx-btn" type="button"><span>🥾</span>Hike</button><button class="abx-btn" type="button"><span>🚐</span>Road Trip</button><button class="abx-btn water" type="button"><span>🏄</span>Paddle</button><button class="abx-btn water" type="button"><span>🛶</span>Kayak</button><button class="abx-btn" type="button"><span>🏕️</span>Camp</button><button class="abx-btn" type="button"><span>📸</span>Photo</button><button class="abx-btn" type="button"><span>🎣</span>Fishing</button><button class="abx-btn" type="button"><span>🐕</span>Dog Walk</button></div></article></div>
-    </section>
+      <article class="paddle-card paddle-card-wide">
+        <div class="paddle-card-heading"><div><p class="eyebrow">4 · Float plan</p><h2>Create a float plan</h2></div></div>
+        <div class="paddle-form-grid two">
+          <div class="paddle-form">
+            <label>Your name<input data-float-name placeholder="Name"></label>
+            <label>Trusted contact<input data-float-contact placeholder="Name / phone number"></label>
+            <label>Vehicle / parking details<input data-float-vehicle placeholder="Registration, car park or meeting point"></label>
+            <label>Extra notes<textarea data-float-notes rows="4" placeholder="Group details, medical information you choose to include, kit, alternative exit... "></textarea></label>
+          </div>
+          <div class="paddle-float-preview" data-float-preview>Start filling in the planner to build your float-plan summary.</div>
+        </div>
+        <div class="paddle-actions">
+          <button class="button button-primary" type="button" data-save-plan>Save plan</button>
+          <button class="button button-secondary" type="button" data-copy-plan>Copy float plan</button>
+          <button class="button button-secondary" type="button" data-download-plan>Download .txt</button>
+          <a class="button button-secondary" href="https://app.adventurebuilder.co.uk" target="_blank" rel="noopener">Open in App</a>
+        </div>
+        <p class="paddle-inline-status" data-plan-status aria-live="polite"></p>
+      </article>
 
-    <section class="ab-hub-view" data-ab-view="paddle">
-      <div class="ab-paddle-banner">
-        <div class="ab-paddle-water"><h3>🛶 Paddle & Kayak Mode</h3><p>Plan the whole water adventure: launch, route, return point, stops, conditions, kit, float plan and memories.</p><span class="paddle-icon">🏄</span></div>
-        <div class="ab-paddle-status" data-paddle-status><strong><span class="ab-paddle-light"></span>Enter conditions</strong><p>Use the guide below as one input to your own planning.</p></div>
-      </div>
-      <div class="abx-grid">
-        <article class="abx-card"><h3>Water route preview</h3><p>Future live version can show verified launch points, parking, toilets, cafés, campsites and paddle stops.</p><div class="ab-paddle-map"><span class="ab-paddle-map-label">Illustrative route preview · not navigation</span><span class="ab-paddle-pin launch">📍</span><span class="ab-paddle-pin stop">☕</span></div></article>
-        <article class="abx-card abx-form"><h3>Conditions guide</h3><p>Enter values from a trusted local forecast. This does not fetch live weather.</p><label>Wind speed (mph)<input data-paddle-wind type="number" min="0" max="80" value="5"></label><label>Peak gust (mph)<input data-paddle-gust type="number" min="0" max="100" value="8"></label><label class="ab-check"><input data-paddle-offshore type="checkbox"> Wind is blowing away from my safe shore / return direction</label><div class="ab-safety-note">This simple indicator is intentionally conservative and is not a go/no-go safety decision. Consider skill, water temperature, tides/flow, local hazards, forecast changes and local restrictions.</div></article>
-      </div>
-      <div class="abx-grid">
-        <article class="abx-card abx-form"><h3>Float plan</h3><form class="abx-form" data-float-form><div class="abx-form-grid"><label>Your name<input name="name"></label><label>Craft<select name="craft"><option>Paddleboard</option><option>Kayak</option><option>Canoe</option></select></label></div><label>Water / planned route<input name="route" placeholder="Lake, river, canal or coast section"></label><div class="abx-form-grid"><label>Launch time<input name="launch" type="time"></label><label>Expected back<input name="back" type="time"></label></div><label>Trusted contact<input name="contact" placeholder="Name / phone kept on your device"></label><label>Notes<textarea name="notes" placeholder="Parking, return point, group details, clothing/kit..."></textarea></label></form><button class="abx-btn water" data-save-float type="button">Save float plan on this device</button><p data-float-status class="abx-form-status" aria-live="polite"></p><div class="ab-float-plan-preview" data-float-preview>Fill in the form to create a shareable float-plan summary.</div></article>
-        <article class="abx-card"><h3>Pre-launch check</h3><div class="ab-checklist"><label class="ab-check"><input type="checkbox"> Buoyancy aid / PFD</label><label class="ab-check"><input type="checkbox"> Suitable leash where appropriate</label><label class="ab-check"><input type="checkbox"> Phone / communication protected</label><label class="ab-check"><input type="checkbox"> Clothing for water temperature</label><label class="ab-check"><input type="checkbox"> Forecast checked</label><label class="ab-check"><input type="checkbox"> Local access/restrictions checked</label><label class="ab-check"><input type="checkbox"> Return/exit points known</label><label class="ab-check"><input type="checkbox"> Trusted person knows the plan</label></div><div class="ab-safety-note" style="margin-top:12px">For coastal or tidal paddling, conditions can change quickly. Use authoritative marine/tide information and local knowledge. Adventure Builder should assist planning, not replace training or professional/local safety advice.</div></article>
-      </div>
+      <article class="paddle-card paddle-card-wide">
+        <div class="paddle-card-heading"><div><p class="eyebrow">5 · Saved plans</p><h2>My water adventures</h2></div><button class="paddle-mini-btn" type="button" data-new-plan>+ New plan</button></div>
+        <div class="paddle-saved-list" data-saved-plans><p class="paddle-muted">No saved plans yet.</p></div>
+      </article>
     </section>
-  </div>
-</section>
-</section>
-</main>
+  </main>
+
   <footer class="site-footer">
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
-    <div class="footer-links"><a href="index.html">Home</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
-      <a href="studio.html">Studio</a><a href="index.html#download">Get the App</a></div>
+    <div class="footer-links"><a href="index.html">Home</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle Board &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a><a href="studio.html">Studio</a><a href="index.html#download">Get the App</a></div>
     <p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p>
   </footer>
+
   <div class="auth-overlay" id="auth-overlay" hidden>
     <section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-title">
       <button class="auth-close" id="auth-close" type="button" aria-label="Close account window">×</button>
       <div class="auth-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><small>One account for the website and app</small></div></div>
-
       <div id="auth-signed-out">
-        <div class="auth-tabs" role="tablist">
-          <button id="login-tab" class="auth-tab active" type="button" role="tab" aria-selected="true">Log in</button>
-          <button id="register-tab" class="auth-tab" type="button" role="tab" aria-selected="false">Register</button>
-        </div>
-
-        <form id="login-form" class="auth-form">
-          <h2 id="auth-title">Welcome back</h2>
-          <p>Log in with your Adventure Builder account.</p>
-          <label>Email<input id="login-email" name="email" type="email" autocomplete="email" required></label>
-          <label>Password<input id="login-password" name="password" type="password" autocomplete="current-password" minlength="6" required></label>
-          <button class="button button-primary auth-submit" type="submit">Log in</button>
-        </form>
-
-        <form id="register-form" class="auth-form" hidden>
-          <h2>Create your account</h2>
-          <p>Register here, then use the same details in the app.</p>
-          <label>Your name<input id="register-name" name="name" type="text" autocomplete="name" maxlength="60" required></label>
-          <label>Email<input id="register-email" name="email" type="email" autocomplete="email" required></label>
-          <label>Password<input id="register-password" name="password" type="password" autocomplete="new-password" minlength="6" required></label>
-          <label>Confirm password<input id="register-confirm" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required></label>
-          <label class="checkbox-row"><input id="register-terms" type="checkbox" required><span>I agree to the Adventure Builder terms and privacy policy.</span></label>
-          <button class="button button-primary auth-submit" type="submit">Create account</button>
-        </form>
+        <div class="auth-tabs" role="tablist"><button id="login-tab" class="auth-tab active" type="button" role="tab" aria-selected="true">Log in</button><button id="register-tab" class="auth-tab" type="button" role="tab" aria-selected="false">Register</button></div>
+        <form id="login-form" class="auth-form"><h2 id="auth-title">Welcome back</h2><p>Log in with your Adventure Builder account.</p><label>Email<input id="login-email" name="email" type="email" autocomplete="email" required></label><label>Password<input id="login-password" name="password" type="password" autocomplete="current-password" minlength="6" required></label><button class="button button-primary auth-submit" type="submit">Log in</button></form>
+        <form id="register-form" class="auth-form" hidden><h2>Create your account</h2><p>Register here, then use the same details in the app.</p><label>Your name<input id="register-name" name="name" type="text" autocomplete="name" maxlength="60" required></label><label>Email<input id="register-email" name="email" type="email" autocomplete="email" required></label><label>Password<input id="register-password" name="password" type="password" autocomplete="new-password" minlength="6" required></label><label>Confirm password<input id="register-confirm" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required></label><label class="checkbox-row"><input id="register-terms" type="checkbox" required><span>I agree to the Adventure Builder terms and privacy policy.</span></label><button class="button button-primary auth-submit" type="submit">Create account</button></form>
       </div>
-
-      <div id="auth-signed-in" class="account-panel" hidden>
-        <div class="account-avatar account-avatar-large" id="panel-avatar">A</div>
-        <p class="eyebrow">Adventure Builder account</p>
-        <h2 id="panel-name">Welcome</h2>
-        <p id="panel-email"></p>
-        <p class="account-choice-copy">Choose how you would like to continue.</p>
-        <div class="account-choice-actions">
-          <button class="button button-primary" id="continue-website" type="button">Continue on Website</button>
-          <a class="button button-secondary" href="https://adventure-builder-app.netlify.app" target="_blank" rel="noopener">Open the App</a>
-        </div>
-        <button class="account-settings-link" id="account-settings" type="button">Account settings</button>
-        <button class="button button-secondary auth-submit logout-button" id="logout-button" type="button">Log out</button>
-      </div>
-
+      <div id="auth-signed-in" class="account-panel" hidden><div class="account-avatar account-avatar-large" id="panel-avatar">A</div><p class="eyebrow">Adventure Builder account</p><h2 id="panel-name">Welcome</h2><p id="panel-email"></p><p class="account-choice-copy">Choose how you would like to continue.</p><div class="account-choice-actions"><button class="button button-primary" id="continue-website" type="button">Continue on Website</button><a class="button button-secondary" href="https://app.adventurebuilder.co.uk" target="_blank" rel="noopener">Open the App</a></div><button class="account-settings-link" id="account-settings" type="button">Account settings</button><button class="button button-secondary auth-submit logout-button" id="logout-button" type="button">Log out</button></div>
       <p class="auth-status" id="auth-status" aria-live="polite"></p>
     </section>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/account-gate.js"></script>
   <script src="js/navigation-shell.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/adventure-hub.js"></script>
+  <script src="js/paddling.js"></script>
 </body>
 </html>
