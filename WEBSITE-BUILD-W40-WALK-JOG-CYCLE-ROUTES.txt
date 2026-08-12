@@ -1,0 +1,18 @@
+Adventure Builder Website Big Update — W40 Walk / Jog / Cycle Routes
+
+Replaces the first smart-loop generator with a more persistent activity-aware route generator.
+
+Changes
+- Adds Walk / Jog / Cycle selector to the Walking & Hiking map workspace.
+- Walking and jogging use Valhalla pedestrian routing so mapped pavements, footways and legally walkable paths can be used.
+- Cycling uses Valhalla bicycle routing so foot-only pedestrian routing is not reused for bikes.
+- Make Me a Route still supports 1–10 miles and now tries up to 20 varied candidate loops in progressive stages.
+- Uses triangle, quadrilateral and wider loop shapes, varied bearings and radius scales.
+- Generated intermediate points get a larger Valhalla snapping/search radius to find the nearby routable network.
+- Failed generation restores the previous map view rather than leaving the user elsewhere.
+- Jogging keeps pedestrian access rules but uses a jogging-time estimate for the generated route.
+- Find Me a Route searches OSM walking/hiking relations for Walk/Jog and bicycle route relations for Cycle.
+- Regenerate continues to use a fresh seed so successive generated routes vary.
+
+Deployment
+This is a patch. Copy the included files over the matching files in the current Adventure-Builder-Website repository, then commit/push.

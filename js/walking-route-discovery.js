@@ -13,14 +13,39 @@
   const styleSelect = document.getElementById('walk-route-style');
   const generateButton = document.getElementById('walk-generate-route');
   const regenerateButton = document.getElementById('walk-regenerate-route');
+  const activityButtons = [...document.querySelectorAll('[data-walk-activity]')];
 
   const METRES_PER_MILE = 1609.344;
+  const ACTIVITY = {
+    walk: { label: 'walking', routeType: 'walking', speedMph: 3.0 },
+    jog: { label: 'jogging', routeType: 'jogging', speedMph: 5.5 },
+    cycle: { label: 'cycling', routeType: 'cycling', speedMph: 11.0 }
+  };
+
   let generating = false;
-  let lastGenerationKey = '';
   let seedCounter = 0;
+  let selectedActivity = 'walk';
 
   const setStatus = (message, kind = '') => planner.setStatus(message, kind);
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
+  }
+
+  function setActivity(activity) {
+    if (!ACTIVITY[activity]) return;
+    selectedActivity = activity;
+    activityButtons.forEach((button) => {
+      const active = button.dataset.walkActivity === activity;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    const label = ACTIVITY[activity].label;
+    if (findButton) findButton.querySelector('small').textContent = activity === 'cycle' ? 'Nearby mapped cycle routes' : `Nearby established ${label} routes`;
+    if (makeButton) makeButton.querySelector('small').textContent = `Create a new ${label} loop from here`;
+    nearbyPanel.hidden = true;
+  }
 
   function ensureEstablishedRouteLayer() {
     const map = planner.map;
@@ -52,7 +77,7 @@
       const bounds = all.reduce((box, coordinate) => box.extend(coordinate), new maplibregl.LngLatBounds(all[0], all[0]));
       planner.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 750 });
     }
-    setStatus(`${route.name} highlighted from OpenStreetMap. Check access, conditions and waymarking before setting off.`, 'success');
+    setStatus(`${route.name} highlighted. Check current access, surface, closures and conditions before setting off.`, 'success');
   }
 
   function destinationPoint(lat, lon, distanceMetres, bearingDegrees) {
@@ -75,29 +100,70 @@
     };
   }
 
-  function buildCandidatePoints(start, targetMetres, style, random) {
-    // A routed triangle usually grows beyond its straight-line perimeter.
-    // Adjust the radius by style, then let Valhalla decide the real walkable path.
-    const styleFactor = style === 'gentle' ? 0.17 : style === 'adventurous' ? 0.23 : 0.20;
-    const radius = Math.max(350, targetMetres * styleFactor * (0.86 + random() * 0.28));
+  function buildLoopPoints(start, targetMetres, style, random, shapeIndex, scale = 1) {
+    const activityRadius = selectedActivity === 'cycle' ? 0.22 : selectedActivity === 'jog' ? 0.19 : 0.18;
+    const styleFactor = style === 'gentle' ? 0.88 : style === 'adventurous' ? 1.12 : 1;
+    const radius = Math.max(selectedActivity === 'cycle' ? 500 : 300, targetMetres * activityRadius * styleFactor * scale * (0.82 + random() * 0.34));
     const direction = random() * 360;
-    const spread = style === 'gentle' ? 105 : style === 'adventurous' ? 145 : 125;
-    const p1 = destinationPoint(start.lat, start.lon, radius, direction);
-    const p2 = destinationPoint(start.lat, start.lon, radius * (0.88 + random() * 0.25), direction + spread + (random() - 0.5) * 22);
-    return [start, p1, p2, { ...start }];
+    const jitter = () => (random() - 0.5) * 20;
+
+    // Rotate through several geometries. Valhalla snaps each intermediate point
+    // to its legal/routable network, so failures do not poison the next attempt.
+    if (shapeIndex % 3 === 0) {
+      const spread = style === 'gentle' ? 100 : style === 'adventurous' ? 150 : 125;
+      return [
+        start,
+        destinationPoint(start.lat, start.lon, radius, direction + jitter()),
+        destinationPoint(start.lat, start.lon, radius * (0.9 + random() * 0.24), direction + spread + jitter()),
+        { ...start }
+      ];
+    }
+    if (shapeIndex % 3 === 1) {
+      return [
+        start,
+        destinationPoint(start.lat, start.lon, radius, direction + jitter()),
+        destinationPoint(start.lat, start.lon, radius * (0.95 + random() * 0.18), direction + 95 + jitter()),
+        destinationPoint(start.lat, start.lon, radius * (0.82 + random() * 0.22), direction + 195 + jitter()),
+        { ...start }
+      ];
+    }
+    return [
+      start,
+      destinationPoint(start.lat, start.lon, radius * 0.85, direction + jitter()),
+      destinationPoint(start.lat, start.lon, radius * 1.08, direction + 70 + jitter()),
+      destinationPoint(start.lat, start.lon, radius * 0.9, direction + 175 + jitter()),
+      destinationPoint(start.lat, start.lon, radius * 0.7, direction + 255 + jitter()),
+      { ...start }
+    ];
   }
 
   async function routePoints(points) {
     const response = await fetch('/.netlify/functions/trail-route', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ points })
+      body: JSON.stringify({ points, activity: selectedActivity, generatedLoop: true })
     });
     const payload = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(payload.error || 'The route could not be calculated.');
     const route = payload.routes?.[0];
-    if (!route?.geometry?.coordinates?.length) throw new Error('No walkable route was returned.');
+    if (!route?.geometry?.coordinates?.length) throw new Error('No suitable route was returned.');
     return route;
+  }
+
+  function routeQuality(route, targetMetres) {
+    const distanceError = Math.abs(route.distance - targetMetres) / targetMetres;
+    const coordinates = route.geometry?.coordinates || [];
+    const routeLength = coordinates.length;
+    // Penalise suspiciously tiny geometry results but otherwise let Valhalla's
+    // legal network and actual routed distance determine the winner.
+    const geometryPenalty = routeLength < 8 ? 0.35 : 0;
+    return distanceError + geometryPenalty;
+  }
+
+  function adjustDurationForActivity(route) {
+    if (selectedActivity !== 'jog') return route;
+    const seconds = Math.max(60, (route.distance / METRES_PER_MILE) / ACTIVITY.jog.speedMph * 3600);
+    return { ...route, duration: seconds };
   }
 
   async function makeRoute() {
@@ -105,42 +171,63 @@
     generating = true;
     generateButton.disabled = true;
     regenerateButton.disabled = true;
+
     const miles = Number(distanceInput.value || 3);
     const targetMetres = miles * METRES_PER_MILE;
     const style = styleSelect.value;
-    setStatus(`Creating a ${miles} mile walking loop near you…`);
+    const activity = ACTIVITY[selectedActivity];
+    const oldCenter = planner.map.getCenter();
+    const oldZoom = planner.map.getZoom();
+    setStatus(`Creating a ${miles} mile ${activity.label} loop near you…`);
 
     try {
       const start = await planner.getCurrentLocation();
       const baseSeed = Math.floor((start.lat + 90) * 1e5) ^ Math.floor((start.lon + 180) * 1e5) ^ Date.now() ^ (++seedCounter * 2654435761);
       const random = mulberry32(baseSeed >>> 0);
-      const attempts = [];
+      const candidates = [];
 
-      // Try several genuinely different directions. Pick the closest result to
-      // the requested distance rather than claiming exact mileage before routing.
-      for (let i = 0; i < 5; i += 1) {
-        const points = buildCandidatePoints(start, targetMetres, style, random);
-        try {
-          const route = await routePoints(points);
-          const score = Math.abs(route.distance - targetMetres) / targetMetres;
-          attempts.push({ route, points, score });
-          if (score <= 0.12) break;
-        } catch (_) {
-          // A candidate may fall in water, private/unconnected data, etc. Try a
-          // different bearing rather than failing the whole feature.
+      // Stage 1 aims for a tight match. Stage 2/3 progressively widen candidate
+      // radii before we give up, which makes urban, coastal and fragmented
+      // path networks much more likely to produce a useful loop.
+      const stages = [
+        { attempts: 7, scales: [0.82, 0.94, 1.04], accept: 0.13 },
+        { attempts: 7, scales: [0.7, 1.16, 1.3], accept: 0.20 },
+        { attempts: 6, scales: [0.6, 1.45], accept: 0.30 }
+      ];
+
+      let attemptIndex = 0;
+      outer: for (const stage of stages) {
+        for (let i = 0; i < stage.attempts; i += 1) {
+          const scale = stage.scales[i % stage.scales.length];
+          const points = buildLoopPoints(start, targetMetres, style, random, attemptIndex++, scale);
+          try {
+            const route = adjustDurationForActivity(await routePoints(points));
+            const score = routeQuality(route, targetMetres);
+            candidates.push({ route, points, score });
+            if (score <= stage.accept) break outer;
+          } catch (_) {
+            // A candidate can land across water, a disconnected estate, or a
+            // path that is not legal for this activity. Keep rotating/scaling.
+          }
+          await sleep(55);
         }
-        await sleep(90);
       }
 
-      if (!attempts.length) throw new Error('I could not build a suitable loop from this location. Try another distance or move the map to a nearby area.');
-      attempts.sort((a, b) => a.score - b.score);
-      const best = attempts[0];
+      if (!candidates.length) {
+        planner.map.easeTo({ center: oldCenter, zoom: oldZoom, duration: 450 });
+        throw new Error(`No ${activity.label} loop could be connected from this exact position. Try a shorter distance or move the start marker a little.`);
+      }
+
+      candidates.sort((a, b) => a.score - b.score);
+      const best = candidates[0];
       const actualMiles = best.route.distance / METRES_PER_MILE;
-      planner.applyRoute(best.route, best.points, `Made a ${actualMiles.toFixed(1)} mile loop. Use “Try a different route” for another one.`);
+      const difference = Math.abs(actualMiles - miles);
+      const note = difference <= 0.35 ? '' : ` (closest available to ${miles} mi)`;
+      planner.applyRoute(best.route, best.points, `Made a ${actualMiles.toFixed(1)} mile ${activity.label} loop${note}. Use “Try a different route” for another one.`);
+
       const trailName = document.getElementById('trail-name');
-      if (trailName && !trailName.value.trim()) trailName.value = `Adventure Builder ${miles} mile loop`;
+      if (trailName && !trailName.value.trim()) trailName.value = `Adventure Builder ${miles} mile ${activity.label} loop`;
       regenerateButton.hidden = false;
-      lastGenerationKey = `${miles}:${style}`;
     } catch (error) {
       setStatus(error.message || 'A route could not be generated.', 'error');
     } finally {
@@ -160,28 +247,32 @@
     findButton.disabled = true;
     makePanel.hidden = true;
     nearbyPanel.hidden = false;
-    nearbyPanel.innerHTML = '<p class="walk-smart-loading">Finding established walking routes near you…</p>';
-    setStatus('Looking for nearby established walking routes…');
+    const activity = ACTIVITY[selectedActivity];
+    nearbyPanel.innerHTML = `<p class="walk-smart-loading">Finding mapped ${activity.label} routes near you…</p>`;
+    setStatus(`Looking for nearby ${activity.label} routes…`);
+
     try {
       const start = await planner.getCurrentLocation();
       const response = await fetch('/.netlify/functions/nearby-walking-routes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lat: start.lat, lon: start.lon, radius: 12000 })
+        body: JSON.stringify({ lat: start.lat, lon: start.lon, radius: selectedActivity === 'cycle' ? 18000 : 12000, activity: selectedActivity })
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(payload.error || 'Nearby routes could not be loaded.');
       const routes = payload.routes || [];
       if (!routes.length) {
-        nearbyPanel.innerHTML = '<p class="walk-smart-loading">No mapped hiking routes were found nearby. Try “Make me a route” instead.</p>';
-        setStatus('No established routes were found nearby. You can still generate a new loop.', 'warning');
+        nearbyPanel.innerHTML = `<p class="walk-smart-loading">No mapped ${activity.label} routes were found nearby. Try “Make me a route” instead.</p>`;
+        setStatus(`No established ${activity.label} routes were found nearby. You can still generate a new loop.`, 'warning');
         return;
       }
+
       nearbyPanel.innerHTML = routes.slice(0, 8).map((route, index) => `
         <button class="walk-nearby-route-item" type="button" data-nearby-index="${index}">
-          <span><strong>${escapeHtml(route.name)}</strong><small>${escapeHtml(route.networkLabel || 'Walking route')}${route.ref ? ` · ${escapeHtml(route.ref)}` : ''}</small></span>
+          <span><strong>${escapeHtml(route.name)}</strong><small>${escapeHtml(route.networkLabel || `${activity.label} route`)}${route.ref ? ` · ${escapeHtml(route.ref)}` : ''}</small></span>
           <em>${routeDistanceLabel(route.distanceFromUser)}</em>
         </button>`).join('');
+
       nearbyPanel.onclick = (event) => {
         const button = event.target.closest('[data-nearby-index]');
         if (!button) return;
@@ -192,7 +283,7 @@
           setStatus(error.message || `${route.name} is near the centre of the map.`, 'warning');
         });
       };
-      setStatus(`Found ${routes.length} established walking route${routes.length === 1 ? '' : 's'} nearby.`, 'success');
+      setStatus(`Found ${routes.length} established ${activity.label} route${routes.length === 1 ? '' : 's'} nearby.`, 'success');
     } catch (error) {
       nearbyPanel.innerHTML = `<p class="walk-smart-loading">${escapeHtml(error.message || 'Nearby routes could not be loaded.')}</p>`;
       setStatus(error.message || 'Nearby routes could not be loaded.', 'error');
@@ -201,10 +292,7 @@
     }
   }
 
-  function escapeHtml(value) {
-    return String(value ?? '').replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
-  }
-
+  activityButtons.forEach((button) => button.addEventListener('click', () => setActivity(button.dataset.walkActivity)));
   distanceInput?.addEventListener('input', () => {
     distanceOutput.textContent = `${distanceInput.value} mile${distanceInput.value === '1' ? '' : 's'}`;
   });
@@ -215,4 +303,6 @@
   findButton?.addEventListener('click', findNearbyRoutes);
   generateButton?.addEventListener('click', makeRoute);
   regenerateButton?.addEventListener('click', makeRoute);
+
+  setActivity('walk');
 })();
