@@ -55,6 +55,39 @@
 
           <div class="walk-planner-body">
             <p class="walk-planner-help">Tap the map for start, finish and waypoints. Drag a marker to adjust it.</p>
+
+            <section class="walk-smart-routes" aria-labelledby="walk-smart-routes-title">
+              <div class="walk-smart-routes-head">
+                <span class="walk-step">Quick routes</span>
+                <strong id="walk-smart-routes-title">Let Adventure Builder help</strong>
+              </div>
+              <div class="walk-smart-route-actions">
+                <button class="walk-smart-route-button" id="walk-find-nearby-route" type="button">
+                  <span>⌖</span><span><strong>Find me a route</strong><small>Nearby established walks</small></span>
+                </button>
+                <button class="walk-smart-route-button" id="walk-make-route" type="button">
+                  <span>↻</span><span><strong>Make me a route</strong><small>Create a new loop from here</small></span>
+                </button>
+              </div>
+              <div class="walk-make-route-panel" id="walk-make-route-panel" hidden>
+                <div class="walk-distance-row">
+                  <label for="walk-route-distance">Distance</label>
+                  <output id="walk-route-distance-output" for="walk-route-distance">3 miles</output>
+                </div>
+                <input id="walk-route-distance" type="range" min="1" max="10" step="1" value="3">
+                <div class="walk-distance-scale" aria-hidden="true"><span>1 mi</span><span>10 mi</span></div>
+                <div class="walk-generate-row">
+                  <select id="walk-route-style" aria-label="Route style">
+                    <option value="balanced">Balanced</option>
+                    <option value="gentle">Gentler</option>
+                    <option value="adventurous">More varied</option>
+                  </select>
+                  <button class="walk-button walk-button-main" id="walk-generate-route" type="button">Generate</button>
+                </div>
+                <button class="walk-text-action" id="walk-regenerate-route" type="button" hidden>↻ Try a different route</button>
+              </div>
+              <div class="walk-nearby-routes" id="walk-nearby-routes" hidden aria-live="polite"></div>
+            </section>
             <label for="trail-name">Trail name</label>
             <input id="trail-name" type="text" maxlength="80" placeholder="My weekend walk">
 
@@ -176,6 +209,7 @@
   <script src="js/navigation-shell.js"></script>
   <script src="js/main.js"></script>
   <script src="js/trail-planner.js"></script>
+  <script src="js/walking-route-discovery.js"></script>
   <script src="js/walking-workspace.js"></script>
 </body>
 </html>

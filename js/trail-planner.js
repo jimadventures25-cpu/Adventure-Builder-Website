@@ -102,6 +102,26 @@
     updateSummary();
   }
 
+  function applyRoute(route, points = state.points, message = 'Trail ready. Save it or open the same plan in the app.') {
+    if (!route?.geometry?.coordinates?.length) throw new Error('No walkable route was returned.');
+    state.points = points.map((point) => ({ ...point }));
+    state.route = route;
+    redrawMarkers();
+    const geojson = { type: 'Feature', properties: {}, geometry: route.geometry };
+    map.getSource('trail-route')?.setData(geojson);
+    const coordinates = route.geometry.coordinates;
+    const bounds = coordinates.reduce(
+      (box, coordinate) => box.extend(coordinate),
+      new maplibregl.LngLatBounds(coordinates[0], coordinates[0])
+    );
+    map.fitBounds(bounds, { padding: 60, maxZoom: 15, duration: 800 });
+    distanceOutput.textContent = `${(route.distance / 1609.344).toFixed(1)} miles`;
+    const minutes = Math.max(1, Math.round(route.duration / 60));
+    timeOutput.textContent = minutes >= 60 ? `${Math.floor(minutes / 60)} hr ${minutes % 60} min` : `${minutes} min`;
+    setStatus(message, 'success');
+    updateSummary();
+  }
+
   function addPoint(lat, lon) {
     if (state.points.length >= 8) {
       setStatus('A trail can contain up to eight planning points in this beta.', 'warning');
@@ -206,23 +226,7 @@
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(payload.error || 'The trail could not be calculated.');
       const route = payload.routes?.[0];
-      if (!route?.geometry?.coordinates?.length) throw new Error('No walkable route was returned.');
-      state.route = route;
-      const geojson = {
-        type: 'Feature',
-        properties: {},
-        geometry: route.geometry
-      };
-      map.getSource('trail-route').setData(geojson);
-      const bounds = route.geometry.coordinates.reduce(
-        (box, coordinate) => box.extend(coordinate),
-        new maplibregl.LngLatBounds(route.geometry.coordinates[0], route.geometry.coordinates[0])
-      );
-      map.fitBounds(bounds, { padding: 60, maxZoom: 15, duration: 800 });
-      distanceOutput.textContent = `${(route.distance / 1609.344).toFixed(1)} miles`;
-      const minutes = Math.max(1, Math.round(route.duration / 60));
-      timeOutput.textContent = minutes >= 60 ? `${Math.floor(minutes / 60)} hr ${minutes % 60} min` : `${minutes} min`;
-      setStatus('Trail ready. Save it or open the same plan in the app.', 'success');
+      applyRoute(route, state.points);
     } catch (error) {
       setStatus(error.message || 'The trail could not be calculated.', 'error');
     } finally {
@@ -272,6 +276,34 @@
       poiResults.innerHTML=places.length?places.map((p,i)=>`<article class="trail-poi-card"><span>${p.icon}</span><div><small>${p.category}</small><h3>${p.name}</h3><p>${p.description||'Near your planned trail'}</p></div><button type="button" data-poi-index="${i}">Add to Trail</button></article>`).join(''):'<div class="empty-feature-state"><span>🗺️</span><h3>No suggestions found</h3><p>Try another category or a longer trail.</p></div>';
       poiResults.onclick=(event)=>{const b=event.target.closest('[data-poi-index]');if(!b)return;const p=places[Number(b.dataset.poiIndex)];if(state.points.length>=8){poiStatus.textContent='The beta trail limit is eight planning points.';return;}state.points.splice(Math.max(1,state.points.length-1),0,{lat:p.lat,lon:p.lon,poi:{id:p.id,name:p.name,category:p.category}});clearRouteLine();redrawMarkers();b.textContent='Added';b.disabled=true;poiStatus.textContent=`${p.name} added as a waypoint. Build the trail again.`;};
     }catch(error){poiStatus.textContent=error.message||'Suggestions could not be loaded.';}finally{poiButton.disabled=!state.route;}
+  });
+
+  window.AdventureBuilderTrailPlanner = Object.freeze({
+    map,
+    getState: () => ({
+      points: state.points.map((point) => ({ ...point })),
+      route: state.route,
+      userLocation: state.userLocationMarker ? state.userLocationMarker.getLngLat() : null
+    }),
+    setStatus,
+    applyRoute,
+    clear: () => {
+      state.points = [];
+      state.markers.forEach((marker) => marker.remove());
+      state.markers = [];
+      clearRouteLine();
+    },
+    getCurrentLocation: () => new Promise((resolve, reject) => {
+      if (!navigator.geolocation) return reject(new Error('Location is not available in this browser.'));
+      navigator.geolocation.getCurrentPosition(
+        ({ coords }) => {
+          showUserLocation(coords);
+          resolve({ lat: coords.latitude, lon: coords.longitude, accuracy: coords.accuracy });
+        },
+        () => reject(new Error('Your location could not be found. Check the browser location permission.')),
+        { enableHighAccuracy: true, maximumAge: 60000, timeout: 12000 }
+      );
+    })
   });
 
   updateSummary();

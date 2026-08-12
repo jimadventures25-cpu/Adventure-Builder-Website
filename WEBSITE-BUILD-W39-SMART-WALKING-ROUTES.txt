@@ -1,0 +1,12 @@
+Adventure Builder Website Build W39 — Smart Walking Routes
+
+Adds:
+- Find Me a Route: nearby established OSM hiking/foot route relations
+- Make Me a Route: 1–10 mile randomized local walking loops using the existing Valhalla trail route endpoint
+- Regenerate: creates a fresh candidate rather than repeating the same loop
+- Modular walking-route-discovery.js and nearby-walking-routes Netlify function
+
+Safety / design:
+- Generated mileage is a target, not an exact promise; actual routed distance is shown.
+- Existing Trail Planner remains the route renderer/saver/app handoff.
+- Established route lookup depends on OpenStreetMap coverage.
