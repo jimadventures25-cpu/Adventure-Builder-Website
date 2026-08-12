@@ -30,3 +30,22 @@ body[data-page="walking-hiking"] .walk-workspace{height:calc(100vh - 72px);min-h
 body[data-page="walking-hiking"] .site-footer{display:none}
 @media(max-width:900px){body[data-page="walking-hiking"] .walk-workspace{height:calc(100dvh - 64px);min-height:560px}.walk-workspace-head{min-height:64px;padding:8px 12px}.walk-workspace-subtitle{display:none}.walk-workspace-actions a:first-child{display:none}.walk-planner{position:absolute;left:0;top:0;bottom:0;width:min(330px,88vw);flex-basis:auto;transform:translateX(0)}.walk-planner.is-collapsed{width:min(330px,88vw);transform:translateX(-102%)}.walk-poi-drawer{width:min(360px,90vw)}.walk-route-bar{grid-template-columns:repeat(3,1fr);left:8px;right:8px;bottom:8px}.walk-route-bar-actions{display:none!important}.trail-map-tip{left:8px;bottom:66px}.walk-map-toolbar{top:8px;left:8px}}
 @media(max-width:560px){.walk-workspace-head h1{font-size:1.2rem}.walk-workspace-actions button{display:none}.walk-workspace-actions a{padding:8px 9px}.walk-route-bar>div{padding:7px 8px}.walk-route-bar strong{font-size:.75rem}.walk-route-bar span{font-size:.52rem}.walk-map-toolbar{gap:4px}.walk-map-toolbar button{padding:7px 8px}.walk-poi-drawer{width:100%}}
+
+/* W38 — distraction-free website navigation + location-first map */
+@media(min-width:901px){
+  body[data-page="walking-hiking"]{--ab-sidebar-w:0px}
+  body[data-page="walking-hiking"]>.ab-site-sidebar{transform:translateX(calc(-100% - 24px));width:248px;box-shadow:12px 0 38px rgba(0,0,0,.28);transition:transform .22s ease}
+  body[data-page="walking-hiking"].walk-site-nav-open>.ab-site-sidebar{transform:translateX(0)}
+  body[data-page="walking-hiking"]>.site-header{left:0!important;width:100%!important}
+  body[data-page="walking-hiking"]>main{margin-left:0!important}
+  .walk-site-nav-backdrop{position:fixed;inset:0;z-index:1240;border:0;background:rgba(7,10,12,.34);opacity:0;pointer-events:none;transition:opacity .18s ease;cursor:default}
+  body.walk-site-nav-open .walk-site-nav-backdrop{opacity:1;pointer-events:auto}
+  .walk-site-menu-toggle{display:inline-flex!important;align-items:center;gap:5px;border:1px solid #d9ddda!important;background:#f5f6f5!important;color:#23282b!important}
+  .walk-site-menu-toggle:hover{background:#ecefed!important}
+}
+
+.trail-user-location-marker{width:18px;height:18px;border:3px solid #fff;border-radius:50%;background:#ff7900;box-shadow:0 0 0 2px rgba(20,25,28,.32),0 4px 12px rgba(0,0,0,.25);position:relative}
+.trail-user-location-marker span{position:absolute;inset:-9px;border:2px solid rgba(255,121,0,.32);border-radius:50%;animation:ab-location-pulse 1.9s ease-out infinite}
+@keyframes ab-location-pulse{0%{transform:scale(.55);opacity:.9}75%,100%{transform:scale(1.55);opacity:0}}
+@media(prefers-reduced-motion:reduce){.trail-user-location-marker span{animation:none}}
+@media(max-width:900px){.walk-site-menu-toggle{display:none!important}}

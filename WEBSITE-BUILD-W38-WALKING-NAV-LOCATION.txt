@@ -1,0 +1,10 @@
+Adventure Builder Website Big Update — W38
+Walking & Hiking polish
+
+- Desktop Adventure Builder sidebar is hidden by default on Walking & Hiking.
+- Small Menu tab re-opens the full site navigation as an overlay.
+- Map requests browser location permission after map load.
+- When permission is granted, the map centres and zooms to the visitor's current area without automatically adding a route point.
+- Existing "Use my location" button still adds the location as the trail start.
+- If location is denied/unavailable, the UK overview remains as the fallback.
+- Open-source map stack remains MapLibre GL JS + OpenStreetMap tiles.

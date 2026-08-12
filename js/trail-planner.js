@@ -21,7 +21,8 @@
   const state = {
     points: [],
     markers: [],
-    route: null
+    route: null,
+    userLocationMarker: null
   };
 
   const setStatus = (message, kind = '') => {
@@ -114,6 +115,43 @@
 
   map.on('click', (event) => addPoint(event.lngLat.lat, event.lngLat.lng));
 
+  function showUserLocation(coords) {
+    const lngLat = [coords.longitude, coords.latitude];
+    if (!state.userLocationMarker) {
+      const element = document.createElement('div');
+      element.className = 'trail-user-location-marker';
+      element.innerHTML = '<span></span>';
+      element.setAttribute('aria-label', 'Your location');
+      state.userLocationMarker = new maplibregl.Marker({ element, anchor: 'center' }).setLngLat(lngLat).addTo(map);
+    } else {
+      state.userLocationMarker.setLngLat(lngLat);
+    }
+    map.flyTo({ center: lngLat, zoom: 14.5, duration: 900, essential: true });
+  }
+
+  function locateUser({ addAsStart = false, quietFailure = false } = {}) {
+    if (!navigator.geolocation) {
+      if (!quietFailure) setStatus('Location is not available in this browser.', 'error');
+      return;
+    }
+    if (!quietFailure) setStatus('Finding your location…');
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        showUserLocation(coords);
+        if (addAsStart) {
+          addPoint(coords.latitude, coords.longitude);
+          setStatus('Your location has been added as the trail start.', 'success');
+        } else {
+          setStatus('Map centred on your location. Tap the map to choose your trail start.', 'success');
+        }
+      },
+      () => {
+        if (!quietFailure) setStatus('Your location could not be found. Check the browser location permission.', 'error');
+      },
+      { enableHighAccuracy: true, maximumAge: 60000, timeout: 12000 }
+    );
+  }
+
   map.on('load', () => {
     map.addSource('trail-route', {
       type: 'geojson',
@@ -140,24 +178,12 @@
       }
     });
     setStatus('Tap the map to place the trail start, finish and optional waypoints.');
+    // Start local, not UK-wide. The browser owns the permission prompt. If the
+    // visitor declines, the normal UK overview remains available.
+    window.setTimeout(() => locateUser({ addAsStart: false, quietFailure: true }), 350);
   });
 
-  locateButton?.addEventListener('click', () => {
-    if (!navigator.geolocation) {
-      setStatus('Location is not available in this browser.', 'error');
-      return;
-    }
-    setStatus('Finding your location…');
-    navigator.geolocation.getCurrentPosition(
-      ({ coords }) => {
-        map.flyTo({ center: [coords.longitude, coords.latitude], zoom: 14 });
-        addPoint(coords.latitude, coords.longitude);
-        setStatus('Your location has been added as the trail start.');
-      },
-      () => setStatus('Your location could not be found. Check the browser location permission.', 'error'),
-      { enableHighAccuracy: true, maximumAge: 0, timeout: 12000 }
-    );
-  });
+  locateButton?.addEventListener('click', () => locateUser({ addAsStart: true }));
 
   clearButton?.addEventListener('click', () => {
     state.points = [];
