@@ -1,0 +1,35 @@
+ADVENTURE BUILDER WEBSITE — BUILD W36
+PROFESSIONAL UI FOUNDATION + WALKING & HIKING FACELIFT
+
+GOAL
+Make Walking & Hiking feel like a finished commercial outdoor-planning product while reducing unnecessary scrolling.
+
+RESEARCH-LED PRINCIPLES
+- Reusable UI components and consistent spacing rather than page-by-page styling.
+- CSS Grid for two-dimensional desktop workspace layout, collapsing cleanly for phone/tablet.
+- Compact visual controls while retaining usable touch targets.
+- Strong information hierarchy: primary planner first, secondary tools grouped below.
+- Preserve semantic HTML/source order and feature IDs so accessibility and JS behaviour stay intact.
+
+NEW MODULAR FILES
+- css/professional-ui.css — shared professional design tokens/foundation for future facelift pages.
+- css/walking-professional.css — Walking & Hiking page-specific layout only.
+
+WALKING & HIKING CHANGES
+- Shorter hero/header.
+- New compact workspace overview with Outdoor Skills and Open App actions.
+- Trail Planner and map combined into one professional workspace card.
+- More efficient control spacing and route summary.
+- Larger useful map while eliminating dead white space around it.
+- Suggested Places converted from a large dark block into a compact light dashboard module.
+- Outdoor Skills and feature capabilities moved into a side stack on desktop.
+- Redundant full-width Get the App CTA removed from the page because app handoff already exists in the planner.
+- Tablet/phone layouts collapse safely to one column.
+
+FEATURE LOGIC
+No route-planning IDs or trail-planner.js behaviour were removed or renamed.
+No auth/data/routing APIs were replaced in this facelift.
+
+NEXT
+Use the approved Walking & Hiking visual standard as the reference for the rest of WEBSITE BIG UPDATE.
+APP BIG UPDATE remains separate and requires the latest app source ZIP before applying the phone-first professional design system.

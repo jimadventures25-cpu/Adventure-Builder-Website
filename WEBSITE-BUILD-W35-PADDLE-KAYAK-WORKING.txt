@@ -1,0 +1,21 @@
+ADVENTURE BUILDER WEBSITE BUILD W35
+PADDLE BOARD & KAYAK - WORKING PLANNER
+
+Changes:
+- Rebuilt paddling.html as a dedicated Paddle Board & Kayak planning page.
+- Removed embedded Adventure Hub demo UI from this page.
+- Added water adventure trip planner (activity, water type, date, launch/return, times, distance, group size, notes).
+- Added browser geolocation buttons for launch and return coordinates.
+- Added OpenStreetMap launch/return links when coordinates are available.
+- Added manual conditions guide for wind, gusts, offshore direction, tide/flow check and water-temperature clothing check.
+- Added persistent 10-point pre-launch checklist.
+- Added automatic float-plan preview.
+- Added save/load/delete plans using localStorage.
+- Added copy float plan and download text file actions.
+- Added current Adventure Builder app link.
+- Added responsive paddling-specific CSS.
+- Added dedicated js/paddling.js module.
+- Fixed duplicate/malformed head markup that existed in paddling.html.
+
+Safety note:
+This page assists planning. It does not currently fetch live weather, marine, river or tide information and does not make a go/no-go safety decision.

@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css">
   <link rel="stylesheet" href="css/site-wide-compact-pages.css">
   <link rel="stylesheet" href="css/outdoor-knowledge.css">
+  <link rel="stylesheet" href="css/professional-ui.css">
+  <link rel="stylesheet" href="css/walking-professional.css">
 </head>
 <body data-page="walking-hiking" data-account-required="true">
   <header class="site-header">
@@ -32,6 +34,17 @@
   <main>
     <section class="section standalone-page category-hub" id="hiking">
       <div class="section-heading"><p class="eyebrow">Plan here · walk with the app</p><h1>Walking &amp; Hiking</h1><p>Build a real walking trail on the website, save it, then open the same plan in Adventure Builder for live navigation.</p></div>
+
+      <div class="walking-overview" aria-label="Walking and hiking workspace overview">
+        <div class="walking-overview-copy">
+          <span class="walking-overview-icon" aria-hidden="true">🥾</span>
+          <div><p class="ab-pro-kicker">Walking workspace</p><h2>Plan the route. Check the stops. Take it with you.</h2><p>Everything needed for the route is kept together so you can plan faster with less scrolling.</p></div>
+        </div>
+        <div class="walking-overview-actions">
+          <a class="button button-secondary ab-pro-action" href="outdoor-skills.html">Outdoor Skills</a>
+          <a class="button button-primary ab-pro-action" href="https://app.adventurebuilder.co.uk" target="_blank" rel="noopener">Open App</a>
+        </div>
+      </div>
 
       <div class="trail-planner-shell">
         <aside class="trail-planner-panel" aria-label="Trail planning controls">
@@ -65,16 +78,20 @@
       </div>
 
 
+      <div class="walking-secondary-grid">
       <section class="trail-poi-section" aria-labelledby="trail-poi-title">
         <div class="trail-poi-heading"><div><p class="eyebrow">Make the walk an adventure</p><h2 id="trail-poi-title">Suggested Places Along Your Trail</h2><p>After building a trail, find viewpoints, waterfalls, historic places, cafés, toilets, parking, picnic areas and other useful stops nearby.</p></div><div class="trail-poi-filters" id="trail-poi-filters"><label><input type="checkbox" value="viewpoint" checked> Viewpoints</label><label><input type="checkbox" value="waterfall" checked> Waterfalls</label><label><input type="checkbox" value="historic" checked> Historic</label><label><input type="checkbox" value="food" checked> Food</label><label><input type="checkbox" value="facilities" checked> Facilities</label><label><input type="checkbox" value="nature" checked> Nature</label></div></div>
         <p class="feature-status" id="trail-poi-status">Build a trail to unlock suggestions.</p>
         <div class="trail-poi-grid" id="trail-poi-results"></div>
       </section>
-      <section class="abok-walk-card" aria-label="Outdoor skills"><div><p class="eyebrow">New walking & hiking guide</p><h2>Survival, Foraging & Knots</h2><p>Offline survival basics, a cautious UK & Ireland foraging guide, visual knot instructions, biodiversity lookup, personal notes and a private foraging log.</p></div><a class="button button-primary" href="outdoor-skills.html">Open Outdoor Skills</a></section>
-      <div class="category-features trail-feature-strip"><span>Footpath routing</span><span>Up to 8 waypoints</span><span>Distance</span><span>Walking time</span><span>Save trail</span><span>Open in app</span></div>
+        <div class="walking-side-stack">
+          <section class="abok-walk-card" aria-label="Outdoor skills"><div><p class="eyebrow">New walking & hiking guide</p><h2>Survival, Foraging & Knots</h2><p>Offline survival basics, a cautious UK & Ireland foraging guide, visual knot instructions, biodiversity lookup, personal notes and a private foraging log.</p></div><a class="button button-primary" href="outdoor-skills.html">Open Outdoor Skills</a></section>
+          <div class="category-features trail-feature-strip"><span>Footpath routing</span><span>Up to 8 waypoints</span><span>Distance</span><span>Walking time</span><span>Save trail</span><span>Open in app</span></div>
+        </div>
+      </div>
     </section>
 
-    <section class="cta-section"><div><p class="eyebrow">Ready to explore?</p><h2>Open Adventure Builder</h2><p>Use the same account on the website and in the Adventure Builder app.</p></div><a class="button button-primary" href="index.html#download">Get the App</a></section>
+    <section class="cta-section walking-page-cta"><div><p class="eyebrow">Ready to explore?</p><h2>Open Adventure Builder</h2><p>Use the same account on the website and in the Adventure Builder app.</p></div><a class="button button-primary" href="index.html#download">Get the App</a></section>
   </main>
   <footer class="site-footer">
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
@@ -121,7 +138,7 @@
         <p class="account-choice-copy">Choose how you would like to continue.</p>
         <div class="account-choice-actions">
           <button class="button button-primary" id="continue-website" type="button">Continue on Website</button>
-          <a class="button button-secondary" href="https://adventure-builder-app.netlify.app" target="_blank" rel="noopener">Open the App</a>
+          <a class="button button-secondary" href="https://app.adventurebuilder.co.uk" target="_blank" rel="noopener">Open the App</a>
         </div>
         <button class="account-settings-link" id="account-settings" type="button">Account settings</button>
         <button class="button button-secondary auth-submit logout-button" id="logout-button" type="button">Log out</button>
