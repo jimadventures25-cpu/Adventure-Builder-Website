@@ -13,8 +13,7 @@
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css">
   <link rel="stylesheet" href="css/site-wide-compact-pages.css">
   <link rel="stylesheet" href="css/outdoor-knowledge.css">
-  <link rel="stylesheet" href="css/professional-ui.css">
-  <link rel="stylesheet" href="css/walking-professional.css">
+  <link rel="stylesheet" href="css/walking-workspace-v2.css">
 </head>
 <body data-page="walking-hiking" data-account-required="true">
   <header class="site-header">
@@ -32,66 +31,87 @@
     </div>
   </header>
   <main>
-    <section class="section standalone-page category-hub" id="hiking">
-      <div class="section-heading"><p class="eyebrow">Plan here · walk with the app</p><h1>Walking &amp; Hiking</h1><p>Build a real walking trail on the website, save it, then open the same plan in Adventure Builder for live navigation.</p></div>
-
-      <div class="walking-overview" aria-label="Walking and hiking workspace overview">
-        <div class="walking-overview-copy">
-          <span class="walking-overview-icon" aria-hidden="true">🥾</span>
-          <div><p class="ab-pro-kicker">Walking workspace</p><h2>Plan the route. Check the stops. Take it with you.</h2><p>Everything needed for the route is kept together so you can plan faster with less scrolling.</p></div>
+    <section class="walk-workspace" id="hiking" aria-label="Walking and hiking route planner">
+      <header class="walk-workspace-head">
+        <div>
+          <p class="eyebrow">Walking &amp; Hiking</p>
+          <h1>Plan your trail</h1>
+          <p class="walk-workspace-subtitle">Build a walking route, add useful stops and send the finished plan to Adventure Builder.</p>
         </div>
-        <div class="walking-overview-actions">
-          <a class="button button-secondary ab-pro-action" href="outdoor-skills.html">Outdoor Skills</a>
-          <a class="button button-primary ab-pro-action" href="https://app.adventurebuilder.co.uk" target="_blank" rel="noopener">Open App</a>
-        </div>
-      </div>
+        <nav class="walk-workspace-actions" aria-label="Walking tools">
+          <a href="outdoor-skills.html">Outdoor Skills</a>
+          <button type="button" id="walk-toggle-pois" aria-controls="walk-poi-drawer" aria-expanded="false">Places</button>
+          <a class="walk-app-link" href="https://app.adventurebuilder.co.uk" target="_blank" rel="noopener">Open App</a>
+        </nav>
+      </header>
 
-      <div class="trail-planner-shell">
-        <aside class="trail-planner-panel" aria-label="Trail planning controls">
-          <span class="category-icon">🥾</span>
-          <h2>Trail Planner</h2>
-          <p>Tap the map to add a start, finish and optional waypoints. Drag any marker to adjust your trail.</p>
-          <label for="trail-name">Trail name</label>
-          <input id="trail-name" type="text" maxlength="80" placeholder="My weekend walk">
-          <div class="trail-actions">
-            <button class="button button-secondary" id="trail-use-location" type="button">Use My Location</button>
-            <button class="button button-primary" id="trail-build-route" type="button" disabled>Build Walking Trail</button>
-            <button class="button button-secondary" id="trail-clear-route" type="button">Clear</button>
+      <div class="walk-map-workspace" id="walk-map-workspace">
+        <aside class="walk-planner" id="walk-planner" aria-label="Trail planning controls">
+          <div class="walk-planner-topline">
+            <div><span class="walk-step">Route planner</span><strong>Build your walk</strong></div>
+            <button class="walk-icon-button" id="walk-collapse-planner" type="button" aria-label="Collapse route planner" aria-expanded="true">‹</button>
           </div>
-          <div class="trail-summary" aria-live="polite">
-            <div><span>Planning points</span><strong id="trail-points">0</strong></div>
+
+          <div class="walk-planner-body">
+            <p class="walk-planner-help">Tap the map for start, finish and waypoints. Drag a marker to adjust it.</p>
+            <label for="trail-name">Trail name</label>
+            <input id="trail-name" type="text" maxlength="80" placeholder="My weekend walk">
+
+            <div class="walk-primary-actions">
+              <button class="walk-button walk-button-quiet" id="trail-use-location" type="button">◎ Use my location</button>
+              <button class="walk-button walk-button-main" id="trail-build-route" type="button" disabled>Build trail</button>
+            </div>
+            <button class="walk-text-action" id="trail-clear-route" type="button">Clear route</button>
+
+            <p class="trail-status" id="trail-status">Loading trail map…</p>
+
+            <div class="walk-save-actions">
+              <button class="walk-button" id="trail-save-route" type="button" disabled>Save trail</button>
+              <button class="walk-button" id="trail-find-pois" type="button" disabled>Find places</button>
+              <a class="walk-button walk-button-main is-disabled" id="trail-open-app" href="#" aria-disabled="true">Send to app</a>
+            </div>
+            <p class="walk-small-note">Live GPS guidance and off-route help stay in the Adventure Builder app.</p>
+          </div>
+        </aside>
+
+        <div class="walk-map-stage">
+          <div id="trail-map" role="application" aria-label="Interactive walking trail planning map"></div>
+          <div class="walk-map-toolbar" aria-label="Map shortcuts">
+            <button type="button" id="walk-open-planner" aria-controls="walk-planner" aria-expanded="true">Route</button>
+            <button type="button" id="walk-open-pois" aria-controls="walk-poi-drawer" aria-expanded="false">Places</button>
+          </div>
+          <div class="trail-map-tip">Tap map to add a point · Drag markers to adjust</div>
+
+          <aside class="walk-poi-drawer" id="walk-poi-drawer" aria-labelledby="trail-poi-title" aria-hidden="true">
+            <div class="walk-drawer-head">
+              <div><p class="eyebrow">Along your trail</p><h2 id="trail-poi-title">Suggested places</h2></div>
+              <button class="walk-icon-button" id="walk-close-pois" type="button" aria-label="Close suggested places">×</button>
+            </div>
+            <p class="walk-drawer-copy">Find viewpoints, waterfalls, historic places, cafés, toilets, parking and nature stops near your route.</p>
+            <div class="trail-poi-filters" id="trail-poi-filters">
+              <label><input type="checkbox" value="viewpoint" checked> Viewpoints</label>
+              <label><input type="checkbox" value="waterfall" checked> Waterfalls</label>
+              <label><input type="checkbox" value="historic" checked> Historic</label>
+              <label><input type="checkbox" value="food" checked> Food</label>
+              <label><input type="checkbox" value="facilities" checked> Facilities</label>
+              <label><input type="checkbox" value="nature" checked> Nature</label>
+            </div>
+            <p class="feature-status" id="trail-poi-status">Build a trail to unlock suggestions.</p>
+            <div class="trail-poi-grid" id="trail-poi-results"></div>
+          </aside>
+
+          <div class="walk-route-bar" aria-live="polite">
+            <div><span>Points</span><strong id="trail-points">0</strong></div>
             <div><span>Distance</span><strong id="trail-distance">—</strong></div>
             <div><span>Walking time</span><strong id="trail-time">—</strong></div>
+            <div class="walk-route-bar-actions">
+              <button type="button" id="walk-route-places">+ Places</button>
+              <a href="outdoor-skills.html">Skills</a>
+            </div>
           </div>
-          <p class="trail-status" id="trail-status">Loading trail map…</p>
-          <div class="trail-transfer-actions">
-            <button class="button button-secondary" id="trail-save-route" type="button" disabled>Save Trail</button>
-            <button class="button button-secondary" id="trail-find-pois" type="button" disabled>Suggest Places Along Trail</button>
-            <a class="button button-primary is-disabled" id="trail-open-app" href="#" aria-disabled="true">Open in Adventure Builder App</a>
-          </div>
-          <small class="trail-note">The website is for planning. Live GPS guidance, progress recording and off-route help remain in the app.</small>
-        </aside>
-        <div class="trail-map-wrap">
-          <div id="trail-map" role="application" aria-label="Interactive walking trail planning map"></div>
-          <div class="trail-map-tip">Tap map: add point · Drag marker: adjust route</div>
-        </div>
-      </div>
-
-
-      <div class="walking-secondary-grid">
-      <section class="trail-poi-section" aria-labelledby="trail-poi-title">
-        <div class="trail-poi-heading"><div><p class="eyebrow">Make the walk an adventure</p><h2 id="trail-poi-title">Suggested Places Along Your Trail</h2><p>After building a trail, find viewpoints, waterfalls, historic places, cafés, toilets, parking, picnic areas and other useful stops nearby.</p></div><div class="trail-poi-filters" id="trail-poi-filters"><label><input type="checkbox" value="viewpoint" checked> Viewpoints</label><label><input type="checkbox" value="waterfall" checked> Waterfalls</label><label><input type="checkbox" value="historic" checked> Historic</label><label><input type="checkbox" value="food" checked> Food</label><label><input type="checkbox" value="facilities" checked> Facilities</label><label><input type="checkbox" value="nature" checked> Nature</label></div></div>
-        <p class="feature-status" id="trail-poi-status">Build a trail to unlock suggestions.</p>
-        <div class="trail-poi-grid" id="trail-poi-results"></div>
-      </section>
-        <div class="walking-side-stack">
-          <section class="abok-walk-card" aria-label="Outdoor skills"><div><p class="eyebrow">New walking & hiking guide</p><h2>Survival, Foraging & Knots</h2><p>Offline survival basics, a cautious UK & Ireland foraging guide, visual knot instructions, biodiversity lookup, personal notes and a private foraging log.</p></div><a class="button button-primary" href="outdoor-skills.html">Open Outdoor Skills</a></section>
-          <div class="category-features trail-feature-strip"><span>Footpath routing</span><span>Up to 8 waypoints</span><span>Distance</span><span>Walking time</span><span>Save trail</span><span>Open in app</span></div>
         </div>
       </div>
     </section>
-
-    <section class="cta-section walking-page-cta"><div><p class="eyebrow">Ready to explore?</p><h2>Open Adventure Builder</h2><p>Use the same account on the website and in the Adventure Builder app.</p></div><a class="button button-primary" href="index.html#download">Get the App</a></section>
   </main>
   <footer class="site-footer">
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
@@ -155,5 +175,6 @@
   <script src="js/navigation-shell.js"></script>
   <script src="js/main.js"></script>
   <script src="js/trail-planner.js"></script>
+  <script src="js/walking-workspace.js"></script>
 </body>
 </html>

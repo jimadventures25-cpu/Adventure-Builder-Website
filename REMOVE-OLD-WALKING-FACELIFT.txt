@@ -1,0 +1,6 @@
+After applying W37, these W36 files are no longer referenced by walking-hiking.html and can be deleted from the website repository:
+
+css/walking-professional.css
+css/professional-ui.css
+
+Do not delete any other website files.

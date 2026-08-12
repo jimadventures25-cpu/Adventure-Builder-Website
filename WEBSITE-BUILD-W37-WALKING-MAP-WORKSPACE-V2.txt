@@ -1,0 +1,13 @@
+Adventure Builder Website — W37 Walking & Hiking Map Workspace V2
+
+Replaces the rejected boxed-card W36 facelift.
+- Full-height map-first route planning workspace.
+- Slim collapsible route planner.
+- Attached route stats bar.
+- Suggested Places moved into a slide-in drawer.
+- Outdoor Skills remains directly accessible without a large card.
+- Minimal normal page scrolling while route planning.
+- Mobile uses overlay planner/drawer over the map.
+- Existing trail-planner.js IDs and routing behaviour preserved.
+- New UI behaviour isolated in js/walking-workspace.js.
+- Old W36 walking-professional.css and professional-ui.css removed from this build.
