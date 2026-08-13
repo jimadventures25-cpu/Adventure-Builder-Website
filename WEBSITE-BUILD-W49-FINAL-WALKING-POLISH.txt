@@ -1,0 +1,11 @@
+Adventure Builder Website W49 — Final Walking/Hiking Polish
+
+Final module freeze candidate.
+- Tightens cycling distance matching with adaptive waypoint scaling.
+- Keeps a strict 3-request maximum and preserves rate-limit protections.
+- Makes Try a Different Route rotate through deterministic direction families.
+- Fixes Walk/Jog/Cycle time labels and manual Build Trail activity routing.
+- Sends the correct activity/transport when saving or opening a trail in the app.
+- Keeps the W47 marker lifecycle fix and W48 route-quality engine intact.
+
+After successful live testing, freeze this module and move development to the next Adventure Builder area.

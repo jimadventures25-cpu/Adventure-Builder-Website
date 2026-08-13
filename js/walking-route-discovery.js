@@ -23,8 +23,14 @@
   };
 
   let generating = false;
-  let seedCounter = 0;
+  let routeFamilySeed = Date.now() >>> 0;
+  let variationCounter = 0;
   let activity = 'walk';
+
+  function resetRouteFamily() {
+    routeFamilySeed = (Date.now() ^ Math.floor(Math.random() * 0xffffffff)) >>> 0;
+    variationCounter = 0;
+  }
 
   const setStatus = (message, kind = '') => planner.setStatus(message, kind);
   const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
@@ -36,6 +42,8 @@
   function setActivity(next) {
     if (!ACTIVITY[next]) return;
     activity = next;
+    planner.setActivity?.(activity);
+    resetRouteFamily();
     activityButtons.forEach((button) => {
       const selected = button.dataset.walkActivity === activity;
       button.classList.toggle('is-active', selected);
@@ -119,11 +127,13 @@
       setStatus(`Creating a ${miles} mile ${cfg.label} loop near you…`);
 
       const start = await planner.getCurrentLocation();
-      const seed = (Date.now() ^ (++seedCounter * 2654435761)) >>> 0;
+      const seed = routeFamilySeed;
+      const variation = variationCounter % 8;
+      variationCounter += 1;
       const response = await fetch('/.netlify/functions/trail-loop', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ start, targetMetres, style, activity, seed })
+        body: JSON.stringify({ start, targetMetres, style, activity, seed, variation })
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
@@ -210,7 +220,8 @@
   }
 
   activityButtons.forEach((button) => button.addEventListener('click', () => setActivity(button.dataset.walkActivity)));
-  distanceInput?.addEventListener('input', () => { distanceOutput.textContent = `${distanceInput.value} mile${distanceInput.value === '1' ? '' : 's'}`; });
+  distanceInput?.addEventListener('input', () => { distanceOutput.textContent = `${distanceInput.value} mile${distanceInput.value === '1' ? '' : 's'}`; resetRouteFamily(); });
+  styleSelect?.addEventListener('change', resetRouteFamily);
   makeButton?.addEventListener('click', () => { nearbyPanel.hidden = true; makePanel.hidden = !makePanel.hidden; });
   findButton?.addEventListener('click', findNearbyRoutes);
   generateButton?.addEventListener('click', makeRoute);

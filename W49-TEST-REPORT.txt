@@ -1,0 +1,15 @@
+ADVENTURE BUILDER WEBSITE W49 — FINAL WALKING/HIKING TEST REPORT
+
+PASS — All shipped JavaScript/MJS files pass node --check.
+PASS — Cycling distance quality: 4.05 mi ranks above 4.70 mi for a 4.00 mi target.
+PASS — Cycling acceptance: 4.70 mi is rejected as too far from a 4.00 mi target; 4.05 mi is accepted.
+PASS — Adaptive routing integration: mocked 4.70 mi first response is corrected to 4.05 mi on the second sequential request.
+PASS — Adaptive retry shrinks the same candidate geometry after an overshoot.
+PASS — Maximum candidate request budget remains 3; old 24-request burst code is absent.
+PASS — Walk/Jog/Cycle time labels are present and activity is sent to manual trail routing.
+PASS — Selected activity/transport is preserved for saved trails and app transfer.
+PASS — Try-a-different-route uses deterministic direction variation families.
+PASS — W47 marker manager remains loaded before trail-planner.js and route discovery.
+PASS — W48 route-quality engine remains modular and active.
+
+Freeze recommendation: after one successful live deployment/video test, freeze Walking & Hiking at W49 and move development to the next module.

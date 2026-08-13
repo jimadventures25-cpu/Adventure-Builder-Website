@@ -56,11 +56,11 @@ function uniqueCandidateKey(points) {
 // Generate several compact loop shapes around the user's position. These are
 // deliberately *hints*, not pre-snapped graph locations. Valhalla's Route API
 // performs its own correlation and is the only endpoint required by this path.
-function buildDirectCandidates({ start, targetMetres, activity, style, seed }) {
-  const baseAngle = seededAngle(seed);
+function buildDirectCandidates({ start, targetMetres, activity, style, seed, variation = 0 }) {
+  const baseAngle = (seededAngle(seed) + (Number(variation) || 0) * 45) % 360;
   const styleScale = styleRadiusMultiplier(style);
-  const minimumRadius = activity === 'cycle' ? 520 : 320;
-  const scales = activity === 'cycle' ? [0.13, 0.16, 0.19, 0.22] : [0.12, 0.15, 0.18, 0.21];
+  const minimumRadius = activity === 'cycle' ? 260 : 300;
+  const scales = activity === 'cycle' ? [0.105, 0.125, 0.145, 0.17] : [0.12, 0.15, 0.18, 0.21];
   const candidates = [];
 
   const add = (points) => candidates.push([start, ...points, { ...start }]);
@@ -93,6 +93,24 @@ function buildDirectCandidates({ start, targetMetres, activity, style, seed }) {
     seen.add(key);
     return true;
   });
+}
+
+
+function scaleCandidate(points, start, factor) {
+  const safeFactor = clamp(Number(factor) || 1, 0.65, 1.30);
+  return points.map((point, index) => {
+    if (index === 0 || index === points.length - 1) return { ...start };
+    return {
+      lat: start.lat + (Number(point.lat) - start.lat) * safeFactor,
+      lon: start.lon + (Number(point.lon) - start.lon) * safeFactor
+    };
+  });
+}
+
+function distanceTolerance(activity) {
+  if (activity === 'cycle') return 0.12;
+  if (activity === 'jog') return 0.15;
+  return 0.18;
 }
 
 function routeRequest(points, costing, activity, style) {
@@ -178,6 +196,7 @@ export default async (request) => {
     const style = ['balanced', 'gentle', 'adventurous'].includes(input?.style) ? input.style : 'balanced';
     const targetMetres = clamp(Number(input?.targetMetres) || (3 * METRES_PER_MILE), 0.75 * METRES_PER_MILE, 20 * METRES_PER_MILE);
     const seed = Number(input?.seed) || Date.now();
+    const variation = Math.abs(Number(input?.variation) || 0) % 8;
     const cfg = activityConfig(activity);
     const costing = costingFor(cfg.transport);
     const config = getRoutingConfig();
@@ -186,25 +205,32 @@ export default async (request) => {
       return json({ error: 'No Adventure Builder routing provider is configured.' }, 503);
     }
 
-    const candidates = buildDirectCandidates({ start, targetMetres, activity, style, seed });
+    const candidates = buildDirectCandidates({ start, targetMetres, activity, style, seed, variation });
     // W48: progressively score a very small number of candidates. This preserves
     // the W46 rate-limit fix while allowing Adventure Builder to reject obviously
     // poor distance matches and mechanical/repetitive loop shapes.
     const results = [];
     const errors = [];
-    const baseIndex = Math.abs(Number(seed) || 0) % candidates.length;
+    const baseIndex = (Math.abs(Number(seed) || 0) + variation * 11) % candidates.length;
     const candidateBudget = 3;
+    let selected = candidates[baseIndex] || candidates[0];
+    let previous = null;
     for (let attempt = 0; attempt < candidateBudget; attempt += 1) {
-      const index = (baseIndex + attempt * 7) % candidates.length;
-      const selected = candidates[index] || candidates[0];
+      if (attempt > 0 && previous?.route?.distance && String(previous.provider || '').includes('valhalla')) {
+        const correction = targetMetres / Number(previous.route.distance);
+        selected = scaleCandidate(previous.points, start, correction);
+      } else if (attempt > 0) {
+        const index = (baseIndex + attempt * 13) % candidates.length;
+        selected = candidates[index] || candidates[0];
+      }
       try {
         const candidate = await routeCandidate({ config, points: selected, costing, activity, style, targetMetres });
+        previous = candidate;
         if (candidate?.route?.geometry?.coordinates?.length >= 5 && Number.isFinite(candidate.score)) {
           results.push(candidate);
-          if (acceptableTrailRoute(candidate) && candidate.quality >= 78) break;
-          // If public Valhalla failed and the emergency gateway/GraphHopper handled
-          // the request, do not make a burst of follow-up calls against that fallback.
+          if (acceptableTrailRoute(candidate, activity) && candidate.quality >= 78) break;
           if (!String(candidate.provider || '').includes('valhalla')) break;
+          if (Number(candidate.metrics?.distanceError) <= distanceTolerance(activity) * 0.75) break;
         }
       } catch (error) {
         errors.push(error);
@@ -233,10 +259,10 @@ export default async (request) => {
       requestedDistance: targetMetres,
       distanceError: best.metrics.distanceError,
       routeQuality: { score: best.quality, grade: best.grade, metrics: best.metrics },
-      gbca_feature: 'website-trail-loop-v4-smart-quality',
+      gbca_feature: 'website-trail-loop-v5-final-polish',
       gbca_activity: activity,
       gbca_provider: best.provider || (config.valhallaConfigured ? 'valhalla-direct' : 'adventure-app-routing-gateway'),
-      gbca_strategy: 'progressive-quality-ranked-routing'
+      gbca_strategy: 'adaptive-distance-quality-routing'
     });
   } catch (error) {
     const message = error?.name === 'AbortError'

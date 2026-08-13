@@ -12,6 +12,7 @@
   const appButton = document.getElementById('trail-open-app');
   const distanceOutput = document.getElementById('trail-distance');
   const timeOutput = document.getElementById('trail-time');
+  const timeLabel = document.getElementById('trail-time-label');
   const pointsOutput = document.getElementById('trail-points');
   const routeNameInput = document.getElementById('trail-name');
   const poiButton = document.getElementById('trail-find-pois');
@@ -24,8 +25,21 @@
   const state = {
     points: [],
     route: null,
-    userLocationMarker: null
+    userLocationMarker: null,
+    activity: 'walk'
   };
+
+  const ACTIVITY = {
+    walk: { label: 'Walking time', routeLabel: 'walking', transport: 'walking' },
+    jog: { label: 'Jogging time', routeLabel: 'jogging', transport: 'walking' },
+    cycle: { label: 'Cycling time', routeLabel: 'cycling', transport: 'bicycle' }
+  };
+
+  function setActivity(next) {
+    if (!ACTIVITY[next]) return;
+    state.activity = next;
+    if (timeLabel) timeLabel.textContent = ACTIVITY[next].label;
+  }
 
   const setStatus = (message, kind = '') => {
     if (!status) return;
@@ -222,12 +236,13 @@
   routeButton?.addEventListener('click', async () => {
     if (state.points.length < 2) return;
     routeButton.disabled = true;
-    setStatus('Building a walking route with Valhalla…');
+    const currentActivity = ACTIVITY[state.activity] || ACTIVITY.walk;
+    setStatus(`Building a ${currentActivity.routeLabel} route…`);
     try {
       const response = await fetch('/.netlify/functions/trail-route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ points: state.points })
+        body: JSON.stringify({ points: state.points, activity: state.activity })
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(payload.error || 'The trail could not be calculated.');
@@ -248,7 +263,9 @@
       createdAt: new Date().toISOString(),
       points: state.points,
       distance: state.route.distance,
-      duration: state.route.duration
+      duration: state.route.duration,
+      activity: state.activity,
+      transport: ACTIVITY[state.activity]?.transport || 'walking'
     };
     const trails = JSON.parse(localStorage.getItem('adventureBuilderSavedTrails') || '[]');
     trails.unshift(saved);
@@ -265,7 +282,8 @@
     const appBase = window.ADVENTURE_BUILDER_CONFIG?.APP_URL || 'https://app.adventurebuilder.co.uk';
     const transfer = {
       name: routeNameInput?.value.trim() || 'Website hiking trail',
-      transport: 'walking',
+      transport: ACTIVITY[state.activity]?.transport || 'walking',
+      activity: state.activity,
       points: state.points
     };
     appButton.href = `${appBase}/?trail=${encodeURIComponent(JSON.stringify(transfer))}`;
@@ -289,9 +307,11 @@
     getState: () => ({
       points: state.points.map((point) => ({ ...point })),
       route: state.route,
+      activity: state.activity,
       userLocation: state.userLocationMarker ? state.userLocationMarker.getLngLat() : null
     }),
     setStatus,
+    setActivity,
     applyRoute,
     clear: () => {
       state.points = [];

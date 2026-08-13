@@ -98,7 +98,8 @@ function scoreTrailRoute(route, targetMetres, activity = 'walk') {
       ? { distance: 0.52, repetition: 0.19, turns: 0.13, crossings: 0.11, closure: 0.05 }
       : { distance: 0.55, repetition: 0.20, turns: 0.10, crossings: 0.10, closure: 0.05 };
 
-  const distancePenalty = clamp01(distanceError / 0.45);
+  const distanceScale = activity === 'cycle' ? 0.24 : (activity === 'jog' ? 0.30 : 0.34);
+  const distancePenalty = clamp01(distanceError / distanceScale);
   const penalty = distancePenalty * weights.distance + repetition * weights.repetition + sharpTurns * weights.turns + crossings * weights.crossings + closurePenalty * weights.closure;
   const quality = Math.round((1 - clamp01(penalty)) * 100);
   const score = penalty;
@@ -111,9 +112,10 @@ function scoreTrailRoute(route, targetMetres, activity = 'walk') {
   };
 }
 
-function acceptableTrailRoute(result) {
+function acceptableTrailRoute(result, activity = 'walk') {
   const error = Number(result?.metrics?.distanceError);
-  return Number.isFinite(error) && error <= 0.30 && Number(result?.quality) >= 55;
+  const tolerance = activity === 'cycle' ? 0.12 : (activity === 'jog' ? 0.15 : 0.18);
+  return Number.isFinite(error) && error <= tolerance && Number(result?.quality) >= 60;
 }
 
 export { scoreTrailRoute, acceptableTrailRoute, repetitionRatio, sharpTurnRatio, selfIntersectionPenalty };
