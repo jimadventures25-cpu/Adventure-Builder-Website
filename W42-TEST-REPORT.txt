@@ -1,0 +1,31 @@
+Adventure Builder W42 Walking Loop Fix — Test Report
+
+Research validation
+- Valhalla Route: locations are visited in order; break_through disallows U-turns at an intermediate location while retaining leg/guidance boundaries.
+- Valhalla Locate: accepts the same location/costing concepts as Route and returns correlated_lat/correlated_lon on routing edges.
+- Valhalla search_cutoff defaults to 35 km and is a civilisation cutoff, not a normal snap-radius control.
+- Native route leg shapes are encoded polyline with 6 decimal places.
+
+Automated checks passed
+- walking-route-discovery.js syntax
+- trail-planner.js syntax
+- trail-route.mjs syntax
+- trail-loop.mjs syntax
+- valhalla-connector.mjs syntax
+- routing-config.mjs included in patch
+- old walking-loop-engine.js removed from the page and patch
+- mock pedestrian /locate -> /route integration passed
+- mock bicycle /locate -> /route integration passed
+- pedestrian costing used for Walk/Jog
+- bicycle costing used for Cycle
+- generated intermediate locations use break_through
+- no artificial tiny search_cutoff is sent by the new loop generator
+- polyline6 normalisation returns MapLibre [lon, lat] geometry
+
+Live-service limitation
+- The build container cannot resolve public internet DNS, so a real POST to the public FOSSGIS Valhalla instance could not be executed here.
+- The endpoint mock exercises the same JSON request/response boundary and the code was checked against current Valhalla API documentation.
+
+Deployment requirement
+- Website Netlify environment must contain VALHALLA_BASE_URL.
+- If the Valhalla server is protected, VALHALLA_API_KEY and VALHALLA_API_KEY_HEADER must match the server.

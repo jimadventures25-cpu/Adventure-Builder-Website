@@ -1,0 +1,24 @@
+Adventure Builder Website W42 — Walking/Jogging/Cycling Loop Fix
+
+Problem found
+- W41 generated raw geometric waypoints in the browser.
+- Those points were sent straight to /route and could land off the legal pedestrian/cycle graph.
+- Every per-candidate error was swallowed, so the page only showed a generic "couldn't make a loop" message.
+- W41 also reduced Valhalla search_cutoff from its large default to a few hundred metres; that option is a civilisation cutoff, not a normal snap-radius control.
+
+W42 replacement design
+- New Netlify function: netlify/functions/trail-loop.mjs
+- Uses Valhalla /locate first to correlate generated candidate points to real routable pedestrian/bicycle edges.
+- Uses break_through for intermediate generated waypoints to discourage U-turning at each candidate point.
+- Tests multiple snapped loop shapes and returns the closest route to the requested mileage.
+- Walk + jog use pedestrian costing; cycle uses bicycle costing.
+- Browser now makes one trail-loop request instead of many trail-route requests.
+- Actual backend errors are returned to the UI instead of being discarded.
+- Removed obsolete browser js/walking-loop-engine.js and its script include.
+- Generic trail-route no longer overrides Valhalla search_cutoff with an artificially small value.
+
+Deployment
+1. Copy the files in this patch over the matching website files.
+2. ADD netlify/functions/trail-loop.mjs.
+3. DELETE js/walking-loop-engine.js from the website repository (the page no longer references it).
+4. Confirm Netlify has VALHALLA_BASE_URL (and API-key variables if your Valhalla server requires them).

@@ -2,8 +2,7 @@
   'use strict';
 
   const planner = window.AdventureBuilderTrailPlanner;
-  const loopEngine = window.AdventureBuilderWalkingLoopEngine;
-  if (!planner || !loopEngine) return;
+  if (!planner) return;
 
   const findButton = document.getElementById('walk-find-nearby-route');
   const makeButton = document.getElementById('walk-make-route');
@@ -28,7 +27,6 @@
   let activity = 'walk';
 
   const setStatus = (message, kind = '') => planner.setStatus(message, kind);
-  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
 
   function escapeHtml(value = '') {
@@ -82,29 +80,6 @@
     setStatus(`${route.name} highlighted from OpenStreetMap. Check access, conditions and local restrictions before setting off.`, 'success');
   }
 
-  async function routePoints(points, mode) {
-    const response = await fetch('/.netlify/functions/trail-route', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ points, activity: mode })
-    });
-    const payload = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(payload.error || 'The route could not be calculated.');
-    const route = payload.routes?.[0];
-    if (!route?.geometry?.coordinates?.length) throw new Error('No routable route was returned.');
-    return route;
-  }
-
-  function captureMapView() {
-    const center = planner.map.getCenter();
-    return { center: [center.lng, center.lat], zoom: planner.map.getZoom(), bearing: planner.map.getBearing(), pitch: planner.map.getPitch() };
-  }
-
-  function restoreMapView(view) {
-    if (!view) return;
-    planner.map.easeTo({ ...view, duration: 500, essential: true });
-  }
-
   async function makeRoute() {
     if (generating) return;
     generating = true;
@@ -119,43 +94,29 @@
 
     try {
       const start = await planner.getCurrentLocation();
-      const baseSeed = Math.floor((start.lat + 90) * 1e5) ^ Math.floor((start.lon + 180) * 1e5) ^ Date.now() ^ (++seedCounter * 2654435761);
-      const plan = loopEngine.makePlan({ start, targetMetres, style, activity, seed: baseSeed >>> 0 });
-      const successes = [];
-
-      for (const pass of plan) {
-        // Small batches keep route generation responsive without hammering the backend.
-        for (let offset = 0; offset < pass.candidates.length; offset += 2) {
-          const batch = pass.candidates.slice(offset, offset + 2);
-          const results = await Promise.all(batch.map(async (points) => {
-            try {
-              const route = await routePoints(points, activity);
-              const score = loopEngine.quality(route, targetMetres);
-              return Number.isFinite(score) ? { route, points, score } : null;
-            } catch (_) {
-              return null;
-            }
-          }));
-          successes.push(...results.filter(Boolean));
-          if (successes.some((item) => item.score <= pass.tolerance)) break;
-          await sleep(60);
-        }
-        if (successes.some((item) => item.score <= pass.tolerance)) break;
+      const seed = (Date.now() ^ (++seedCounter * 2654435761)) >>> 0;
+      const response = await fetch('/.netlify/functions/trail-loop', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ start, targetMetres, style, activity, seed })
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.error || 'The automatic route could not be generated.');
+      if (!payload.route?.geometry?.coordinates?.length || !Array.isArray(payload.planningPoints)) {
+        throw new Error('The route service returned an incomplete loop.');
       }
 
-      if (!successes.length) {
-        restoreMapView(originalView);
-        throw new Error(`I couldn't make a ${cfg.label} loop here after trying several nearby directions. Try a different mileage or start point.`);
-      }
-
-      successes.sort((a, b) => a.score - b.score);
-      const best = successes[0];
-      const actualMiles = best.route.distance / METRES_PER_MILE;
-      planner.applyRoute(best.route, best.points, `Made a ${actualMiles.toFixed(1)} mile ${cfg.label} loop. Use “Try a different route” for another one.`);
+      const actualMiles = payload.route.distance / METRES_PER_MILE;
+      planner.applyRoute(
+        payload.route,
+        payload.planningPoints,
+        `Made a ${actualMiles.toFixed(1)} mile ${cfg.label} loop. Use “Try a different route” for another one.`
+      );
       const trailName = document.getElementById('trail-name');
       if (trailName && !trailName.value.trim()) trailName.value = `Adventure Builder ${miles} mile ${cfg.label} loop`;
       regenerateButton.hidden = false;
     } catch (error) {
+      restoreMapView(originalView);
       setStatus(error.message || 'A route could not be generated.', 'error');
     } finally {
       generating = false;

@@ -1,0 +1,6 @@
+Delete this old file from the website repository after applying W42:
+
+js/walking-loop-engine.js
+
+W42 no longer loads or uses it. Loop generation now lives server-side in:
+netlify/functions/trail-loop.mjs

@@ -29,8 +29,8 @@ export default async (request) => {
           // metres inside a field, estate or beside a path.
           routeRequest.locations = routeRequest.locations.map((location, index) => ({
             ...location,
-            radius: index === 0 || index === routeRequest.locations.length - 1 ? 70 : (activity === 'cycle' ? 220 : 160),
-            search_cutoff: index === 0 || index === routeRequest.locations.length - 1 ? 350 : (activity === 'cycle' ? 900 : 700)
+            radius: index === 0 || index === routeRequest.locations.length - 1 ? 90 : (activity === 'cycle' ? 240 : 180),
+            minimum_reachability: index === 0 || index === routeRequest.locations.length - 1 ? 10 : 5
           }));
           return routeRequest;
         })()),
