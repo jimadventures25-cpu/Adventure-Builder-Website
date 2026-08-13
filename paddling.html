@@ -38,128 +38,143 @@
       <div>
         <p class="eyebrow">Adventure on the water</p>
         <h1>Paddle Board &amp; Kayak</h1>
-        <p>Plan the launch, route, return point, conditions, kit and float plan in one place. Save the plan on this device and open Adventure Builder when you are ready to go.</p>
-        <div class="paddle-hero-actions">
-          <button class="button button-primary" type="button" data-scroll-planner>Plan a water adventure</button>
-          <a class="button button-secondary" href="https://app.adventurebuilder.co.uk" target="_blank" rel="noopener">Open the App</a>
-        </div>
+        <p>Build a simple water plan, check the conditions, get ready and share a float plan before you launch.</p>
       </div>
-      <div class="paddle-hero-card" aria-label="Paddle planning summary">
-        <span class="paddle-hero-icon">🛶</span>
-        <strong>Plan → Check → Paddle → Remember</strong>
-        <small>Designed for paddle boards, kayaks and canoes.</small>
+      <div class="paddle-hero-actions">
+        <button class="button button-primary" type="button" data-scroll-planner>Plan a water adventure</button>
+        <a class="button button-secondary" href="https://app.adventurebuilder.co.uk" target="_blank" rel="noopener">Open the App</a>
       </div>
     </section>
 
-    <section class="paddle-grid" id="paddle-planner">
-      <article class="paddle-card paddle-card-wide">
-        <div class="paddle-card-heading">
-          <div><p class="eyebrow">1 · Trip</p><h2>Plan your water adventure</h2></div>
-          <span class="paddle-badge">Saved locally</span>
-        </div>
-        <form class="paddle-form" data-paddle-trip-form>
-          <div class="paddle-form-grid three">
-            <label>Activity
-              <select name="activity">
-                <option value="Paddle Board">Paddle Board</option>
-                <option value="Kayak">Kayak</option>
-                <option value="Canoe">Canoe</option>
-              </select>
-            </label>
-            <label>Water type
-              <select name="waterType">
-                <option>Lake / reservoir</option>
-                <option>River</option>
-                <option>Canal</option>
-                <option>Coast / sea</option>
-                <option>Estuary</option>
-              </select>
-            </label>
-            <label>Date<input name="date" type="date"></label>
-          </div>
-          <label>Adventure name<input name="title" maxlength="100" placeholder="Sunset paddle at Windermere"></label>
-          <div class="paddle-form-grid two">
-            <label>Launch point<input name="launchPoint" placeholder="Beach, slipway, car park or place name"></label>
-            <label>Return / exit point<input name="returnPoint" placeholder="Same as launch or another safe exit"></label>
-          </div>
-          <div class="paddle-location-actions">
-            <button class="paddle-mini-btn" type="button" data-use-location="launch">📍 Use my location for launch</button>
-            <button class="paddle-mini-btn" type="button" data-use-location="return">📍 Use my location for return</button>
-            <a class="paddle-mini-btn disabled" data-map-link="launch" target="_blank" rel="noopener" aria-disabled="true">Open launch on map</a>
-            <a class="paddle-mini-btn disabled" data-map-link="return" target="_blank" rel="noopener" aria-disabled="true">Open return on map</a>
-          </div>
-          <input name="launchLat" type="hidden"><input name="launchLon" type="hidden">
-          <input name="returnLat" type="hidden"><input name="returnLon" type="hidden">
-          <div class="paddle-form-grid four">
-            <label>Launch time<input name="launchTime" type="time"></label>
-            <label>Expected back<input name="backTime" type="time"></label>
-            <label>Distance (km)<input name="distance" type="number" min="0" step="0.1" placeholder="0"></label>
-            <label>People<input name="groupSize" type="number" min="1" max="30" value="1"></label>
-          </div>
-          <label>Route / notes<textarea name="routeNotes" rows="4" placeholder="Planned route, landmarks, parking, return point, stops and anything important..."></textarea></label>
-          <p class="paddle-inline-status" data-location-status aria-live="polite"></p>
-        </form>
-      </article>
+    <nav class="paddle-progress-nav" aria-label="Water adventure planning stages">
+      <button type="button" data-paddle-go="trip" class="is-active"><span>1</span><b>Plan</b><small>Where &amp; when</small></button>
+      <button type="button" data-paddle-go="conditions"><span>2</span><b>Conditions</b><small>Weather &amp; water</small></button>
+      <button type="button" data-paddle-go="ready"><span>3</span><b>Get ready</b><small>Pre-launch checks</small></button>
+      <button type="button" data-paddle-go="float"><span>4</span><b>Float plan</b><small>Tell someone</small></button>
+    </nav>
 
-      <article class="paddle-card">
-        <div class="paddle-card-heading"><div><p class="eyebrow">2 · Conditions</p><h2>Conditions check</h2></div></div>
-        <p class="paddle-muted">Enter values from a trusted local forecast. Adventure Builder does not currently fetch live weather or tides on this page.</p>
-        <div class="paddle-form">
-          <div class="paddle-form-grid two">
-            <label>Wind (mph)<input data-paddle-wind type="number" min="0" max="80" value="5"></label>
-            <label>Peak gust (mph)<input data-paddle-gust type="number" min="0" max="100" value="8"></label>
-          </div>
-          <label class="paddle-check"><input data-paddle-offshore type="checkbox"> Wind is blowing away from the safe shore / return direction</label>
-          <label class="paddle-check"><input data-paddle-tide type="checkbox"> Tide / river flow has been checked where relevant</label>
-          <label class="paddle-check"><input data-paddle-water-temp type="checkbox"> Clothing is suitable for the water temperature</label>
+    <section class="paddle-flow" id="paddle-planner">
+      <details class="paddle-stage" data-paddle-stage="trip" open>
+        <summary>
+          <span class="paddle-stage-number">1</span>
+          <span><b>Plan your water adventure</b><small>Activity, launch, return and timing</small></span>
+          <span class="paddle-stage-state">Start here</span>
+        </summary>
+        <div class="paddle-stage-body">
+          <form class="paddle-form" data-paddle-trip-form>
+            <div class="paddle-form-grid three">
+              <label>Activity<select name="activity"><option value="Paddle Board">Paddle Board</option><option value="Kayak">Kayak</option><option value="Canoe">Canoe</option></select></label>
+              <label>Water type<select name="waterType"><option>Lake / reservoir</option><option>River</option><option>Canal</option><option>Coast / sea</option><option>Estuary</option></select></label>
+              <label>Date<input name="date" type="date"></label>
+            </div>
+            <label>Adventure name<input name="title" maxlength="100" placeholder="Sunset paddle at Windermere"></label>
+            <div class="paddle-form-grid two">
+              <label>Launch point<input name="launchPoint" placeholder="Beach, slipway, car park or place name"></label>
+              <label>Return / exit point<input name="returnPoint" placeholder="Same as launch or another safe exit"></label>
+            </div>
+            <div class="paddle-location-actions">
+              <button class="paddle-mini-btn" type="button" data-use-location="launch">📍 Use my location for launch</button>
+              <button class="paddle-mini-btn" type="button" data-use-location="return">📍 Use my location for return</button>
+              <a class="paddle-mini-btn disabled" data-map-link="launch" target="_blank" rel="noopener" aria-disabled="true">Open launch map</a>
+              <a class="paddle-mini-btn disabled" data-map-link="return" target="_blank" rel="noopener" aria-disabled="true">Open return map</a>
+            </div>
+            <input name="launchLat" type="hidden"><input name="launchLon" type="hidden"><input name="returnLat" type="hidden"><input name="returnLon" type="hidden">
+            <div class="paddle-form-grid four paddle-secondary-fields">
+              <label>Launch time<input name="launchTime" type="time"></label>
+              <label>Expected back<input name="backTime" type="time"></label>
+              <label>Distance (km)<input name="distance" type="number" min="0" step="0.1" placeholder="0"></label>
+              <label>People<input name="groupSize" type="number" min="1" max="30" value="1"></label>
+            </div>
+            <details class="paddle-more">
+              <summary>Route notes &amp; extra trip details</summary>
+              <label>Route / notes<textarea name="routeNotes" rows="3" placeholder="Route, landmarks, parking, return point, stops or anything important..."></textarea></label>
+            </details>
+            <p class="paddle-inline-status" data-location-status aria-live="polite"></p>
+            <div class="paddle-stage-actions"><button class="button button-primary" type="button" data-paddle-next="conditions">Next: check conditions</button></div>
+          </form>
         </div>
-        <div class="paddle-condition-status" data-paddle-status>
-          <strong><span class="paddle-status-light"></span>Enter conditions</strong>
-          <p>Use this as a planning prompt, not a go/no-go decision.</p>
-        </div>
-        <div class="paddle-safety-note">Wind limits vary greatly with skill, craft, location, tide/flow and rescue options. Always use local knowledge and authoritative weather, marine or river information.</div>
-      </article>
+      </details>
 
-      <article class="paddle-card">
-        <div class="paddle-card-heading"><div><p class="eyebrow">3 · Safety</p><h2>Pre-launch checklist</h2></div><span class="paddle-progress" data-check-progress>0 / 10</span></div>
-        <div class="paddle-checklist" data-paddle-checklist>
-          <label class="paddle-check"><input type="checkbox" value="PFD"> Buoyancy aid / PFD fitted</label>
-          <label class="paddle-check"><input type="checkbox" value="Leash"> Suitable leash used where appropriate</label>
-          <label class="paddle-check"><input type="checkbox" value="Comms"> Phone / communication protected and charged</label>
-          <label class="paddle-check"><input type="checkbox" value="Clothing"> Clothing suitable for water temperature</label>
-          <label class="paddle-check"><input type="checkbox" value="Forecast"> Forecast checked</label>
-          <label class="paddle-check"><input type="checkbox" value="Access"> Access and local restrictions checked</label>
-          <label class="paddle-check"><input type="checkbox" value="Exits"> Safe return / exit points known</label>
-          <label class="paddle-check"><input type="checkbox" value="Contact"> Trusted person knows the plan</label>
-          <label class="paddle-check"><input type="checkbox" value="Kit"> Repair / emergency kit appropriate to trip</label>
-          <label class="paddle-check"><input type="checkbox" value="Hydration"> Water / food packed for the trip</label>
-        </div>
-      </article>
-
-      <article class="paddle-card paddle-card-wide">
-        <div class="paddle-card-heading"><div><p class="eyebrow">4 · Float plan</p><h2>Create a float plan</h2></div></div>
-        <div class="paddle-form-grid two">
+      <details class="paddle-stage" data-paddle-stage="conditions">
+        <summary>
+          <span class="paddle-stage-number">2</span>
+          <span><b>Check the conditions</b><small>Weather, wind and water considerations</small></span>
+          <span class="paddle-stage-state" data-paddle-condition-summary>Not checked</span>
+        </summary>
+        <div class="paddle-stage-body">
+          <p class="paddle-muted">Use values from a trusted local forecast. Adventure Builder does not currently fetch live weather, tides or river levels here.</p>
           <div class="paddle-form">
-            <label>Your name<input data-float-name placeholder="Name"></label>
-            <label>Trusted contact<input data-float-contact placeholder="Name / phone number"></label>
-            <label>Vehicle / parking details<input data-float-vehicle placeholder="Registration, car park or meeting point"></label>
-            <label>Extra notes<textarea data-float-notes rows="4" placeholder="Group details, medical information you choose to include, kit, alternative exit... "></textarea></label>
+            <div class="paddle-form-grid two compact">
+              <label>Wind (mph)<input data-paddle-wind type="number" min="0" max="80" value="5"></label>
+              <label>Peak gust (mph)<input data-paddle-gust type="number" min="0" max="100" value="8"></label>
+            </div>
+            <div class="paddle-check-group">
+              <label class="paddle-check"><input data-paddle-offshore type="checkbox"> Wind is blowing away from the safe shore / return direction</label>
+              <label class="paddle-check"><input data-paddle-tide type="checkbox"> Tide / river flow checked where relevant</label>
+              <label class="paddle-check"><input data-paddle-water-temp type="checkbox"> Clothing suits the water temperature</label>
+            </div>
           </div>
-          <div class="paddle-float-preview" data-float-preview>Start filling in the planner to build your float-plan summary.</div>
+          <div class="paddle-condition-status" data-paddle-status><strong><span class="paddle-status-light"></span>Enter conditions</strong><p>Use this as a planning prompt, not a go/no-go decision.</p></div>
+          <details class="paddle-safety-disclosure"><summary>Why these checks matter</summary><div class="paddle-safety-note">Wind limits vary greatly with skill, craft, location, tide/flow and rescue options. Always use local knowledge and authoritative weather, marine or river information.</div></details>
+          <div class="paddle-stage-actions"><button class="button button-secondary" type="button" data-paddle-back="trip">Back</button><button class="button button-primary" type="button" data-paddle-next="ready">Next: get ready</button></div>
         </div>
-        <div class="paddle-actions">
-          <button class="button button-primary" type="button" data-save-plan>Save plan</button>
-          <button class="button button-secondary" type="button" data-copy-plan>Copy float plan</button>
-          <button class="button button-secondary" type="button" data-download-plan>Download .txt</button>
-          <a class="button button-secondary" href="https://app.adventurebuilder.co.uk" target="_blank" rel="noopener">Open in App</a>
-        </div>
-        <p class="paddle-inline-status" data-plan-status aria-live="polite"></p>
-      </article>
+      </details>
 
-      <article class="paddle-card paddle-card-wide">
-        <div class="paddle-card-heading"><div><p class="eyebrow">5 · Saved plans</p><h2>My water adventures</h2></div><button class="paddle-mini-btn" type="button" data-new-plan>+ New plan</button></div>
-        <div class="paddle-saved-list" data-saved-plans><p class="paddle-muted">No saved plans yet.</p></div>
-      </article>
+      <details class="paddle-stage" data-paddle-stage="ready">
+        <summary>
+          <span class="paddle-stage-number">3</span>
+          <span><b>Get ready to launch</b><small>Ten quick pre-launch checks</small></span>
+          <span class="paddle-progress" data-check-progress>0 / 10</span>
+        </summary>
+        <div class="paddle-stage-body">
+          <div class="paddle-checklist" data-paddle-checklist>
+            <label class="paddle-check"><input type="checkbox" value="PFD"> Buoyancy aid / PFD fitted</label>
+            <label class="paddle-check"><input type="checkbox" value="Leash"> Suitable leash used where appropriate</label>
+            <label class="paddle-check"><input type="checkbox" value="Comms"> Phone / communication protected and charged</label>
+            <label class="paddle-check"><input type="checkbox" value="Clothing"> Clothing suitable for water temperature</label>
+            <label class="paddle-check"><input type="checkbox" value="Forecast"> Forecast checked</label>
+            <label class="paddle-check"><input type="checkbox" value="Access"> Access and local restrictions checked</label>
+            <label class="paddle-check"><input type="checkbox" value="Exits"> Safe return / exit points known</label>
+            <label class="paddle-check"><input type="checkbox" value="Contact"> Trusted person knows the plan</label>
+            <label class="paddle-check"><input type="checkbox" value="Kit"> Repair / emergency kit appropriate to trip</label>
+            <label class="paddle-check"><input type="checkbox" value="Hydration"> Water / food packed for the trip</label>
+          </div>
+          <div class="paddle-stage-actions"><button class="button button-secondary" type="button" data-paddle-back="conditions">Back</button><button class="button button-primary" type="button" data-paddle-next="float">Next: float plan</button></div>
+        </div>
+      </details>
+
+      <details class="paddle-stage" data-paddle-stage="float">
+        <summary>
+          <span class="paddle-stage-number">4</span>
+          <span><b>Create a float plan</b><small>Give someone the essentials before you launch</small></span>
+          <span class="paddle-stage-state">Final step</span>
+        </summary>
+        <div class="paddle-stage-body">
+          <div class="paddle-float-layout">
+            <div class="paddle-form">
+              <label>Your name<input data-float-name placeholder="Name"></label>
+              <label>Trusted contact<input data-float-contact placeholder="Name / phone number"></label>
+              <details class="paddle-more"><summary>Vehicle and extra notes</summary>
+                <div class="paddle-form nested"><label>Vehicle / parking details<input data-float-vehicle placeholder="Registration, car park or meeting point"></label><label>Extra notes<textarea data-float-notes rows="3" placeholder="Group details, optional medical information, kit or alternative exit..."></textarea></label></div>
+              </details>
+            </div>
+            <div><p class="paddle-preview-label">Float plan preview</p><div class="paddle-float-preview" data-float-preview>Start filling in the planner to build your float-plan summary.</div></div>
+          </div>
+          <div class="paddle-actions compact-actions">
+            <button class="button button-primary" type="button" data-save-plan>Save plan</button>
+            <button class="button button-secondary" type="button" data-copy-plan>Copy plan</button>
+            <button class="button button-secondary" type="button" data-download-plan>Download .txt</button>
+            <a class="button button-secondary" href="https://app.adventurebuilder.co.uk" target="_blank" rel="noopener">Open in App</a>
+          </div>
+          <p class="paddle-inline-status" data-plan-status aria-live="polite"></p>
+          <div class="paddle-stage-actions"><button class="button button-secondary" type="button" data-paddle-back="ready">Back</button></div>
+        </div>
+      </details>
+    </section>
+
+    <section class="paddle-saved-section">
+      <div class="paddle-saved-head"><div><p class="eyebrow">Saved on this device</p><h2>My water adventures</h2></div><button class="paddle-mini-btn" type="button" data-new-plan>+ New plan</button></div>
+      <div class="paddle-saved-list" data-saved-plans><p class="paddle-muted">No saved plans yet.</p></div>
     </section>
   </main>
 
@@ -196,5 +211,6 @@
   <script src="js/navigation-shell.js"></script>
   <script src="js/main.js"></script>
   <script src="js/paddling.js"></script>
+  <script src="js/paddling-flow.js"></script>
 </body>
 </html>

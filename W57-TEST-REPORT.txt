@@ -1,0 +1,15 @@
+W57 PADDLE & KAYAK SIMPLIFICATION — TEST REPORT
+
+PASS — All 51 JS/MJS files in the merged W56.1 website passed node --check.
+PASS — All existing paddling data/action hooks retained.
+PASS — Four planning stages present: Plan, Conditions, Get ready, Float plan.
+PASS — Only one stage is managed as active/open by the new flow controller.
+PASS — Existing paddling.js remains unchanged.
+PASS — New paddling-flow.js is presentation/navigation only.
+PASS — Saved plans remain outside the active planning sequence.
+PASS — All local resources referenced by paddling.html resolve in the merged W56.1 baseline.
+PASS — W56.1 global Accessibility, Profile, Feedback and account scripts remain loaded.
+
+Research basis:
+- W3C WAI recommends splitting long forms into logical groups and supports disclosure/show-hide patterns.
+- Paddle UK current PaddleSafe advice emphasises buoyancy aids, telling someone the plan, communication, weather checks and knowing limits.

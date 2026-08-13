@@ -1,0 +1,9 @@
+Adventure Builder W57 — Paddle & Kayak Simplification
+
+- Reorganised the planner into Plan → Conditions → Get ready → Float plan.
+- Uses native disclosure sections so only the current task is expanded.
+- Preserves every existing paddling data hook and safety function.
+- Moves route notes and secondary float-plan details behind optional disclosures.
+- Moves saved water adventures outside the active planning flow.
+- Removes the old card-grid and oversized hero summary panel.
+- Adds paddling-flow.js for navigation/disclosure behaviour only; paddling.js remains the feature/data owner.
