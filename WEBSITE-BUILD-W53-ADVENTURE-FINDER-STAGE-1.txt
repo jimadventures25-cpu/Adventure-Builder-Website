@@ -1,0 +1,16 @@
+Adventure Builder Website W53 — Adventure Finder Stage 1
+
+Replace the matching files in the website with this patch.
+
+Main changes:
+- White, open Adventure Finder layout.
+- Search flow simplified to Where → What matters → Discover.
+- Real interactive MapLibre map with result markers.
+- Map and result list are linked.
+- Percentage match display removed; results explain match quality and reasons.
+- Existing My Van profile support preserved.
+- Save Idea and Trip Planner hand-off preserved.
+- Old monolithic adventure-finder.js replaced with five focused modules.
+- Old Finder development roadmap section removed from the customer page.
+
+Stage 2 is the live-data stage. The Stage 1 data module is deliberately isolated so real discovery providers can replace the sample places without another UI rebuild.

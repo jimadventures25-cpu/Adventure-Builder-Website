@@ -1,0 +1,38 @@
+W53 ADVENTURE FINDER — STAGE 1 FOUNDATION REBUILD
+
+PASS — Modular architecture
+- adventure-finder-data.js: normalized Stage 1 sample places + coordinates.
+- adventure-finder-state.js: preferences, saved ideas, My Van profile and Trip Planner hand-off.
+- adventure-finder-score.js: filtering, vehicle fit and transparent match ranking.
+- adventure-finder-map.js: MapLibre lifecycle, markers, fit bounds and result focus.
+- adventure-finder.js: UI/controller only.
+
+PASS — Pure module tests
+- 8 normalized sample places.
+- Every place has longitude/latitude coordinates.
+- Duplicate preference keys normalize safely.
+- Area filtering works.
+- Matching requested priorities rank correctly.
+- Oversize van profiles are marked as non-fitting and penalized.
+- Search preferences persist.
+- Duplicate saved ideas are blocked.
+- Trip Planner hand-off preserves source, coordinates and preferences.
+
+PASS — UI / resource checks
+- Real MapLibre map container present.
+- MapLibre v5.7.1 loads before Adventure Finder map/controller modules.
+- New module load order is data → state → score → map → controller.
+- Old partners/roadmap scripts removed from Adventure Finder.
+- Old staged-rollout development section removed.
+- Old percentage-match UI removed.
+- White responsive Stage 1 layout includes visible keyboard focus and reduced-motion handling.
+- All local resources resolve when overlaid onto the full Adventure Builder website base.
+
+STAGE 1 SCOPE
+- Uses the current sample/demo place concept deliberately.
+- Establishes the final search/filter/result/map architecture.
+- Stage 2 can replace adventure-finder-data.js with live discovery providers without rebuilding the page/controller.
+
+MAP NOTE
+- MapLibre GL JS is open source and used as the interactive renderer.
+- The beta map uses OpenStreetMap public raster tiles. Before high-volume launch, use an appropriate production tile provider or self-hosted map stack in line with OpenStreetMap tile usage policy.
