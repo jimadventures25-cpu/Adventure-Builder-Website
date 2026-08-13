@@ -36,13 +36,9 @@ function seededAngle(seed = 0) {
 }
 
 function activityConfig(activity) {
-  if (activity === 'cycle') {
-    return { transport: 'bicycle', label: 'cycling', locateRadius: 450, routeRadius: 180, speed: 18 };
-  }
-  if (activity === 'jog') {
-    return { transport: 'walking', label: 'jogging', locateRadius: 350, routeRadius: 140, speed: 9 };
-  }
-  return { transport: 'walking', label: 'walking', locateRadius: 350, routeRadius: 140, speed: 5.1 };
+  if (activity === 'cycle') return { transport: 'bicycle', label: 'cycling', speed: 18 };
+  if (activity === 'jog') return { transport: 'walking', label: 'jogging', speed: 9 };
+  return { transport: 'walking', label: 'walking', speed: 5.1 };
 }
 
 function styleRadiusMultiplier(style) {
@@ -51,93 +47,42 @@ function styleRadiusMultiplier(style) {
   return 1;
 }
 
-function correlatedPoint(item) {
-  const edge = Array.isArray(item?.edges) ? item.edges.find((entry) =>
-    Number.isFinite(Number(entry?.correlated_lat)) && Number.isFinite(Number(entry?.correlated_lon))) : null;
-  if (edge) return { lat: Number(edge.correlated_lat), lon: Number(edge.correlated_lon) };
-  const node = Array.isArray(item?.nodes) ? item.nodes.find((entry) =>
-    Number.isFinite(Number(entry?.lat)) && Number.isFinite(Number(entry?.lon))) : null;
-  if (node) return { lat: Number(node.lat), lon: Number(node.lon) };
-  return null;
-}
-
-async function upstreamJson(url, options, timeoutMs = 10000) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const response = await fetch(url, { ...options, signal: controller.signal });
-    const body = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      const message = body?.error || body?.error_message || body?.trip?.status_message || `Routing service returned HTTP ${response.status}.`;
-      const error = new Error(message);
-      error.status = response.status;
-      error.code = body?.error_code || body?.code || null;
-      throw error;
-    }
-    return body;
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
-async function locateRing({ config, headers, start, targetMetres, costing, activity, style, scale, seed }) {
-  const cfg = activityConfig(activity);
-  // The ring is deliberately based on loop perimeter rather than straight-line
-  // distance. 0.23-0.31 of target gives useful 3- and 4-sided loops after
-  // real street/path detours are taken into account.
-  const radius = Math.max(
-    activity === 'cycle' ? 650 : 380,
-    targetMetres * scale * styleRadiusMultiplier(style)
-  );
-  const rotation = seededAngle(seed) + (scale * 113.7);
-  const rawPoints = Array.from({ length: 8 }, (_, index) =>
-    destinationPoint(start, radius, rotation + index * 45));
-
-  const locations = [start, ...rawPoints].map((point, index) => ({
-    lat: point.lat,
-    lon: point.lon,
-    radius: index === 0 ? Math.min(180, cfg.locateRadius) : cfg.locateRadius,
-    // Lower than Valhalla's default 50 so footpaths/cycle links on the edge of
-    // estates and parks are not discarded as tiny islands before correlation.
-    minimum_reachability: index === 0 ? 10 : 5
-  }));
-
-  const payload = await upstreamJson(`${config.baseUrl}/locate`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({ locations, costing, verbose: false })
-  }, 9000);
-
-  if (!Array.isArray(payload) || payload.length < locations.length) {
-    throw new Error('Valhalla Locate did not return all candidate points.');
-  }
-
-  const snapped = payload.map(correlatedPoint);
-  if (!snapped[0]) throw new Error('Your current position could not be snapped to the routing network.');
-  return { start: snapped[0], ring: snapped.slice(1), rawPoints };
-}
-
 function uniqueCandidateKey(points) {
   return points.map((point) => `${point.lat.toFixed(5)},${point.lon.toFixed(5)}`).join('|');
 }
 
-function buildCandidates(snapped) {
+// Generate several compact loop shapes around the user's position. These are
+// deliberately *hints*, not pre-snapped graph locations. Valhalla's Route API
+// performs its own correlation and is the only endpoint required by this path.
+function buildDirectCandidates({ start, targetMetres, activity, style, seed }) {
+  const baseAngle = seededAngle(seed);
+  const styleScale = styleRadiusMultiplier(style);
+  const minimumRadius = activity === 'cycle' ? 520 : 320;
+  const scales = activity === 'cycle' ? [0.20, 0.24, 0.28] : [0.19, 0.23, 0.27];
   const candidates = [];
-  const { start, ring } = snapped;
-  const add = (indices) => {
-    const via = indices.map((index) => ring[(index + ring.length) % ring.length]).filter(Boolean);
-    if (via.length !== indices.length) return;
-    const points = [start, ...via, { ...start }];
-    candidates.push(points);
-  };
 
-  // Two-waypoint triangular loops: 90° and 135° separation.
-  for (let i = 0; i < 8; i += 1) {
-    add([i, i + 2]);
-    add([i, i + 3]);
-  }
-  // Three-waypoint loops give the router more shape control in grid-like areas.
-  for (let i = 0; i < 8; i += 2) add([i, i + 2, i + 4]);
+  const add = (points) => candidates.push([start, ...points, { ...start }]);
+
+  scales.forEach((scale, scaleIndex) => {
+    const radius = Math.max(minimumRadius, targetMetres * scale * styleScale);
+    // Rotate each scale so retries do not keep probing the same streets/paths.
+    const rotation = baseAngle + scaleIndex * 37;
+    for (let i = 0; i < 4; i += 1) {
+      const angle = rotation + i * 90;
+      // Triangle: two broad via points. This is the most tolerant shape and is
+      // attempted first because it asks the graph for the least constrained loop.
+      add([
+        destinationPoint(start, radius, angle),
+        destinationPoint(start, radius, angle + 125)
+      ]);
+      // Rounded rectangle: better distance control in grid-like areas.
+      add([
+        destinationPoint(start, radius * 0.82, angle),
+        destinationPoint(start, radius * 1.03, angle + 82),
+        destinationPoint(start, radius * 0.82, angle + 168)
+      ]);
+    }
+  });
 
   const seen = new Set();
   return candidates.filter((points) => {
@@ -152,14 +97,13 @@ function routeRequest(points, costing, activity, style) {
   const cfg = activityConfig(activity);
   const locations = points.map((point, index) => {
     const endpoint = index === 0 || index === points.length - 1;
+    // Via points influence the path without forcing separate route legs. More
+    // importantly, we intentionally omit radius/search_cutoff so Valhalla can
+    // use its normal graph correlation instead of W41's overly strict snapping.
     return {
       lat: Number(point.lat),
       lon: Number(point.lon),
-      // break_through on generated intermediate locations prevents a cheap
-      // U-turn at the snapped waypoint while still giving us separate legs.
-      type: endpoint ? 'break' : 'break_through',
-      radius: endpoint ? Math.min(120, cfg.routeRadius) : cfg.routeRadius,
-      minimum_reachability: endpoint ? 10 : 5
+      type: endpoint ? 'break' : 'via'
     };
   });
 
@@ -193,15 +137,33 @@ function routeRequest(points, costing, activity, style) {
   return request;
 }
 
+async function upstreamJson(url, options, timeoutMs = 12000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    const raw = await response.text();
+    let body = {};
+    try { body = raw ? JSON.parse(raw) : {}; } catch { body = {}; }
+    if (!response.ok) {
+      const message = body?.error || body?.error_message || body?.trip?.status_message || raw?.slice(0, 240) || `Routing service returned HTTP ${response.status}.`;
+      const error = new Error(message);
+      error.status = response.status;
+      error.code = body?.error_code || body?.code || null;
+      throw error;
+    }
+    return body;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 function routeScore(route, targetMetres) {
   const distance = Number(route?.distance);
   const coordinates = route?.geometry?.coordinates || [];
   if (!Number.isFinite(distance) || distance <= 0 || coordinates.length < 5) return Infinity;
-  const distanceError = Math.abs(distance - targetMetres) / targetMetres;
-
-  // Reject pathological routes that are far outside the requested distance.
-  if (distance < targetMetres * 0.5 || distance > targetMetres * 1.7) return Infinity;
-  return distanceError;
+  if (distance < targetMetres * 0.42 || distance > targetMetres * 1.9) return Infinity;
+  return Math.abs(distance - targetMetres) / targetMetres;
 }
 
 async function routeCandidate({ config, headers, points, costing, activity, style, targetMetres }) {
@@ -209,13 +171,13 @@ async function routeCandidate({ config, headers, points, costing, activity, styl
     method: 'POST',
     headers,
     body: JSON.stringify(routeRequest(points, costing, activity, style))
-  }, 12000);
+  });
   const normalised = normaliseValhalla(body);
   const route = normalised.routes?.[0];
   return { route, score: routeScore(route, targetMetres), points };
 }
 
-async function firstSuccessfulBatch(items, worker, concurrency = 3) {
+async function routeBatches(items, worker, concurrency = 3) {
   const results = [];
   const errors = [];
   for (let offset = 0; offset < items.length; offset += concurrency) {
@@ -225,9 +187,16 @@ async function firstSuccessfulBatch(items, worker, concurrency = 3) {
       catch (error) { errors.push(error); return null; }
     }));
     results.push(...settled.filter((item) => item && Number.isFinite(item.score)));
-    if (results.some((item) => item.score <= 0.18)) break;
+    if (results.some((item) => item.score <= 0.20)) break;
   }
   return { results, errors };
+}
+
+function conciseError(error) {
+  if (!error) return '';
+  const status = Number(error.status);
+  const prefix = Number.isFinite(status) ? `HTTP ${status}: ` : '';
+  return `${prefix}${error.message || 'Unknown routing error'}`.slice(0, 300);
 }
 
 export default async (request) => {
@@ -254,36 +223,24 @@ export default async (request) => {
     }
 
     const headers = valhallaHeaders(config);
-    const ringScales = activity === 'cycle' ? [0.24, 0.30] : [0.23, 0.29];
-    const allCandidates = [];
-    const locateErrors = [];
-
-    for (let index = 0; index < ringScales.length; index += 1) {
-      try {
-        const snapped = await locateRing({
-          config, headers, start, targetMetres, costing, activity, style,
-          scale: ringScales[index], seed: seed + index * 7919
-        });
-        allCandidates.push(...buildCandidates(snapped));
-      } catch (error) {
-        locateErrors.push(error);
-      }
-    }
-
-    if (!allCandidates.length) {
-      const detail = locateErrors[0]?.message || 'No nearby routable points could be found.';
-      return json({ error: `I could not connect your position to nearby ${cfg.label} paths: ${detail}` }, 422);
-    }
-
-    const { results, errors } = await firstSuccessfulBatch(
-      allCandidates.slice(0, 28),
+    const candidates = buildDirectCandidates({ start, targetMetres, activity, style, seed });
+    const { results, errors } = await routeBatches(
+      candidates.slice(0, 24),
       (points) => routeCandidate({ config, headers, points, costing, activity, style, targetMetres }),
       3
     );
 
     if (!results.length) {
-      const detail = errors[0]?.message || 'Valhalla could not connect the snapped loop points.';
-      return json({ error: `No ${cfg.label} loop could be connected from this position. ${detail}` }, 422);
+      const first = errors[0];
+      const detail = conciseError(first) || 'Valhalla returned no usable route candidates.';
+      return json({
+        error: `No ${cfg.label} loop could be generated from this position. ${detail}`,
+        diagnostic: {
+          stage: 'route-candidates',
+          attempts: Math.min(candidates.length, 24),
+          upstreamError: detail
+        }
+      }, 422);
     }
 
     results.sort((a, b) => a.score - b.score);
@@ -293,14 +250,15 @@ export default async (request) => {
       planningPoints: best.points,
       requestedDistance: targetMetres,
       distanceError: best.score,
-      gbca_feature: 'website-trail-loop-v2',
+      gbca_feature: 'website-trail-loop-v3',
       gbca_activity: activity,
-      gbca_provider: 'valhalla'
+      gbca_provider: 'valhalla',
+      gbca_strategy: 'route-api-direct-correlation'
     });
   } catch (error) {
     const message = error?.name === 'AbortError'
       ? 'Walking route generation timed out. Please try again.'
       : (error?.message || 'Walking route generation failed.');
-    return json({ error: message }, 500);
+    return json({ error: message, diagnostic: { stage: 'function', upstreamError: conciseError(error) } }, 500);
   }
 };

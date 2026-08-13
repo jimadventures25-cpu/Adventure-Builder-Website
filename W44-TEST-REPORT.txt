@@ -1,0 +1,33 @@
+Adventure Builder Website — W44 Test Report
+
+PASS — JavaScript / MJS syntax
+- node --check run against all shipped .js and .mjs files.
+
+PASS — Browser Generate regression
+- Simulated the Walking & Hiking page controls and AdventureBuilderTrailPlanner.
+- Clicked Generate.
+- Verified exactly one request reached /.netlify/functions/trail-loop.
+- Verified walk, balanced style and ~3 mile requested distance were sent.
+- Verified a successful route response was passed to planner.applyRoute().
+- Verified Generate re-enabled and Try a different route became visible.
+- Verified a default trail name was filled in.
+
+PASS — Browser failure recovery
+- Simulated a 422 backend rejection with diagnostic stage route-candidates.
+- Verified the original map view was restored.
+- Verified the real diagnostic stage appeared in the planner status.
+- Verified Generate re-enabled after failure.
+
+PASS — Static undefined-helper check
+- captureMapView and restoreMapView are both defined in walking-route-discovery.js.
+- Their references are confined to the auto-route controller path.
+
+PASS — Package integrity
+- Walking-specific script/stylesheet references are present in W44.
+- Shared site-wide references were validated against the W36 full website base.
+
+Research validation
+-------------------
+Valhalla official documentation confirms the route service supports pedestrian and
+bicycle costing and waypoint location types including break/via. W44 therefore leaves
+the W43 server request format intact and fixes the proven client-side crash instead.

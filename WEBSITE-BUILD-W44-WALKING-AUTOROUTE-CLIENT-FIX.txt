@@ -1,0 +1,25 @@
+Adventure Builder Website — W44 Walking Auto-Route Client Fix
+
+Root cause fixed
+----------------
+W43's js/walking-route-discovery.js called captureMapView() when Generate was pressed,
+but captureMapView() and restoreMapView() had been accidentally removed during the
+W42/W43 rebuild. Because captureMapView() was called before the try/catch, the browser
+threw ReferenceError immediately. The Generate button had already been disabled, so the
+request never reached /.netlify/functions/trail-loop and the UI appeared to do nothing.
+
+W44 changes
+-----------
+- Restores map-view capture/restore helpers with defensive MapLibre API checks.
+- Moves Generate setup, including view capture, inside the protected try/finally path.
+- Ensures Generate and Regenerate buttons always recover after success or failure.
+- Keeps W43's route-only Valhalla loop backend; the validated server request format was
+  not changed again.
+- Keeps diagnostic backend errors visible in the planner status message.
+- Retains modular separation: planner/map state, route-discovery UI, loop Netlify
+  function, Valhalla connector, and routing config remain separate modules.
+
+Install
+-------
+Copy the files in this package over the matching paths in Adventure-Builder-Website.
+If js/walking-loop-engine.js still exists from W41, delete it; it is obsolete.

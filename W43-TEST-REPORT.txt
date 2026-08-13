@@ -1,0 +1,12 @@
+Adventure Builder W43 — Test Report
+
+Tests run before packaging:
+- Node syntax checks for all modified JS/MJS files.
+- Direct route candidate generation: start/end loop is preserved.
+- Walk/Jog requests use pedestrian costing.
+- Cycle requests use bicycle costing.
+- Generated intermediate points use Valhalla `via` locations.
+- No generated route request contains W41 search_cutoff/radius restrictions.
+- Integration mock where /locate is unavailable but /route succeeds.
+- Integration mock where route rejects all candidates and W43 returns the real upstream error/stage.
+- Required website script references exist in package.

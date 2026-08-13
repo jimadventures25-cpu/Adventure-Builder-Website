@@ -1,0 +1,24 @@
+Adventure Builder Website — W43 Walking Loop Route API Fix
+
+Purpose
+-------
+Fix the remaining Make me a route failure seen after W42.
+
+Root cause addressed
+--------------------
+W42 made Valhalla /locate a mandatory prerequisite before any loop route was attempted.
+The existing Adventure Builder routing stack is proven around Valhalla /route; adding a mandatory
+Locate dependency can make every auto-loop fail on deployments/proxies that route correctly but do
+not expose Locate in the same way.
+
+W43 changes
+-----------
+- Makes Valhalla /route the required/primary API again.
+- Removes W41's restrictive search_cutoff/radius snapping settings.
+- Uses Valhalla's normal Route location correlation for generated via points.
+- Uses via points so generated loop hints influence the route without forcing separate legs.
+- Tries multiple distances/orientations/shapes and scores valid results against requested mileage.
+- Returns the first real upstream failure and diagnostic stage if every candidate is rejected.
+- Keeps pedestrian costing for Walk/Jog and bicycle costing for Cycle.
+
+No /locate endpoint is required for W43 auto-loop generation.

@@ -80,19 +80,44 @@
     setStatus(`${route.name} highlighted from OpenStreetMap. Check access, conditions and local restrictions before setting off.`, 'success');
   }
 
+
+  function captureMapView() {
+    const map = planner?.map;
+    if (!map || typeof map.getCenter !== 'function') return null;
+    const center = map.getCenter();
+    return {
+      center: [Number(center.lng), Number(center.lat)],
+      zoom: typeof map.getZoom === 'function' ? map.getZoom() : undefined,
+      bearing: typeof map.getBearing === 'function' ? map.getBearing() : undefined,
+      pitch: typeof map.getPitch === 'function' ? map.getPitch() : undefined
+    };
+  }
+
+  function restoreMapView(view) {
+    const map = planner?.map;
+    if (!view || !map || typeof map.easeTo !== 'function') return;
+    const options = { center: view.center, duration: 500, essential: true };
+    if (Number.isFinite(view.zoom)) options.zoom = view.zoom;
+    if (Number.isFinite(view.bearing)) options.bearing = view.bearing;
+    if (Number.isFinite(view.pitch)) options.pitch = view.pitch;
+    map.easeTo(options);
+  }
+
   async function makeRoute() {
     if (generating) return;
     generating = true;
-    generateButton.disabled = true;
-    regenerateButton.disabled = true;
-    const miles = clamp(Number(distanceInput.value || 3), 1, 10);
-    const targetMetres = miles * METRES_PER_MILE;
-    const style = styleSelect.value;
-    const cfg = ACTIVITY[activity];
-    const originalView = captureMapView();
-    setStatus(`Creating a ${miles} mile ${cfg.label} loop near you…`);
+    if (generateButton) generateButton.disabled = true;
+    if (regenerateButton) regenerateButton.disabled = true;
+    let originalView = null;
 
     try {
+      const miles = clamp(Number(distanceInput?.value || 3), 1, 10);
+      const targetMetres = miles * METRES_PER_MILE;
+      const style = styleSelect?.value || 'balanced';
+      const cfg = ACTIVITY[activity];
+      originalView = captureMapView();
+      setStatus(`Creating a ${miles} mile ${cfg.label} loop near you…`);
+
       const start = await planner.getCurrentLocation();
       const seed = (Date.now() ^ (++seedCounter * 2654435761)) >>> 0;
       const response = await fetch('/.netlify/functions/trail-loop', {
@@ -101,7 +126,10 @@
         body: JSON.stringify({ start, targetMetres, style, activity, seed })
       });
       const payload = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(payload.error || 'The automatic route could not be generated.');
+      if (!response.ok) {
+        const stage = payload?.diagnostic?.stage ? ` [${payload.diagnostic.stage}]` : '';
+        throw new Error(`${payload.error || 'The automatic route could not be generated.'}${stage}`);
+      }
       if (!payload.route?.geometry?.coordinates?.length || !Array.isArray(payload.planningPoints)) {
         throw new Error('The route service returned an incomplete loop.');
       }
@@ -120,8 +148,8 @@
       setStatus(error.message || 'A route could not be generated.', 'error');
     } finally {
       generating = false;
-      generateButton.disabled = false;
-      regenerateButton.disabled = false;
+      if (generateButton) generateButton.disabled = false;
+      if (regenerateButton) regenerateButton.disabled = false;
     }
   }
 
