@@ -1,0 +1,23 @@
+Adventure Builder W47 — Map Marker Lifecycle Fix
+
+ROOT CAUSE
+MapLibre GL JS Evented.on() returns a Subscription. The old trail planner chained
+Marker.addTo(map).on('dragend', ...), so state.markers stored Subscription objects
+instead of Marker instances. Later marker.remove() calls then failed with:
+"marker.remove is not a function".
+
+FIX
+- Added js/trail-marker-manager.js as the single owner of route markers.
+- Marker construction and event registration are now separate operations.
+- Only objects with Marker-style setLngLat() + remove() methods can enter marker state.
+- Removed all old state.markers cleanup loops from trail-planner.js.
+- Marker cleanup is idempotent and isolated; one failed removal cannot break the rest.
+
+TESTS
+PASS — simulated MapLibre v5 .on() Subscription return cannot enter marker state.
+PASS — real Marker object remains stored after registering dragend listener.
+PASS — repeated clear does not double-remove markers.
+PASS — route-marker replacement removes old markers exactly once.
+PASS — trail-planner contains no legacy state.markers paths.
+PASS — all shipped JavaScript/MJS files pass node --check.
+PASS — walking-hiking.html loads trail-marker-manager.js before trail-planner.js.

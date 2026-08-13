@@ -18,9 +18,11 @@
   const poiStatus = document.getElementById('trail-poi-status');
   const poiResults = document.getElementById('trail-poi-results');
 
+  const markerManager = window.AdventureBuilderTrailMarkerManager?.create?.();
+  if (!markerManager) return;
+
   const state = {
     points: [],
-    markers: [],
     route: null,
     userLocationMarker: null
   };
@@ -73,21 +75,26 @@
   }
 
   function redrawMarkers() {
-    state.markers.forEach((marker) => marker.remove());
-    state.markers = state.points.map((point, index) => {
+    markerManager.clear();
+    state.points.forEach((point, index) => {
       const element = document.createElement('div');
       element.className = `trail-marker ${index === 0 ? 'trail-marker-start' : index === state.points.length - 1 ? 'trail-marker-end' : 'trail-marker-waypoint'}`;
       element.textContent = markerLabel(index);
       element.title = index === 0 ? 'Trail start' : index === state.points.length - 1 ? 'Trail finish' : `Waypoint ${index}`;
-      return new maplibregl.Marker({ element, draggable: true })
+
+      const marker = new maplibregl.Marker({ element, draggable: true })
         .setLngLat([point.lon, point.lat])
-        .addTo(map)
-        .on('dragend', (event) => {
-          const position = event.target.getLngLat();
-          state.points[index] = { lat: position.lat, lon: position.lng };
-          clearRouteLine();
-          setStatus('Point moved. Build the trail again to update the route.');
-        });
+        .addTo(map);
+
+      // MapLibre Evented.on() returns a Subscription in v5+, not the Marker.
+      // Keep the marker instance itself in marker state and register events separately.
+      marker.on('dragend', (event) => {
+        const position = event.target.getLngLat();
+        state.points[index] = { lat: position.lat, lon: position.lng };
+        clearRouteLine();
+        setStatus('Point moved. Build the trail again to update the route.');
+      });
+      markerManager.add(marker);
     });
     updateSummary();
   }
@@ -207,8 +214,7 @@
 
   clearButton?.addEventListener('click', () => {
     state.points = [];
-    state.markers.forEach((marker) => marker.remove());
-    state.markers = [];
+    markerManager.clear();
     clearRouteLine();
     setStatus('Trail cleared. Tap the map to begin again.');
   });
@@ -289,8 +295,7 @@
     applyRoute,
     clear: () => {
       state.points = [];
-      state.markers.forEach((marker) => marker.remove());
-      state.markers = [];
+      markerManager.clear();
       clearRouteLine();
     },
     getCurrentLocation: () => new Promise((resolve, reject) => {
