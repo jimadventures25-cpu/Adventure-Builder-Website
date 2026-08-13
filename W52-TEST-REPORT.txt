@@ -1,0 +1,21 @@
+W52 ADVENTURE HUB WHITE EDITORIAL — TEST REPORT
+
+PASS — 3 Adventure Hub JavaScript files passed node --check.
+PASS — W50/W51 store, import, map and controller JavaScript retained byte-for-byte.
+PASS — Dashboard, Adventures, Timeline, Map and Add views retained.
+PASS — Add/import hooks and MapLibre map target retained.
+PASS — old dark theme colour removed from Adventure Hub page.
+PASS — W51 Quick Actions panel removed.
+PASS — generic .abh-card visual treatment reset to open/transparent.
+PASS — statistics, milestones, timeline and imports use separators rather than nested cards.
+PASS — white page/background treatment present.
+PASS — desktop, tablet and phone responsive breakpoints present.
+PASS — keyboard focus treatment and reduced-motion support present.
+
+Research/design basis
+- W3C WAI recommends whitespace around content to make sections clear without overwhelming the page.
+- W3C WAI clear-layout guidance emphasises headings, navigation and consistent styling.
+- web.dev responsive-design guidance recommends layouts adapt to device size/capabilities rather than simply shrink.
+- W49 Walking & Hiking used as Adventure Builder's internal visual benchmark.
+PASS — merged-site integrity check against W36 full website + frozen W49 Walking build: every local script, stylesheet, image and page link referenced by adventures.html resolves.
+PASS — shared site CSS contains no later Adventure Hub background override that defeats W52's white canvas.

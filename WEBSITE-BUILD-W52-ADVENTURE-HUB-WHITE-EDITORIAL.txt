@@ -1,0 +1,17 @@
+Adventure Builder Website W52 — Adventure Hub White Editorial Rebuild
+
+Design direction
+- White background throughout the Adventure Hub.
+- Removes the dark dashboard/card visual language from W51.
+- Uses spacing, typography and thin dividers to group content.
+- Removes the redundant Quick Actions panel.
+- Statistics are now open typography with separators, not a boxed dashboard card.
+- Recent adventures and milestones are open list sections.
+- Adventure Map becomes a full-width editorial feature and the real map is the dominant element on the Map tab.
+- Feed cards lose outer frames and nested pills; content reads like an editorial gallery.
+- Timeline rows, imports and forms use rules instead of panel boxes.
+- Orange is reserved for active navigation, labels and emphasis.
+- W50 data/import/map logic is retained unchanged.
+
+Reference
+Walking & Hiking W49 was used as the internal quality benchmark for its white canvas, restrained borders and spacing-led organisation.
