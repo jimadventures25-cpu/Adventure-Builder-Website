@@ -1,0 +1,5 @@
+Adventure Builder Website W56.1 — Adventure Hub Integration Fix
+
+Install over W56.
+This patch restores the frozen W52 Adventure Hub while retaining W56 Account, Accessibility, Profile, Feedback and Community Counter services.
+No Adventure Hub redesign and no account architecture changes are included.

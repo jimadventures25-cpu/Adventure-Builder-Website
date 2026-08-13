@@ -1,0 +1,24 @@
+W56.1 ADVENTURE HUB INTEGRATION FIX — TEST REPORT
+
+ROOT CAUSE
+W56 was packaged from an older full-site Adventure Hub baseline. That overwrote the frozen W52 white-editorial Hub and dropped W52's dedicated store/map modules.
+
+FIX
+- Restored frozen W52 adventures.html structure and white-editorial presentation.
+- Restored W52 css/adventure-hub.css byte-for-byte.
+- Restored W52 js/adventure-hub-store.js byte-for-byte.
+- Restored W52 js/adventure-hub-map.js byte-for-byte.
+- Restored W52 js/adventure-hub.js byte-for-byte.
+- Added the W56 shared Accessibility, Profile, Feedback and Community Counter assets to the W52 page shell.
+- Kept W56 auth/account/profile implementation unchanged.
+
+PASS — 50 JS/MJS files in the merged W56.1 website passed node --check.
+PASS — exactly one valid <head> in adventures.html.
+PASS — W52 hero 'Your adventures. Your story.' restored.
+PASS — old 'My Adventure World' Hub removed.
+PASS — Overview / Adventures / Timeline / Map / Add hooks restored.
+PASS — MapLibre + W52 store/map/controller modules are present once.
+PASS — W56 accessibility/profile/feedback/counter modules are present once.
+PASS — all local assets referenced by adventures.html resolve in the merged W56.1 tree.
+PASS — frozen W52 Hub CSS/JS files are byte-identical to W52.
+PASS — W56 shared account/personalisation modules remain byte-identical to W56.
