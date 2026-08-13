@@ -135,10 +135,14 @@
       }
 
       const actualMiles = payload.route.distance / METRES_PER_MILE;
+      const quality = payload.routeQuality || {};
+      const qualityLabel = Number.isFinite(Number(quality.score))
+        ? ` · ${String(quality.grade || 'route')} match ${Math.round(Number(quality.score))}/100`
+        : '';
       planner.applyRoute(
         payload.route,
         payload.planningPoints,
-        `Made a ${actualMiles.toFixed(1)} mile ${cfg.label} loop. Use “Try a different route” for another one.`
+        `Made a ${actualMiles.toFixed(1)} mile ${cfg.label} loop${qualityLabel}. Use “Try a different route” for another one.`
       );
       const trailName = document.getElementById('trail-name');
       if (trailName && !trailName.value.trim()) trailName.value = `Adventure Builder ${miles} mile ${cfg.label} loop`;

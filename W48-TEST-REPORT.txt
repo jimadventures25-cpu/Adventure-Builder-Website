@@ -1,0 +1,23 @@
+W48 SMART ROUTE QUALITY — TEST REPORT
+
+PASS — pure quality engine: accurate clean route outranks severe overshoot and repeated geometry.
+PASS — endpoint ranking: mocked 3-mile request rejected an 8.9-mile first candidate and selected a 3.2-mile candidate (92/100) in two upstream calls.
+PASS — progressive request budget: maximum three sequential candidates; early stop on strong quality.
+PASS — emergency gateway protection: candidate loop stops after a non-Valhalla provider result.
+PASS — Jog costing: pedestrian, 9 km/h walking_speed, stronger step penalty.
+PASS — Cycle gentle costing: bicycle hybrid + stronger poor-surface avoidance.
+PASS — Cycle adventurous costing: bicycle cross + relaxed poor-surface avoidance.
+PASS — every shipped JS/MJS file passed node --check.
+PASS — old 24-candidate burst path removed.
+PASS — old unused routeBatches implementation removed.
+PASS — W47 trail marker manager remains referenced before trail-planner.js.
+
+Quality metrics
+- distance accuracy
+- repeated segment ratio
+- sharp-turn density
+- self-crossing penalty
+- loop closure
+
+Notes
+The FOSSGIS Valhalla endpoint remains a fair-use public demo fallback. A private VALHALLA_BASE_URL remains preferred for production-scale usage.

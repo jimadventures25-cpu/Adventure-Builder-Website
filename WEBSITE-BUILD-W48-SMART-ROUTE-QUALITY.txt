@@ -1,0 +1,13 @@
+Adventure Builder Website W48 — Smart Route Quality Engine
+
+What changed
+- Adds a separate trail-quality-engine.mjs module.
+- Ranks generated loops using distance accuracy, repeated segments, sharp-turn density, self-crossing and loop closure.
+- Uses at most three sequential Valhalla candidates and stops early on a strong match.
+- Preserves the W46 protection: if routing falls through to the emergency app/GraphHopper gateway, no candidate burst is sent.
+- Tightens initial loop radii to reduce severe overshoot.
+- Jogging now penalises steps more strongly and favours continuous pedestrian surfaces.
+- Cycling now avoids poor surfaces more strongly unless Adventurous mode is selected.
+- Shows the selected route's quality score in the page status message.
+
+Provider order and marker lifecycle from W46/W47 remain unchanged.
