@@ -1,0 +1,22 @@
+Adventure Builder Website — W41 Walking / Jogging / Cycling Route Rebuild
+
+Purpose
+- Rebuild the automatic loop route path instead of stacking another W40 patch.
+- Fix the shared Valhalla route geometry conversion.
+- Keep loop geometry/scoring separate from UI code.
+
+Main changes
+1. netlify/functions/lib/valhalla-connector.mjs
+   - Removed unsupported reliance on GeoJSON route-leg shapes.
+   - Decodes Valhalla polyline6 leg shapes into GeoJSON [lon, lat] coordinates.
+   - Keeps pedestrian costing for walk/jog and bicycle costing for cycle.
+2. js/walking-loop-engine.js
+   - New pure candidate-generation and route-quality module.
+3. js/walking-route-discovery.js
+   - Uses the loop engine and small concurrent route batches.
+   - Keeps existing established-route discovery and UI behaviour.
+4. walking-hiking.html
+   - Loads the loop engine before the discovery controller.
+
+Deployment
+Replace the matching files in the website build, including the shared Valhalla connector and new walking-loop-engine.js.

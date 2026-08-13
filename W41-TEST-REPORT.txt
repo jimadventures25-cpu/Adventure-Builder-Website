@@ -1,0 +1,39 @@
+Adventure Builder W41 Walking Route Rebuild — Test Report
+
+PASS — JavaScript / MJS syntax
+- valhalla-connector.mjs
+- trail-route.mjs
+- trail-planner.js
+- walking-workspace.js
+- walking-loop-engine.js
+- walking-route-discovery.js
+
+PASS — Valhalla connector unit tests
+- polyline6 decode restores latitude/longitude correctly
+- GeoJSON output uses [longitude, latitude]
+- walk/jog maps to pedestrian costing
+- cycle maps to bicycle costing
+- obsolete shape_format request option removed
+- normalised route contains usable LineString geometry and distance
+
+PASS — Netlify trail-route mocked end-to-end test
+- POST input accepted
+- pedestrian request sent upstream for jogging
+- encoded Valhalla route converted into browser geometry
+- activity metadata retained
+
+PASS — Loop engine tests
+- 3-pass candidate plan generated
+- 16 candidate loops generated
+- candidate loops return to the start point
+- route quality scorer accepts valid near-target route
+
+PASS — Package integrity
+- all local JavaScript files referenced by walking-hiking.html exist
+- walking-loop-engine.js loads before walking-route-discovery.js
+- exactly one Walk/Jog/Cycle switch in page
+- no old loop-generation functions remain in walking-route-discovery.js
+- no shape_format references remain in the rebuilt routing code
+
+External live-route note
+A direct live POST to the public Valhalla demo was attempted from the build container, but the container's outbound DNS was unavailable. This was an environment/network limitation, not a module error. The connector behaviour is covered by the mocked Valhalla response test using native encoded polyline6 geometry.

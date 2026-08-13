@@ -6,6 +6,36 @@ function metres(length, units = 'kilometers') {
   return units === 'miles' ? value * MILES_TO_METRES : value * KILOMETRES_TO_METRES;
 }
 
+// Valhalla route legs use encoded polyline with 6 decimal places.
+// Return MapLibre/GeoJSON order: [longitude, latitude].
+function decodePolyline6(encoded = '') {
+  if (typeof encoded !== 'string' || !encoded) return [];
+  const coordinates = [];
+  let index = 0;
+  let lat = 0;
+  let lon = 0;
+
+  const decodeValue = () => {
+    let result = 0;
+    let shift = 0;
+    let byte;
+    do {
+      if (index >= encoded.length) throw new Error('Valhalla returned an invalid route shape.');
+      byte = encoded.charCodeAt(index++) - 63;
+      result |= (byte & 0x1f) << shift;
+      shift += 5;
+    } while (byte >= 0x20);
+    return (result & 1) ? ~(result >> 1) : (result >> 1);
+  };
+
+  while (index < encoded.length) {
+    lat += decodeValue();
+    lon += decodeValue();
+    coordinates.push([lon / 1e6, lat / 1e6]);
+  }
+  return coordinates;
+}
+
 function manoeuvreDescriptor(type) {
   const table = {
     0: ['continue', 'straight'], 1: ['depart', 'straight'], 2: ['depart', 'right'], 3: ['depart', 'left'],
@@ -21,6 +51,7 @@ function manoeuvreDescriptor(type) {
 }
 
 function lineCoordinates(shape) {
+  if (typeof shape === 'string') return decodePolyline6(shape);
   if (shape?.type === 'LineString' && Array.isArray(shape.coordinates)) return shape.coordinates;
   if (shape?.geometry?.type === 'LineString' && Array.isArray(shape.geometry.coordinates)) return shape.geometry.coordinates;
   return [];
@@ -32,15 +63,20 @@ function normaliseValhalla(payload) {
     const message = trip?.status_message || payload?.error || 'Valhalla did not return a route.';
     throw new Error(message);
   }
+
   const units = trip.units || 'kilometers';
   const routeCoordinates = [];
   const legs = trip.legs.map((leg) => {
     const coords = lineCoordinates(leg.shape);
-    const offset = routeCoordinates.length;
-    coords.forEach((coordinate, index) => {
-      if (index === 0 && routeCoordinates.length && routeCoordinates.at(-1)[0] === coordinate[0] && routeCoordinates.at(-1)[1] === coordinate[1]) return;
+    if (!coords.length) throw new Error('Valhalla returned a route without usable geometry.');
+    const routeOffset = routeCoordinates.length ? routeCoordinates.length - 1 : 0;
+
+    coords.forEach((coordinate, pointIndex) => {
+      const previous = routeCoordinates.at(-1);
+      if (pointIndex === 0 && previous && previous[0] === coordinate[0] && previous[1] === coordinate[1]) return;
       routeCoordinates.push(coordinate);
     });
+
     const steps = (leg.maneuvers || []).map((item) => {
       const [type, modifier] = manoeuvreDescriptor(item.type);
       const localIndex = Math.max(0, Math.min(coords.length - 1, Number(item.begin_shape_index) || 0));
@@ -58,11 +94,13 @@ function normaliseValhalla(payload) {
           modifier,
           instruction: item.instruction || item.verbal_pre_transition_instruction || 'Continue',
           location,
+          shape_index: routeOffset + localIndex,
           exit: Number(item.roundabout_exit_count) || undefined
         },
         intersections: []
       };
     });
+
     return {
       distance: metres(leg.summary?.length, units),
       duration: Number(leg.summary?.time) || 0,
@@ -71,6 +109,9 @@ function normaliseValhalla(payload) {
       annotation: { closure: [] }
     };
   });
+
+  if (routeCoordinates.length < 2) throw new Error('Valhalla returned an incomplete route shape.');
+
   return {
     code: 'Ok',
     routes: [{
@@ -107,6 +148,7 @@ function buildValhallaRequest(input) {
   if (points.length < 2 || points.some((point) => !Number.isFinite(point.lat) || !Number.isFinite(point.lon))) {
     throw new Error('At least two valid route points are required.');
   }
+
   const costing = costingFor(input.transport);
   const options = {
     locations: points,
@@ -114,7 +156,6 @@ function buildValhallaRequest(input) {
     units: 'miles',
     language: 'en-GB',
     directions_type: 'instructions',
-    shape_format: 'geojson',
     alternates: input.routeStyle === 'scenic' ? 2 : 0
   };
   const costingOptions = {};
@@ -135,4 +176,4 @@ function buildValhallaRequest(input) {
   return options;
 }
 
-export { buildValhallaRequest, normaliseValhalla };
+export { buildValhallaRequest, normaliseValhalla, decodePolyline6, costingFor };

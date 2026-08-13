@@ -15,13 +15,10 @@ const haversine = (aLat, aLon, bLat, bLon) => {
   return 2 * R * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
 };
 
-const walkingNetworkLabel = (network) => ({
-  iwn: 'International walking route', nwn: 'National walking route', rwn: 'Regional walking route', lwn: 'Local walking route'
-}[network] || 'Walking route');
-
-const cyclingNetworkLabel = (network) => ({
-  icn: 'International cycle route', ncn: 'National cycle route', rcn: 'Regional cycle route', lcn: 'Local cycle route'
-}[network] || 'Cycle route');
+const networkLabel = (network, activity = 'walk') => {
+  if (activity === 'cycle') return ({ icn: 'International cycle route', ncn: 'National cycle route', rcn: 'Regional cycle route', lcn: 'Local cycle route' }[network] || 'Cycle route');
+  return ({ iwn: 'International walking route', nwn: 'National walking route', rwn: 'Regional walking route', lwn: 'Local walking route' }[network] || 'Walking route');
+};
 
 const geometryFromRelation = (relation) => {
   const lines = [];
@@ -53,16 +50,16 @@ exports.handler = async (event) => {
       return json(200, { geometry, source: 'OpenStreetMap route relation' });
     }
 
+    const activity = ['walk', 'jog', 'cycle'].includes(input.activity) ? input.activity : 'walk';
     const lat = Number(input.lat);
     const lon = Number(input.lon);
-    const activity = input.activity === 'cycle' ? 'cycle' : (input.activity === 'jog' ? 'jog' : 'walk');
-    const radius = Math.min(25000, Math.max(1000, Number(input.radius) || (activity === 'cycle' ? 18000 : 12000)));
+    const radius = Math.min(20000, Math.max(1000, Number(input.radius) || 12000));
     if (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) {
       return json(400, { error: 'A valid location is required.' });
     }
 
-    const routePattern = activity === 'cycle' ? 'bicycle' : '(hiking|foot)';
-    const query = `[out:json][timeout:18];\n(\n relation(around:${Math.round(radius)},${lat},${lon})[route~"^${routePattern}$"][name];\n);\nout center tags;`;
+    const routeFilter = activity === 'cycle' ? 'bicycle' : '^(hiking|foot)$';
+    const query = `[out:json][timeout:18];\n(\n relation(around:${Math.round(radius)},${lat},${lon})[route~"${routeFilter}"][name];\n);\nout center tags;`;
     const response = await fetch(OVERPASS_URL, {
       method: 'POST',
       headers: { 'content-type': 'application/x-www-form-urlencoded;charset=UTF-8', 'user-agent': 'AdventureBuilder/1.0' },
@@ -86,7 +83,7 @@ exports.handler = async (event) => {
         name,
         ref: item.tags?.ref || '',
         network: item.tags?.network || '',
-        networkLabel: activity === 'cycle' ? cyclingNetworkLabel(item.tags?.network) : walkingNetworkLabel(item.tags?.network),
+        networkLabel: networkLabel(item.tags?.network, activity),
         operator: item.tags?.operator || '',
         lat: cLat,
         lon: cLon,
@@ -97,6 +94,6 @@ exports.handler = async (event) => {
     return json(200, { routes, activity, source: 'OpenStreetMap route relations' });
   } catch (error) {
     console.error('nearby-walking-routes', error);
-    return json(502, { error: 'Nearby routes could not be loaded right now.' });
+    return json(502, { error: 'Nearby walking routes could not be loaded right now.' });
   }
 };
