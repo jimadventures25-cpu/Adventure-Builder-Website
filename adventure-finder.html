@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/account-gate.css">
   <link rel="stylesheet" href="css/navigation-shell.css">
+  <link rel="stylesheet" href="css/accessibility.css">
   <link rel="stylesheet" href="css/adventure-finder.css">
   
   <link rel="stylesheet" href="css/site-wide-compact-pages.css">
@@ -53,6 +54,7 @@
         <select id="af-drive" data-af-drive><option>30 minutes</option><option>1 hour</option><option selected>2 hours</option><option>3 hours</option><option>No limit</option></select>
       </div>
       <button class="af-filter-toggle" type="button" data-af-filter-toggle>What matters <span aria-hidden="true">＋</span></button>
+      <button class="af-accessibility-toggle" type="button" data-accessibility-open><span aria-hidden="true">♿</span> Accessibility <small data-accessibility-summary>Accessibility off</small></button>
       <button class="af-btn primary af-search-submit" type="button" data-af-search>Find adventures</button>
     </div>
 
@@ -74,6 +76,7 @@
     <div class="af-discovery-layout">
       <section class="af-results-column" aria-label="Adventure Finder results">
         <p class="af-stage-note" data-af-stage-note></p>
+        <p class="af-accessibility-explainer" data-af-accessibility-explainer hidden></p>
         <div class="af-list" data-af-results></div>
         <p class="af-status" data-af-status aria-live="polite"></p>
         <aside class="af-safety"><strong>Overnight stays</strong><p>Ordinary car parks must never be presented as overnight stops unless current evidence says overnight use is permitted. Always check signs, access rules and local restrictions before staying.</p></aside>
@@ -142,6 +145,8 @@
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/account-gate.js"></script>
+  <script src="js/accessibility-core.js"></script>
+  <script src="js/accessibility-ui.js"></script>
   <script src="js/navigation-shell.js"></script>
   <script src="js/main.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js"></script>

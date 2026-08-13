@@ -26,6 +26,7 @@
     return write('ab-trip-planner-handoff-v1',{
       placeId:place.id, placeName:place.name, region:place.region, source:'adventure-finder',
       coordinates:place.coords, vanProfile:prefs.useVan?getVan():null, preferences:normalise(prefs),
+      accessibility:window.AdventureAccessibility?.get?.() || null,
       createdAt:new Date().toISOString()
     });
   }

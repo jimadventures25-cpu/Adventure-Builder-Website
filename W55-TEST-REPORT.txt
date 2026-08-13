@@ -1,0 +1,46 @@
+W55 ACCESSIBILITY FOUNDATION — TEST REPORT
+
+PASS — Shared Accessibility Core
+- Uses one controlled vocabulary of access requirements rather than diagnoses.
+- Session storage is the default.
+- Persistent local-device storage only activates when the user explicitly selects "Remember these needs on this device".
+- Clear removes both session and persistent accessibility preferences.
+- No Stage A accessibility profile is sent to Supabase/account storage.
+
+PASS — Evidence / confidence rules
+- Supported states: Verified, Source information, Reported, Stage 1 sample, Not verified.
+- Unknown information does not count as an accessibility match.
+- An explicit conflict with a selected accessibility need excludes that Finder result.
+- Lower-confidence/sample evidence never presents itself as Verified.
+
+PASS — Adventure Finder integration
+- Finder reads the global accessibility profile.
+- Accessibility status appears separately from the ordinary adventure match.
+- Unknown access facts are shown as "Accessibility to verify".
+- Trip Planner hand-off includes the same accessibility profile snapshot.
+- Stage 1 sample places use clearly labelled fictional/sample accessibility facts only.
+
+PASS — Global website integration
+- Accessibility assets are included exactly once on all 18 website HTML pages.
+- Global Accessibility button/dialog is available from every page.
+- Finder has an additional direct Accessibility control beside its search options.
+- All local HTML script/style/image/page references resolve.
+
+PASS — Code / package checks
+- 45 JavaScript/MJS files across the merged website passed node --check.
+- accessibility-core.js, accessibility-ui.js and all Finder modules passed syntax checks.
+- Accessibility Core + Finder integration regression tests passed.
+- Existing W49 Walking, W52 Adventure Hub and W54 Adventure Finder were used as the merged baseline.
+
+RESEARCH BASIS
+- W3C WAI: accessible controls should be clearly labelled, understandable, keyboard operable and consistent.
+- WCAG 2.2 remains the current W3C WCAG standard family reference.
+- UK travel accessibility guidance emphasises concrete access facts such as step-free routes, toilets, parking and equipment fit.
+- Changing Places maintains a distinct network of fully accessible toilets and should not be conflated with a generic accessible toilet.
+- Paddle UK's inclusive paddling work supports modelling adaptive equipment/assistance and inclusive sessions as separate access facts.
+
+NEXT ADAPTERS
+- Walking & Hiking: surface, gradient, steps/gates, rest points, accessible parking/toilets.
+- Paddle & Kayak: launch/transfer access, adaptive equipment, companion support, accessible facilities.
+- Trip Planner: retain access requirements across stops/destinations.
+- App: adopt this same schema during the later website-to-app integration phase.

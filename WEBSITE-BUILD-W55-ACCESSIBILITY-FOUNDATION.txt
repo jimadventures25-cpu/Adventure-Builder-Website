@@ -1,0 +1,22 @@
+Adventure Builder Website W55 — Accessibility Foundation (Stage A)
+
+Purpose
+- Adds one shared Accessibility control across the website.
+- Stores needs/requirements rather than diagnoses.
+- Session-only by default; remembering on this device is an explicit user choice.
+- No Stage A accessibility profile data is sent to Supabase/account storage.
+- Defines evidence states: Verified, Source information, Reported, Stage 1 sample, Not verified.
+- Missing access data is never converted into an accessibility match.
+
+Adventure Finder integration
+- Finder reads the shared accessibility profile.
+- Explicit conflicts with a selected access need are excluded.
+- Unknown access facts remain visible as 'Accessibility to verify'.
+- Accessibility is included in the Trip Planner hand-off.
+- Stage 1 uses fictional sample access facts only; Stage 2 must replace them with sourced real-world data.
+
+Future adapters
+- Walking & Hiking: surface, gradient, steps/gates, rest points, accessible parking/toilets.
+- Paddle & Kayak: launch access, transfer/adaptive support, parking/toilets, companion support.
+- Trip Planner: carry accessibility needs through stops and destinations.
+- App: adopt the same schema in the later website-to-app integration phase.

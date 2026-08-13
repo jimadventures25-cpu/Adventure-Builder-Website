@@ -45,12 +45,17 @@
     const reasons=r.matched.slice(0,4).map(k=>`<li><span>✓</span>${label(k)}${r.distance?.[k]!=null?` <small>${r.distance[k]} km away</small>`:''}</li>`).join('');
     const general=!reasons?`<li><span>✓</span>${r.region}</li><li><span>✓</span>${r.type}</li>`:'';
     const van=prefs.useVan?(r.van.fit?'<li><span>✓</span>Fits your saved van profile</li>':`<li class="warn"><span>!</span>${r.van.issues.join(' · ')}</li>`):'';
+    const A=window.AdventureAccessibility;
+    const accessMatched=(r.access?.matched||[]).slice(0,4).map(f=>`<li class="access"><span>♿</span>${A?.label?.(f.key)||f.key} <small>${A?.statusLabel?.(f.status)||'Not verified'}</small></li>`).join('');
+    const accessUnknown=(r.access?.unknown||[]).slice(0,4).map(f=>A?.label?.(f.key)||f.key);
+    const accessBadge=r.access?.enabled?`<strong class="af-access-label ${r.access.unknown.length?'needs-check':'meets'}">${r.access.label}</strong>`:'';
     return `<article class="af-result" data-af-card="${r.id}">
       <div class="af-result-visual tone-${r.imageTone||'default'}"><span>${icon[r.type]||'📍'}</span><small>Stage 1 sample</small></div>
       <div class="af-result-copy">
-        <div class="af-result-heading"><div><p>${r.type} · ${r.region}</p><h3>${r.name}</h3></div><strong class="af-match-label">${r.matchLabel}</strong></div>
+        <div class="af-result-heading"><div><p>${r.type} · ${r.region}</p><h3>${r.name}</h3></div><div class="af-result-badges"><strong class="af-match-label">${r.matchLabel}</strong>${accessBadge}</div></div>
         <p class="af-result-summary">${r.summary}</p>
-        <ul class="af-reasons">${van}${reasons||general}</ul>
+        <ul class="af-reasons">${van}${accessMatched}${reasons||general}</ul>
+        ${accessUnknown.length?`<p class="af-access-unknown"><strong>Accessibility to verify:</strong> ${accessUnknown.join(', ')}.</p>`:''}
         ${r.missing.length?`<details class="af-missing"><summary>Also check</summary><p>This sample does not list: ${r.missing.slice(0,4).map(label).join(', ')}.</p></details>`:''}
         <div class="af-result-actions"><button type="button" class="af-link" data-af-map-focus="${r.id}">Show on map</button><span></span><button type="button" class="af-btn secondary" data-af-save="${r.id}">Save idea</button><button type="button" class="af-btn primary" data-af-plan="${r.id}">Build adventure</button></div>
       </div>
@@ -60,13 +65,16 @@
   function render(root,{scroll=false,prefs=null}={}){
     const committed=State.normalise(prefs || root._afCommitted || getPrefs(root));
     root._afCommitted=committed;
-    const results=Score.rank(Data.places,committed,State.getVan());
+    const accessProfile=window.AdventureAccessibility?.get?.() || {};
+    const results=Score.rank(Data.places,committed,State.getVan(),accessProfile);
     root._afResults=results;
     root.querySelector('[data-af-count]').textContent=`${results.length} place${results.length===1?'':'s'}`;
-    root.querySelector('[data-af-summary]').textContent=selectedSummary(committed);
+    root.querySelector('[data-af-summary]').textContent=selectedSummary(committed)+(window.AdventureAccessibility?.activeCount?.(accessProfile)?` · Accessibility ${window.AdventureAccessibility.activeCount(accessProfile)} need${window.AdventureAccessibility.activeCount(accessProfile)===1?'':'s'}`:'');
     const list=root.querySelector('[data-af-results]');
     list.innerHTML=results.length?results.map(r=>resultCard(r,committed)).join(''):`<div class="af-empty"><p class="af-kicker">No matches yet</p><h3>Try opening the search a little.</h3><p>Change the area, base type or one of your selected priorities.</p><button type="button" class="af-btn secondary" data-af-reset-results>Reset filters</button></div>`;
-    root.querySelector('[data-af-stage-note]').textContent='Stage 1 uses sample places so we can prove the search, ranking and map experience before connecting live place data.';
+    root.querySelector('[data-af-stage-note]').textContent='Stage 1 uses sample places so we can prove the search, ranking, map and accessibility architecture before connecting live place data.';
+    const explainer=root.querySelector('[data-af-accessibility-explainer]');
+    if(explainer){const n=window.AdventureAccessibility?.activeCount?.(accessProfile)||0;explainer.hidden=!n;explainer.textContent=n?`Accessibility is active with ${n} need${n===1?'':'s'}. Results with a known conflict are excluded; unknown access facts are shown as not verified.`:'';}
     if(MapUI) MapUI.render(root,results,results[0]?.id||null);
     if(scroll) root.querySelector('[data-af-results-heading]')?.scrollIntoView({behavior:'smooth',block:'start'});
   }
@@ -94,6 +102,9 @@
       const plan=e.target.closest('[data-af-plan]'); if(plan){const r=Data.places.find(x=>x.id===plan.dataset.afPlan);const ok=State.createTripHandoff(r,root._afCommitted || getPrefs(root));root.querySelector('[data-af-status]').textContent=ok?`${r.name} is ready for Trip Planner.`:'Could not prepare the Trip Planner hand-off.';}
     });
     root.querySelector('[data-af-live-selection]').textContent=selectedSummary(getPrefs(root));
+    const refreshAccess=()=>render(root,{prefs:root._afCommitted || loaded});
+    if(window.AdventureAccessibility?.events?.change) window.addEventListener(window.AdventureAccessibility.events.change,refreshAccess);
+    else window.addEventListener('adventurebuilder:accessibilityready',refreshAccess,{once:true});
     render(root,{prefs:loaded});
   }
 
