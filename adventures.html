@@ -4,16 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Your Adventure Builder history: adventures, routes, memories, map and outdoor milestones in one place.">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#0b0d0f">
   <title>Adventure Hub | Adventure Builder</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/account-gate.css">
   <link rel="stylesheet" href="css/navigation-shell.css">
-  <link rel="stylesheet" href="css/accessibility.css">
-  <link rel="stylesheet" href="css/feedback.css">
-  <link rel="stylesheet" href="css/community-counter.css">
-  <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css">
   <link rel="stylesheet" href="css/adventure-hub.css">
   <link rel="stylesheet" href="css/site-wide-compact-pages.css">
@@ -29,18 +25,20 @@
 
   <main>
     <section class="section standalone-page">
-<section class="abh" data-adventure-hub>
+      <div class="section-heading"><p class="eyebrow">Your routes · places · memories</p><h2>My Adventure World</h2><p>A living history of the places you explore — not a fitness leaderboard.</p></div>
+
+      <section class="abh" data-adventure-hub>
         <header class="abh-hero">
-          <div><p class="eyebrow">Adventure Hub</p><h1>Your adventures. Your story.</h1><p>Routes, places and memories brought together in one clean, personal history.</p></div>
-          <div class="abh-hero-actions"><button class="abh-btn primary" type="button" data-open-tab="add">Add adventure</button><a class="abh-btn" href="adventure-finder.html">Plan something new</a></div>
+          <div><p class="eyebrow">Adventure Builder · Adventure Hub</p><h1>Your outdoor story, all in one place.</h1><p>Bring completed walks, rides, road trips, paddles and journal memories together. See where you have been, what you have done and what you want to relive.</p></div>
+          <div class="abh-hero-actions"><button class="abh-btn primary" type="button" data-open-tab="add">＋ Add adventure</button><a class="abh-btn" href="adventure-finder.html">Find the next one</a></div>
         </header>
 
         <nav class="abh-tabs" aria-label="Adventure Hub sections">
           <button class="is-active" type="button" data-hub-tab="dashboard">Overview</button>
           <button type="button" data-hub-tab="adventures">Adventures</button>
           <button type="button" data-hub-tab="timeline">Timeline</button>
-          <button type="button" data-hub-tab="map">Map</button>
-          <button type="button" data-hub-tab="add">Add</button>
+          <button type="button" data-hub-tab="map">Adventure Map</button>
+          <button type="button" data-hub-tab="add">Add / Import</button>
         </nav>
 
         <div class="abh-body">
@@ -53,22 +51,23 @@
             </div>
 
             <div class="abh-dashboard-grid">
-              <article class="abh-section abh-recent-card">
+              <article class="abh-card abh-recent-card">
                 <div class="abh-card-head"><div><p class="abh-kicker">Latest memories</p><h3>Recent adventures</h3></div><button class="abh-text-btn" type="button" data-open-tab="adventures">View all</button></div>
                 <div data-recent-adventures></div>
               </article>
 
-              <article class="abh-section abh-milestone-section">
+              <article class="abh-card">
                 <div class="abh-card-head"><div><p class="abh-kicker">Your progress</p><h3>Adventure milestones</h3></div><a class="abh-text-btn" href="passport.html">Open Passport</a></div>
                 <div class="abh-milestones" data-milestones></div>
               </article>
             </div>
 
             <div class="abh-dashboard-grid">
-              <article class="abh-map-teaser">
-                <div><p class="abh-kicker">Adventure map</p><h3>See your story spread across the map</h3><p>Adventures with a saved GPS position appear automatically. Walking trails, paddles and journal entries can bring their coordinates with them when imported.</p><button class="abh-btn" type="button" data-open-tab="map">Open Map</button></div>
+              <article class="abh-card abh-map-teaser">
+                <div><p class="abh-kicker">Adventure map</p><h3>See your story spread across the map</h3><p>Adventures with a saved GPS position appear automatically. Walking trails, paddles and journal entries can bring their coordinates with them when imported.</p><button class="abh-btn" type="button" data-open-tab="map">Open Adventure Map</button></div>
                 <div class="abh-map-art" aria-hidden="true"><span>📍</span><i></i><span>🥾</span><i></i><span>🛶</span></div>
               </article>
+              <article class="abh-card abh-quick-actions"><p class="abh-kicker">Build the next memory</p><h3>Quick actions</h3><div><a href="walking-hiking.html">🥾 Plan a walk</a><a href="trip-planner.html">🚐 Plan a trip</a><a href="paddling.html">🛶 Plan a paddle</a><a href="journal.html">📖 Write in Journal</a></div></article>
             </div>
           </section>
 
@@ -85,18 +84,18 @@
           <section class="abh-view" data-hub-view="map" hidden>
             <div class="abh-map-layout">
               <div class="abh-map-panel"><div id="adventure-hub-map" class="abh-map" aria-label="Map of your recorded adventures"></div><p class="abh-map-status" data-map-status>Adventures with saved coordinates will appear here.</p></div>
-              <aside class="abh-map-aside"><p class="abh-kicker">Mapped adventures</p><h3>Places you have explored</h3><div class="abh-map-list" data-map-list></div></aside>
+              <aside class="abh-card"><p class="abh-kicker">Mapped adventures</p><h3>Places you have explored</h3><div class="abh-map-list" data-map-list></div></aside>
             </div>
           </section>
 
           <section class="abh-view" data-hub-view="add" hidden>
             <div class="abh-add-grid">
-              <form class="abh-form" data-adventure-form>
+              <form class="abh-card abh-form" data-adventure-form>
                 <div class="abh-card-head"><div><p class="abh-kicker">Manual entry</p><h2>Add a completed adventure</h2></div></div>
                 <div class="abh-form-grid two"><label>Adventure type<select name="type" data-activity-type><option value="hike">🥾 Hike</option><option value="cycle">🚴 Cycle</option><option value="road">🚐 Road trip</option><option value="camp">🏕️ Camping</option><option value="paddle">🏄 Paddleboard</option><option value="kayak">🛶 Kayak</option><option value="photo">📸 Photography</option><option value="explore">🧭 Explore</option><option value="dog">🐕 Dog walk</option><option value="fishing">🎣 Fishing</option></select></label><label>Date<input name="date" type="date"></label></div>
                 <label>Adventure name<input name="title" maxlength="80" required placeholder="Sunset walk at Formby Point"></label>
                 <label>Location<input name="location" maxlength="120" placeholder="Lake District, Cumbria"></label>
-                <div class="abh-location-row"><button class="abh-btn small" type="button" data-use-location>Use current GPS</button><span data-location-status>Optional — useful for the Map.</span></div>
+                <div class="abh-location-row"><button class="abh-btn small" type="button" data-use-location>Use current GPS</button><span data-location-status>Optional — useful for the Adventure Map.</span></div>
                 <input name="lat" type="hidden"><input name="lon" type="hidden">
 
                 <div class="abh-form-grid two" data-field-group="distance"><label>Distance (km)<input name="distanceKm" type="number" min="0" step="0.1" value="0"></label><label data-field="elevation">Elevation / high point (m)<input name="elevationM" type="number" min="0" step="1" placeholder="Optional"></label></div>
@@ -130,17 +129,7 @@
 
   <script src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/config.js"></script>
-  <script src="js/accessibility-core.js"></script>
-  <script src="js/profile-core.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/account-gate.js"></script>
-  <script src="js/accessibility-ui.js"></script>
-  <script src="js/profile-ui.js"></script>
-  <script src="js/community-counter.js"></script>
-  <script src="js/feedback.js"></script>
-  <script src="js/navigation-shell.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/config.js"></script><script src="js/auth.js"></script><script src="js/account-gate.js"></script><script src="js/navigation-shell.js"></script><script src="js/main.js"></script>
   <script src="js/adventure-hub-store.js"></script><script src="js/adventure-hub-map.js"></script><script src="js/adventure-hub.js"></script>
 </body>
 </html>
