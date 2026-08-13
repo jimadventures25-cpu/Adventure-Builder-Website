@@ -1,0 +1,11 @@
+W46 TEST REPORT
+
+PASS — 9 JavaScript/MJS files passed node --check.
+PASS — auto-loop request budget is one upstream route request per Generate click.
+PASS — configured private VALHALLA_BASE_URL remains first priority.
+PASS — FOSSGIS public Valhalla fallback is present and sends X-Client-Id: adventurebuilder.co.uk.
+PASS — Adventure Builder app gateway remains final fallback.
+PASS — old 24-candidate burst path removed.
+
+Reason for rebuild:
+W45 reached the app gateway, which fell back to GraphHopper. The auto-loop candidate burst then hit GraphHopper's minutely API limit. W46 removes the burst rather than increasing retries.

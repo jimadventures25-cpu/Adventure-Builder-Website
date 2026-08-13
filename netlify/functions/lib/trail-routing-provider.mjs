@@ -1,6 +1,8 @@
 import { normaliseValhalla } from './valhalla-connector.mjs';
 import { valhallaHeaders } from './routing-config.mjs';
 
+const PUBLIC_VALHALLA_URL = 'https://valhalla1.openstreetmap.de';
+
 async function readJsonResponse(response) {
   const raw = await response.text();
   let body = {};
@@ -47,15 +49,34 @@ async function requestNormalisedRoute({ config, points, transport, style = 'bala
     return { payload: normaliseValhalla(body), provider: 'valhalla-direct' };
   }
 
-  if (!config.appGatewayConfigured) throw new Error('No walking routing provider is configured.');
-  const response = await fetchWithTimeout(config.appRoutingUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify(gatewayPayload({ points, transport, style }))
-  });
-  const body = await readJsonResponse(response);
-  if (!Array.isArray(body?.routes) || !body.routes.length) throw new Error(body?.error || 'Adventure Builder routing gateway returned no route.');
-  return { payload: body, provider: body.gbca_provider || 'adventure-app-routing-gateway' };
+  // W46: when the website has no private Valhalla endpoint, use the official
+  // FOSSGIS Valhalla public demo directly before considering the app gateway.
+  // Keep this deliberately low-volume: the loop controller sends one route
+  // request per Generate click and identifies Adventure Builder as requested
+  // by the Valhalla demo-server documentation.
+  try {
+    const response = await fetchWithTimeout(`${PUBLIC_VALHALLA_URL}/route`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'X-Client-Id': 'adventurebuilder.co.uk'
+      },
+      body: JSON.stringify(directValhallaBody)
+    });
+    const body = await readJsonResponse(response);
+    return { payload: normaliseValhalla(body), provider: 'valhalla-fossgis-public' };
+  } catch (publicError) {
+    if (!config.appGatewayConfigured) throw publicError;
+    const response = await fetchWithTimeout(config.appRoutingUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(gatewayPayload({ points, transport, style }))
+    });
+    const body = await readJsonResponse(response);
+    if (!Array.isArray(body?.routes) || !body.routes.length) throw new Error(body?.error || 'Adventure Builder routing gateway returned no route.');
+    return { payload: body, provider: body.gbca_provider || 'adventure-app-routing-gateway' };
+  }
 }
 
 export { requestNormalisedRoute, gatewayPayload };

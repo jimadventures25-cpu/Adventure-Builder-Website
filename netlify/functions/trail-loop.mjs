@@ -200,11 +200,24 @@ export default async (request) => {
     }
 
     const candidates = buildDirectCandidates({ start, targetMetres, activity, style, seed });
-    const { results, errors } = await routeBatches(
-      candidates.slice(0, 24),
-      (points) => routeCandidate({ config, points, costing, activity, style, targetMetres }),
-      3
-    );
+    // W46: one upstream route request per Generate click. Previous builds could
+    // fire up to 24 candidate requests (three at a time), which exhausted the
+    // GraphHopper fallback's minute quota. A new seed on "Try a different route"
+    // naturally selects a different candidate without request bursts.
+    const selected = candidates[Math.abs(Number(seed) || 0) % candidates.length] || candidates[0];
+    const results = [];
+    const errors = [];
+    try {
+      const candidate = await routeCandidate({ config, points: selected, costing, activity, style, targetMetres });
+      if (candidate?.route?.geometry?.coordinates?.length >= 5) {
+        // A routed loop is useful even when real streets/paths make the final
+        // distance less exact than the ideal geometric target.
+        if (!Number.isFinite(candidate.score)) candidate.score = 1;
+        results.push(candidate);
+      }
+    } catch (error) {
+      errors.push(error);
+    }
 
     if (!results.length) {
       const first = errors[0];
@@ -213,7 +226,7 @@ export default async (request) => {
         error: `No ${cfg.label} loop could be generated from this position. ${detail}`,
         diagnostic: {
           stage: 'route-candidates',
-          attempts: Math.min(candidates.length, 24),
+          attempts: 1,
           upstreamError: detail
         }
       }, 422);

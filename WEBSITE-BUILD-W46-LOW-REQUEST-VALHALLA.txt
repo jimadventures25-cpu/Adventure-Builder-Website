@@ -1,0 +1,12 @@
+Adventure Builder Website W46 — Low-Request Valhalla Auto Route
+
+Fix:
+- Stops the auto-loop generator from sending bursts of up to 24 routing calls.
+- Sends ONE route request per Generate click.
+- Uses configured private Valhalla first.
+- If private Valhalla is not configured, uses the official FOSSGIS Valhalla public demo with X-Client-Id: adventurebuilder.co.uk.
+- Only if that public Valhalla request fails does it fall back to the existing Adventure Builder app gateway.
+- "Try a different route" uses a new seed/candidate, so alternative loops are generated one request at a time.
+
+Production note:
+The FOSSGIS endpoint is a public demo with fair-use rate limits. Adventure Builder should configure its own VALHALLA_BASE_URL before higher-volume public launch.
