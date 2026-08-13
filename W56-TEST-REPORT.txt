@@ -1,0 +1,42 @@
+W56 ACCOUNT & PERSONALISATION FOUNDATION — TEST REPORT
+
+PASS — 50 JavaScript/MJS files passed node --check across the merged website.
+PASS — 17 interactive website pages load Accessibility Core → Profile Core → Auth → Accessibility UI → Profile UI → Community Counter → Feedback exactly once. camping.html remains an immediate redirect to Adventure Finder.
+PASS — all local script/style references on interactive pages resolve.
+PASS — W49 Walking, W52 Adventure Hub, W54 Finder and W55 Accessibility were used as the merged baseline.
+
+PASS — Adventure Profile core regression tests:
+- valid age bands normalise correctly; invalid values are discarded.
+- no date-of-birth field is used.
+- selected interests are allow-listed.
+- accessibility data is removed from a profile when accessibility account sync is off.
+- accessibility data is included only when accessibility account sync is on.
+- Under 18 produces a youth recommendation context for future age-appropriate rules.
+- pending registration personalisation survives the registration-to-first-login hand-off for the browser session.
+- turning accessibility sync off clears the cloud accessibility payload.
+
+PASS — Account integration:
+- registration reads the optional Adventure Profile before sign-up.
+- signed-in registrations save the profile immediately when the W56 database exists.
+- email-confirmation registrations stage the optional profile until first login.
+- Account settings opens the shared Adventure Profile editor.
+- cloud profile loading can apply the same Accessibility requirements to the global Accessibility system.
+
+PASS — Privacy / database structure:
+- adventure_profiles has RLS enabled.
+- select/insert/update/delete policies require auth.uid() = user_id.
+- accessibility_sync_enabled requires a consent timestamp.
+- accessibility data cannot remain in the profile when accessibility sync is disabled.
+- feedback table has no direct browser read/write policy; validated submission is through a security-definer RPC.
+- public community RPC returns only an aggregate confirmed-account count.
+
+PASS — Legacy removal:
+- old visitor-counter JavaScript/CSS is no longer referenced or present in the merged W56 build.
+- old visitor-count markup is removed from the homepage.
+- optional database cleanup commands for the old website_visits table are documented but deliberately not auto-run.
+
+RESEARCH BASIS
+- ICO: access requirements can be special-category data and explicit consent can be an appropriate Article 9 condition.
+- ICO Children's Code: services likely to be accessed by children need age-appropriate privacy safeguards.
+- W3C WAI: registration/settings forms need clear labels, instructions and understandable controls.
+- Supabase: user profile tables exposed through the API should use Row Level Security and reference auth.users.

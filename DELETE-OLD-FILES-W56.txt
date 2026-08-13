@@ -1,0 +1,8 @@
+W56 replaces the old browser/page-view visitor counter.
+
+Delete these files from the website repository if they are still present:
+- js/visitor-counter.js
+- css/visitor-counter.css
+- supabase-website-visitor-counter.sql
+
+The old Supabase website_visits table/function are no longer used. W56 does NOT automatically delete database history. Optional cleanup SQL is commented at the bottom of supabase-account-personalisation-feedback.sql.

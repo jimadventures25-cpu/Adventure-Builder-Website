@@ -1,0 +1,20 @@
+Adventure Builder Website W56 — Account & Personalisation Foundation
+
+What changed
+- Added one shared Adventure Profile for website now and app integration later.
+- Registration gains an optional Personalise Adventure Builder section.
+- Age is stored only as an age band; no date of birth is required for recommendations.
+- Added atmosphere, pace, usual company and activity interests.
+- W55 Accessibility can now be explicitly synced to the account.
+- Accessibility sync is separate, explicit consent; turning it off removes the cloud accessibility payload.
+- Existing users can edit the same profile from Account settings.
+- Added a global Feedback button on all interactive website pages.
+- Replaced the old device/page-view visitor counter with a confirmed-account community counter.
+- Added Supabase RLS profile storage, aggregate community-count RPC and validated feedback RPC.
+- The app is NOT rebuilt in W56; it is intended to consume this same profile schema in the later app integration phase.
+
+Setup required
+Run supabase-account-personalisation-feedback.sql once in the Supabase SQL editor before expecting cloud profile sync, the community counter or feedback submission to work.
+
+Privacy
+Accessibility requirements may reveal sensitive information. W56 never uploads them merely because they are selected locally. The user must separately opt in to account sync. Profile rows are protected with RLS so authenticated users can only access their own row.

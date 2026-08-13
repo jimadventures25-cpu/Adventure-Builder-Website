@@ -89,6 +89,8 @@
     elements.signedIn.hidden = !signedIn;
 
     if (!user) {
+      window.AdventureProfile?.clearAccountContext?.();
+      window.AdventureAccessibility?.clearAccount?.();
       elements.chipLabel.textContent = 'My account';
       elements.chipAvatar.textContent = 'A';
       return;
@@ -100,6 +102,9 @@
     elements.panelAvatar.textContent = avatar;
     elements.panelName.textContent = `Welcome, ${name}`;
     elements.panelEmail.textContent = user.email || '';
+    if (window.AdventureProfile) {
+      window.AdventureProfile.loadAccount(client,user).then(()=>window.AdventureProfile.consumePending(client,user)).catch(()=>{});
+    }
   }
 
   elements.openLogin?.addEventListener('click', () => openDialog('login'));
@@ -134,6 +139,7 @@
     const email = document.getElementById('register-email').value.trim();
     const password = document.getElementById('register-password').value;
     const confirm = document.getElementById('register-confirm').value;
+    const pendingProfile = window.AdventureProfileRegistration?.read?.() || null;
     if (password !== confirm) return setStatus('The passwords do not match.', 'error');
     setStatus('Creating your account…');
     const { data, error } = await client.auth.signUp({
@@ -145,8 +151,11 @@
       }
     });
     if (error) return setStatus(error.message, 'error');
+    if (pendingProfile) window.AdventureProfile?.stageRegistration?.(pendingProfile);
     elements.registerForm.reset();
+    window.AdventureProfileRegistration?.reset?.();
     if (data.session) {
+      if (pendingProfile) window.AdventureProfile?.consumePending?.(client, data.session.user).catch(()=>{});
       setStatus('Your account is ready and you are logged in.', 'success');
     } else {
       setMode('login');
@@ -160,7 +169,9 @@
   });
 
   elements.accountSettings?.addEventListener('click', () => {
-    setStatus('Account settings will be added in the next account stage. You can continue using the website now.');
+    closeDialog();
+    if (window.AdventureProfileUI?.openSettings) window.AdventureProfileUI.openSettings();
+    else setStatus('Adventure Profile settings are unavailable.', 'error');
   });
 
   elements.logout?.addEventListener('click', async () => {

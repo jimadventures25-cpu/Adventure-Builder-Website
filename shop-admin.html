@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="css/account-gate.css">
   <link rel="stylesheet" href="css/adventure-store-admin.css">
   <link rel="stylesheet" href="css/accessibility.css">
+  <link rel="stylesheet" href="css/feedback.css">
+  <link rel="stylesheet" href="css/community-counter.css">
+  <link rel="stylesheet" href="css/profile.css">
 </head>
 <body data-page="store-admin" data-account-required="true">
   <header class="site-header">
@@ -59,8 +62,12 @@
   </main>
 
   <div class="auth-overlay" id="auth-overlay" hidden><section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-title"><button class="auth-close" id="auth-close" type="button" aria-label="Close account window">×</button><div class="auth-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><small>Private Adventure Store</small></div></div><div id="auth-signed-out"><div class="auth-tabs" role="tablist"><button id="login-tab" class="auth-tab active" type="button" role="tab" aria-selected="true">Log in</button><button id="register-tab" class="auth-tab" type="button" role="tab" aria-selected="false">Register</button></div><form id="login-form" class="auth-form"><h2 id="auth-title">Store admin login</h2><p>Log in with your Adventure Builder account.</p><label>Email<input id="login-email" name="email" type="email" autocomplete="email" required></label><label>Password<input id="login-password" name="password" type="password" autocomplete="current-password" minlength="6" required></label><button class="button button-primary auth-submit" type="submit">Log in</button></form><form id="register-form" class="auth-form" hidden><h2>Create account</h2><p>Registration does not grant store admin access.</p><label>Your name<input id="register-name" name="name" type="text" autocomplete="name" maxlength="60" required></label><label>Email<input id="register-email" name="email" type="email" autocomplete="email" required></label><label>Password<input id="register-password" name="password" type="password" autocomplete="new-password" minlength="6" required></label><label>Confirm password<input id="register-confirm" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required></label><label class="checkbox-row"><input id="register-terms" type="checkbox" required><span>I agree to the Adventure Builder terms and privacy policy.</span></label><button class="button button-primary auth-submit" type="submit">Create account</button></form></div><div id="auth-signed-in" class="account-panel" hidden><div class="account-avatar account-avatar-large" id="panel-avatar">A</div><p class="eyebrow">Adventure Builder account</p><h2 id="panel-name">Welcome</h2><p id="panel-email"></p><div class="account-choice-actions"><button class="button button-primary" id="continue-website" type="button">Continue</button></div><button class="account-settings-link" id="account-settings" type="button">Account settings</button><button class="button button-secondary auth-submit logout-button" id="logout-button" type="button">Log out</button></div><p class="auth-status" id="auth-status" aria-live="polite"></p></section></div>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/config.js"></script><script src="js/auth.js"></script>
-  <script src="js/account-gate.js"></script><script src="js/main.js"></script><script src="js/adventure-store-admin.js"></script>
-  <script src="js/accessibility-core.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/config.js"></script><script src="js/accessibility-core.js"></script>
+  <script src="js/profile-core.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/account-gate.js"></script>
   <script src="js/accessibility-ui.js"></script>
+  <script src="js/profile-ui.js"></script>
+  <script src="js/community-counter.js"></script>
+  <script src="js/feedback.js"></script><script src="js/main.js"></script><script src="js/adventure-store-admin.js"></script>
 </body></html>

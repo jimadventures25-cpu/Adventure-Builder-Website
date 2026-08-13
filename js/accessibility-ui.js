@@ -34,7 +34,7 @@
       </div>
       <label class="ab-accessibility-remember"><input type="checkbox" data-ab-accessibility-remember><span><strong>Remember these needs on this device</strong><small>Leave this off to keep them for this browser session only.</small></span></label>
       <footer class="ab-accessibility-actions"><button type="button" class="ab-accessibility-clear" data-ab-accessibility-clear>Clear</button><button type="button" class="ab-accessibility-save" data-ab-accessibility-save>Use these needs</button></footer>
-      <p class="ab-accessibility-privacy">Stage A keeps accessibility preferences on this device. They are not sent to your Adventure Builder account or Supabase.</p>
+      <p class="ab-accessibility-privacy" data-ab-accessibility-privacy>Accessibility needs stay on this device unless you explicitly enable account sync in your Adventure Profile. Account sync can be changed or removed at any time.</p>
     </form>`;
   document.body.append(dialog);
 
@@ -61,9 +61,22 @@
   dialog.querySelector('[data-ab-accessibility-save]').addEventListener('click',()=>{
     const selected=choices.filter(c=>c.checked).map(c=>c.value);
     A.save({enabled:selected.length>0,selected,remember:remember.checked});
+    const profile=window.AdventureProfile?.get?.();
+    const auth=window.ADVENTURE_BUILDER_AUTH;
+    if(profile?.accessibilitySyncEnabled && auth?.getSession?.()?.user){
+      window.AdventureProfile.saveAccount(auth.client,auth.getSession().user,{...profile,accessibility:{enabled:selected.length>0,selected,remember:false}}).catch(()=>{});
+    }
     close();
   });
-  dialog.querySelector('[data-ab-accessibility-clear]').addEventListener('click',()=>{A.clear();populate();close();});
+  dialog.querySelector('[data-ab-accessibility-clear]').addEventListener('click',()=>{
+    A.clear();
+    const profile=window.AdventureProfile?.get?.();
+    const auth=window.ADVENTURE_BUILDER_AUTH;
+    if(profile?.accessibilitySyncEnabled && auth?.getSession?.()?.user){
+      window.AdventureProfile.saveAccount(auth.client,auth.getSession().user,{...profile,accessibility:{enabled:false,selected:[],remember:false}}).catch(()=>{});
+    }
+    populate();close();
+  });
   dialog.addEventListener('click',event=>{ if(event.target===dialog) close(); });
   window.addEventListener(A.events.change,event=>syncButton(event.detail?.profile));
   syncButton();

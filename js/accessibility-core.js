@@ -3,6 +3,7 @@
 
   const LOCAL_KEY = 'ab-accessibility-profile-v1';
   const SESSION_KEY = 'ab-accessibility-session-v1';
+  const ACCOUNT_KEY = 'ab-accessibility-account-v1';
   const EVENT_CHANGE = 'adventurebuilder:accessibilitychange';
   const EVENT_READY = 'adventurebuilder:accessibilityready';
 
@@ -53,8 +54,9 @@
 
   function load() {
     const persistent = safeParse(localStorage,LOCAL_KEY);
+    const account = safeParse(sessionStorage,ACCOUNT_KEY);
     const session = safeParse(sessionStorage,SESSION_KEY);
-    return normalise(session || persistent || {});
+    return normalise(account || session || persistent || {});
   }
 
   let current = load();
@@ -76,9 +78,23 @@
 
   function get() { return normalise(current); }
   function save(input={}) { return persist({...input,enabled:Boolean(input.enabled ?? true)}); }
+  function applyAccount(input={}) {
+    const clean=normalise({...input,remember:false});
+    safeWrite(sessionStorage,ACCOUNT_KEY,clean);
+    current=clean;
+    window.dispatchEvent(new CustomEvent(EVENT_CHANGE,{detail:{profile:get(),source:'account'}}));
+    return get();
+  }
+  function clearAccount() {
+    try { sessionStorage.removeItem(ACCOUNT_KEY); } catch {}
+    current=load();
+    window.dispatchEvent(new CustomEvent(EVENT_CHANGE,{detail:{profile:get(),source:'device'}}));
+    return get();
+  }
   function clear() {
     try { localStorage.removeItem(LOCAL_KEY); } catch {}
     try { sessionStorage.removeItem(SESSION_KEY); } catch {}
+    try { sessionStorage.removeItem(ACCOUNT_KEY); } catch {}
     current = normalise({});
     window.dispatchEvent(new CustomEvent(EVENT_CHANGE,{detail:{profile:get()}}));
     return get();
@@ -89,7 +105,7 @@
   function activeCount(profile=current) { const p=normalise(profile); return p.enabled?p.selected.length:0; }
 
   window.AdventureAccessibility = Object.freeze({
-    requirements,factStatuses,normalise,get,save,clear,label,statusLabel,statusRank,activeCount,
+    requirements,factStatuses,normalise,get,save,applyAccount,clearAccount,clear,label,statusLabel,statusRank,activeCount,
     events:Object.freeze({change:EVENT_CHANGE,ready:EVENT_READY})
   });
   window.dispatchEvent(new CustomEvent(EVENT_READY,{detail:{profile:get()}}));
