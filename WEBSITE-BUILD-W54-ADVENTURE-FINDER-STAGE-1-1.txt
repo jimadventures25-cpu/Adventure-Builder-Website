@@ -1,0 +1,11 @@
+Adventure Builder Website W54 — Adventure Finder Stage 1.1 Polish
+
+- Reduced the oversized Adventure Finder hero heading and tightened top spacing.
+- Shortened intro copy so search controls appear sooner.
+- Separated live filter preview from committed result-search state.
+- Result heading now always describes the search that produced the visible results.
+- Replaced large prototype gradient image placeholders with compact activity/base icons.
+- Tightened result rows, actions and typography.
+- Gave the interactive map slightly more desktop space.
+- Kept W53 data, scoring, map and state modules intact except for controller state coordination.
+- Stage 2 real discovery remains intentionally out of scope.

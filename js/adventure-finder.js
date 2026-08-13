@@ -57,29 +57,32 @@
     </article>`;
   }
 
-  function render(root,{scroll=false}={}){
-    const prefs=getPrefs(root), results=Score.rank(Data.places,prefs,State.getVan());
+  function render(root,{scroll=false,prefs=null}={}){
+    const committed=State.normalise(prefs || root._afCommitted || getPrefs(root));
+    root._afCommitted=committed;
+    const results=Score.rank(Data.places,committed,State.getVan());
     root._afResults=results;
     root.querySelector('[data-af-count]').textContent=`${results.length} place${results.length===1?'':'s'}`;
-    root.querySelector('[data-af-summary]').textContent=selectedSummary(prefs);
+    root.querySelector('[data-af-summary]').textContent=selectedSummary(committed);
     const list=root.querySelector('[data-af-results]');
-    list.innerHTML=results.length?results.map(r=>resultCard(r,prefs)).join(''):`<div class="af-empty"><p class="af-kicker">No matches yet</p><h3>Try opening the search a little.</h3><p>Change the area, base type or one of your selected priorities.</p><button type="button" class="af-btn secondary" data-af-reset-results>Reset filters</button></div>`;
+    list.innerHTML=results.length?results.map(r=>resultCard(r,committed)).join(''):`<div class="af-empty"><p class="af-kicker">No matches yet</p><h3>Try opening the search a little.</h3><p>Change the area, base type or one of your selected priorities.</p><button type="button" class="af-btn secondary" data-af-reset-results>Reset filters</button></div>`;
     root.querySelector('[data-af-stage-note]').textContent='Stage 1 uses sample places so we can prove the search, ranking and map experience before connecting live place data.';
     if(MapUI) MapUI.render(root,results,results[0]?.id||null);
     if(scroll) root.querySelector('[data-af-results-heading]')?.scrollIntoView({behavior:'smooth',block:'start'});
   }
 
-  function clear(root){const clean=State.clear();setPrefs(root,clean);renderVan(root);render(root);}
+  function clear(root){const clean=State.clear();root._afCommitted=clean;setPrefs(root,clean);renderVan(root);root.querySelector('[data-af-live-selection]').textContent=selectedSummary(clean);render(root,{prefs:clean});}
 
   function bind(root){
-    setPrefs(root,State.load()); renderVan(root);
+    const loaded=State.load(); root._afCommitted=loaded; setPrefs(root,loaded); renderVan(root);
     root.querySelectorAll('[data-af-choice]').forEach(b=>b.addEventListener('click',()=>{
       b.setAttribute('aria-pressed',String(b.getAttribute('aria-pressed')!=='true'));
       root.querySelector('[data-af-live-selection]').textContent=selectedSummary(getPrefs(root));
     }));
-    root.querySelector('[data-af-search]').addEventListener('click',()=>{const p=getPrefs(root);State.save(p);render(root,{scroll:true});});
+    root.querySelector('[data-af-search]').addEventListener('click',()=>{const p=getPrefs(root);State.save(p);root._afCommitted=p;render(root,{scroll:true,prefs:p});});
     root.querySelector('[data-af-clear]').addEventListener('click',()=>clear(root));
-    root.querySelector('[data-af-use-van]')?.addEventListener('change',()=>renderVan(root));
+    root.querySelector('[data-af-use-van]')?.addEventListener('change',()=>{renderVan(root);root.querySelector('[data-af-live-selection]').textContent=selectedSummary(getPrefs(root));});
+    ['[data-af-area]','[data-af-stay]','[data-af-drive]'].forEach(selector=>root.querySelector(selector)?.addEventListener('change',()=>{root.querySelector('[data-af-live-selection]').textContent=selectedSummary(getPrefs(root));}));
     root.querySelector('[data-af-filter-toggle]')?.addEventListener('click',()=>root.querySelector('[data-af-filters]')?.classList.toggle('is-open'));
     root.addEventListener('af:select',e=>{
       const id=e.detail?.id; const card=root.querySelector(`[data-af-card="${CSS.escape(id)}"]`); if(card)card.scrollIntoView({behavior:'smooth',block:'center'});
@@ -88,10 +91,10 @@
       const focus=e.target.closest('[data-af-map-focus]'); if(focus){const r=root._afResults?.find(x=>x.id===focus.dataset.afMapFocus);MapUI?.focus(root,r);return;}
       const reset=e.target.closest('[data-af-reset-results]'); if(reset){clear(root);return;}
       const save=e.target.closest('[data-af-save]'); if(save){const r=Data.places.find(x=>x.id===save.dataset.afSave);const ok=State.saveIdea(r.id);root.querySelector('[data-af-status]').textContent=ok?`${r.name} saved as an idea on this device.`:'Could not save on this device.';return;}
-      const plan=e.target.closest('[data-af-plan]'); if(plan){const r=Data.places.find(x=>x.id===plan.dataset.afPlan);const ok=State.createTripHandoff(r,getPrefs(root));root.querySelector('[data-af-status]').textContent=ok?`${r.name} is ready for Trip Planner.`:'Could not prepare the Trip Planner hand-off.';}
+      const plan=e.target.closest('[data-af-plan]'); if(plan){const r=Data.places.find(x=>x.id===plan.dataset.afPlan);const ok=State.createTripHandoff(r,root._afCommitted || getPrefs(root));root.querySelector('[data-af-status]').textContent=ok?`${r.name} is ready for Trip Planner.`:'Could not prepare the Trip Planner hand-off.';}
     });
     root.querySelector('[data-af-live-selection]').textContent=selectedSummary(getPrefs(root));
-    render(root);
+    render(root,{prefs:loaded});
   }
 
   roots.forEach(bind);

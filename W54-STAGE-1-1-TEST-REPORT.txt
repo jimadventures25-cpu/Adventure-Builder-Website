@@ -1,0 +1,22 @@
+W54 ADVENTURE FINDER STAGE 1.1 — TEST REPORT
+
+PASS — all Adventure Finder JS files passed node --check.
+PASS — state persistence round-trip test.
+PASS — sample-place coordinate validation.
+PASS — scoring/ranking module execution.
+PASS — committed search state is stored separately from live filter preview.
+PASS — results heading reads the committed search, not unsubmitted edits.
+PASS — Trip Planner hand-off uses the committed search that produced the result.
+PASS — live preview updates when area, base type, travel time, van or preference choices change.
+PASS — oversized W53 hero reduced and top spacing tightened.
+PASS — large prototype result image blocks replaced by compact semantic base-type icons.
+PASS — desktop map given greater visual weight while mobile keeps map/list reflow.
+PASS — merged W36 + W49 + W52 + W54 resource integrity.
+PASS — MapLibre loads before the Finder map module.
+
+Research basis:
+- W3C WAI: use clear, descriptive heading hierarchy and page structure.
+- W3C WCAG 2.2: headings and labels should describe purpose.
+- MapLibre Map API: resize map when its container dimensions change; W53/W54 map module retains this behavior.
+
+Stage 2 real place discovery remains intentionally out of scope.
