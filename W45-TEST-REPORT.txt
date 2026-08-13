@@ -1,0 +1,18 @@
+Adventure Builder Website — W45 Test Report
+
+PASS — Website with no VALHALLA_BASE_URL calls the Adventure Builder app routing gateway.
+PASS — Auto-loop sends walking transport correctly through the gateway.
+PASS — Manual trail route sends bicycle transport correctly through the gateway.
+PASS — Gateway response geometry is returned to the walking module.
+PASS — Provider identity from the app gateway is retained.
+PASS — Direct VALHALLA_BASE_URL remains preferred when configured.
+PASS — Direct mode does not call the app gateway.
+PASS — JavaScript and MJS syntax checks pass for all shipped walking/backend files.
+PASS — Existing W44 client Generate fix remains in trail-planner.js.
+PASS — Shared site references are satisfied by the full website base; walking-specific replacement files are included here.
+
+Deployment design
+Website trail routing -> direct website Valhalla when configured
+                      -> otherwise app.adventurebuilder.co.uk/api/navigation-route
+
+The app routing gateway already owns the provider choice and can use its configured Valhalla service or its controlled routing fallback. This avoids duplicating private routing configuration across the website and app deployments.

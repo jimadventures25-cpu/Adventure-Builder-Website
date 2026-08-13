@@ -1,5 +1,6 @@
-import { buildValhallaRequest, normaliseValhalla } from './lib/valhalla-connector.mjs';
-import { getRoutingConfig, valhallaHeaders } from './lib/routing-config.mjs';
+import { buildValhallaRequest } from './lib/valhalla-connector.mjs';
+import { getRoutingConfig } from './lib/routing-config.mjs';
+import { requestNormalisedRoute } from './lib/trail-routing-provider.mjs';
 
 const json = (body, status = 200) => new Response(JSON.stringify(body), {
   status,
@@ -13,35 +14,24 @@ export default async (request) => {
     const points = Array.isArray(input?.points) ? input.points.slice(0, 8) : [];
     const activity = ['walk', 'jog', 'cycle'].includes(input?.activity) ? input.activity : 'walk';
     const transport = activity === 'cycle' ? 'bicycle' : 'walking';
-    const config = getRoutingConfig();
-    if (!config.valhallaConfigured) return json({ error: 'Trail routing is not configured yet.' }, 503);
+    if (points.length < 2) return json({ error: 'At least two route points are required.' }, 400);
 
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 18000);
-    try {
-      const upstream = await fetch(`${config.baseUrl}/route`, {
-        method: 'POST',
-        headers: valhallaHeaders(config),
-        body: JSON.stringify((() => {
-          const routeRequest = buildValhallaRequest({ points, transport });
-          // Give generated intermediate points room to snap onto Valhalla's legal
-          // routable graph instead of failing because a random point lands a few
-          // metres inside a field, estate or beside a path.
-          routeRequest.locations = routeRequest.locations.map((location, index) => ({
-            ...location,
-            radius: index === 0 || index === routeRequest.locations.length - 1 ? 90 : (activity === 'cycle' ? 240 : 180),
-            minimum_reachability: index === 0 || index === routeRequest.locations.length - 1 ? 10 : 5
-          }));
-          return routeRequest;
-        })()),
-        signal: controller.signal
-      });
-      const body = await upstream.json().catch(() => ({}));
-      if (!upstream.ok) throw new Error(body?.error || body?.trip?.status_message || 'Valhalla rejected the trail.');
-      return json({ ...normaliseValhalla(body), gbca_feature: 'website-trail-planner', gbca_activity: activity });
-    } finally {
-      clearTimeout(timer);
-    }
+    const config = getRoutingConfig();
+    const directValhallaBody = buildValhallaRequest({ points, transport });
+    directValhallaBody.locations = directValhallaBody.locations.map((location, index) => ({
+      ...location,
+      radius: index === 0 || index === directValhallaBody.locations.length - 1 ? 90 : (activity === 'cycle' ? 240 : 180),
+      minimum_reachability: index === 0 || index === directValhallaBody.locations.length - 1 ? 10 : 5
+    }));
+
+    const { payload, provider } = await requestNormalisedRoute({
+      config,
+      points,
+      transport,
+      style: 'balanced',
+      directValhallaBody
+    });
+    return json({ ...payload, gbca_feature: 'website-trail-planner', gbca_activity: activity, gbca_provider: provider });
   } catch (error) {
     const message = error?.name === 'AbortError' ? 'Trail routing timed out. Please try again.' : (error?.message || 'Trail routing failed.');
     return json({ error: message }, 500);

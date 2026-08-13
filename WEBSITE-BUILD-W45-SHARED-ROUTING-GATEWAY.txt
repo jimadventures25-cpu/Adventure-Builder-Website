@@ -1,0 +1,22 @@
+Adventure Builder Website — W45 Shared Routing Gateway
+
+Purpose
+- Remove the website-only VALHALLA_BASE_URL requirement that blocked Walking / Jogging / Cycling Generate.
+
+What changed
+- Added netlify/functions/lib/trail-routing-provider.mjs as the shared provider adapter.
+- Direct website Valhalla remains first choice when VALHALLA_BASE_URL exists.
+- If it does not, trail-loop and trail-route use the existing Adventure Builder app routing gateway:
+  https://app.adventurebuilder.co.uk/api/navigation-route
+- ADVENTURE_APP_ROUTING_URL can override that gateway later without code changes.
+- Auto-loop and manual trail routing now share the same provider-selection logic.
+- No routing credentials are exposed to browser JavaScript.
+
+Install
+- Copy the files in this patch over the matching Adventure-Builder-Website files.
+- No website VALHALLA_BASE_URL is required for the default shared-gateway path.
+- Keep the Adventure Builder app routing gateway deployed and working.
+- Optional: set ADVENTURE_APP_ROUTING_URL in website Netlify only if the app routing endpoint moves.
+
+Old code
+- js/walking-loop-engine.js remains obsolete and should be deleted if still present.

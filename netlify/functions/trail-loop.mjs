@@ -1,5 +1,6 @@
-import { costingFor, normaliseValhalla } from './lib/valhalla-connector.mjs';
-import { getRoutingConfig, valhallaHeaders } from './lib/routing-config.mjs';
+import { costingFor } from './lib/valhalla-connector.mjs';
+import { getRoutingConfig } from './lib/routing-config.mjs';
+import { requestNormalisedRoute } from './lib/trail-routing-provider.mjs';
 
 const EARTH_RADIUS_METRES = 6371000;
 const METRES_PER_MILE = 1609.344;
@@ -137,27 +138,6 @@ function routeRequest(points, costing, activity, style) {
   return request;
 }
 
-async function upstreamJson(url, options, timeoutMs = 12000) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const response = await fetch(url, { ...options, signal: controller.signal });
-    const raw = await response.text();
-    let body = {};
-    try { body = raw ? JSON.parse(raw) : {}; } catch { body = {}; }
-    if (!response.ok) {
-      const message = body?.error || body?.error_message || body?.trip?.status_message || raw?.slice(0, 240) || `Routing service returned HTTP ${response.status}.`;
-      const error = new Error(message);
-      error.status = response.status;
-      error.code = body?.error_code || body?.code || null;
-      throw error;
-    }
-    return body;
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 function routeScore(route, targetMetres) {
   const distance = Number(route?.distance);
   const coordinates = route?.geometry?.coordinates || [];
@@ -166,15 +146,14 @@ function routeScore(route, targetMetres) {
   return Math.abs(distance - targetMetres) / targetMetres;
 }
 
-async function routeCandidate({ config, headers, points, costing, activity, style, targetMetres }) {
-  const body = await upstreamJson(`${config.baseUrl}/route`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(routeRequest(points, costing, activity, style))
+async function routeCandidate({ config, points, costing, activity, style, targetMetres }) {
+  const cfg = activityConfig(activity);
+  const directValhallaBody = routeRequest(points, costing, activity, style);
+  const { payload, provider } = await requestNormalisedRoute({
+    config, points, transport: cfg.transport, style, directValhallaBody
   });
-  const normalised = normaliseValhalla(body);
-  const route = normalised.routes?.[0];
-  return { route, score: routeScore(route, targetMetres), points };
+  const route = payload.routes?.[0];
+  return { route, score: routeScore(route, targetMetres), points, provider };
 }
 
 async function routeBatches(items, worker, concurrency = 3) {
@@ -216,17 +195,14 @@ export default async (request) => {
     const costing = costingFor(cfg.transport);
     const config = getRoutingConfig();
 
-    if (!config.valhallaConfigured) {
-      return json({
-        error: 'Walking route generation needs VALHALLA_BASE_URL in the website Netlify environment. Copy the same Valhalla URL used by the Adventure Builder app.'
-      }, 503);
+    if (!config.valhallaConfigured && !config.appGatewayConfigured) {
+      return json({ error: 'No Adventure Builder routing provider is configured.' }, 503);
     }
 
-    const headers = valhallaHeaders(config);
     const candidates = buildDirectCandidates({ start, targetMetres, activity, style, seed });
     const { results, errors } = await routeBatches(
       candidates.slice(0, 24),
-      (points) => routeCandidate({ config, headers, points, costing, activity, style, targetMetres }),
+      (points) => routeCandidate({ config, points, costing, activity, style, targetMetres }),
       3
     );
 
@@ -252,8 +228,8 @@ export default async (request) => {
       distanceError: best.score,
       gbca_feature: 'website-trail-loop-v3',
       gbca_activity: activity,
-      gbca_provider: 'valhalla',
-      gbca_strategy: 'route-api-direct-correlation'
+      gbca_provider: best.provider || (config.valhallaConfigured ? 'valhalla-direct' : 'adventure-app-routing-gateway'),
+      gbca_strategy: config.valhallaConfigured ? 'direct-valhalla' : 'shared-app-routing-gateway'
     });
   } catch (error) {
     const message = error?.name === 'AbortError'
