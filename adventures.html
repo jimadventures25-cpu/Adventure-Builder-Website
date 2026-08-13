@@ -25,20 +25,18 @@
 
   <main>
     <section class="section standalone-page">
-      <div class="section-heading"><p class="eyebrow">Your routes · places · memories</p><h2>My Adventure World</h2><p>A living history of the places you explore — not a fitness leaderboard.</p></div>
-
-      <section class="abh" data-adventure-hub>
+<section class="abh" data-adventure-hub>
         <header class="abh-hero">
-          <div><p class="eyebrow">Adventure Builder · Adventure Hub</p><h1>Your outdoor story, all in one place.</h1><p>Bring completed walks, rides, road trips, paddles and journal memories together. See where you have been, what you have done and what you want to relive.</p></div>
-          <div class="abh-hero-actions"><button class="abh-btn primary" type="button" data-open-tab="add">＋ Add adventure</button><a class="abh-btn" href="adventure-finder.html">Find the next one</a></div>
+          <div><p class="eyebrow">Adventure Hub</p><h1>Your adventures, beautifully remembered.</h1><p>A single place for the routes, places and moments that make up your outdoor story.</p></div>
+          <div class="abh-hero-actions"><button class="abh-btn primary" type="button" data-open-tab="add">Add adventure</button><a class="abh-btn" href="adventure-finder.html">Plan something new</a></div>
         </header>
 
         <nav class="abh-tabs" aria-label="Adventure Hub sections">
           <button class="is-active" type="button" data-hub-tab="dashboard">Overview</button>
           <button type="button" data-hub-tab="adventures">Adventures</button>
           <button type="button" data-hub-tab="timeline">Timeline</button>
-          <button type="button" data-hub-tab="map">Adventure Map</button>
-          <button type="button" data-hub-tab="add">Add / Import</button>
+          <button type="button" data-hub-tab="map">Map</button>
+          <button type="button" data-hub-tab="add">Add</button>
         </nav>
 
         <div class="abh-body">
@@ -64,7 +62,7 @@
 
             <div class="abh-dashboard-grid">
               <article class="abh-card abh-map-teaser">
-                <div><p class="abh-kicker">Adventure map</p><h3>See your story spread across the map</h3><p>Adventures with a saved GPS position appear automatically. Walking trails, paddles and journal entries can bring their coordinates with them when imported.</p><button class="abh-btn" type="button" data-open-tab="map">Open Adventure Map</button></div>
+                <div><p class="abh-kicker">Adventure map</p><h3>See your story spread across the map</h3><p>Adventures with a saved GPS position appear automatically. Walking trails, paddles and journal entries can bring their coordinates with them when imported.</p><button class="abh-btn" type="button" data-open-tab="map">Open Map</button></div>
                 <div class="abh-map-art" aria-hidden="true"><span>📍</span><i></i><span>🥾</span><i></i><span>🛶</span></div>
               </article>
               <article class="abh-card abh-quick-actions"><p class="abh-kicker">Build the next memory</p><h3>Quick actions</h3><div><a href="walking-hiking.html">🥾 Plan a walk</a><a href="trip-planner.html">🚐 Plan a trip</a><a href="paddling.html">🛶 Plan a paddle</a><a href="journal.html">📖 Write in Journal</a></div></article>
@@ -95,7 +93,7 @@
                 <div class="abh-form-grid two"><label>Adventure type<select name="type" data-activity-type><option value="hike">🥾 Hike</option><option value="cycle">🚴 Cycle</option><option value="road">🚐 Road trip</option><option value="camp">🏕️ Camping</option><option value="paddle">🏄 Paddleboard</option><option value="kayak">🛶 Kayak</option><option value="photo">📸 Photography</option><option value="explore">🧭 Explore</option><option value="dog">🐕 Dog walk</option><option value="fishing">🎣 Fishing</option></select></label><label>Date<input name="date" type="date"></label></div>
                 <label>Adventure name<input name="title" maxlength="80" required placeholder="Sunset walk at Formby Point"></label>
                 <label>Location<input name="location" maxlength="120" placeholder="Lake District, Cumbria"></label>
-                <div class="abh-location-row"><button class="abh-btn small" type="button" data-use-location>Use current GPS</button><span data-location-status>Optional — useful for the Adventure Map.</span></div>
+                <div class="abh-location-row"><button class="abh-btn small" type="button" data-use-location>Use current GPS</button><span data-location-status>Optional — useful for the Map.</span></div>
                 <input name="lat" type="hidden"><input name="lon" type="hidden">
 
                 <div class="abh-form-grid two" data-field-group="distance"><label>Distance (km)<input name="distanceKm" type="number" min="0" step="0.1" value="0"></label><label data-field="elevation">Elevation / high point (m)<input name="elevationM" type="number" min="0" step="1" placeholder="Optional"></label></div>

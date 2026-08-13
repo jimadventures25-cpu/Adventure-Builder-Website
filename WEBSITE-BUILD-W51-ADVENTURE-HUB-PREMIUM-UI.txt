@@ -1,0 +1,3 @@
+W51 Adventure Hub Premium UI
+
+Presentation-only rebuild of W50. Data/import/map logic retained. Premium spacing, hierarchy, tabs, stats strip, cards, responsive layout, focus treatment and reduced-motion support added.
