@@ -1,0 +1,30 @@
+Adventure Builder Website W61 — Media Bin + Dual Viewer
+
+Replaces the W60 video editor layer with a modern mixed-media workflow.
+
+Built
+- Add Media accepts multiple videos, multiple photos, or a mixed selection.
+- Imported media goes into a Project Media Bin instead of automatically entering the timeline.
+- Media Bin includes thumbnails, type badges, duration/still labels and All/Video/Photos filters.
+- Source viewer previews selected media independently.
+- Video source viewer supports Mark In / Mark Out before timeline insertion.
+- Programme viewer shows the selected timeline item.
+- Dual Viewer and Single Viewer modes.
+- Insert, Overwrite, Replace, Place on top and Append at end operations.
+- Video 1, Video 2, Photo/Overlay and Text timeline tracks.
+- Timeline clip selection, split, duplicate, track assignment, speed, volume and basic colour controls.
+- Mixed photo/video timeline; photos default to five seconds.
+- Compact professional dark NLE layout using Adventure Builder orange as the action accent.
+- Drag-and-drop media import.
+- Undo/redo foundation and JSON project-plan export.
+
+Removed/replaced
+- studio.html no longer loads video-studio-v2.js.
+- W60 adventure-studio-nle-v4.css/js are no longer loaded.
+- The old Add video clips-only interface is replaced by Add Media and the Project Media Bin.
+
+Architecture
+- Existing Photo Editor and Adventure Studio launcher remain intact.
+- W61 video logic is isolated in js/adventure-studio-nle-v5.js.
+- W61 video presentation is isolated in css/adventure-studio-nle-v5.css.
+- Existing app shell is reused rather than duplicating the Studio launcher.

@@ -1,0 +1,17 @@
+Adventure Builder W61 Test Report
+
+PASS — JavaScript syntax: js/adventure-studio-nle-v5.js
+PASS — JavaScript syntax: js/adventure-studio-app-v4.js
+PASS — W61 stylesheet referenced by studio.html
+PASS — W61 script referenced by studio.html
+PASS — legacy video-studio-v2.js removed from Studio load path
+PASS — legacy adventure-studio-nle-v4.js removed from Studio load path
+PASS — media input accepts video/* and image/* with multiple selection
+PASS — Project Media Bin markup present
+PASS — Source + Programme dual viewer markup present
+PASS — Insert / Overwrite / Replace / Place on top / Append controls present
+PASS — Video 1 / Video 2 / Overlay / Text timeline foundations present
+PASS — mixed-media import and drag/drop handlers present
+PASS — W61 isolated CSS/JS modules created
+
+Note: static/syntax tests were run in the build environment. Final browser acceptance should be performed after deployment with real local photo/video files because browser media decoding, codecs and object-URL playback are runtime-specific.

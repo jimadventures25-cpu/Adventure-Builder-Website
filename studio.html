@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="css/photo-studio.css">
   <link rel="stylesheet" href="css/video-studio-v2.css">
-  <link rel="stylesheet" href="css/adventure-studio-app-v3.css">\n  <link rel="stylesheet" href="css/adventure-studio-nle-v4.css">
+  <link rel="stylesheet" href="css/adventure-studio-app-v3.css">\n  <link rel="stylesheet" href="css/adventure-studio-nle-v5.css">
   <link rel="stylesheet" href="css/site-wide-compact-pages.css">
 </head>
 <body data-page="studio" data-account-required="true">
@@ -156,124 +156,45 @@
 </section>
 
         
-<section class="ab-video-studio" data-ab-studio-panel="video" id="adventure-video-studio" aria-labelledby="ab-video-title-heading">
-  <header class="ab-video-head">
-    <div><h2 id="ab-video-title-heading">🎬 Adventure Studio — Video Editor</h2><p>A clean travel-first editor with the same core tools on website and app.</p></div>
-    <span class="ab-video-badge">Shared Web + App Studio · Beta</span>
-  </header>
+<section class="ab-video-studio ab-video-w61" data-ab-studio-panel="video" id="adventure-video-studio" aria-labelledby="ab-video-title-heading">
+  <header class="ab-video-head"><div><h2 id="ab-video-title-heading">Adventure Studio — Video Editor</h2><p>Modern mixed-media editing with source and programme viewers.</p></div></header>
   <div class="ab-video-layout">
     <aside class="ab-video-left">
-      <h3>Media &amp; clip tools</h3>
-      <label class="ab-video-upload">＋ Add video clips<input id="ab-video-file" type="file" accept="video/*" multiple></label>
-      <div class="ab-video-group">
-        <div class="ab-video-grid2"><button class="ab-video-btn" id="ab-video-split" type="button">✂ Split</button><button class="ab-video-btn" id="ab-video-duplicate" type="button">⧉ Duplicate</button></div>
-        <label>Trim start<input id="ab-video-start" type="range" min="0" max="1" step=".05" value="0"></label>
-        <label>Trim end<input id="ab-video-end" type="range" min="0" max="1" step=".05" value="1"></label>
-        <label>Speed<select id="ab-video-speed"><option value=".5">0.5× Slow</option><option value="1" selected>1× Normal</option><option value="1.5">1.5×</option><option value="2">2× Fast</option></select></label>
-        <label>Clip volume<input id="ab-video-volume" type="range" min="0" max="100" value="100"></label>
+      <h3>Media</h3>
+      <label class="ab-video-upload">＋ Add Media<input id="ab-media-file" type="file" accept="video/*,image/*" multiple></label>
+      <div class="ab-video-group" id="ab-media-bin">
+        <div class="ab-media-bin-head"><strong>Project Media</strong><span id="ab-media-count">0 items</span></div>
+        <div class="ab-media-filter" role="group" aria-label="Filter project media"><button type="button" class="is-active" data-media-filter="all">All</button><button type="button" data-media-filter="video">Video</button><button type="button" data-media-filter="image">Photos</button></div>
+        <div class="ab-media-grid" id="ab-media-grid"><p class="ab-media-empty">Import photos and videos. They stay in the Media Bin until you add them to the timeline.</p></div>
       </div>
-      <div class="ab-video-group">
-        <label>Video format<select id="ab-video-format"><option value="landscape">YouTube · 16:9</option><option value="portrait">Shorts / Reels · 9:16</option><option value="square">Square · 1:1</option></select></label>
-        <label>Adventure title<input id="ab-video-title" type="text" maxlength="70" placeholder="Our Lake District Adventure"></label>
-        <label>Look<select id="ab-video-style"><option value="original">Original</option><option value="adventure">Adventure</option><option value="cinematic">Cinematic</option><option value="sunset">Sunset</option><option value="forest">Forest</option><option value="bw">Black &amp; White</option><option value="memory">Memory</option></select></label>
-      </div>
-      
-      <div class="ab-video-group">
-        <span class="ab-video-group-title">Timeline &amp; layers</span>
-        <div class="ab-video-grid2">
-          <label>Video track<select id="ab-video-track-select"><option value="video-1">Video 1 · Main</option><option value="video-2">Video 2 · B-roll</option><option value="video-3">Video 3 · Overlay</option></select></label>
-          <label>Transition<select id="ab-video-transition"><option value="cut">Cut</option><option value="crossfade">Crossfade</option><option value="fade-black">Fade through black</option><option value="dissolve">Dissolve</option><option value="slide-left">Slide left</option><option value="slide-right">Slide right</option><option value="zoom">Zoom</option><option value="wipe">Wipe</option></select></label>
-        </div>
-        <label>Transition duration <span id="ab-video-transition-value">0.6s</span><input id="ab-video-transition-duration" type="range" min="0" max="2" step=".1" value=".6"></label>
-      </div>
-      <div class="ab-video-group">
-        <span class="ab-video-group-title">Effects</span>
-        <div class="ab-video-grid2">
-          <label>Brightness<input id="ab-video-brightness" type="range" min="50" max="150" value="100"></label>
-          <label>Contrast<input id="ab-video-contrast" type="range" min="50" max="150" value="100"></label>
-          <label>Saturation<input id="ab-video-saturation" type="range" min="0" max="200" value="100"></label>
-          <label>Blur<input id="ab-video-blur" type="range" min="0" max="10" step=".5" value="0"></label>
-        </div>
-        <label class="ab-video-check"><input id="ab-video-vignette" type="checkbox"> Vignette preview</label>
-      </div>
-      <div class="ab-video-group">
-        <span class="ab-video-group-title">Templates</span>
-        <label>Quick template<select id="ab-video-template"><option value="">Choose a template…</option><option value="adventure-recap">Adventure Recap</option><option value="vanlife-weekend">Vanlife Weekend</option><option value="walking-adventure">Walking Adventure</option><option value="paddle-trip">Paddle Trip</option><option value="travel-highlights">Travel Highlights</option><option value="youtube-short">YouTube Short</option><option value="facebook-reel">Facebook / Reel</option><option value="photo-slideshow">Photo Slideshow</option></select></label>
-        <button class="ab-video-btn" id="ab-video-apply-template" type="button">Apply template</button>
-      </div>
-
-      <div class="ab-video-group">
-        <span style="font-weight:800;font-size:.86rem">Quick edit</span>
-        <div class="ab-video-tool-list"><button class="ab-video-btn" id="ab-video-mute" type="button">🔇 Mute</button><button class="ab-video-btn" id="ab-video-auto" type="button">✨ Adventure Movie</button></div>
-      </div>
+      <div class="ab-video-group"><span class="ab-video-group-title">Clip edit</span><div class="ab-video-grid2"><button class="ab-video-btn" id="ab-w61-split" type="button">✂ Split</button><button class="ab-video-btn" id="ab-w61-duplicate" type="button">⧉ Duplicate</button></div><label>Speed<select id="ab-w61-speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label><label>Volume<input id="ab-w61-volume" type="range" min="0" max="100" value="100"></label></div>
+      <div class="ab-video-group"><span class="ab-video-group-title">Timeline &amp; layers</span><label>Target track<select id="ab-w61-track"><option value="video-1">Video 1 · Main</option><option value="video-2">Video 2 · B-roll</option><option value="overlay">Photo / Overlay</option></select></label><label>Transition<select id="ab-w61-transition"><option value="cut">Cut</option><option value="crossfade">Crossfade</option><option value="dissolve">Dissolve</option><option value="fade">Fade through black</option></select></label></div>
+      <div class="ab-video-group"><span class="ab-video-group-title">Effects</span><label>Brightness<input id="ab-w61-brightness" type="range" min="50" max="150" value="100"></label><label>Contrast<input id="ab-w61-contrast" type="range" min="50" max="150" value="100"></label><label>Saturation<input id="ab-w61-saturation" type="range" min="0" max="200" value="100"></label></div>
+      <div class="ab-video-group"><span class="ab-video-group-title">Templates</span><button class="ab-video-btn" type="button" data-w61-template="recap">Adventure Recap</button><button class="ab-video-btn" type="button" data-w61-template="slideshow">Photo Slideshow</button></div>
+      <div class="ab-video-group"><span class="ab-video-group-title">Quick edit</span><button class="ab-video-btn" id="ab-w61-fit" type="button">Fit timeline</button></div>
     </aside>
 
     <section class="ab-video-main">
-      <div class="ab-video-preview-wrap">
-        <div class="ab-video-preview-frame" id="ab-video-frame">
-          <video id="ab-video-preview" playsinline preload="metadata" hidden></video>
-          <div class="ab-video-empty" id="ab-video-empty"><div><strong>Your adventure film appears here</strong><span>Add video clips, then trim, split, style and preview them.</span></div></div>
-          <div class="ab-video-overlay-title" id="ab-video-overlay-title"></div>
-          <div class="ab-video-overlay-stage" id="ab-video-overlay-stage" aria-label="Moveable video overlays"></div>
-          <div class="ab-video-route-card" id="ab-video-route-card"><strong>📍 Adventure Route</strong><br>Start → Scenic Stop → Summit → Camp<br>12.4 km · 640 m climbed</div>
-          <div class="ab-video-stamp" id="ab-video-stamp">ADVENTURE BUILDER · TRIP MEMORY</div>
-        </div>
-        <div class="ab-video-controls"><button class="ab-video-btn" id="ab-video-back" type="button">−5s</button><button class="ab-video-btn ab-video-primary" id="ab-video-play" type="button">▶ / ❚❚</button><button class="ab-video-btn" id="ab-video-forward" type="button">+5s</button><span class="ab-video-time" id="ab-video-time">0:00 / 0:00</span></div>
+      <div class="ab-dual-viewers" id="ab-dual-viewers">
+        <section class="ab-viewer"><header><strong>Source</strong><span id="ab-source-name">Select media</span></header><div class="ab-viewer-stage" id="ab-source-stage"><video id="ab-source-video" playsinline preload="metadata" hidden></video><img id="ab-source-image" alt="Selected source" hidden><div class="ab-viewer-empty" id="ab-source-empty">Select a photo or video from Project Media</div></div><footer><button class="ab-video-btn" id="ab-source-play" type="button">▶</button><button class="ab-video-btn" id="ab-source-mark-in" type="button">Mark In</button><button class="ab-video-btn" id="ab-source-mark-out" type="button">Mark Out</button><span id="ab-source-time">0:00 / 0:00</span></footer></section>
+        <section class="ab-viewer"><header><strong>Programme</strong><span>Timeline output</span></header><div class="ab-viewer-stage" id="ab-program-stage"><video id="ab-program-video" playsinline preload="metadata" hidden></video><img id="ab-program-image" alt="Timeline preview" hidden><div class="ab-viewer-empty" id="ab-program-empty">Add media to the timeline to build your film</div></div><footer><button class="ab-video-btn" id="ab-program-back" type="button">−5s</button><button class="ab-video-btn ab-video-primary" id="ab-program-play" type="button">▶ / ❚❚</button><button class="ab-video-btn" id="ab-program-forward" type="button">+5s</button><span id="ab-program-time">0:00 / 0:00</span></footer></section>
       </div>
+      <div class="ab-insert-bar"><span>Send selected source to timeline:</span><button class="ab-video-btn" data-insert-mode="insert" type="button">Insert</button><button class="ab-video-btn" data-insert-mode="overwrite" type="button">Overwrite</button><button class="ab-video-btn" data-insert-mode="replace" type="button">Replace</button><button class="ab-video-btn" data-insert-mode="overlay" type="button">Place on top</button><button class="ab-video-btn ab-video-primary" data-insert-mode="append" type="button">Append at end</button><button class="ab-video-btn" id="ab-viewer-toggle" type="button">Single Viewer</button></div>
       <div class="ab-video-timeline-wrap">
-        <div class="ab-video-timeline-head"><strong>Timeline</strong><span id="ab-video-summary">No clips added</span></div>
-        <div class="ab-video-timeline" id="ab-video-timeline"></div>
-
-        <div class="ab-video-track-controls">
-          <button class="ab-video-btn" id="ab-video-add-video-track" type="button">＋ Video track</button>
-          <button class="ab-video-btn" id="ab-video-add-text-track" type="button">＋ Text track</button>
-          <label>Timeline zoom <input id="ab-video-timeline-zoom" type="range" min="70" max="180" value="100"></label>
-          <button class="ab-video-btn" id="ab-video-undo" type="button">↶ Undo</button><button class="ab-video-btn" id="ab-video-redo" type="button">↷ Redo</button>
-        </div>
+        <div class="ab-video-timeline-head"><strong>Timeline</strong><span id="ab-video-summary">No timeline media</span></div>
+        <div class="ab-video-track-controls"><button class="ab-video-btn" id="ab-w61-undo" type="button">↶ Undo</button><button class="ab-video-btn" id="ab-w61-redo" type="button">↷ Redo</button><label>Zoom <input id="ab-w61-zoom" type="range" min="70" max="180" value="100"></label></div>
         <div class="ab-video-multitracks" id="ab-video-multitracks" aria-label="Multi-track timeline"></div>
-
       </div>
     </section>
 
     <aside class="ab-video-right">
-      <h3>Adventure tools</h3>
-      <div class="ab-video-group">
-        <button class="ab-video-btn" id="ab-video-route-toggle" type="button">🗺 Route overlay</button>
-        <button class="ab-video-btn" id="ab-video-stamp-toggle" type="button">🏅 Adventure stamp</button>
-      </div>
-
-      <div class="ab-video-group">
-        <span class="ab-video-group-title">Text overlays</span>
-        <label>Text<input id="ab-video-text-input" type="text" maxlength="120" placeholder="Add your own text"></label>
-        <div class="ab-video-grid2">
-          <label>Text track<select id="ab-video-text-track"><option value="text-1">Text 1</option><option value="text-2">Text 2</option><option value="text-3">Text 3</option><option value="text-4">Text 4</option></select></label>
-          <label>Style<select id="ab-video-text-style"><option value="clean">Clean</option><option value="bold">Bold</option><option value="caption">Caption</option><option value="outline">Outline</option></select></label>
-        </div>
-        <button class="ab-video-btn" id="ab-video-add-text" type="button">＋ Add text overlay</button>
-      </div>
-      <div class="ab-video-group">
-        <span class="ab-video-group-title">Stickers</span>
-        <div class="ab-video-sticker-palette" id="ab-video-sticker-palette">
-          <button type="button" data-ab-sticker="🧭">🧭</button><button type="button" data-ab-sticker="🥾">🥾</button><button type="button" data-ab-sticker="🚐">🚐</button><button type="button" data-ab-sticker="🏕️">🏕️</button><button type="button" data-ab-sticker="🛶">🛶</button><button type="button" data-ab-sticker="🚴">🚴</button><button type="button" data-ab-sticker="🌅">🌅</button><button type="button" data-ab-sticker="📍">📍</button><button type="button" data-ab-sticker="⭐">⭐</button><button type="button" data-ab-sticker="❤️">❤️</button>
-        </div>
-        <p class="ab-video-help">Add a sticker, then drag it anywhere on the preview. Use its corner handle to resize it.</p>
-      </div>
-      <div class="ab-video-group">
-        <span class="ab-video-group-title">Selected overlay</span>
-        <div class="ab-video-grid2"><button class="ab-video-btn" id="ab-video-overlay-front" type="button">Bring forward</button><button class="ab-video-btn" id="ab-video-overlay-back" type="button">Send backward</button><button class="ab-video-btn" id="ab-video-overlay-duplicate" type="button">Duplicate</button><button class="ab-video-btn" id="ab-video-overlay-delete" type="button">Delete</button></div>
-      </div>
-
-      <div class="ab-video-group">
-        <span style="font-weight:800;font-size:.86rem">Auto chapters</span>
-        <div class="ab-video-chapters" id="ab-video-chapters"></div>
-      </div>
-      <div class="ab-video-group">
-        <button class="ab-video-btn ab-video-primary" id="ab-video-export" type="button">Export project plan</button>
-        <p class="ab-video-status" id="ab-video-status">Add clips to begin. Video files stay on this device.</p>
-      </div>
-      <div class="ab-video-note"><strong>Next isolated modules</strong><br>Final MP4 compositing/encoding, music library, voice-over recording, animated GPS route replay, subtitles and stabilisation remain isolated rendering modules.</div>
+      <h3>Tools</h3>
+      <div class="ab-video-group"><span class="ab-video-group-title">Text</span><input id="ab-w61-text" type="text" placeholder="Add title or caption"><button class="ab-video-btn" id="ab-w61-add-text" type="button">＋ Add text</button></div>
+      <div class="ab-video-group"><span class="ab-video-group-title">Elements</span><button class="ab-video-btn" type="button">Route overlay</button><button class="ab-video-btn" type="button">Adventure stamp</button></div>
+      <div class="ab-video-group"><span class="ab-video-group-title">Export</span><button class="ab-video-btn ab-video-primary" id="ab-video-export" type="button">Export project</button><p class="ab-video-help">Exports an editable Adventure Studio project plan. Browser MP4 rendering remains a separate rendering module.</p></div>
     </aside>
   </div>
+  <p class="ab-video-status" id="ab-video-status" aria-live="polite">Ready. Add photos and videos to Project Media.</p>
 </section>
 
         
@@ -348,7 +269,6 @@
   <script src="js/main.js"></script>
   <script src="js/studio-web.js"></script>
   <script src="js/photo-studio.js"></script>
-  <script src="js/video-studio-v2.js"></script>
-  <script src="js/adventure-studio-app-v4.js"></script>\n  <script src="js/adventure-studio-nle-v4.js"></script>
+    <script src="js/adventure-studio-app-v4.js"></script>\n  <script src="js/adventure-studio-nle-v5.js"></script>
 </body>
 </html>

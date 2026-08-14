@@ -60,10 +60,10 @@ function videoState(section){
   section,canvas:main,upload,top:[exp].filter(Boolean),
   defs:[["＋","Media","media"],["✂","Edit","edit"],["T","Text","text"],["✦","Elements","elements"],["◐","Effects","effects"],["↔","Timeline","timeline"],["▦","Templates","templates"]],
   tools:{
-   media:{title:"Media",nodes:[upload]},
-   edit:{title:"Clip",nodes:[lg[0],lg[1]]},
-   text:{title:"Text",nodes:[rg[1],rg[3]]},
-   elements:{title:"Elements",nodes:[rg[0],rg[2],rg[4]]},
+   media:{title:"Media",nodes:[upload,$("#ab-media-bin",section)]},
+   edit:{title:"Clip",nodes:[lg[1]]},
+   text:{title:"Text",nodes:[rg[0]]},
+   elements:{title:"Elements",nodes:[rg[1]]},
    effects:{title:"Effects",nodes:[lg[3]]},
    timeline:{title:"Timeline",nodes:[lg[2]]},
    templates:{title:"Templates",nodes:[lg[4],lg[5]]}
