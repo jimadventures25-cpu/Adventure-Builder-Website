@@ -1,0 +1,61 @@
+
+/* W58 Adventure Studio workspace rebuild — presentation only. Existing editor controls keep their IDs/hooks. */
+body[data-page="studio"] #studio{max-width:none;padding-inline:clamp(14px,2vw,30px)}
+body[data-page="studio"] #studio>.section-heading{max-width:760px;margin:0 auto 14px;text-align:center}
+body[data-page="studio"] #studio>.section-heading p:last-child{max-width:650px;margin-inline:auto}
+body[data-page="studio"] .beta-access-banner{max-width:920px;margin:0 auto 14px}
+body[data-page="studio"] #studio-members-area{max-width:1500px;margin:0 auto}
+body[data-page="studio"] .ab-studio-note{display:none}
+body[data-page="studio"] .ab-studio-switch{justify-content:center;margin:10px 0 14px}
+body[data-page="studio"] .ab-photo-head,
+body[data-page="studio"] .ab-video-head{display:none!important}
+
+.ab-studio-v2-topbar{display:flex;align-items:center;gap:10px;min-height:58px;padding:8px 12px;border:1px solid #dfe5e8;border-radius:14px 14px 0 0;background:#fff}
+.ab-studio-v2-title{font-weight:850;color:#172126;margin-right:auto}
+.ab-studio-v2-sub{font-size:.82rem;color:#68747b}
+.ab-studio-v2-topbar button,.ab-studio-v2-topbar label{min-height:38px}
+.ab-studio-v2-workspace{display:grid;grid-template-columns:72px minmax(230px,300px) minmax(0,1fr);min-height:690px;border:1px solid #dfe5e8;border-top:0;border-radius:0 0 14px 14px;overflow:hidden;background:#f4f5f5}
+.ab-studio-v2-rail{background:#162427;padding:10px 7px;display:flex;flex-direction:column;gap:5px}
+.ab-studio-v2-tool{border:0;background:transparent;color:#dbe4e5;border-radius:10px;min-height:60px;padding:7px 4px;font:inherit;font-size:.72rem;font-weight:750;cursor:pointer;display:grid;place-items:center;gap:2px}
+.ab-studio-v2-tool span{font-size:1.25rem}
+.ab-studio-v2-tool:hover,.ab-studio-v2-tool.is-active{background:#fff;color:#142326}
+.ab-studio-v2-panel{background:#fff;border-right:1px solid #dfe5e8;overflow:auto;padding:16px}
+.ab-studio-v2-panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+.ab-studio-v2-panel-head h3{margin:0;font-size:1rem}
+.ab-studio-v2-panel .ab-photo-group,.ab-studio-v2-panel .ab-video-group{border:0!important;background:transparent!important;padding:0!important;margin:0 0 18px!important;box-shadow:none!important}
+.ab-studio-v2-canvas{min-width:0;display:flex;flex-direction:column;align-items:stretch;justify-content:center;padding:22px;background:#eceeed}
+.ab-studio-v2-canvas .ab-photo-canvas-wrap{width:min(100%,980px);margin:auto;box-shadow:0 18px 50px rgba(20,35,38,.13)}
+.ab-studio-v2-empty-cta{display:grid;place-items:center;text-align:center;gap:12px;min-height:440px;color:#435156}
+.ab-studio-v2-empty-cta strong{font-size:1.35rem;color:#172126}
+.ab-studio-v2-empty-cta p{max-width:430px;margin:0}
+.ab-studio-v2-empty-cta label{display:inline-flex!important;width:auto!important}
+.ab-studio-v2-hidden{display:none!important}
+.ab-studio-v2-topbar .ab-photo-btn,.ab-studio-v2-topbar .ab-video-btn{width:auto}
+.ab-studio-v2-panel .ab-photo-coming{display:none}
+.ab-studio-v2-panel .ab-photo-status{font-size:.78rem}
+.ab-photo-studio.is-v2 .ab-photo-shell{display:contents}
+.ab-photo-studio.is-v2 .ab-photo-tools,.ab-photo-studio.is-v2 .ab-photo-side{display:none!important}
+
+/* Video: same calm editor grammar; timeline remains visible because it is part of the edit. */
+.ab-video-studio.is-v2 .ab-video-layout{display:grid!important;grid-template-columns:72px minmax(230px,300px) minmax(0,1fr)!important;min-height:690px;border:1px solid #dfe5e8;border-top:0;border-radius:0 0 14px 14px;overflow:hidden;background:#f4f5f5}
+.ab-video-studio.is-v2 .ab-video-left{display:none!important}
+.ab-video-studio.is-v2 .ab-video-main{grid-column:3;padding:22px;min-width:0}
+.ab-video-studio.is-v2 .ab-video-right{display:none!important}
+.ab-video-studio.is-v2 .ab-studio-v2-rail{grid-column:1;grid-row:1}
+.ab-video-studio.is-v2 .ab-studio-v2-panel{grid-column:2;grid-row:1}
+.ab-video-studio.is-v2 .ab-video-main{grid-row:1}
+.ab-video-studio.is-v2 .ab-video-preview-wrap{max-width:980px;margin:0 auto}
+.ab-video-studio.is-v2 .ab-video-timeline-wrap{margin-top:16px}
+
+@media(max-width:980px){
+ .ab-studio-v2-workspace,.ab-video-studio.is-v2 .ab-video-layout{grid-template-columns:64px minmax(210px,260px) minmax(0,1fr)}
+ .ab-studio-v2-sub{display:none}
+}
+@media(max-width:760px){
+ .ab-studio-v2-workspace,.ab-video-studio.is-v2 .ab-video-layout{display:flex!important;flex-direction:column;min-height:0}
+ .ab-studio-v2-rail{order:2;flex-direction:row;overflow-x:auto;padding:6px}
+ .ab-studio-v2-tool{min-width:70px;min-height:54px}
+ .ab-studio-v2-panel{order:3;border-right:0;border-top:1px solid #dfe5e8;max-height:46vh}
+ .ab-studio-v2-canvas,.ab-video-studio.is-v2 .ab-video-main{order:1;padding:10px}
+ .ab-studio-v2-topbar{flex-wrap:wrap}
+}

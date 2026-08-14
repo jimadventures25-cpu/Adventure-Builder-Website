@@ -1,0 +1,31 @@
+Adventure Builder Website W58 — Adventure Studio Stage 1 Workspace Rebuild
+
+GOAL
+Replace the crowded three-column editor presentation with a website-first creative workspace:
+tool rail -> one contextual panel -> large canvas. Keep the proven photo/video editing engines.
+
+WHAT CHANGED
+- Adventure Studio now uses a narrow left tool rail.
+- Only the selected tool category is shown in the contextual panel.
+- Photo canvas is the dominant centre workspace.
+- Photo tools are grouped as Adjust, Crop, Retouch, Looks and Text.
+- Video tools are grouped as Clips, Format, Timeline, Effects and Templates.
+- Video timeline remains part of the main edit workspace.
+- Existing upload, crop, selection, brush, clone, smart tools, presets, undo/redo and export hooks are preserved.
+- Existing video clip/trim/speed/transition/effects/template hooks are preserved.
+- Empty photo state is simplified.
+- Tablet/mobile layout collapses to canvas -> horizontal tool rail -> contextual panel.
+
+ARCHITECTURE
+- Existing photo-studio.js and video-studio-v2.js remain the editing engines.
+- New adventure-studio-workspace-v2.js owns workspace presentation only.
+- New adventure-studio-workspace-v2.css owns the new responsive layout.
+- No third-party library was added because the existing editor engine already supplies the required functions;
+  adding Fabric/Cropper at this stage would duplicate working code rather than improve modularity.
+
+TESTS
+PASS — 54 JS/MJS files pass node --check.
+PASS — all 44 local src/href references from studio.html resolve.
+PASS — all 129 existing Studio element IDs are retained.
+PASS — new workspace CSS/JS are loaded after the existing Studio modules.
+PASS — existing engine files are not duplicated or replaced.
