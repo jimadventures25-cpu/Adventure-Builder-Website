@@ -1,0 +1,6 @@
+Adventure Builder Website W60 — Modern Video Editor Core
+Keeps W59 Studio landing page. Rebuilds Video Editor as a modern dark NLE workspace.
+Functional engine retained: import, preview, trim, split, duplicate, speed, volume, effects, transitions, text/stickers, tracks, undo/redo and project export.
+Timeline is compact by default, expands on demand, and collapses to a small prompt when empty.
+Keyboard: Space play/pause; S split; Ctrl/Cmd+Z undo; Shift+Ctrl/Cmd+Z redo; Alt+arrows seek.
+Tests: {'video-studio-v2.js': True, 'adventure-studio-app-v4.js': False, 'adventure-studio-nle-v4.js': True}
