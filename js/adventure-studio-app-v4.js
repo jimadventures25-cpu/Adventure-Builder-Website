@@ -56,20 +56,22 @@ function videoState(section){
  const left=$(".ab-video-left",section), right=$(".ab-video-right",section), main=$(".ab-video-main",section);
  const lg=left?$$(":scope > .ab-video-group",left):[], rg=right?$$(":scope > .ab-video-group",right):[];
  const upload=$(".ab-video-upload",left), exp=$("#ab-video-export",section);
+ const creative=$("#ab-w62-creative-panels",section);
+ const node=id=>creative?$("#"+id,creative):null;
  return {
   section,canvas:main,upload,top:[exp].filter(Boolean),
   defs:[["＋","Media","media"],["✂","Edit","edit"],["T","Text","text"],["♫","Audio","audio"],["CC","Captions","captions"],["▱","Layers","layers"],["↔","Transitions","transitions"],["✦","Effects","effects"],["▦","Templates","templates"],["AI","Auto Edit","ai"]],
   tools:{
-   media:{title:"Project media",nodes:[upload]},
-   edit:{title:"Clip edit",nodes:[lg[0],lg[1]]},
-   text:{title:"Text & typography",nodes:[rg[1],$(".ab-w62-text-pro",right)]},
-   audio:{title:"Audio & voice-over",nodes:[$(".ab-w62-audio",right)]},
-   captions:{title:"Captions & transcript",nodes:[$(".ab-w62-captions",right)]},
-   layers:{title:"Layers",nodes:[$("#ab-video-layer-dock",section),rg[3]]},
+   media:{title:"Project media",nodes:[upload,$("#ab-media-bin",section)]},
+   edit:{title:"Clip",nodes:[lg[1]]},
+   text:{title:"Text & typography",nodes:[rg[0],node("ab-w62-text-panel")]},
+   audio:{title:"Audio & voice-over",nodes:[node("ab-w62-audio-panel")]},
+   captions:{title:"Captions & transcript",nodes:[node("ab-w62-caption-panel")]},
+   layers:{title:"Layers",nodes:[node("ab-w62-layers-panel")]},
    transitions:{title:"Transitions",nodes:[lg[2]]},
    effects:{title:"Effects",nodes:[lg[3]]},
    templates:{title:"Templates",nodes:[lg[4],lg[5]]},
-   ai:{title:"AI Auto Edit",nodes:[$(".ab-w62-ai",right)]}
+   ai:{title:"AI Auto Edit",nodes:[node("ab-w62-ai-panel")]}
   },initial:"media"
  };
 }

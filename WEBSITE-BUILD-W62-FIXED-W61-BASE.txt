@@ -1,0 +1,32 @@
+Adventure Builder Website W62 FIXED — Creative Tools on W61 Dual-Viewer Base
+
+ROOT CAUSE
+The first W62 package was built from an older website editor base, so it restored the old
+single Programme viewer and old Add video clips workflow. That removed the W61 features
+the user had approved.
+
+FIX
+- Rebuilt W62 directly on the W61 Media Bin + Source/Programme dual-view editor.
+- W61 mixed photo/video Media Bin remains intact.
+- W61 multiple media imports remain intact.
+- W61 Source viewer remains intact.
+- W61 Programme viewer remains intact.
+- W61 dual-view editing workflow remains intact.
+- W61 modern timeline remains intact.
+- Added modern editor categories without replacing W61:
+  Media, Edit, Text, Audio, Captions, Layers, Transitions, Effects, Templates, AI Auto Edit.
+- Added layer controls.
+- Added font family, font size and colour controls.
+- Added manual subtitle overlay workflow.
+- Added music/audio import panel.
+- Added real microphone voice-over recording via MediaRecorder.
+- Added AI Auto Edit configuration and editable first-cut planning hook.
+- AI transcript remains an honest prepared integration hook; it does not pretend to
+  transcribe without a speech model/service.
+
+TESTS
+PASS — adventure-studio-app-v4.js syntax.
+PASS — adventure-studio-creative-v6.js syntax.
+PASS — adventure-studio-nle-v5.js syntax.
+PASS — all local studio.html resources resolve.
+PASS — W61 nle-v5 dual-view engine retained and untouched.
