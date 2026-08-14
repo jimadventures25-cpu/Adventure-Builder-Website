@@ -1,0 +1,34 @@
+Adventure Builder Website W59 — Adventure Studio Full-Viewport Application
+
+DESIGN
+- Studio landing screen has two primary choices: Photo Editor and Video Editor.
+- Opening either editor creates a fixed full-viewport application workspace.
+- A persistent Back to Adventure Studio control returns to the landing screen.
+- Desktop: vertical tool rail + one contextual tool panel + large canvas/preview.
+- Mobile/tablet: canvas first, horizontal tool rail, contextual controls below.
+- Video keeps its timeline with the main editing workspace.
+- Layout automatically uses the visible viewport; users no longer choose layout modes.
+
+REMOVED FROM ACTIVE CODE
+- Auto Fit / Compact / Standard / Full Screen / Reset Layout manager.
+- W58 embedded-page workspace layer.
+- Old Photo/Video tab controller.
+- Their files are listed separately for safe repository deletion.
+
+PRESERVED
+- Existing photo-studio.js editing engine.
+- Existing video-studio-v2.js editing engine.
+- All original Studio control IDs/hooks.
+- Account gate, Accessibility, Adventure Profile and Feedback website services.
+
+TESTS
+PASS — 55/55 JavaScript/MJS files pass node --check.
+PASS — 40/40 local Studio page assets resolve.
+PASS — 129/129 original Studio IDs retained.
+PASS — photo/video engine scripts load before the W59 application shell.
+PASS — obsolete layout manager / W58 workspace / old tab controller no longer referenced.
+
+IMPLEMENTATION BASIS
+- Uses CSS dynamic viewport height (100dvh) for the current visible browser height.
+- Uses ResizeObserver to trigger existing editor resize behaviour when the application workspace changes.
+- Does not invoke the browser Fullscreen API; the editor fills the browser viewport without a fullscreen permission flow.

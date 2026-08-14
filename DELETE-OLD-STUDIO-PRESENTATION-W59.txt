@@ -1,0 +1,16 @@
+W59 — OLD STUDIO PRESENTATION FILES NO LONGER USED
+
+These files are no longer referenced by studio.html and may be deleted from the website repository:
+css/adventure-studio-tabs.css
+js/adventure-studio-tabs.js
+css/studio-workspace-manager.css
+js/studio-workspace-manager.js
+css/adventure-studio-workspace-v2.css
+js/adventure-studio-workspace-v2.js
+
+Do NOT delete:
+css/photo-studio.css
+js/photo-studio.js
+css/video-studio-v2.css
+js/video-studio-v2.js
+Those remain the working photo/video editing engines.
