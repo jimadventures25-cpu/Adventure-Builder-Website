@@ -58,15 +58,18 @@ function videoState(section){
  const upload=$(".ab-video-upload",left), exp=$("#ab-video-export",section);
  return {
   section,canvas:main,upload,top:[exp].filter(Boolean),
-  defs:[["＋","Media","media"],["✂","Edit","edit"],["T","Text","text"],["✦","Elements","elements"],["◐","Effects","effects"],["↔","Timeline","timeline"],["▦","Templates","templates"]],
+  defs:[["＋","Media","media"],["✂","Edit","edit"],["T","Text","text"],["♫","Audio","audio"],["CC","Captions","captions"],["▱","Layers","layers"],["↔","Transitions","transitions"],["✦","Effects","effects"],["▦","Templates","templates"],["AI","Auto Edit","ai"]],
   tools:{
-   media:{title:"Media",nodes:[upload,$("#ab-media-bin",section)]},
-   edit:{title:"Clip",nodes:[lg[1]]},
-   text:{title:"Text",nodes:[rg[0]]},
-   elements:{title:"Elements",nodes:[rg[1]]},
+   media:{title:"Project media",nodes:[upload]},
+   edit:{title:"Clip edit",nodes:[lg[0],lg[1]]},
+   text:{title:"Text & typography",nodes:[rg[1],$(".ab-w62-text-pro",right)]},
+   audio:{title:"Audio & voice-over",nodes:[$(".ab-w62-audio",right)]},
+   captions:{title:"Captions & transcript",nodes:[$(".ab-w62-captions",right)]},
+   layers:{title:"Layers",nodes:[$("#ab-video-layer-dock",section),rg[3]]},
+   transitions:{title:"Transitions",nodes:[lg[2]]},
    effects:{title:"Effects",nodes:[lg[3]]},
-   timeline:{title:"Timeline",nodes:[lg[2]]},
-   templates:{title:"Templates",nodes:[lg[4],lg[5]]}
+   templates:{title:"Templates",nodes:[lg[4],lg[5]]},
+   ai:{title:"AI Auto Edit",nodes:[$(".ab-w62-ai",right)]}
   },initial:"media"
  };
 }

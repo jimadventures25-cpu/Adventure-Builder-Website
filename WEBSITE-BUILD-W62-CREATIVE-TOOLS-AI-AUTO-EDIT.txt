@@ -1,0 +1,33 @@
+Adventure Builder Website W62 — Creative Tools, Layers & AI Auto Edit Foundation
+
+BUILT
+- Modern Video Editor rail expanded to: Media, Edit, Text, Audio, Captions, Layers,
+  Transitions, Effects, Templates and AI Auto Edit.
+- Layer inspector for Video 1, Video 2/B-roll, photo/overlay, text/captions,
+  music and voice-over, including visibility and lock states.
+- Typography controls: font family, size, colour, bold and shadow.
+- Manual captions/subtitle overlay workflow.
+- Audio import control for music/audio assets.
+- Browser microphone voice-over recording using MediaRecorder.
+- AI Auto Edit panel with style, target length, aspect ratio and captions preference.
+- Auto Edit currently creates an editable first-cut PLAN from clips already in the timeline;
+  it deliberately does not pretend to perform semantic AI scene analysis yet.
+- AI transcript button is a prepared integration point; manual captions work now.
+
+RESEARCH / ARCHITECTURE
+- WebCodecs is the future low-level frame encode/decode path for browser rendering.
+- MediaRecorder is used now for voice-over because it is widely available and designed
+  to record MediaStreams.
+- Transformers.js + Whisper is suitable for a later optional local transcript/caption module.
+- ffmpeg.wasm remains suitable as an optional render/transcode fallback, but is not forced
+  into the editor bundle because it is heavy and has a 2 GB WebAssembly input limit.
+- AI semantic clip selection remains modular; a real model/service can replace the current
+  deterministic first-cut planner without rewriting the manual editor.
+
+TESTS
+PASS — adventure-studio-app-v4.js node --check.
+PASS — adventure-studio-creative-v5.js node --check.
+PASS — adventure-studio-nle-v4.js node --check.
+PASS — video-studio-v2.js node --check.
+PASS — all local studio.html src/href resources resolve.
+PASS — no duplicate HTML IDs introduced.
