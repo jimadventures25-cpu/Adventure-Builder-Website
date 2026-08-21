@@ -1,0 +1,31 @@
+Adventure Builder Website — W63 Auth Repair Test Report
+Date: 2026-08-21
+
+PASS — JavaScript syntax
+- node --check passed for every file in js/.
+
+PASS — Auth module loading
+- 17 HTML pages load js/auth.js.
+- The same 17 pages load js/auth-service.js before js/auth.js.
+- js/config.js loads before js/auth-service.js on each auth page.
+
+PASS — Registration legal links
+- 17 registration forms found.
+- 17 Terms & Conditions links found.
+- 17 Privacy Policy links found.
+- 0 old non-clickable legal-consent strings remain.
+
+PASS — HTML structural checks
+- No duplicate IDs detected in HTML pages.
+- All local page, script, stylesheet and image references resolve to files in the build.
+
+PASS — Auth service unit simulations
+- invalid_credentials -> friendly incorrect email/password message.
+- network TypeError -> friendly account service connection message.
+- successful sign-in response -> no error generated.
+- non-resolving sign-in -> request_timeout error path confirmed.
+
+LIMITATION — Live Supabase request
+- The build environment could not resolve the project hostname over its container network, so a real credential login was not performed here.
+- Final deployment test should use a real Adventure Builder test account on the deployed site.
+- Supabase URL Configuration must allow the production website redirect URL used by email confirmation.

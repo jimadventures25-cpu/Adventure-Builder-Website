@@ -103,3 +103,4 @@ body[data-page]:not([data-page="index"]) .section-heading h2{font-size:clamp(2.3
 .home-story-card h2,.home-story-card blockquote,.home-story-emphasis{color:#111820!important}
 .home-story-card p{color:#3f484f!important}
 .home-story-card .button-secondary{background:#fff!important;color:#111820!important;border-color:rgba(255,121,0,.65)!important}
+.checkbox-row a{color:var(--orange);font-weight:750;text-decoration:underline;text-underline-offset:2px}.checkbox-row a:hover{filter:brightness(1.15)}.auth-form[aria-busy="true"]{opacity:.78}.auth-form button:disabled,.auth-form input:disabled,.logout-button:disabled{cursor:wait;opacity:.72}

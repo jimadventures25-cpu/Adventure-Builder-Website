@@ -180,7 +180,7 @@
 
   <footer class="site-footer">
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
-    <div class="footer-links"><a href="index.html">Home</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle Board &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a><a href="studio.html">Studio</a><a href="index.html#download">Get the App</a></div>
+    <div class="footer-links"><a href="index.html">Home</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle Board &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a><a href="studio.html">Studio</a><a href="index.html#download">Get the App</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a></div>
     <p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p>
   </footer>
 
@@ -191,7 +191,7 @@
       <div id="auth-signed-out">
         <div class="auth-tabs" role="tablist"><button id="login-tab" class="auth-tab active" type="button" role="tab" aria-selected="true">Log in</button><button id="register-tab" class="auth-tab" type="button" role="tab" aria-selected="false">Register</button></div>
         <form id="login-form" class="auth-form"><h2 id="auth-title">Welcome back</h2><p>Log in with your Adventure Builder account.</p><label>Email<input id="login-email" name="email" type="email" autocomplete="email" required></label><label>Password<input id="login-password" name="password" type="password" autocomplete="current-password" minlength="6" required></label><button class="button button-primary auth-submit" type="submit">Log in</button></form>
-        <form id="register-form" class="auth-form" hidden><h2>Create your account</h2><p>Register here, then use the same details in the app.</p><label>Your name<input id="register-name" name="name" type="text" autocomplete="name" maxlength="60" required></label><label>Email<input id="register-email" name="email" type="email" autocomplete="email" required></label><label>Password<input id="register-password" name="password" type="password" autocomplete="new-password" minlength="6" required></label><label>Confirm password<input id="register-confirm" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required></label><label class="checkbox-row"><input id="register-terms" type="checkbox" required><span>I agree to the Adventure Builder terms and privacy policy.</span></label><button class="button button-primary auth-submit" type="submit">Create account</button></form>
+        <form id="register-form" class="auth-form" hidden><h2>Create your account</h2><p>Register here, then use the same details in the app.</p><label>Your name<input id="register-name" name="name" type="text" autocomplete="name" maxlength="60" required></label><label>Email<input id="register-email" name="email" type="email" autocomplete="email" required></label><label>Password<input id="register-password" name="password" type="password" autocomplete="new-password" minlength="6" required></label><label>Confirm password<input id="register-confirm" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required></label><label class="checkbox-row"><input id="register-terms" type="checkbox" required><span>I agree to the Adventure Builder <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span></label><button class="button button-primary auth-submit" type="submit">Create account</button></form>
       </div>
       <div id="auth-signed-in" class="account-panel" hidden><div class="account-avatar account-avatar-large" id="panel-avatar">A</div><p class="eyebrow">Adventure Builder account</p><h2 id="panel-name">Welcome</h2><p id="panel-email"></p><p class="account-choice-copy">Choose how you would like to continue.</p><div class="account-choice-actions"><button class="button button-primary" id="continue-website" type="button">Continue on Website</button><a class="button button-secondary" href="https://app.adventurebuilder.co.uk" target="_blank" rel="noopener">Open the App</a></div><button class="account-settings-link" id="account-settings" type="button">Account settings</button><button class="button button-secondary auth-submit logout-button" id="logout-button" type="button">Log out</button></div>
       <p class="auth-status" id="auth-status" aria-live="polite"></p>
@@ -202,6 +202,7 @@
   <script src="js/config.js"></script>
   <script src="js/accessibility-core.js"></script>
   <script src="js/profile-core.js"></script>
+  <script src="js/auth-service.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/account-gate.js"></script>
   <script src="js/accessibility-ui.js"></script>

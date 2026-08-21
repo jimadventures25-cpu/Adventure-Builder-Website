@@ -67,7 +67,7 @@
   <footer class="site-footer">
     <div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div>
     <div class="footer-links"><a href="index.html">Home</a><a href="adventures.html">Adventures</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="adventure-finder.html">Adventure Finder</a><a href="trip-planner.html">Trip Planner</a><a href="gallery.html">Gallery</a><a href="community.html">Community</a>
-      <a href="studio.html">Studio</a><a href="index.html#download">Get the App</a></div>
+      <a href="studio.html">Studio</a><a href="index.html#download">Get the App</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a></div>
     <p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p>
   </footer>
   <div class="auth-overlay" id="auth-overlay" hidden>
@@ -96,7 +96,7 @@
           <label>Email<input id="register-email" name="email" type="email" autocomplete="email" required></label>
           <label>Password<input id="register-password" name="password" type="password" autocomplete="new-password" minlength="6" required></label>
           <label>Confirm password<input id="register-confirm" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required></label>
-          <label class="checkbox-row"><input id="register-terms" type="checkbox" required><span>I agree to the Adventure Builder terms and privacy policy.</span></label>
+          <label class="checkbox-row"><input id="register-terms" type="checkbox" required><span>I agree to the Adventure Builder <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
           <button class="button button-primary auth-submit" type="submit">Create account</button>
         </form>
       </div>
@@ -122,6 +122,7 @@
   <script src="js/config.js"></script>
   <script src="js/accessibility-core.js"></script>
   <script src="js/profile-core.js"></script>
+  <script src="js/auth-service.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/account-gate.js"></script>
   <script src="js/accessibility-ui.js"></script>

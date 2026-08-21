@@ -1,0 +1,19 @@
+Adventure Builder Website — W63 Auth Repair + Legal Links
+Date: 2026-08-21
+
+Changes
+- Replaced direct auth network calls in js/auth.js with modular js/auth-service.js.
+- Added 20-second auth request timeout so login/register/logout cannot remain indefinitely on an in-progress message.
+- Added try/catch handling for network/runtime failures.
+- Added friendly handling for common Supabase Auth error codes.
+- Disabled auth controls during requests to prevent duplicate submissions.
+- Hardened missing-element checks in shared auth UI.
+- Preserved Supabase session persistence and onAuthStateChange behaviour.
+- Added clickable Terms & Conditions and Privacy Policy links to every registration form.
+- Added terms.html and privacy.html baseline pages.
+- Added Terms/Privacy footer links where the shared footer exists.
+- Added legal/auth UI styling.
+
+Deployment check still required
+- Supabase Auth URL Configuration must allow https://adventurebuilder.co.uk/ (and www variant if used) as an email redirect URL.
+- The Privacy Policy contains a clear pre-launch note that a dedicated privacy contact address should be added before full commercial launch.
