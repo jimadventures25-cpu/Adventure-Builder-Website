@@ -1,0 +1,17 @@
+Adventure Builder Website W64 — Premium Homepage + Coloured Navigation Tabs
+
+Changes made:
+- Rebuilt the actual homepage layout without replacing working website/app functionality.
+- Kept the existing Adventure Builder hero artwork.
+- Removed the long duplicated homepage story and large separate Vanlife/Gallery/Passport promotional blocks.
+- Replaced them with a shorter premium homepage journey: strong opening message, platform overview, website-to-app flow, activity overview, trust/safety/accessibility section, community/memories CTA and compact final app CTA.
+- Kept one QR/app area only to reduce duplication.
+- Kept the working left pop-out navigation as the primary site navigation.
+- Added section colour accents to the working desktop sidebar and mobile navigation so each section is easier to recognise and visually closer to the app.
+- Preserved authentication, Supabase scripts, account controls, feedback/accessibility modules and all existing page links.
+
+Files changed:
+- index.html
+- js/navigation-shell.js
+- css/navigation-shell.css
+- css/homepage-premium.css (new; replaces the old homepage-refinement stylesheet)

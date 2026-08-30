@@ -2,21 +2,21 @@
   'use strict';
 
   const routes = [
-    ['index.html','Home','home'],
-    ['adventure-finder.html','Adventure Finder','search'],
-    ['adventures.html','Adventures','map'],
-    ['trip-planner.html','Trip Planner','route'],
-    ['walking-hiking.html','Walking & Hiking','walk'],
-    ['outdoor-skills.html','Survival & Foraging','leaf'],
-    ['paddling.html','Paddle & Kayak','paddle'],
-    ['van-life.html','Vanlife','van'],
-    ['passport.html','Adventure Passport','passport'],
-    ['gallery.html','Gallery','image'],
-    ['journal.html','Journal','book'],
-    ['accident-assistance.html','Accident Assistance','alert'],
-    ['studio.html','Adventure Studio','studio'],
-    ['community.html','Community','users'],
-    ['partners.html','Partners','handshake']
+    ['index.html','Home','home','#ff7900'],
+    ['adventure-finder.html','Adventure Finder','search','#54d65a'],
+    ['adventures.html','Adventures','map','#00bde8'],
+    ['trip-planner.html','Trip Planner','route','#22a7f0'],
+    ['walking-hiking.html','Walking & Hiking','walk','#93dc00'],
+    ['outdoor-skills.html','Survival & Foraging','leaf','#ff8b18'],
+    ['paddling.html','Paddle & Kayak','paddle','#00c9d7'],
+    ['van-life.html','Vanlife','van','#9a52e8'],
+    ['passport.html','Adventure Passport','passport','#e73fa8'],
+    ['gallery.html','Gallery','image','#ffd21f'],
+    ['journal.html','Journal','book','#ffb31a'],
+    ['accident-assistance.html','Accident Assistance','alert','#f04444'],
+    ['studio.html','Adventure Studio','studio','#7766ff'],
+    ['community.html','Community','users','#ff5a4f'],
+    ['partners.html','Partners','handshake','#b3bbc1']
   ];
 
   const icons = {
@@ -41,7 +41,7 @@
   const svg = (name) => `<svg viewBox="0 0 24 24" aria-hidden="true">${icons[name] || icons.more}</svg>`;
   const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   const isActive = href => file === href;
-  const link = ([href,label,icon], extra='') => `<a class="ab-sidebar-link${isActive(href)?' active':''} ${extra}" href="${href}"${isActive(href)?' aria-current="page"':''}>${svg(icon)}<span>${label}</span></a>`;
+  const link = ([href,label,icon,color], extra='') => `<a class="ab-sidebar-link${isActive(href)?' active':''} ${extra}" href="${href}" style="--tab-color:${color || '#ff7900'}"${isActive(href)?' aria-current="page"':''}>${svg(icon)}<span>${label}</span></a>`;
 
   const sidebar = document.createElement('aside');
   sidebar.className = 'ab-site-sidebar';
@@ -74,7 +74,7 @@
   mobile.setAttribute('aria-label','Mobile navigation');
   const mobilePrimary = ['index.html','adventure-finder.html','trip-planner.html','community.html'].map(href => routes.find(r => r[0] === href)).filter(Boolean);
   const moreIsActive = !mobilePrimary.some(([href]) => isActive(href));
-  mobile.innerHTML = mobilePrimary.map(([href,label,icon]) => `<a href="${href}" class="${isActive(href)?'active':''}"${isActive(href)?' aria-current="page"':''}>${svg(icon)}<span>${label === 'Adventure Finder' ? 'Finder' : label === 'Trip Planner' ? 'Plan' : label}</span></a>`).join('') + `<button type="button" data-ab-more class="${moreIsActive?'active':''}" aria-expanded="false">${svg('more')}<span>More</span></button>`;
+  mobile.innerHTML = mobilePrimary.map(([href,label,icon,color]) => `<a href="${href}" style="--tab-color:${color || '#ff7900'}" class="${isActive(href)?'active':''}"${isActive(href)?' aria-current="page"':''}>${svg(icon)}<span>${label === 'Adventure Finder' ? 'Finder' : label === 'Trip Planner' ? 'Plan' : label}</span></a>`).join('') + `<button type="button" data-ab-more class="${moreIsActive?'active':''}" aria-expanded="false">${svg('more')}<span>More</span></button>`;
   document.body.appendChild(mobile);
 
   const backdrop = document.createElement('div');
@@ -82,7 +82,7 @@
   const sheet = document.createElement('section');
   sheet.className = 'ab-mobile-more';
   sheet.setAttribute('aria-label','More website sections');
-  sheet.innerHTML = `<div class="ab-mobile-more-head"><div><strong>Explore Adventure Builder</strong><small>All website sections</small></div><button class="ab-mobile-more-close" type="button" aria-label="Close navigation">×</button></div><nav class="ab-mobile-more-grid">${routes.slice(2).map(([href,label,icon])=>`<a href="${href}" class="${isActive(href)?'active':''}"${isActive(href)?' aria-current="page"':''}>${svg(icon)}<span>${label}</span></a>`).join('')}</nav>`;
+  sheet.innerHTML = `<div class="ab-mobile-more-head"><div><strong>Explore Adventure Builder</strong><small>All website sections</small></div><button class="ab-mobile-more-close" type="button" aria-label="Close navigation">×</button></div><nav class="ab-mobile-more-grid">${routes.slice(2).map(([href,label,icon,color])=>`<a href="${href}" style="--tab-color:${color || '#ff7900'}" class="${isActive(href)?'active':''}"${isActive(href)?' aria-current="page"':''}>${svg(icon)}<span>${label}</span></a>`).join('')}</nav>`;
   document.body.append(backdrop, sheet);
 
   const moreButton = mobile.querySelector('[data-ab-more]');

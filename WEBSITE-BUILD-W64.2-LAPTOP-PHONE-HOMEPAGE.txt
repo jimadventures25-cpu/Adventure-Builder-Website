@@ -1,0 +1,7 @@
+Adventure Builder Website W64.2 — Laptop + Phone Homepage
+
+- Restored the key visual from the approved homepage direction: laptop + phone shown together.
+- Replaced the separate dark app card in the Plan/Take It Anywhere section with the device presentation.
+- Kept a compact real QR code and Open App action beneath the devices.
+- Kept all existing navigation, authentication, Supabase, page links and side-tab behaviour unchanged.
+- No new feature work added.
