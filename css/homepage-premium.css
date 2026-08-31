@@ -55,3 +55,32 @@ body[data-page="index"] .ab-qr span{font-size:.8rem;color:#454a4f;font-weight:56
 body[data-page="index"] .ab-qr a{margin-top:2px;color:#d86500;font-size:.78rem;font-weight:800;text-decoration:none}
 @media(max-width:800px){body[data-page="index"] .ab-shell{width:min(100% - 34px,680px)}body[data-page="index"] .ab-two-col{grid-template-columns:1fr;gap:24px}body[data-page="index"] .ab-copy{max-width:650px}body[data-page="index"] .ab-device-stage img{width:100%;max-width:720px;margin:0 auto}body[data-page="index"] .ab-live-copy{width:min(100% - 40px,680px)}}
 @media(max-width:560px){body[data-page="index"] .ab-home-hero img{min-height:190px;object-fit:cover}body[data-page="index"] .ab-opening{padding:46px 0 34px}body[data-page="index"] .ab-chapter{padding:38px 0}body[data-page="index"] .ab-live{min-height:380px;padding:68px 0}body[data-page="index"] .ab-ending{padding:40px 0 50px}body[data-page="index"] .ab-qr{width:100%;justify-content:flex-start}body[data-page="index"] .ab-qr img{width:72px;height:72px}}
+
+
+/* W69.4 - dark background contrast fix */
+body[data-page="index"] footer,
+body[data-page="index"] .site-footer {
+  color: #f4f6f8 !important;
+}
+
+body[data-page="index"] footer a,
+body[data-page="index"] .site-footer a {
+  color: #e7ebef !important;
+  font-weight: 700 !important;
+}
+
+body[data-page="index"] footer strong,
+body[data-page="index"] .site-footer strong {
+  color: #ffffff !important;
+  font-weight: 850 !important;
+}
+
+body[data-page="index"] footer p,
+body[data-page="index"] .site-footer p {
+  color: #d9e0e6 !important;
+}
+
+body[data-page="index"] .accessibility-button,
+body[data-page="index"] [class*="accessibility"] button {
+  color: #ffffff !important;
+}
