@@ -128,6 +128,7 @@ body[data-page="index"] .site-footer{border-top:1px solid rgba(255,255,255,.08)}
   body[data-page="index"] .ab-home-community-actions .button{width:100%}
 }
 
+
 /* W64.1 COMPACT PREMIUM PASS — tighter hierarchy, less visual noise */
 @media (min-width:761px){
 body[data-page="index"] .hero-compact{min-height:clamp(185px,20vw,285px);background-size:cover;background-position:center 47%}
@@ -240,3 +241,5 @@ body[data-page="index"] .ab-home-mini-qr .button{min-height:34px;padding:7px 11p
   body[data-page="index"] .ab-home-mini-qr{width:100%;justify-content:flex-start}
   body[data-page="index"] .ab-home-mini-qr img{width:54px;height:54px}
 }
+
+
