@@ -84,3 +84,13 @@ body[data-page="index"] .accessibility-button,
 body[data-page="index"] [class*="accessibility"] button {
   color: #ffffff !important;
 }
+
+/* W69.5 - Accessibility header button contrast fix */
+body[data-page="index"] .accessibility-button,
+body[data-page="index"] .accessibility-button *,
+body[data-page="index"] [class*="accessibility"],
+body[data-page="index"] [class*="accessibility"] * {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    -webkit-text-fill-color: #ffffff !important;
+    font-weight: 700 !important;
