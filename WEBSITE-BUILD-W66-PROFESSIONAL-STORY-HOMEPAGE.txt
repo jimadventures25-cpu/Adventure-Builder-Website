@@ -1,0 +1,18 @@
+Adventure Builder Website W66 — Professional Story Homepage
+
+Rebuilt the homepage presentation after W65 review.
+
+Direction:
+- Keep the existing Adventure Builder hero artwork as the visual opening instead of covering it with oversized text.
+- Tell one restrained story: idea -> plan -> website/app -> experience -> remember.
+- Make the laptop + phone the central product proof.
+- Use consistent content width, spacing and typography.
+- Reduce cards, oversized headings and abrupt promotional blocks.
+- Keep black/orange brand accents without allowing them to dominate every section.
+- Preserve existing authentication, navigation shell, QR/app URL, footer and other pages.
+
+Checks:
+- No merge-conflict markers.
+- No duplicate HTML IDs.
+- No missing local homepage references.
+- JavaScript syntax checks passed.

@@ -1,0 +1,6 @@
+Adventure Builder Website W69.2 – Laptop + Phone Fix
+
+- Replaced the previous homepage device artwork with the supplied Adventure Builder laptop + phone image.
+- Kept it as one combined visual: laptop dominant on the left, phone alongside on the right.
+- Increased the device presentation so the Adventure Builder screens are clearly visible.
+- Preserved the existing flowing-story homepage, side navigation, authentication, QR/app links and other website functionality.
