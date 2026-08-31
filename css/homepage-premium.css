@@ -1,0 +1,57 @@
+/* Adventure Builder W69.3 — brand-strength homepage polish. Homepage only. */
+body[data-page="index"]{background:#fff;color:#181a1c}
+body[data-page="index"] .site-header{min-height:54px;padding-top:5px;padding-bottom:5px}
+body[data-page="index"] .site-header .header-link,body[data-page="index"] .site-header .header-register{padding-top:7px;padding-bottom:7px}
+body[data-page="index"] .site-header .account-chip{padding-top:4px;padding-bottom:4px}
+body[data-page="index"] .ab-home,body[data-page="index"] .ab-story{overflow:hidden;background:#fff}
+body[data-page="index"] .ab-home-hero{background:#080a0c;line-height:0}
+body[data-page="index"] .ab-home-hero img{display:block;width:100%;height:auto;max-height:460px;object-fit:cover;object-position:center}
+body[data-page="index"] .ab-shell{width:min(1040px,calc(100% - 48px));margin:0 auto}
+body[data-page="index"] .ab-story p{line-height:1.68;color:#303438;font-weight:550}
+body[data-page="index"] .ab-kicker{margin:0 0 10px;color:#ef6c00;font-size:.72rem;font-weight:950;letter-spacing:.15em;text-transform:uppercase}
+body[data-page="index"] .ab-story h1,body[data-page="index"] .ab-story h2{margin:0;color:#0e1012;line-height:1.06;letter-spacing:-.035em;font-weight:850}
+body[data-page="index"] .ab-story h1{font-size:clamp(2.1rem,4vw,3.7rem)}
+body[data-page="index"] .ab-opening h1:after{content:"";display:block;width:88px;height:4px;margin:18px auto 0;background:#ff7900;border-radius:999px}
+body[data-page="index"] .ab-story strong{color:#111417;font-weight:850}
+body[data-page="index"] .ab-story h2{font-size:clamp(1.7rem,2.8vw,2.65rem)}
+body[data-page="index"] .ab-opening{padding:62px 0 48px}
+body[data-page="index"] .ab-opening-copy{max-width:790px;text-align:center}
+body[data-page="index"] .ab-opening .ab-lead{margin:16px auto 0;max-width:650px;color:#24282c;font-size:clamp(1.07rem,1.5vw,1.2rem);font-weight:760}
+body[data-page="index"] .ab-opening p:not(.ab-kicker):not(.ab-lead):not(.ab-turn){max-width:720px;margin:18px auto 0;color:#3b4045;font-size:1rem;font-weight:560}
+body[data-page="index"] .ab-turn{margin:22px 0 0;color:#1a1e22;font-family:Georgia,'Times New Roman',serif;font-size:1.2rem;font-style:italic;font-weight:700}
+body[data-page="index"] .ab-chapter{position:relative;padding:50px 0;background:#fff}
+body[data-page="index"] .ab-chapter:before{content:"";position:absolute;top:0;left:50%;width:76px;height:3px;transform:translateX(-50%);background:#ff7900;border-radius:999px}
+body[data-page="index"] .ab-two-col{display:grid;grid-template-columns:minmax(0,.88fr) minmax(360px,1.12fr);gap:54px;align-items:center}
+body[data-page="index"] .ab-copy{max-width:490px}
+body[data-page="index"] .ab-chapter p:not(.ab-kicker){margin:16px 0 0;color:#34393e;font-size:1rem;font-weight:560}
+body[data-page="index"] .ab-emphasis{color:#111417!important;font-family:Georgia,'Times New Roman',serif;font-size:1.2rem!important;line-height:1.5!important;font-weight:750!important}
+body[data-page="index"] .ab-device-stage{margin:0;position:relative;min-width:0}
+body[data-page="index"] .ab-device-stage img{position:relative;z-index:1;display:block;width:118%;max-width:780px;margin:-18px 0 -18px -7%;height:auto;}
+body[data-page="index"] .ab-go{padding:56px 0 60px}
+body[data-page="index"] .ab-go-copy{max-width:760px;text-align:center}
+body[data-page="index"] .ab-go-copy p:not(.ab-kicker){max-width:690px;margin-left:auto;margin-right:auto}
+body[data-page="index"] .ab-live{min-height:430px;display:flex;align-items:center;margin:10px 0;padding:90px 0;background-image:linear-gradient(90deg,rgba(8,10,12,.87),rgba(8,10,12,.58) 50%,rgba(8,10,12,.2)),url('../images/hero-background.jpg');background-size:cover;background-position:center 58%;color:#fff}
+body[data-page="index"] .ab-live:before{display:none}
+body[data-page="index"] .ab-live-copy{width:min(1040px,calc(100% - 48px));margin:0 auto}
+body[data-page="index"] .ab-live-copy>*{max-width:610px}
+body[data-page="index"] .ab-live h2{color:#fff}
+body[data-page="index"] .ab-live p:not(.ab-kicker){color:#fff;font-weight:600}
+body[data-page="index"] .ab-live strong{color:#fff}
+body[data-page="index"] .ab-homecoming{padding:62px 0 50px}
+body[data-page="index"] .ab-homecoming-copy{max-width:760px;text-align:center}
+body[data-page="index"] .ab-homecoming-copy p:not(.ab-kicker){max-width:690px;margin-left:auto;margin-right:auto}
+body[data-page="index"] .ab-ending{padding:50px 0 64px;background:#fff;text-align:center;border-top:1px solid #ededed}
+body[data-page="index"] .ab-ending-inner{max-width:780px}
+body[data-page="index"] .ab-small-story{max-width:650px;margin:0 auto 16px;color:#3d4247;font-family:Georgia,'Times New Roman',serif;font-size:1.05rem;font-style:italic;font-weight:650}
+body[data-page="index"] .ab-ending h2{font-size:clamp(1.9rem,3vw,2.8rem)}
+body[data-page="index"] .ab-signoff{margin:16px auto 0;color:#262a2e;font-weight:760}
+body[data-page="index"] .ab-signoff span{color:#ff7900}
+body[data-page="index"] .ab-ending>.ab-shell>.button{margin-top:24px;min-width:188px}
+body[data-page="index"] .ab-qr{display:flex;align-items:center;justify-content:center;gap:14px;width:max-content;max-width:100%;margin:30px auto 0;padding-top:24px;border-top:1px solid #ececec;text-align:left}
+body[data-page="index"] .ab-qr img{display:block;width:82px;height:82px;object-fit:contain}
+body[data-page="index"] .ab-qr div{display:flex;flex-direction:column;gap:3px}
+body[data-page="index"] .ab-qr strong{font-size:.92rem;color:#14171a;font-weight:850}
+body[data-page="index"] .ab-qr span{font-size:.8rem;color:#454a4f;font-weight:560}
+body[data-page="index"] .ab-qr a{margin-top:2px;color:#d86500;font-size:.78rem;font-weight:800;text-decoration:none}
+@media(max-width:800px){body[data-page="index"] .ab-shell{width:min(100% - 34px,680px)}body[data-page="index"] .ab-two-col{grid-template-columns:1fr;gap:24px}body[data-page="index"] .ab-copy{max-width:650px}body[data-page="index"] .ab-device-stage img{width:100%;max-width:720px;margin:0 auto}body[data-page="index"] .ab-live-copy{width:min(100% - 40px,680px)}}
+@media(max-width:560px){body[data-page="index"] .ab-home-hero img{min-height:190px;object-fit:cover}body[data-page="index"] .ab-opening{padding:46px 0 34px}body[data-page="index"] .ab-chapter{padding:38px 0}body[data-page="index"] .ab-live{min-height:380px;padding:68px 0}body[data-page="index"] .ab-ending{padding:40px 0 50px}body[data-page="index"] .ab-qr{width:100%;justify-content:flex-start}body[data-page="index"] .ab-qr img{width:72px;height:72px}}

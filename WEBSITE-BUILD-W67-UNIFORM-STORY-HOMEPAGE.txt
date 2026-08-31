@@ -1,0 +1,22 @@
+Adventure Builder Website W67 — Uniform Story Homepage
+
+Purpose
+- Rebuild the homepage as one continuous story rather than a stack of boxes.
+- Keep the side navigation as the main navigation, so the homepage does not need repeated feature buttons.
+
+Homepage story
+1. Every adventure starts with an idea.
+2. Turn the idea into a plan.
+3. Plan on the website and take the same journey onto the phone.
+4. Experience the adventure outside.
+5. Keep the route, journal, passport, photos and memories afterwards.
+6. Close with: Plan it. Experience it. Remember it.
+
+Design changes
+- One light warm/off-white background through the complete story area.
+- Removed alternating dark/light content blocks.
+- Removed activity cards, memory boxes and repeated action buttons.
+- Added a subtle route/story line and numbered chapters to connect the scroll.
+- Laptop + phone artwork is frameless and blended into the page rather than placed inside a card.
+- Only one main action button at the end of the story.
+- Existing hero, side navigation, authentication, footer and website pages remain in place.

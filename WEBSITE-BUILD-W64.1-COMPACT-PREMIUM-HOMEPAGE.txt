@@ -1,0 +1,18 @@
+Adventure Builder Website W64.1 — Compact Premium Homepage
+Date: 2026-08-30
+
+Purpose:
+Correct the W64 homepage scale/density so the real build more closely matches the cleaner premium reference direction.
+
+Changes:
+- Reduced desktop hero height.
+- Reduced hero and section heading sizes.
+- Reduced vertical padding throughout the homepage.
+- Made capability tiles, activity cards, trust cards and flow steps smaller and tighter.
+- Reduced QR/app card size.
+- Reduced CTA and community section height.
+- Kept the existing working side navigation and its colour-coded accents.
+- Kept existing account/authentication, QR, links and app connection unchanged.
+- No new homepage features added.
+
+Baseline: W64 Premium Homepage
