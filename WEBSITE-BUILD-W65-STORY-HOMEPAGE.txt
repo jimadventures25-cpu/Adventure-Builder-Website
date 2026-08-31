@@ -1,0 +1,9 @@
+Adventure Builder Website W65 — Story Homepage
+
+Purpose: rebuild the homepage around one continuous Adventure Builder story rather than a collection of feature blocks.
+
+Story: Idea -> why Adventure Builder exists -> Plan it -> Experience it -> practical real-world tools -> Remember it -> final call to action.
+
+Preserved: existing header/account/authentication, footer, working side navigation shell, app link, QR code, existing pages and scripts.
+
+Homepage-only files changed: index.html and css/homepage-premium.css.
