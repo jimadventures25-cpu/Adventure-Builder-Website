@@ -1,0 +1,18 @@
+Adventure Builder Website — W74.2
+My Adventure World: compact white/open layout
+Date: 2026-09-04
+
+Changes:
+- Kept white as the main page colour and retained the open, non-card design.
+- Reduced unused vertical whitespace throughout My Adventure World.
+- Slimmed the hero area and reduced oversized heading/copy spacing.
+- Tightened Next Adventure and Quick Actions spacing.
+- Brought the Adventure World map higher up the page.
+- Expanded usable page width on desktop by reducing unnecessary outer gutters.
+- Reduced map/sidebar gap and made the journey summary column more compact.
+- Tightened map stats, journey rows, upcoming plans, lower sections and final note.
+- Preserved all W74 journey/map/data/auth functionality.
+- No Journal, Passport, Community or Journey Recording logic was changed.
+
+Design rule retained:
+White/open page first. Cards/boxes only where functionally useful.

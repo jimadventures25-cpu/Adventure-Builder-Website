@@ -1,0 +1,16 @@
+Adventure Builder Website W78.1 — Git Conflict Repair
+Date: 2026-09-04
+
+Purpose
+- Clean repair checkpoint for the W78 Plant & Wildlife build after unresolved Git merge markers appeared on the live outdoor-skills page.
+- No feature/layout redesign in this checkpoint.
+
+Checks performed
+- Scanned the full website tree for Git conflict markers: <<<<<<<, =======, >>>>>>>
+- Confirmed outdoor-skills.html contains no unresolved conflict markers.
+- Confirmed Plant & Wildlife category structure remains present.
+- JavaScript syntax check passed for js/outdoor-knowledge.js.
+- ZIP integrity test passed.
+
+Important
+- This is a clean source checkpoint. Replace the affected repo files with this build and commit/push normally.

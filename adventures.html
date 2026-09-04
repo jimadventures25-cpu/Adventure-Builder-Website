@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Your Adventure Builder history: adventures, routes, memories, map and outdoor milestones in one place.">
+  <meta name="description" content="My Adventure World: your personal Adventure Builder control centre for upcoming plans and a map of completed journeys.">
   <meta name="theme-color" content="#0b0d0f">
-  <title>Adventure Hub | Adventure Builder</title>
+  <title>My Adventure World | Adventure Builder</title>
   <link rel="icon" href="images/adventure-builder-logo.png">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/account-gate.css">
+  <link rel="stylesheet" href="css/accessibility.css">
+  <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="css/navigation-shell.css">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css">
   <link rel="stylesheet" href="css/adventure-hub.css">
@@ -24,98 +26,87 @@
   </header>
 
   <main>
-    <section class="section standalone-page">
-      <div class="section-heading"><p class="eyebrow">Your routes · places · memories</p><h2>My Adventure World</h2><p>A living history of the places you explore — not a fitness leaderboard.</p></div>
-
+    <section class="section standalone-page adventure-world-page">
       <section class="abh" data-adventure-hub>
         <header class="abh-hero">
-          <div><p class="eyebrow">Adventure Builder · Adventure Hub</p><h1>Your outdoor story, all in one place.</h1><p>Bring completed walks, rides, road trips, paddles and journal memories together. See where you have been, what you have done and what you want to relive.</p></div>
-          <div class="abh-hero-actions"><button class="abh-btn primary" type="button" data-open-tab="add">＋ Add adventure</button><a class="abh-btn" href="adventure-finder.html">Find the next one</a></div>
+          <div>
+            <p class="eyebrow">Adventure Builder · My Adventure World</p>
+            <h1>Your adventures, mapped around you.</h1>
+            <p>Plan what comes next, then keep a simple record of where Adventure Builder has taken you. Completed journeys can show their route from start to finish without turning this page into another Journal or Community feed.</p>
+          </div>
+          <div class="abh-hero-actions">
+            <a class="abh-btn primary" href="adventure-finder.html">Find my next adventure</a>
+            <a class="abh-btn" href="trip-planner.html">Plan a trip</a>
+          </div>
         </header>
 
-        <nav class="abh-tabs" aria-label="Adventure Hub sections">
-          <button class="is-active" type="button" data-hub-tab="dashboard">Overview</button>
-          <button type="button" data-hub-tab="adventures">Adventures</button>
-          <button type="button" data-hub-tab="timeline">Timeline</button>
-          <button type="button" data-hub-tab="map">Adventure Map</button>
-          <button type="button" data-hub-tab="add">Add / Import</button>
-        </nav>
-
         <div class="abh-body">
-          <section class="abh-view" data-hub-view="dashboard">
-            <div class="abh-stats">
-              <article><span>Adventures</span><strong data-stat="count">0</strong><small>memories recorded</small></article>
-              <article><span>Distance explored</span><strong data-stat="distance">0 km</strong><small>across recorded routes</small></article>
-              <article><span>Places discovered</span><strong data-stat="places">0</strong><small>new places marked</small></article>
-              <article><span>Photos remembered</span><strong data-stat="photos">0</strong><small>linked to adventures</small></article>
+          <div class="abh-top-grid">
+            <article class="abh-card abh-next" data-next-adventure></article>
+            <article class="abh-card">
+              <p class="abh-kicker">Quick actions</p>
+              <h2>Where do you want to go?</h2>
+              <p class="abh-muted">Jump straight back into the part of Adventure Builder you need.</p>
+              <div class="abh-quick-grid">
+                <a href="adventure-finder.html">🧭 Find an adventure</a>
+                <a href="trip-planner.html">🚐 Plan a trip</a>
+                <a href="walking-hiking.html">🥾 Plan a route</a>
+                <a href="paddling.html">🛶 Plan a paddle</a>
+              </div>
+            </article>
+          </div>
+
+          <section class="abh-world-section" aria-labelledby="world-map-heading">
+            <div class="abh-world-head">
+              <div>
+                <p class="abh-kicker">Your Adventure World map</p>
+                <h2 id="world-map-heading">Every completed journey becomes part of your world.</h2>
+                <p>When a journey has recorded route data, Adventure Builder draws it from the start point to the finish. Select a journey to see its distance, travel time, total duration, stops and completion date.</p>
+              </div>
             </div>
 
-            <div class="abh-dashboard-grid">
-              <article class="abh-card abh-recent-card">
-                <div class="abh-card-head"><div><p class="abh-kicker">Latest memories</p><h3>Recent adventures</h3></div><button class="abh-text-btn" type="button" data-open-tab="adventures">View all</button></div>
-                <div data-recent-adventures></div>
-              </article>
-
-              <article class="abh-card">
-                <div class="abh-card-head"><div><p class="abh-kicker">Your progress</p><h3>Adventure milestones</h3></div><a class="abh-text-btn" href="passport.html">Open Passport</a></div>
-                <div class="abh-milestones" data-milestones></div>
-              </article>
-            </div>
-
-            <div class="abh-dashboard-grid">
-              <article class="abh-card abh-map-teaser">
-                <div><p class="abh-kicker">Adventure map</p><h3>See your story spread across the map</h3><p>Adventures with a saved GPS position appear automatically. Walking trails, paddles and journal entries can bring their coordinates with them when imported.</p><button class="abh-btn" type="button" data-open-tab="map">Open Adventure Map</button></div>
-                <div class="abh-map-art" aria-hidden="true"><span>📍</span><i></i><span>🥾</span><i></i><span>🛶</span></div>
-              </article>
-              <article class="abh-card abh-quick-actions"><p class="abh-kicker">Build the next memory</p><h3>Quick actions</h3><div><a href="walking-hiking.html">🥾 Plan a walk</a><a href="trip-planner.html">🚐 Plan a trip</a><a href="paddling.html">🛶 Plan a paddle</a><a href="journal.html">📖 Write in Journal</a></div></article>
-            </div>
-          </section>
-
-          <section class="abh-view" data-hub-view="adventures" hidden>
-            <div class="abh-toolbar"><div><p class="abh-kicker">Adventure feed</p><h2>Your adventures</h2></div><div class="abh-filter-row"><input type="search" data-feed-search placeholder="Search adventures or places" aria-label="Search adventures"><select data-feed-filter aria-label="Filter by activity"><option value="all">All activities</option><option value="hike">Hiking</option><option value="cycle">Cycling</option><option value="road">Road trips</option><option value="camp">Camping</option><option value="paddle">Paddleboard</option><option value="kayak">Kayak</option><option value="photo">Photography</option><option value="explore">Explore</option><option value="dog">Dog walk</option><option value="fishing">Fishing</option></select></div></div>
-            <div class="abh-feed" data-adventure-feed></div>
-          </section>
-
-          <section class="abh-view" data-hub-view="timeline" hidden>
-            <div class="abh-card-head"><div><p class="abh-kicker">Adventure timeline</p><h2>Your outdoor story</h2><p class="abh-muted">Browse adventures by month and year instead of digging through separate tools.</p></div></div>
-            <div class="abh-timeline" data-adventure-timeline></div>
-          </section>
-
-          <section class="abh-view" data-hub-view="map" hidden>
             <div class="abh-map-layout">
-              <div class="abh-map-panel"><div id="adventure-hub-map" class="abh-map" aria-label="Map of your recorded adventures"></div><p class="abh-map-status" data-map-status>Adventures with saved coordinates will appear here.</p></div>
-              <aside class="abh-card"><p class="abh-kicker">Mapped adventures</p><h3>Places you have explored</h3><div class="abh-map-list" data-map-list></div></aside>
+              <div class="abh-map-wrap">
+                <div id="adventure-hub-map" class="abh-map" aria-label="Map of your completed Adventure Builder journeys"></div>
+                <div class="abh-map-legend" aria-label="Map legend"><span><i class="done"></i> Completed journey</span><span><i class="plan"></i> Planned routes stay in your plans</span></div>
+                <p class="abh-map-status" data-map-status>Complete an adventure in Adventure Builder and its journey can appear here.</p>
+              </div>
+
+              <aside class="abh-map-side">
+                <div class="abh-map-stats" aria-label="Adventure World totals">
+                  <article><span>Completed</span><strong data-stat="journeys">0</strong><small>journeys</small></article>
+                  <article><span>Distance</span><strong data-stat="distance">0 km</strong><small>travelled</small></article>
+                  <article><span>Travel time</span><strong data-stat="time">0 min</strong><small>recorded</small></article>
+                  <article><span>Stops</span><strong data-stat="stops">0</strong><small>along the way</small></article>
+                </div>
+                <article class="abh-card">
+                  <div class="abh-card-head"><div><p class="abh-kicker">Completed journeys</p><h3>Pick a route on your map</h3></div></div>
+                  <div class="abh-journey-list" data-journey-list></div>
+                </article>
+              </aside>
             </div>
           </section>
 
-          <section class="abh-view" data-hub-view="add" hidden>
-            <div class="abh-add-grid">
-              <form class="abh-card abh-form" data-adventure-form>
-                <div class="abh-card-head"><div><p class="abh-kicker">Manual entry</p><h2>Add a completed adventure</h2></div></div>
-                <div class="abh-form-grid two"><label>Adventure type<select name="type" data-activity-type><option value="hike">🥾 Hike</option><option value="cycle">🚴 Cycle</option><option value="road">🚐 Road trip</option><option value="camp">🏕️ Camping</option><option value="paddle">🏄 Paddleboard</option><option value="kayak">🛶 Kayak</option><option value="photo">📸 Photography</option><option value="explore">🧭 Explore</option><option value="dog">🐕 Dog walk</option><option value="fishing">🎣 Fishing</option></select></label><label>Date<input name="date" type="date"></label></div>
-                <label>Adventure name<input name="title" maxlength="80" required placeholder="Sunset walk at Formby Point"></label>
-                <label>Location<input name="location" maxlength="120" placeholder="Lake District, Cumbria"></label>
-                <div class="abh-location-row"><button class="abh-btn small" type="button" data-use-location>Use current GPS</button><span data-location-status>Optional — useful for the Adventure Map.</span></div>
-                <input name="lat" type="hidden"><input name="lon" type="hidden">
+          <div class="abh-lower-grid">
+            <article class="abh-card">
+              <div class="abh-card-head"><div><p class="abh-kicker">What is next?</p><h2>Upcoming &amp; saved plans</h2></div><a class="abh-text-btn" href="trip-planner.html">Open Trip Planner</a></div>
+              <div class="abh-stack" data-planned-list></div>
+            </article>
 
-                <div class="abh-form-grid two" data-field-group="distance"><label>Distance (km)<input name="distanceKm" type="number" min="0" step="0.1" value="0"></label><label data-field="elevation">Elevation / high point (m)<input name="elevationM" type="number" min="0" step="1" placeholder="Optional"></label></div>
-                <div class="abh-form-grid two" data-field-group="trip" hidden><label>Days<input name="days" type="number" min="1" max="60" value="1"></label><label>Nights away<input name="nights" type="number" min="0" max="60" value="0"></label></div>
-                <div class="abh-form-grid two" data-field-group="water" hidden><label>Water type<input name="waterType" maxlength="60" placeholder="Lake, river, coast..."></label><label>Launch / access point<input name="launchPoint" maxlength="100" placeholder="Optional"></label></div>
-                <div data-field-group="fishing" hidden><label>Species / focus<input name="species" maxlength="80" placeholder="Optional"></label></div>
+            <article class="abh-card">
+              <p class="abh-kicker">Keep each tool doing one job</p>
+              <h2>Your memories still belong in Journal.</h2>
+              <p class="abh-muted">My Adventure World keeps the journey facts and what is coming next. Use Journal for the story and memories, Passport for achievements, Gallery for media and Community for anything you choose to share.</p>
+              <div class="abh-quick-grid">
+                <a href="journal.html">📖 Open Journal</a>
+                <a href="passport.html">🏅 Open Passport</a>
+                <a href="gallery.html">📷 Open Gallery</a>
+                <a href="community.html">👥 Open Community</a>
+              </div>
+            </article>
+          </div>
 
-                <div class="abh-form-grid two"><label>Photos taken<input name="photos" type="number" min="0" step="1" value="0"></label><label>Time outdoors (minutes)<input name="durationMinutes" type="number" min="0" step="1" value="0"></label></div>
-                <label>Memory / notes<textarea name="notes" maxlength="1200" rows="4" placeholder="Best moment, who came with you, something worth remembering..."></textarea></label>
-                <label class="abh-check"><input name="newPlace" type="checkbox"> This was a new place for me</label>
-                <button class="abh-btn primary" type="submit">Add to Adventure Hub</button><p class="abh-form-status" data-form-status aria-live="polite"></p>
-              </form>
-
-              <article class="abh-card">
-                <div class="abh-card-head"><div><p class="abh-kicker">No retyping</p><h2>Import from Adventure Builder</h2></div><button class="abh-text-btn" type="button" data-refresh-imports>Refresh</button></div>
-                <p class="abh-muted">Saved walking trails, trip plans, paddle plans and journal memories on this device can be brought into your Hub.</p>
-                <div class="abh-import-list" data-import-list></div>
-              </article>
-            </div>
-          </section>
+          <div class="abh-note"><strong>How the map will grow:</strong> planned adventures stay in your planning tools. Once an adventure is completed and the app has journey data, its real route, distance, time and stops can become a permanent part of My Adventure World.</div>
         </div>
       </section>
     </section>
@@ -123,14 +114,22 @@
 
   <dialog class="abh-dialog" data-adventure-dialog><button class="abh-dialog-close" type="button" data-dialog-close aria-label="Close">×</button><div data-dialog-content></div></dialog>
 
-  <footer class="site-footer"><div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div><div class="footer-links"><a href="index.html">Home</a><a href="adventures.html">Adventures</a><a href="walking-hiking.html">Walking &amp; Hiking</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="trip-planner.html">Trip Planner</a><a href="journal.html">Journal</a><a href="passport.html">Passport</a><a href="community.html">Community</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a></div><p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p></footer>
+  <footer class="site-footer"><div class="footer-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><p>Your adventure starts here.</p></div></div><div class="footer-links"><a href="index.html">Home</a><a href="adventures.html">My Adventure World</a><a href="walking-hiking.html">Walking &amp; Hiking</a><a href="paddling.html">Paddle &amp; Kayak</a><a href="trip-planner.html">Trip Planner</a><a href="journal.html">Journal</a><a href="passport.html">Passport</a><a href="community.html">Community</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a></div><p class="copyright">© <span id="year"></span> Adventure Builder. All rights reserved.</p></footer>
 
   <div class="auth-overlay" id="auth-overlay" hidden><section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-title"><button class="auth-close" id="auth-close" type="button" aria-label="Close account window">×</button><div class="auth-brand"><img src="images/adventure-builder-logo.png" alt=""><div><strong>Adventure Builder</strong><small>One account for the website and app</small></div></div><div id="auth-signed-out"><div class="auth-tabs" role="tablist"><button id="login-tab" class="auth-tab active" type="button" role="tab" aria-selected="true">Log in</button><button id="register-tab" class="auth-tab" type="button" role="tab" aria-selected="false">Register</button></div><form id="login-form" class="auth-form"><h2 id="auth-title">Welcome back</h2><p>Log in with your Adventure Builder account.</p><label>Email<input id="login-email" name="email" type="email" autocomplete="email" required></label><label>Password<input id="login-password" name="password" type="password" autocomplete="current-password" minlength="6" required></label><button class="button button-primary auth-submit" type="submit">Log in</button></form><form id="register-form" class="auth-form" hidden><h2>Create your account</h2><p>Register here, then use the same details in the app.</p><label>Your name<input id="register-name" name="name" type="text" autocomplete="name" maxlength="60" required></label><label>Email<input id="register-email" name="email" type="email" autocomplete="email" required></label><label>Password<input id="register-password" name="password" type="password" autocomplete="new-password" minlength="6" required></label><label>Confirm password<input id="register-confirm" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required></label><label class="checkbox-row"><input id="register-terms" type="checkbox" required><span>I agree to the Adventure Builder <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span></label><button class="button button-primary auth-submit" type="submit">Create account</button></form></div><div id="auth-signed-in" class="account-panel" hidden><div class="account-avatar account-avatar-large" id="panel-avatar">A</div><p class="eyebrow">Adventure Builder account</p><h2 id="panel-name">Welcome</h2><p id="panel-email"></p><p class="account-choice-copy">Choose how you would like to continue.</p><div class="account-choice-actions"><button class="button button-primary" id="continue-website" type="button">Continue on Website</button><a class="button button-secondary" href="https://app.adventurebuilder.co.uk" target="_blank" rel="noopener">Open the App</a></div><button class="account-settings-link" id="account-settings" type="button">Account settings</button><button class="button button-secondary auth-submit logout-button" id="logout-button" type="button">Log out</button></div><p class="auth-status" id="auth-status" aria-live="polite"></p></section></div>
 
   <script src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/config.js"></script><script src="js/auth-service.js"></script>
-  <script src="js/auth.js"></script><script src="js/account-gate.js"></script><script src="js/navigation-shell.js"></script><script src="js/main.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/accessibility-core.js"></script>
+  <script src="js/profile-core.js"></script>
+  <script src="js/auth-service.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/account-gate.js"></script>
+  <script src="js/accessibility-ui.js"></script>
+  <script src="js/profile-ui.js"></script>
+  <script src="js/navigation-shell.js"></script>
+  <script src="js/main.js"></script>
   <script src="js/adventure-hub-store.js"></script><script src="js/adventure-hub-map.js"></script><script src="js/adventure-hub.js"></script>
 </body>
 </html>

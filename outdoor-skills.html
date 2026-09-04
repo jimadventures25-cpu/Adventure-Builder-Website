@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/outdoor-knowledge.css">
 </head>
 <body data-page="outdoor-skills" data-account-required="true">
+<!-- W78.1: clean checkpoint after Git conflict-marker repair -->
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="Adventure Builder home">
       <img src="images/adventure-builder-logo.png" alt="Adventure Builder logo">
@@ -37,12 +38,42 @@
 
 <div class="abok-shell" data-ab-outdoor-knowledge>
 <header class="abok-hero"><div><span class="abok-kicker">Walking &amp; Hiking · Outdoor Skills</span><h1>Survival, Foraging &amp; Knots</h1><p>Offline-first outdoor reference guides, personal trail notes and a private foraging observation log. Live biodiversity lookups are optional and never used to declare a wild plant safe to eat.</p></div><span class="abok-offline">Core guides work offline</span></header>
-<div class="abok-safety"><b>Foraging safety:</b> never eat a wild plant or fungus unless you are completely certain of its identity and suitability. A photo, app result or nearby observation is not enough. Check land access, local rules and protected species before collecting. For technical rope, climbing or rescue use, get qualified instruction and use appropriate certified equipment.</div>
+<div class="abok-safety"><b>Outdoor safety:</b> prepare for the route, weather and daylight before setting out. These guides support learning but do not replace practical training, local restrictions or emergency-service advice.</div>
 <nav class="abok-tabs" aria-label="Outdoor skills sections"><button data-abok-tab="survival" aria-selected="true">Survival Basics</button><button data-abok-tab="foraging" aria-selected="false">Foraging Guide</button><button data-abok-tab="knots" aria-selected="false">Knots</button><button data-abok-tab="nature" aria-selected="false">Plant &amp; Wildlife</button><button data-abok-tab="notes" aria-selected="false">Personal Notes</button><button data-abok-tab="log" aria-selected="false">Foraging Log</button></nav>
-<section class="abok-panel" data-abok-panel="survival"><div class="section-heading"><p class="eyebrow">Stay found · stay warm · make good decisions</p><h2>Survival Basics</h2><p>Short, conservative guidance designed to support good preparation—not replace outdoor training, maps or emergency services.</p></div><div class="abok-grid" id="abok-survival-grid"></div></section>
-<section class="abok-panel" data-abok-panel="foraging" hidden><div class="section-heading"><p class="eyebrow">UK &amp; Ireland learning guide</p><h2>Foraging Guide</h2><p>Curated educational profiles. Treat each entry as a starting point for learning, never as permission to eat a plant.</p></div><div class="abok-grid" id="abok-foraging-grid"></div><p class="abok-source">Safety basis: Woodland Trust responsible foraging guidance and UK wild-plant law. Biodiversity names can be cross-checked with iNaturalist and GBIF.</p></section>
-<section class="abok-panel" data-abok-panel="knots" hidden><div class="section-heading"><p class="eyebrow">Visual reference</p><h2>Useful Outdoor Knots</h2><p>Ten common knots and hitches with simple diagrams and dressing steps. These are learning aids, not climbing/rescue certification.</p></div><div class="abok-grid" id="abok-knot-grid"></div></section>
-<section class="abok-panel" data-abok-panel="nature" hidden><div class="section-heading"><p class="eyebrow">Optional live biodiversity data</p><h2>Plant &amp; Wildlife Lookup</h2><p>Search taxon names or use your location to view nearby research-grade iNaturalist observations. GBIF is used as an independent scientific-name match.</p></div><div class="abok-search"><input id="abok-species-query" placeholder="Search a plant or wildlife name"><button class="abok-btn" id="abok-species-search" type="button">Search Species</button><button class="abok-btn secondary" id="abok-nearby" type="button">Nearby Nature</button></div><p class="abok-status" id="abok-live-status">Live lookup needs an internet connection. Core guides do not.</p><div class="abok-live-grid" id="abok-species-results"></div></section>
+<section class="abok-panel abok-survival-panel" data-abok-panel="survival">
+  <div class="section-heading abok-survival-heading"><p class="eyebrow">Stay found · stay warm · make good decisions</p><h2>Survival Basics</h2><p>Practical field-guide lessons with real photographs, proper steps and clear safety limits. Choose a subject below.</p></div>
+  <nav class="abok-survival-topics" id="abok-survival-grid" aria-label="Survival Basics topics"></nav>
+  <article class="abok-survival-lesson" id="abok-survival-lesson" aria-live="polite"></article>
+</section>
+<section class="abok-panel abok-foraging-panel" data-abok-panel="foraging" hidden>
+  <div class="section-heading abok-foraging-heading">
+    <div>
+      <span class="eyebrow">Trusted UK sources · 30 plant guides · real photographs</span>
+      <h2>Foraging Guide</h2>
+      <p>Identify carefully, check dangerous lookalikes and use more than one trusted reference before collecting or consuming any wild plant.</p>
+    </div>
+    <button type="button" class="abok-safety-link" data-foraging-safety-open>Safety &amp; Sources</button>
+  </div>
+  <div class="abok-foraging-alert"><strong>If in doubt, do not eat it.</strong><span>Be 100% certain of identification, wash what you collect, avoid contaminated ground and busy roadsides, and never uproot a wild plant without permission.</span></div>
+  <div class="abok-trusted-sources" aria-label="Trusted information sources">
+    <a href="https://www.food.gov.uk/safety-hygiene/guidance-for-safe-foraging" target="_blank" rel="noopener"><b>Food Standards Agency</b><small>Food safety</small></a>
+    <a href="https://www.nature.scot/doc/foraging-wild-plants" target="_blank" rel="noopener"><b>NatureScot</b><small>Safe &amp; sustainable foraging</small></a>
+    <a href="https://www.rhs.org.uk/fruit/hedgerow" target="_blank" rel="noopener"><b>Royal Horticultural Society</b><small>Hedgerow fruit</small></a>
+    <a href="https://www.gov.uk/guidance/protected-plants-fungi-and-lichens-advice-for-making-planning-decisions" target="_blank" rel="noopener"><b>GOV.UK</b><small>Wild-plant law</small></a>
+  </div>
+  <nav class="abok-foraging-topics" id="abok-foraging-grid" aria-label="Foraging Guide plants"></nav>
+  <article class="abok-foraging-lesson" id="abok-foraging-lesson" aria-live="polite"></article>
+</section>
+<section class="abok-panel abok-knots-panel" data-abok-panel="knots" hidden><div class="section-heading abok-knots-heading"><p class="eyebrow">20 practical rope skills · outdoor learning guide</p><h2>Useful Outdoor Knots</h2><p>Choose a knot to see a reference image, what it is best used for, clear tying steps and important limitations.</p></div><div class="abok-knot-safety"><strong>⚠ Rope safety:</strong> These guides are for general outdoor learning. Do not use Adventure Builder as your sole instruction for climbing, rescue, supporting people, fall protection or other life-critical loads. Use suitable rated equipment and qualified instruction.</div><nav class="abok-knot-topics" id="abok-knot-grid" aria-label="Choose a knot"></nav><article class="abok-knot-lesson" id="abok-knot-lesson" aria-live="polite"></article></section>
+<section class="abok-panel abok-nature-panel" data-abok-panel="nature" hidden>
+  <div class="section-heading abok-nature-heading"><p class="eyebrow">UK &amp; Ireland · 120-species starter collection</p><h2>Plant &amp; Wildlife Lookup</h2><p>Explore one group at a time. Use the category tabs, search the current collection, then open a species for identification notes, habitat and a real reference photograph.</p></div>
+  <div class="abok-nature-note"><strong>Identification, not a foraging recommendation.</strong><span>Wildlife can vary by age, season, sex and location. Confirm uncertain identifications with trusted regional sources. Edibility information stays inside the safety-locked Foraging Guide.</span></div>
+  <nav class="abok-nature-tabs" id="abok-nature-tabs" aria-label="Plant and wildlife categories"></nav>
+  <div class="abok-nature-tools"><input id="abok-nature-filter" type="search" placeholder="Search this category…" aria-label="Search current wildlife category"><span id="abok-nature-count"></span></div>
+  <div class="abok-nature-grid" id="abok-nature-grid" aria-live="polite"></div>
+  <article class="abok-nature-detail" id="abok-nature-detail" aria-live="polite"></article>
+  <div class="abok-nature-live"><div><strong>Not sure what you saw?</strong><span>Search biodiversity databases by name or, with permission, view nearby research-grade observations.</span></div><div class="abok-search"><input id="abok-species-query" placeholder="Search a species name"><button class="abok-btn" id="abok-species-search" type="button">Search Species</button><button class="abok-btn secondary" id="abok-nearby" type="button">Nearby Nature</button></div><p class="abok-status" id="abok-live-status">Live lookup needs an internet connection. The Adventure Builder collection remains available without it once the page is loaded.</p><div class="abok-live-grid" id="abok-species-results"></div></div>
+</section>
 <section class="abok-panel" data-abok-panel="notes" hidden><div class="section-heading"><p class="eyebrow">Your private trail notebook</p><h2>Personal Outdoor Notes</h2><p>Record conditions, water points, difficult ground, viewpoints or anything you want to remember. Notes save locally and can sync after the Supabase setup is run.</p></div><div class="abok-two"><form class="abok-card abok-form" id="abok-note-form"><label>Title<input name="title" maxlength="100" placeholder="Boggy path after rain"></label><label>Date<input name="date" type="date"></label><label>Location<input name="location" maxlength="180" placeholder="Trail or place"></label><label>Note<textarea name="text" maxlength="5000" required></textarea></label><button class="abok-btn" type="submit">Save Note</button><p class="abok-status" id="abok-note-status"></p></form><div class="abok-card"><h3>Saved notes</h3><div class="abok-list" id="abok-notes-list"></div></div></div></section>
 <section class="abok-panel" data-abok-panel="log" hidden><div class="section-heading"><p class="eyebrow">Observation log · private by default</p><h2>Foraging Log</h2><p>Record what you think you found, where and when. The log deliberately does not mark observations as “safe to eat”.</p></div><div class="abok-two"><form class="abok-card abok-form" id="abok-log-form"><label>Plant / find name<input name="name" maxlength="160" required placeholder="e.g. possible wild garlic"></label><label>Date<input name="date" type="date"></label><label>Location<input name="location" maxlength="180"></label><label>Observation notes<textarea name="notes" maxlength="5000" placeholder="What did you notice? How will you verify it?"></textarea></label><button class="abok-btn" type="submit">Save Observation</button><p class="abok-status" id="abok-log-status"></p></form><div class="abok-card"><h3>Your observations</h3><div class="abok-list" id="abok-log-list"></div></div></div></section>
 </div>

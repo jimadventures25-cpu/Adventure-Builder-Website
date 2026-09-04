@@ -337,18 +337,3 @@ body[data-page="adventure-finder"] .af-trust-strip{
   body[data-page="adventure-finder"] .af-discovery-shell{width:100%!important;display:flex!important;flex-direction:column!important}
   body[data-page="adventure-finder"] .af-map-panel,body[data-page="adventure-finder"] .af-map{min-height:410px!important}
 }
-
-
-/* W72.6 — remove duplicate accessibility controls and keep What Matters above the map */
-body[data-page="adventure-finder"] .ab-accessibility-button,
-body[data-page="adventure-finder"] [data-ab-accessibility-button]{display:none!important}
-body[data-page="adventure-finder"] .af-accessibility-toggle{display:none!important}
-body[data-page="adventure-finder"] .af-hero{z-index:20!important;overflow:visible!important}
-body[data-page="adventure-finder"] .af-hero-content,
-body[data-page="adventure-finder"] .ab-finder,
-body[data-page="adventure-finder"] .af-search-strip,
-body[data-page="adventure-finder"] .af-matters-wrap{position:relative;z-index:21!important;overflow:visible!important}
-body[data-page="adventure-finder"] .af-filter-panel{z-index:9999!important}
-body[data-page="adventure-finder"] .af-discovery-shell{position:relative;z-index:1!important}
-body[data-page="adventure-finder"] .af-map-panel,
-body[data-page="adventure-finder"] .af-map{z-index:1!important}
