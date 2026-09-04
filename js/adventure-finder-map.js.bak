@@ -41,7 +41,7 @@
     return state;
   }
 
-  function clearMarkers(state){
+  function clear(state){
     state.markers.forEach(marker=>{try{marker.remove()}catch{}});
     state.markers=[];
   }
@@ -59,7 +59,7 @@
     if(!state) state=init(root,id=>root.dispatchEvent(new CustomEvent('af:select',{detail:{id}})));
     if(!state) return;
     state.activeId=activeId;
-    clearMarkers(state);
+    clear(state);
     clearRoute(root);
     const bounds=new maplibregl.LngLatBounds();
     results.forEach(result=>{
@@ -70,16 +70,6 @@
       state.markers.push(marker); bounds.extend(result.coords);
     });
     if(!bounds.isEmpty()) state.map.fitBounds(bounds,{padding:70,maxZoom:10,duration:350});
-    setTimeout(()=>state.map.resize(),0);
-  }
-
-  function clearResults(root){
-    const state=instances.get(root); if(!state)return;
-    if(state.routeAbort){try{state.routeAbort.abort()}catch{} state.routeAbort=null;}
-    clearMarkers(state);
-    clearRoute(root);
-    state.activeId=null;
-    state.map.easeTo({center:[-3.2,54.4],zoom:5.2,duration:350});
     setTimeout(()=>state.map.resize(),0);
   }
 
@@ -120,5 +110,5 @@
     }
   }
 
-  window.AdventureFinderMap = Object.freeze({init,render,focus,route,clearRoute,clearResults});
+  window.AdventureFinderMap = Object.freeze({init,render,focus,route,clearRoute});
 })();

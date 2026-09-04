@@ -1,0 +1,8 @@
+Adventure Builder Website W72.6
+Adventure Finder accessibility/layer fix
+
+Changes:
+- Removed the Adventure Finder accessibility button beside Find My Next Adventure.
+- Hid the globally injected Accessibility header button on Adventure Finder only.
+- Corrected stacking contexts so What Matters to you opens above the results/map workspace.
+- Preserved W72.5 full-width results/map layout and MapLibre + Valhalla behaviour.

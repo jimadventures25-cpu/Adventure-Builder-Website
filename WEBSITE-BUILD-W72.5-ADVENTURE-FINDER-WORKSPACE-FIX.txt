@@ -1,0 +1,15 @@
+Adventure Builder Website — W72.5 Adventure Finder Workspace Fix
+
+Base: W72.4 Adventure Finder Dropdown + Clear Results
+
+Changes
+1. Fixed What matters to you popover being clipped by the search strip.
+2. Raised preferences popover stacking level so it opens above Finder content.
+3. Removed the white search-summary banner that overlaid the top of the map.
+4. Expanded Best matches + map discovery workspace to use the full available page width.
+5. Increased desktop left results allocation while preserving the map as the larger pane.
+6. Kept the black outer results panel and white inner result cards.
+7. Kept MapLibre rendering and existing Valhalla route calculation path unchanged.
+8. Preserved responsive mobile stacking.
+
+No unrelated website pages changed.

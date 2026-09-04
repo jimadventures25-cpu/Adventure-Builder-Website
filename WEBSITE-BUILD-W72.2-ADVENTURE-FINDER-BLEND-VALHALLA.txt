@@ -1,0 +1,24 @@
+Adventure Builder Website W72.2 — Adventure Finder blend + Valhalla route
+
+Changes
+- Reduced Adventure Finder hero/banner height so it fits the desktop screen better.
+- Reduced hero heading/search control scale while preserving the approved visual direction.
+- Re-anchored What matters to you as an overlay dropdown immediately below the search strip.
+- Dropdown no longer expands page flow or appears beneath the map on desktop.
+- Added outside-click and Escape close behaviour plus aria-expanded state.
+- Finder shell and trust strip now blend into the website's white page styling.
+- Tightened map/results section width and spacing.
+- Added Adventure Finder Valhalla route Netlify function using the existing routing config/provider chain.
+- MapLibre remains the map renderer; Valhalla now supplies driving route geometry.
+- Selecting/searching a result draws the Valhalla route in Adventure Builder orange and shows route time/distance.
+
+Safety
+- No files deleted.
+- Existing Adventure Finder data/scoring/saved-idea/Trip Planner handoff retained.
+- Existing routing library reused; no new routing provider added.
+
+Checks
+- adventure-finder.js syntax: PASS
+- adventure-finder-map.js syntax: PASS
+- adventure-finder-data.js syntax: PASS
+- adventure-finder-route.mjs syntax: PASS

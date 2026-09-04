@@ -1,0 +1,19 @@
+Adventure Builder Website W73 — Registration Accessibility Integration
+Date: 4 September 2026
+Base: W72.6 Adventure Finder Layer Fix
+
+Changes
+- Removed the globally injected Accessibility button from site headers.
+- Kept the existing accessibility chooser as a reusable dialog opened from Registration and My Account.
+- Reworked the optional registration section so Accessibility & support preferences are the first, clearest option.
+- Kept Adventure Profile preferences optional and below the accessibility choices.
+- Kept existing Terms & Conditions and Privacy Policy links and Supabase signup flow unchanged.
+- Added explicit accessibility-dialog foreground/background colours to prevent white text on white background from site-wide header rules.
+- Accessibility account sync remains explicit opt-in.
+- Registration profile data continues to stage through the existing AdventureProfileRegistration integration.
+
+Safety / scope
+- No Supabase authentication endpoints changed.
+- No Adventure Finder files changed.
+- No legal documents changed.
+- No database schema changes introduced.

@@ -7,16 +7,8 @@
   const groups = {};
   Object.entries(A.requirements).forEach(([key,item]) => (groups[item.group] ||= []).push([key,item]));
 
-  const button = document.createElement('button');
-  button.type='button';
-  button.className='ab-accessibility-button';
-  button.setAttribute('data-ab-accessibility-button','');
-  button.setAttribute('aria-haspopup','dialog');
-  button.innerHTML='<span aria-hidden="true">♿</span><span data-ab-accessibility-button-label>Accessibility</span>';
-
-  const accountActions=document.querySelector('.site-header .account-actions');
-  if (accountActions) accountActions.prepend(button);
-  else document.body.append(button);
+  // W73: accessibility is now opened from Registration / My Account only.
+  // Do not inject a global Accessibility button into every site header.
 
   const dialog=document.createElement('dialog');
   dialog.className='ab-accessibility-dialog';
@@ -40,12 +32,9 @@
 
   const choices=[...dialog.querySelectorAll('[data-ab-accessibility-choice]')];
   const remember=dialog.querySelector('[data-ab-accessibility-remember]');
-  const labelNode=button.querySelector('[data-ab-accessibility-button-label]');
 
-  function syncButton(profile=A.get()) {
+  function syncSummaries(profile=A.get()) {
     const n=A.activeCount(profile);
-    button.classList.toggle('is-active',n>0);
-    labelNode.textContent=n?`Accessibility · ${n}`:'Accessibility';
     document.querySelectorAll('[data-accessibility-summary]').forEach(node=>node.textContent=n?`${n} access need${n===1?'':'s'} active`:'Accessibility off');
   }
   function populate() {
@@ -56,7 +45,6 @@
   function open() { populate(); if(typeof dialog.showModal==='function') dialog.showModal(); else dialog.setAttribute('open',''); }
   function close() { if(typeof dialog.close==='function') dialog.close(); else dialog.removeAttribute('open'); }
 
-  button.addEventListener('click',open);
   document.addEventListener('click',event=>{ if(event.target.closest('[data-accessibility-open]')) { event.preventDefault(); open(); } });
   dialog.querySelector('[data-ab-accessibility-save]').addEventListener('click',()=>{
     const selected=choices.filter(c=>c.checked).map(c=>c.value);
@@ -78,6 +66,6 @@
     populate();close();
   });
   dialog.addEventListener('click',event=>{ if(event.target===dialog) close(); });
-  window.addEventListener(A.events.change,event=>syncButton(event.detail?.profile));
-  syncButton();
+  window.addEventListener(A.events.change,event=>syncSummaries(event.detail?.profile));
+  syncSummaries();
 })();
