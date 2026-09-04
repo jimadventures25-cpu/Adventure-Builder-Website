@@ -1,0 +1,11 @@
+Adventure Builder Website W72.4
+Adventure Finder dropdown + clear results
+
+Changes:
+- What Matters is now a compact anchored popover under its own search control.
+- Popover has a fixed maximum height, internal scrolling and a Done button.
+- Opening What Matters no longer pushes the map/results down the page.
+- Added Clear Results beside the result count.
+- Clear Results removes result cards, map pins, active Valhalla route and selection state while preserving the user's search choices.
+- Map returns to its clean starting view after results are cleared.
+- Existing dark results panel / white result card styling retained.

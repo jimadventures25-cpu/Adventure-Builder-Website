@@ -60,31 +60,28 @@
             <span class="af-search-text"><strong>How far will you travel?</strong><small>Choose travel time</small></span>
             <select id="af-drive" data-af-drive><option>30 minutes</option><option>1 hour</option><option selected>2 hours</option><option>3 hours</option><option>No limit</option></select>
           </label>
-          <div class="af-matters-wrap">
-            <button class="af-search-cell af-matters" type="button" data-af-filter-toggle>
-              <span class="af-search-icon" aria-hidden="true">♡</span>
-              <span class="af-search-text"><strong>What matters to you?</strong><small data-af-matters-summary>Add what’s important</small></span>
-            </button>
-            <div class="af-filter-panel" data-af-filters>
-              <div class="af-filter-head">
-                <div><p class="af-kicker">What matters to you?</p><h2>Choose what would change your decision.</h2></div>
-                <button class="af-link" type="button" data-af-clear>Clear all</button>
-              </div>
-              <div class="af-filter-groups">
-                <fieldset><legend>Who or what needs to fit?</legend><div class="af-options"><button type="button" data-af-choice="dog" aria-pressed="false">Dog friendly</button><button type="button" data-af-choice="tent" aria-pressed="false">Tent</button><button type="button" data-af-choice="van" aria-pressed="false">Van friendly</button><button type="button" data-af-choice="family" aria-pressed="false">Family</button><button type="button" data-af-choice="quiet" aria-pressed="false">Quiet</button></div></fieldset>
-                <fieldset><legend>Nearby</legend><div class="af-options"><button type="button" data-af-choice="hiking" aria-pressed="false">Walks</button><button type="button" data-af-choice="paddle" aria-pressed="false">Paddling</button><button type="button" data-af-choice="lake" aria-pressed="false">Lakes</button><button type="button" data-af-choice="mountain" aria-pressed="false">Mountains</button><button type="button" data-af-choice="waterfall" aria-pressed="false">Waterfalls</button><button type="button" data-af-choice="beach" aria-pressed="false">Beaches</button><button type="button" data-af-choice="forest" aria-pressed="false">Forest</button><button type="button" data-af-choice="wildlife" aria-pressed="false">Wildlife</button><button type="button" data-af-choice="sunset" aria-pressed="false">Sunset</button><button type="button" data-af-choice="sunrise" aria-pressed="false">Sunrise</button><button type="button" data-af-choice="photo" aria-pressed="false">Photography</button><button type="button" data-af-choice="cafe" aria-pressed="false">Cafés</button><button type="button" data-af-choice="pub" aria-pressed="false">Pubs</button></div></fieldset>
-                <fieldset><legend>Facilities</legend><div class="af-options"><button type="button" data-af-choice="showers" aria-pressed="false">Showers</button><button type="button" data-af-choice="toilets" aria-pressed="false">Toilets</button><button type="button" data-af-choice="water" aria-pressed="false">Fresh water</button><button type="button" data-af-choice="electric" aria-pressed="false">Electric</button></div></fieldset>
-                <fieldset class="af-van-fieldset"><legend>My Van</legend><label class="af-van-toggle"><input data-af-use-van type="checkbox"> Use my saved van dimensions</label><p data-af-van-summary></p></fieldset>
-              </div>
-              <div class="af-filter-footer"><p class="af-live-selection"><span>Current search</span><strong data-af-live-selection></strong></p><button class="af-filter-done" type="button" data-af-filter-done>Done</button></div>
-            </div>
-          </div>
+          <button class="af-search-cell af-matters" type="button" data-af-filter-toggle>
+            <span class="af-search-icon" aria-hidden="true">♡</span>
+            <span class="af-search-text"><strong>What matters to you?</strong><small data-af-matters-summary>Add what’s important</small></span>
+          </button>
         </div>
 
         <div class="af-hero-actions">
           <button class="af-find-button" type="button" data-af-search>FIND MY NEXT ADVENTURE <span aria-hidden="true">→</span></button>
+          <button class="af-accessibility-toggle" type="button" data-accessibility-open><span aria-hidden="true">♿</span> Accessibility <small data-accessibility-summary>Accessibility off</small></button>
         </div>
         <p class="af-hero-note"><span>✓</span> We compare campsites, campervan stops and other adventure bases around your chosen area and show the ones that best match you.</p>
+
+        <div class="af-filter-panel" data-af-filters>
+          <div class="af-filter-head"><div><p class="af-kicker">What matters to you?</p><h2>Choose only the things that would change your decision.</h2></div><button class="af-link" type="button" data-af-clear>Clear all</button></div>
+          <div class="af-filter-groups">
+            <fieldset><legend>Who or what needs to fit?</legend><div class="af-options"><button type="button" data-af-choice="dog" aria-pressed="false">Dog friendly</button><button type="button" data-af-choice="tent" aria-pressed="false">Tent</button><button type="button" data-af-choice="van" aria-pressed="false">Van friendly</button><button type="button" data-af-choice="family" aria-pressed="false">Family</button><button type="button" data-af-choice="quiet" aria-pressed="false">Quiet</button></div></fieldset>
+            <fieldset><legend>What do you want nearby?</legend><div class="af-options"><button type="button" data-af-choice="hiking" aria-pressed="false">Walks</button><button type="button" data-af-choice="paddle" aria-pressed="false">Paddling</button><button type="button" data-af-choice="lake" aria-pressed="false">Lakes</button><button type="button" data-af-choice="mountain" aria-pressed="false">Mountains</button><button type="button" data-af-choice="waterfall" aria-pressed="false">Waterfalls</button><button type="button" data-af-choice="beach" aria-pressed="false">Beaches</button><button type="button" data-af-choice="forest" aria-pressed="false">Forest</button><button type="button" data-af-choice="wildlife" aria-pressed="false">Wildlife</button><button type="button" data-af-choice="sunset" aria-pressed="false">Sunset views</button><button type="button" data-af-choice="sunrise" aria-pressed="false">Sunrise</button><button type="button" data-af-choice="photo" aria-pressed="false">Photography</button><button type="button" data-af-choice="cafe" aria-pressed="false">Cafés</button><button type="button" data-af-choice="pub" aria-pressed="false">Pubs</button></div></fieldset>
+            <fieldset><legend>Facilities</legend><div class="af-options"><button type="button" data-af-choice="showers" aria-pressed="false">Showers</button><button type="button" data-af-choice="toilets" aria-pressed="false">Toilets</button><button type="button" data-af-choice="water" aria-pressed="false">Fresh water</button><button type="button" data-af-choice="electric" aria-pressed="false">Electric</button></div></fieldset>
+            <fieldset class="af-van-fieldset"><legend>My Van</legend><label class="af-van-toggle"><input data-af-use-van type="checkbox"> Use my saved van dimensions when matching</label><p data-af-van-summary></p></fieldset>
+          </div>
+          <p class="af-live-selection"><span>Current search</span><strong data-af-live-selection></strong></p>
+        </div>
       </section>
     </div>
   </section>
@@ -93,7 +90,7 @@
     <div class="af-results-panel">
       <div class="af-results-top" id="af-results-heading" data-af-results-heading>
         <div><p class="af-kicker">Your next adventures</p><h2>Best matches for you</h2><p data-af-summary></p></div>
-        <div class="af-results-tools"><span class="af-count" data-af-count></span><button class="af-clear-results" type="button" data-af-clear-results>Clear Results</button></div>
+        <span class="af-count" data-af-count></span>
       </div>
       <p class="af-stage-note" data-af-stage-note></p>
       <p class="af-accessibility-explainer" data-af-accessibility-explainer hidden></p>
@@ -102,6 +99,10 @@
     </div>
 
     <aside class="af-map-panel" aria-label="Map of matching places">
+      <div class="af-map-search-summary">
+        <span data-af-map-area>Lake District</span><span data-af-map-stay>Any stay</span><span data-af-map-drive>Within 2 hours</span><span data-af-map-matters>Any preferences</span>
+        <button type="button" data-af-edit-search>Edit search</button>
+      </div>
       <div class="af-map" data-af-map></div>
       <div class="af-map-route-status" data-af-route-status hidden></div>
       <div class="af-map-key"><span><i class="is-match"></i> Best matches</span><span><i></i> Other matches</span></div>
