@@ -1,0 +1,6 @@
+W72.3 Adventure Finder layout polish
+- Single-line desktop heading
+- Search moved up/left
+- Wider dark results panel
+- White result cards with orange selected state
+- Existing W72.2 MapLibre + Valhalla behaviour retained

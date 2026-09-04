@@ -1,0 +1,22 @@
+Adventure Builder Website - W72 Adventure Finder Hero + Split View
+Date: 2026-09-03
+
+Built from: Adventure-Builder-Website_1(1).zip
+
+Adventure Finder changes only:
+- Scenic Adventure Finder hero using existing website finder image.
+- Clear four-part search: Where / Stay / Travel time / What matters.
+- FIND MY NEXT ADVENTURE primary action.
+- Hidden preference panel retained for powerful matching without clutter.
+- Dark compact result panel with photo thumbnails and match information.
+- Large interactive MapLibre map beside results.
+- Search summary over the map and Edit Search action.
+- Existing Finder ranking, accessibility, saved van, Save and Trip Planner hand-off retained.
+- Mobile responsive layout switches to map + results stack.
+- Removed Stage 1 wording from user-facing results.
+
+Checks:
+- adventure-finder.js syntax: PASS
+- Required Finder selectors: PASS
+- Duplicate HTML IDs: PASS
+- Original website files retained; no other page intentionally redesigned.

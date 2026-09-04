@@ -130,12 +130,12 @@ body[data-page]:not([data-page="index"]) .cta-section .button-primary{color:#111
    3) restore readable controls/text on light canvas, 4) keep Studio editor dark. */
 
 /* Light feature hubs to match the selected website direction. */
-body[data-page]:not([data-page="index"]):not([data-page="studio"]) .ab-finder,
-body[data-page]:not([data-page="index"]):not([data-page="studio"]) .ab-hub,
-body[data-page]:not([data-page="index"]):not([data-page="studio"]) .ab-gallery,
-body[data-page]:not([data-page="index"]):not([data-page="studio"]) .ab-passport,
-body[data-page]:not([data-page="index"]):not([data-page="studio"]) .ab-vanlife,
-body[data-page]:not([data-page="index"]):not([data-page="studio"]) .ab-partners{
+body[data-page]:not([data-page="index"]):not([data-page="studio"]):not([data-page="adventure-finder"]) .ab-finder,
+body[data-page]:not([data-page="index"]):not([data-page="studio"]):not([data-page="adventure-finder"]) .ab-hub,
+body[data-page]:not([data-page="index"]):not([data-page="studio"]):not([data-page="adventure-finder"]) .ab-gallery,
+body[data-page]:not([data-page="index"]):not([data-page="studio"]):not([data-page="adventure-finder"]) .ab-passport,
+body[data-page]:not([data-page="index"]):not([data-page="studio"]):not([data-page="adventure-finder"]) .ab-vanlife,
+body[data-page]:not([data-page="index"]):not([data-page="studio"]):not([data-page="adventure-finder"]) .ab-partners{
   --abx-bg:#fff;--abx-panel:#f7f7f5;--abx-card:#fff;--abx-line:#d9dddf;--abx-text:#17191b;--abx-muted:#5f686d;
   --af-bg:#fff;--af-panel:#f7f7f5;--af-card:#fff;--af-line:#d9dddf;--af-text:#17191b;--af-muted:#5f686d;
   --g-bg:#fff;--g-panel:#f7f7f5;--g-card:#fff;--g-line:#d9dddf;--g-text:#17191b;--g-muted:#5f686d;
@@ -146,19 +146,19 @@ body[data-page]:not([data-page="index"]):not([data-page="studio"]) .ab-partners{
 }
 
 /* Hero strips inside feature modules become subtle light sections rather than a second dark header. */
-body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.af-hero,.ab-hub-hero,.ag-hero,.ap-hero,.av-hero,.abp-head){
+body[data-page]:not([data-page="index"]):not([data-page="studio"]):not([data-page="adventure-finder"]) :is(.af-hero,.ab-hub-hero,.ag-hero,.ap-hero,.av-hero,.abp-head){
   background:#f4f5f3!important;border-color:#d9dddf!important;color:#17191b!important
 }
-body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.af-hero,.ab-hub-hero,.ag-hero,.ap-hero,.av-hero,.abp-head) :is(h1,h2,h3){color:#17191b!important}
-body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.af-hero,.ab-hub-hero,.ag-hero,.ap-hero,.av-hero,.abp-head) p{color:#596267!important}
+body[data-page]:not([data-page="index"]):not([data-page="studio"]):not([data-page="adventure-finder"]) :is(.af-hero,.ab-hub-hero,.ag-hero,.ap-hero,.av-hero,.abp-head) :is(h1,h2,h3){color:#17191b!important}
+body[data-page]:not([data-page="index"]):not([data-page="studio"]):not([data-page="adventure-finder"]) :is(.af-hero,.ab-hub-hero,.ag-hero,.ap-hero,.av-hero,.abp-head) p{color:#596267!important}
 
 /* Light cards and fields across the converted hubs. */
-body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.af-builder,.af-results,.ab-hub-body,.ag-body,.ap-body,.av-body,.abp-body){background:#fff!important;color:#17191b!important}
-body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.abx-stat,.abx-card,.abx-feed-card,.abx-collection,.af-card,.af-result,.ag-card,.ag-memory,.ag-badge,.ag-story-step,.ap-card,.ap-stat,.av-stat,.av-card,.av-result,.av-stage,.av-base,.abp-card,.abp-stage){
+body[data-page]:not([data-page="index"]):not([data-page="studio"]):not([data-page="adventure-finder"]) :is(.af-builder,.af-results,.ab-hub-body,.ag-body,.ap-body,.av-body,.abp-body){background:#fff!important;color:#17191b!important}
+body[data-page]:not([data-page="index"]):not([data-page="studio"]):not([data-page="adventure-finder"]) :is(.abx-stat,.abx-card,.abx-feed-card,.abx-collection,.af-card,.af-result,.ag-card,.ag-memory,.ag-badge,.ag-story-step,.ap-card,.ap-stat,.av-stat,.av-card,.av-result,.av-stage,.av-base,.abp-card,.abp-stage){
   background:#f8f8f6!important;color:#17191b!important;border-color:#d8dddf!important
 }
-body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.abx-stat,.abx-card,.af-step,.af-summary,.ag-card,.ap-card,.av-card,.abp-card) :is(p,small,label,span){color:#5c666b}
-body[data-page]:not([data-page="index"]):not([data-page="studio"]) :is(.af-input,.af-select,.abx-form input,.abx-form select,.abx-form textarea,.ag-form input,.ag-form select,.ag-form textarea,.ap-form input,.ap-form select,.ap-form textarea,.av-form input,.av-form select,.av-form textarea,.abp-form input,.abp-form select,.abp-form textarea){
+body[data-page]:not([data-page="index"]):not([data-page="studio"]):not([data-page="adventure-finder"]) :is(.abx-stat,.abx-card,.af-step,.af-summary,.ag-card,.ap-card,.av-card,.abp-card) :is(p,small,label,span){color:#5c666b}
+body[data-page]:not([data-page="index"]):not([data-page="studio"]):not([data-page="adventure-finder"]) :is(.af-input,.af-select,.abx-form input,.abx-form select,.abx-form textarea,.ag-form input,.ag-form select,.ag-form textarea,.ap-form input,.ap-form select,.ap-form textarea,.av-form input,.av-form select,.av-form textarea,.abp-form input,.abp-form select,.abp-form textarea){
   background:#fff!important;color:#17191b!important;border-color:#cbd1d4!important
 }
 
