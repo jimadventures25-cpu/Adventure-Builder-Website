@@ -1,0 +1,13 @@
+Adventure Builder Website W78 — Plant & Wildlife Lookup
+
+- Rebuilt Plant & Wildlife as a category-led lookup rather than one mixed page.
+- 10 internal category tabs.
+- 120 starter species (12 per category).
+- Current-category search/filter.
+- Real reference photos loaded from iNaturalist taxon data when online.
+- Species detail view with habitat/identification guidance and trusted-source links.
+- Plants link to the safety-locked Foraging Guide; no edibility claims in Wildlife Lookup.
+- Existing iNaturalist/GBIF name search and nearby research-grade observations retained.
+- Other Outdoor Skills tabs unchanged.
+
+Trusted-reference direction: RSPB, Woodland Trust, National Biodiversity Data Centre, plus existing iNaturalist/GBIF lookup.

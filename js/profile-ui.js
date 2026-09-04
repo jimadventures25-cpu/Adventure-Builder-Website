@@ -13,9 +13,16 @@
     const section=document.createElement('details');
     section.className='ab-profile-registration';
     section.setAttribute('data-profile-registration','');
-    section.innerHTML=`<summary>Personalise Adventure Builder <small>optional</small></summary>
+    section.innerHTML=`<summary>Accessibility &amp; adventure preferences <small>optional</small></summary>
       <div class="ab-profile-registration-body">
-        <p class="ab-profile-help">These choices help Adventure Builder recommend better places and adventures. You can skip them or change them later.</p>
+        <p class="ab-profile-help">Make Adventure Builder work better for you from the start. Everything in this section is optional and can be changed later in My Account.</p>
+        <div class="ab-profile-access ab-profile-access-primary">
+          <div><strong>Accessibility &amp; support preferences</strong><small data-profile-access-summary>No accessibility needs selected.</small></div>
+          <button type="button" class="button button-secondary" data-accessibility-open>Choose what I need</button>
+        </div>
+        <label class="ab-profile-consent"><input type="checkbox" data-profile-access-sync><span><strong>Save these accessibility preferences to my Adventure Builder account</strong><small>Optional. Only enable this if you want these preferences to follow you between the website and app. You can change or remove them later.</small></span></label>
+        <div class="ab-profile-preferences-divider"><span>Optional adventure preferences</span></div>
+        <p class="ab-profile-help">These choices help Adventure Builder recommend places and adventures that suit you. You can leave them blank.</p>
         <div class="ab-profile-grid two">
           <label>Age group <span>optional</span><select data-profile-age>${options(P.ageBands)}</select></label>
           <label>Adventure atmosphere <span>optional</span><select data-profile-atmosphere>${options(P.atmosphere)}</select></label>
@@ -23,14 +30,10 @@
           <label>Usually adventuring <span>optional</span><select data-profile-company>${options(P.company)}</select></label>
         </div>
         <fieldset class="ab-profile-fieldset"><legend>Things you enjoy <span>optional</span></legend><div class="ab-profile-choices">${interestChecks}</div></fieldset>
-        <div class="ab-profile-access">
-          <div><strong>Accessibility preferences</strong><small data-profile-access-summary>No accessibility needs selected.</small></div>
-          <button type="button" class="button button-secondary" data-accessibility-open>Choose accessibility needs</button>
-        </div>
-        <label class="ab-profile-consent"><input type="checkbox" data-profile-access-sync><span><strong>Save my accessibility needs to my Adventure Builder account</strong><small>Optional. This can reveal sensitive information about your access needs. If selected, you explicitly agree to Adventure Builder storing these preferences so they can sync between the website and app. You can remove them at any time.</small></span></label>
         <p class="ab-profile-youth" data-profile-youth-note hidden>For under-18 accounts, Adventure Builder will use age-appropriate privacy and recommendation safeguards. Age-restricted places and activities can be filtered where reliable age rules are available.</p>
       </div>`;
-    register.insertBefore(section,submit);
+    const legalRow=register.querySelector('#register-terms')?.closest('label');
+    register.insertBefore(section,legalRow||submit);
     const age=section.querySelector('[data-profile-age]');
     age.addEventListener('change',()=>section.querySelector('[data-profile-youth-note]').hidden=age.value!=='under18');
   }

@@ -62,7 +62,6 @@
     const accessProfile=window.AdventureAccessibility?.get?.() || {};
     const results=Score.rank(Data.places,committed,State.getVan(),accessProfile);
     root._afResults=results;
-    root.querySelector('.af-results-panel')?.classList.remove('is-cleared');
     root.querySelector('[data-af-count]').textContent=`${results.length} place${results.length===1?'':'s'}`;
     root.querySelector('[data-af-summary]').textContent=selectedSummary(committed)+(window.AdventureAccessibility?.activeCount?.(accessProfile)?` · Accessibility ${window.AdventureAccessibility.activeCount(accessProfile)} need${window.AdventureAccessibility.activeCount(accessProfile)===1?'':'s'}`:'');
     const qs=(sel)=>root.closest('.af-page-shell')?.querySelector(sel);
@@ -84,23 +83,6 @@
     if(scroll) root.querySelector('[data-af-results-heading]')?.scrollIntoView({behavior:'smooth',block:'start'});
   }
 
-  function clearResultsOnly(root){
-    root._afResults=[];
-    const panel=root.querySelector('.af-results-panel');
-    panel?.classList.add('is-cleared');
-    const count=root.querySelector('[data-af-count]'); if(count) count.textContent='0 places';
-    const summary=root.querySelector('[data-af-summary]'); if(summary) summary.textContent='Ready for your next search';
-    const list=root.querySelector('[data-af-results]');
-    if(list) list.innerHTML='<div class="af-cleared-state"><strong>Results cleared</strong><small>Your search choices are still here. Change anything you want, then press Find My Next Adventure.</small></div>';
-    const status=root.querySelector('[data-af-status]'); if(status) status.textContent='';
-    const shell=root.closest('.af-page-shell');
-    shell?.querySelector('[data-af-map-area]') && (shell.querySelector('[data-af-map-area]').textContent='Ready');
-    shell?.querySelector('[data-af-map-stay]') && (shell.querySelector('[data-af-map-stay]').textContent='No results');
-    shell?.querySelector('[data-af-map-drive]') && (shell.querySelector('[data-af-map-drive]').textContent='');
-    shell?.querySelector('[data-af-map-matters]') && (shell.querySelector('[data-af-map-matters]').textContent='');
-    MapUI?.clearResults?.(root);
-  }
-
   function clear(root){const clean=State.clear();root._afCommitted=clean;setPrefs(root,clean);renderVan(root);root.querySelector('[data-af-live-selection]').textContent=selectedSummary(clean);render(root,{prefs:clean});}
 
   function bind(root){
@@ -117,7 +99,6 @@
     const mattersPanel=root.querySelector('[data-af-filters]');
     mattersToggle?.setAttribute('aria-expanded','false');
     mattersToggle?.addEventListener('click',()=>{const open=!mattersPanel?.classList.contains('is-open');mattersPanel?.classList.toggle('is-open',open);mattersToggle.setAttribute('aria-expanded',String(open));});
-    root.querySelector('[data-af-filter-done]')?.addEventListener('click',()=>{mattersPanel?.classList.remove('is-open');mattersToggle?.setAttribute('aria-expanded','false');mattersToggle?.focus();});
     document.addEventListener('click',event=>{if(!mattersPanel?.classList.contains('is-open'))return;if(root.contains(event.target)&&(mattersPanel.contains(event.target)||mattersToggle?.contains(event.target)))return;mattersPanel.classList.remove('is-open');mattersToggle?.setAttribute('aria-expanded','false');});
     document.addEventListener('keydown',event=>{if(event.key==='Escape'&&mattersPanel?.classList.contains('is-open')){mattersPanel.classList.remove('is-open');mattersToggle?.setAttribute('aria-expanded','false');mattersToggle?.focus();}});
     root.closest('.af-page-shell')?.querySelector('[data-af-edit-search]')?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
@@ -126,7 +107,6 @@
     });
     root.addEventListener('click',e=>{
       const focus=e.target.closest('[data-af-map-focus]'); if(focus){const r=root._afResults?.find(x=>x.id===focus.dataset.afMapFocus);root.querySelectorAll('[data-af-card]').forEach(c=>c.classList.toggle('is-active',c.dataset.afCard===focus.dataset.afMapFocus));MapUI?.focus(root,r);const origin=Data.areaCenters?.[(root._afCommitted||getPrefs(root)).area];if(origin&&r)MapUI?.route?.(root,origin,r);return;}
-      const clearResults=e.target.closest('[data-af-clear-results]'); if(clearResults){clearResultsOnly(root);return;}
       const reset=e.target.closest('[data-af-reset-results]'); if(reset){clear(root);return;}
       const save=e.target.closest('[data-af-save]'); if(save){const r=Data.places.find(x=>x.id===save.dataset.afSave);const ok=State.saveIdea(r.id);root.querySelector('[data-af-status]').textContent=ok?`${r.name} saved as an idea on this device.`:'Could not save on this device.';return;}
       const plan=e.target.closest('[data-af-plan]'); if(plan){const r=Data.places.find(x=>x.id===plan.dataset.afPlan);const ok=State.createTripHandoff(r,root._afCommitted || getPrefs(root));root.querySelector('[data-af-status]').textContent=ok?`${r.name} is ready for Trip Planner.`:'Could not prepare the Trip Planner hand-off.';}
