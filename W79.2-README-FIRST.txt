@@ -1,0 +1,26 @@
+Adventure Builder Website — W79.2 Outdoor Skills Popup Rebuild
+
+SAFE CLEAN-REPOSITORY PATCH
+
+Copy ONLY these three website files into the CLEAN repository:
+1. outdoor-skills.html
+2. css/outdoor-knowledge.css
+3. js/outdoor-knowledge.js
+
+Expected GitHub Desktop result: exactly 3 changed files.
+
+Main changes:
+- Survival Basics cards now open a compact popup guide instead of placing the full lesson below the grid.
+- Foraging cards now open the full safety-led plant guide in a popup; the existing first-use Foraging Safety Lock remains.
+- Survival/Outdoor Knots now open tying instructions in a popup.
+- Plant & Wildlife species now open in a popup.
+- Freshwater and sea species now open description, food guidance, legal retention/size and fishing notes in a popup.
+- Coastal Foraging items use the popup pattern while keeping the separate Coastal Foraging safety lock.
+- Fishing Knots, Hooks & Rigs, and Baits & Lures now use click-to-open detail popups.
+- Species image lookup now requires an EXACT scientific-name match from iNaturalist rather than accepting the first common-name-style search result. This is specifically intended to stop mismatches such as Roach showing a snake or Barbel showing a bird.
+- No information panels are pushed to the bottom of the species collections.
+
+Checks performed:
+- JavaScript syntax: PASS (node --check)
+- Git conflict marker scan on all 3 replacement files: PASS (0 markers)
+- ZIP integrity: verify after packaging

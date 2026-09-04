@@ -1,30 +1,12 @@
-ADVENTURE BUILDER W79 — FISHING & COASTAL
-PATCH BUILD: contains ONLY the 3 files changed by W79.
+Adventure Builder W79.1 – Fishing & Coastal Rebuild
 
-Replace these exact files in the CLEAN GitHub repository:
-1) outdoor-skills.html
-2) css/outdoor-knowledge.css
-3) js/outdoor-knowledge.js
+SAFE 3-FILE PATCH. Copy only these three files into the CLEAN repository:
+1. outdoor-skills.html
+2. css/outdoor-knowledge.css
+3. js/outdoor-knowledge.js
 
-Expected GitHub Desktop result: exactly 3 changed files.
-Do not copy an old full-site folder over the CLEAN repository.
+GitHub Desktop should show exactly 3 changed files.
 
-W79 adds:
-- Fishing & Coastal main Outdoor Skills tab
-- Freshwater Fishing
-- Sea Fishing
-- Coastal Foraging with safety lock
-- 20 Fishing Knots (separate from Survival Knots)
-- Hooks & Rigs
-- Baits & Lures
-- Fish Identification
-- Safety & Rules with official links
-- Plant & Wildlife duplicate search bar removed; one collection search now escalates to wider biodiversity search
+Adds richer freshwater and marine species descriptions, food guidance, legal retention/size information, freshwater crayfish, crabs/lobsters/shellfish, official rule links, and keeps fishing knots separate from survival knots.
 
-Safety/source basis reviewed 2026-09-04:
-- GOV.UK freshwater rod fishing rules / Environment Agency
-- GOV.UK/MMO Minimum Conservation Reference Sizes
-- RNLI angling and tide safety
-- Food Standards Agency safe foraging guidance
-
-Checks: JavaScript syntax PASS; Git conflict marker scan PASS; patch contains exactly 3 website code files.
+Legal information is deliberately labelled as baseline/reference guidance because local byelaws, fisheries, seasons and jurisdiction rules can override it.
