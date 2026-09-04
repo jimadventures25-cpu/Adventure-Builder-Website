@@ -1,0 +1,12 @@
+Adventure Builder Website W76.1
+Foraging Guide — 30 entries + full-width Outdoor Skills layout
+
+Changes:
+- Expanded Foraging Guide from 6 to 30 UK/Ireland wild-food learning entries.
+- Outdoor Skills now uses nearly the full browser width on desktop.
+- Preserved open white layout and existing Survival/Knots/Nature/Notes/Log functionality.
+- Each foraging entry includes identification features, habitat, season, preparation checklist, lookalike/safety warning, real-photo link and trusted references.
+- Fungi/mushrooms remain excluded.
+
+Safety baseline: Food Standards Agency safe-foraging guidance; NatureScot; RHS; GOV.UK plant protection guidance.
+Important: guide is educational and never declares a plant safe from a photo/automated match alone.

@@ -83,6 +83,7 @@
 
         <div class="af-hero-actions">
           <button class="af-find-button" type="button" data-af-search>FIND MY NEXT ADVENTURE <span aria-hidden="true">→</span></button>
+          <button class="af-accessibility-toggle" type="button" data-accessibility-open><span aria-hidden="true">♿</span> Accessibility <small data-accessibility-summary>Accessibility off</small></button>
         </div>
         <p class="af-hero-note"><span>✓</span> We compare campsites, campervan stops and other adventure bases around your chosen area and show the ones that best match you.</p>
       </section>

@@ -1,0 +1,15 @@
+Adventure Builder Website — W76 Outdoor Skills: Foraging Guide
+
+Base: W75 Survival Basics
+Scope: Foraging Guide tab only.
+
+Changes:
+- Rebuilt Foraging Guide as an open white field-guide layout.
+- Uses trusted information sources only for food-safety and foraging guidance: Food Standards Agency, NatureScot, RHS, GOV.UK, plus Woodland Trust for wild-garlic/lily-of-the-valley identification detail.
+- Six curated UK/Ireland-relevant plant profiles: Dandelion, Wild Garlic, Elder, Hazel, Sloe/Blackthorn, Rosehip.
+- Real Wikimedia Commons photographs with visible photo credit links.
+- Every entry includes identification features, habitat/season, preparation checks, warnings/lookalikes where supported, and direct trusted-source links.
+- Added global FSA-based safety rules and UK wild-plant law reminder.
+- No fungi/mushroom profiles included in this beginner guide.
+- No automated plant ID is presented as proof of edibility.
+- Survival Basics and all other Outdoor Skills tabs retained unchanged.

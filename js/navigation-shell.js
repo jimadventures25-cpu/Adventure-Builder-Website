@@ -4,7 +4,7 @@
   const routes = [
     ['index.html','Home','home','#ff7900'],
     ['adventure-finder.html','Adventure Finder','search','#54d65a'],
-    ['adventures.html','Adventures','map','#00bde8'],
+    ['adventures.html','My Adventure World','map','#00bde8'],
     ['trip-planner.html','Trip Planner','route','#22a7f0'],
     ['walking-hiking.html','Walking & Hiking','walk','#93dc00'],
     ['outdoor-skills.html','Survival & Foraging','leaf','#ff8b18'],
