@@ -26,5 +26,14 @@
     {id:'af8',name:'New Forest Quiet Base',region:'New Forest',type:'Campervan Site',coords:[-1.576,50.858],traits:['dog','van','quiet','toilets','water'],pois:['forest','wildlife','cycling','cafe','hiking'],vehicle:{maxHeight:3.0,maxLength:6.5,maxWeight:3500},distance:{forest:.1,wildlife:.6,cycling:.2,cafe:1.4,hiking:.2},accessibility:{stepFree:af(true),wheelchair:af(true),mobilityScooter:af(true),firmSurface:af(true),lowGradient:af(true),shortDistance:af(true),restPoints:af(true),accessibleParking:af(true),accessibleToilet:af(false,'unknown'),changingPlaces:af(false,'unknown'),assistanceDog:af(true),companion:af(true),adaptiveEquipment:af(false,'unknown'),quietSensory:af(true),visualInfo:af(true),hearingSupport:af(false,'unknown')},summary:'A woodland base for cycling, wildlife and gentle walking days.',imageTone:'forest'}
   ];
 
-  window.AdventureFinderData = Object.freeze({ labels, places });
+  const areaCenters = Object.freeze({
+    'Lake District':[-3.088,54.46],
+    'Peak District':[-1.79,53.35],
+    'Yorkshire Dales':[-2.15,54.24],
+    'Scottish Highlands':[-4.20,57.12],
+    'Cornwall':[-5.05,50.40],
+    'New Forest':[-1.62,50.86]
+  });
+
+  window.AdventureFinderData = Object.freeze({ labels, places, areaCenters });
 })();

@@ -1,0 +1,28 @@
+Adventure Builder Website W76.3 — Foraging Risk Warnings
+Date: 2026-09-04
+
+Built from W76.2.
+
+Changes:
+- Strengthened mandatory pre-unlock Foraging warning with prominent serious poisoning/injury/death notice.
+- States Adventure Builder/photo/app/smell/single feature must never be the sole identification basis.
+- Added suspected-poisoning/emergency guidance.
+- Terms/safety acceptance version increased to v2, so previous local acceptance is intentionally requested again.
+- Added visible risk hierarchy to the 30-plant browser.
+- High-risk/caution plant thumbnails receive warning badges.
+- Selected plant displays a prominent plant-specific risk banner.
+- High-risk entries currently include Wild Garlic, Common Hogweed and selected Pine Needles; caution entries include Ground Elder, Sweet Cicely, Elder and Yarrow.
+- High-risk wording is conservative and tied to trusted-source safety evidence; no unsupported claim that an edible plant itself is deadly.
+- Existing safety/source dialog, Terms link, lock, 30 guides and other Outdoor Skills tabs retained.
+
+Trusted safety references reviewed for this update:
+- Food Standards Agency / GOV.UK safe-foraging guidance
+- NatureScot Foraging for Wild Plants
+- Royal Horticultural Society potentially harmful plants
+- RHS / Woodland Trust wild garlic and lily-of-the-valley identification information
+
+Tests:
+- node --check js/outdoor-knowledge.js: PASS
+- 30 foraging guide entries retained: PASS
+- Terms version v2 present: PASS
+- high/caution risk UI hooks present: PASS

@@ -1,0 +1,49 @@
+Adventure Builder Website — W74 MY ADVENTURE WORLD
+Date: 2026-09-04
+Base: W73 Registration Accessibility Integration
+
+PURPOSE
+Rebuild My Adventure World so it has one clear job: the user's personal Adventure Builder control centre. It no longer tries to duplicate Journal, Community, Passport or Gallery.
+
+BUILT
+- Rebuilt adventures.html around "what is next" + completed journey map.
+- Large Adventure World Map is now the centrepiece.
+- Completed journey model supports:
+  * start point and finish point
+  * full recorded route/track geometry
+  * distance travelled
+  * travel time
+  * overall adventure duration
+  * stop count
+  * completion date
+- Clicking a route, start/finish point, or journey list row opens a focused journey summary.
+- Upcoming/saved plans are read from existing Trip Planner, Walking/Hiking and Paddling local stores.
+- Next Adventure card links users back to the correct planner.
+- Clear links keep Journal, Passport, Gallery and Community in their own roles instead of duplicating them here.
+- Existing W72/W73 Adventure Hub local data is migrated safely into the new v3 journey store; old keys are not deleted.
+- Added modular completion hook: dispatch `adventurebuilder:journey-completed` with a completed journey payload and the page stores/renders it automatically.
+- Updated side navigation label from "Adventures" to "My Adventure World".
+
+MAP BEHAVIOUR
+- MapLibre renders OpenStreetMap tiles.
+- Completed routes draw as Adventure Builder orange lines.
+- Start/finish markers are separate and clickable.
+- The map automatically fits to the user's completed journeys.
+- If an older journey only has one saved coordinate, it remains visible as a pin rather than inventing a route.
+- No fake/sample user journey data is inserted.
+
+FILES CHANGED
+- adventures.html
+- css/adventure-hub.css
+- js/adventure-hub-store.js
+- js/adventure-hub-map.js
+- js/adventure-hub.js
+- js/navigation-shell.js
+
+CHECKS
+- JavaScript syntax checks passed for all changed JS modules.
+- Required page elements/selectors verified.
+- Login/register modal retained.
+- Terms & Conditions and Privacy Policy links retained.
+- Existing W73 registration/accessibility files preserved.
+- No original W73 file was deleted or renamed.

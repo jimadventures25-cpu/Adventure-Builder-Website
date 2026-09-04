@@ -1,0 +1,14 @@
+Adventure Builder Website W76.4 — Foraging Photo Fix
+
+Base: W76.3 Foraging Risk Warnings
+Scope: broken foraging thumbnail photographs only.
+
+Replaced broken/guessed Wikimedia Commons filenames with verified Commons file-page photographs for:
+- Bilberry
+- Common Sorrel
+- Sweet Cicely
+- Common Hogweed
+- Pine Needles (selected pines; Scots pine photograph)
+
+No layout, safety lock, risk warning, plant text, or other website functionality changed.
+JavaScript syntax check: PASS.

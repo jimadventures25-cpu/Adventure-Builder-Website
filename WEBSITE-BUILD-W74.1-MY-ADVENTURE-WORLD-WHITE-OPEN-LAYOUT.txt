@@ -1,0 +1,35 @@
+Adventure Builder Website — W74.1
+My Adventure World: White / Open Layout
+Date: 2026-09-04
+
+Built from W74 My Adventure World.
+
+Changes
+- White is now the main page/background colour to match the rest of the Adventure Builder website.
+- Removed the large dark outer container and dark card-heavy styling.
+- Removed the duplicate page heading above the My Adventure World hero.
+- Hero now sits naturally on the page with typography, spacing and a simple divider.
+- Next Adventure and Quick Actions are open page sections rather than boxed cards.
+- Quick Actions are clean text/action rows instead of individual tiles.
+- Adventure World Map remains the centrepiece with only the map itself framed where functionally useful.
+- Journey totals use open statistics with divider lines instead of four separate cards.
+- Completed journey rows are clean list rows with dividers, not boxed items.
+- Upcoming/saved plans are open list rows.
+- Journal/Passport/Gallery/Community links remain available without heavy card styling.
+- Journey detail dialog remains a functional panel, but is now white and visually consistent.
+- Adventure Builder orange remains the main action/highlight colour.
+
+Safety / Function
+- Existing My Adventure World data hooks preserved.
+- Existing completed-route map logic preserved.
+- Existing Journey Recording integration structure preserved.
+- Existing auth/account flow untouched.
+- No user data deleted or renamed.
+
+Checks
+PASS — adventure-hub.js syntax
+PASS — adventure-hub-map.js syntax
+PASS — adventure-hub-store.js syntax
+PASS — Adventure World map hook present
+PASS — next-adventure hook present
+PASS — white/open layout stylesheet present

@@ -1,0 +1,8 @@
+W77 Useful Outdoor Knots
+- Rebuilt Knots tab only
+- 20 knot types
+- Full-width selector matching Foraging Guide direction
+- Reference images + step-by-step instructions
+- Best-use and limitation/safety guidance
+- RNLI and Animated Knots trusted reference links
+- No changes to Foraging safety lock or other Outdoor Skills tabs

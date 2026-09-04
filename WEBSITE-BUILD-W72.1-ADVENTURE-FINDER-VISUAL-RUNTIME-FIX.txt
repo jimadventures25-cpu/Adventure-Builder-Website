@@ -1,0 +1,17 @@
+Adventure Builder Website — W72.1 Adventure Finder Visual + Runtime Fix
+Date: 2026-09-03
+
+Fixes from W72 user video:
+1. Adventure Finder is excluded from the generic compact-page visual normaliser so its scenic hero is no longer replaced by a grey/light strip.
+2. data-adventure-finder now wraps the whole Finder page, including controls, results and map. This fixes the JavaScript scope error that prevented result cards and the MapLibre map from initialising.
+3. Added page-specific Finder visual overrides to restore the approved scenic hero, white search strip, orange CTA, dark results panel and large map layout.
+4. Tightened desktop widths, spacing, split view and responsive behaviour.
+5. Kept existing Finder search/ranking/accessibility/My Van/save/Trip Planner behaviour.
+
+Validation:
+- JavaScript syntax: PASS
+- Exactly one data-adventure-finder root: PASS
+- Results container inside Finder root: PASS
+- Map container inside Finder root: PASS
+- Duplicate HTML IDs: PASS
+- ZIP integrity: PASS (after packaging)

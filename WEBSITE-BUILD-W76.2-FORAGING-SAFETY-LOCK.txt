@@ -1,0 +1,16 @@
+Adventure Builder Website W76.2 — Foraging Safety Lock + Compact Guide
+
+Scope: Foraging Guide tab only.
+
+Changes:
+- Foraging Guide is locked until the user accepts the Foraging Safety & Sources agreement.
+- Unlock button remains disabled until the checkbox is ticked.
+- Acceptance is stored on the device with a version identifier and timestamp.
+- Changing FORAGING_TERMS_VERSION will require fresh acceptance.
+- Permanent Safety & Sources button reopens the notice after acceptance.
+- Notice includes trusted sources, health/safety guidance, user-responsibility wording, and link to full Terms & Conditions.
+- If the user does not agree, they are returned to Survival Basics and Foraging remains locked.
+- Foraging heading and spacing tightened; large trusted-sources strip removed in favour of the compact popup.
+- Existing 30 plant guides and W76.1 full-width layout retained.
+
+Important: disclaimer wording is product copy, not legal advice; final public Terms should be professionally reviewed.
