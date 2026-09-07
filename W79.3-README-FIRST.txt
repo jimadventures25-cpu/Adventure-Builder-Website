@@ -1,0 +1,31 @@
+Adventure Builder Website — W79.3 Outdoor Skills Sleek Page Rebuild
+
+BASE: W79.2 Outdoor Skills Popup Rebuild
+PURPOSE: Make the Outdoor Skills area feel like a natural part of the main Adventure Builder website while preserving the W79.2 popup interaction and safety systems.
+
+COPY INTO THE CLEAN GITHUB REPOSITORY ONLY:
+1. outdoor-skills.html -> repository root
+2. css/outdoor-knowledge.css -> repository css folder
+
+This patch intentionally changes ONLY 2 website files. The W79.2 JavaScript is unchanged.
+
+MAIN CHANGES
+- Removed the large dark Outdoor Skills hero/banner.
+- Replaced it with a clean, open white page introduction.
+- Renamed the visible page heading to “Outdoor Skills & Nature Guide”.
+- Reworked the main section navigation into a sleek underline tab row rather than pill buttons.
+- Added a clear but unobtrusive “General guide only” notice.
+- States that the area is not professional training, hands-on instruction, or a guarantee of safe/correct identification.
+- Retained specific Foraging, Knots, Nature and Fishing safety information but visually reduced the banner/card feeling.
+- Kept the W79.2 click-to-open popup system intact.
+- Kept existing safety locks and source links intact.
+- Responsive mobile styling included.
+
+TESTS
+- JavaScript syntax: PASS (unchanged W79.2 JS)
+- Duplicate HTML IDs: PASS
+- Git conflict markers: 0
+- New intro and guide-only notice: PASS
+
+EXPECTED GITHUB DESKTOP RESULT AFTER COPYING:
+2 changed files.
