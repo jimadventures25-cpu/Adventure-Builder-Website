@@ -343,3 +343,25 @@ body[data-page="outdoor-skills"] .abok-walk-card{
   body[data-page="outdoor-skills"] .abok-tabs button{padding:13px 0 11px;font-size:.84rem}
   body[data-page="outdoor-skills"] .abok-guide-notice{font-size:.83rem}
 }
+
+/* W80 — centred introduction, colour-coded guide tabs and Smart Camera */
+body[data-page="outdoor-skills"] .abok-page-intro{display:block;text-align:center;padding-top:10px}
+body[data-page="outdoor-skills"] .abok-page-intro-copy{max-width:900px;margin:0 auto}
+body[data-page="outdoor-skills"] .abok-page-intro p{margin:12px auto 0}
+body[data-page="outdoor-skills"] .abok-page-intro .abok-offline{display:inline-block;margin:14px auto 0}
+body[data-page="outdoor-skills"] .abok-guide-notice{max-width:900px;margin:16px auto 8px;text-align:center;grid-template-columns:1fr}
+body[data-page="outdoor-skills"] .abok-guide-notice-icon{margin:0 auto}
+body[data-page="outdoor-skills"] .abok-tabs{justify-content:center;gap:30px}
+body[data-page="outdoor-skills"] .abok-tabs .tab-survival{--tab-accent:#e8751a}
+body[data-page="outdoor-skills"] .abok-tabs .tab-foraging{--tab-accent:#2f8a4b}
+body[data-page="outdoor-skills"] .abok-tabs .tab-knots{--tab-accent:#3977b8}
+body[data-page="outdoor-skills"] .abok-tabs .tab-nature{--tab-accent:#567c3d}
+body[data-page="outdoor-skills"] .abok-tabs .tab-fishing{--tab-accent:#287da8}
+body[data-page="outdoor-skills"] .abok-tabs button:hover{color:var(--tab-accent,#222725)}
+body[data-page="outdoor-skills"] .abok-tabs button[aria-selected="true"]{color:var(--tab-accent,#171a18)}
+body[data-page="outdoor-skills"] .abok-tabs button[aria-selected="true"]::after{background:var(--tab-accent,#f47b20)}
+.abok-smart-camera{margin:4px 0 34px;padding:22px 0;border-bottom:1px solid #e5e9e6;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
+.abok-smart-camera-copy h2{margin:2px 0 5px;font-size:clamp(1.35rem,2.2vw,1.9rem)}.abok-smart-camera-copy p{margin:0;color:#626a66;line-height:1.5;max-width:760px}
+.abok-camera-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.abok-camera-btn{border:1px solid #d9dfdb;background:#fff;color:#26302b;border-radius:10px;padding:10px 14px;font:inherit;font-weight:800;cursor:pointer}.abok-camera-btn.primary{background:#202b25;color:#fff;border-color:#202b25}
+.abok-camera-workspace{grid-column:1/-1;display:grid;grid-template-columns:minmax(220px,.75fr) minmax(300px,1.25fr);gap:22px;padding-top:18px;border-top:1px solid #edf0ee}.abok-camera-workspace[hidden]{display:none!important}.abok-camera-preview img{display:block;width:100%;max-height:360px;object-fit:contain;background:#f5f7f5;border-radius:12px}.abok-camera-result{display:grid;gap:10px;align-content:start}.abok-camera-result h3{margin:0}.abok-camera-result label{display:grid;gap:5px;font-weight:750}.abok-camera-result input,.abok-camera-result select{width:100%;border:1px solid #ccd5cf;border-radius:9px;padding:10px 11px;background:#fff;font:inherit}.abok-camera-safety{margin:0;padding:9px 0;border-bottom:1px solid #ecefec;color:#6a5142}.abok-camera-matches{display:grid;gap:8px}.abok-camera-match{display:flex;justify-content:space-between;gap:14px;align-items:center;text-align:left;border:1px solid #e0e5e2;background:#fff;border-radius:10px;padding:10px 12px;cursor:pointer}.abok-camera-match span{color:#66706a;font-size:.84rem}.abok-camera-empty{color:#626a66;font-size:.9rem}
+@media(max-width:760px){body[data-page="outdoor-skills"] .abok-tabs{justify-content:flex-start}.abok-smart-camera{grid-template-columns:1fr}.abok-camera-actions{justify-content:flex-start}.abok-camera-workspace{grid-template-columns:1fr}}
