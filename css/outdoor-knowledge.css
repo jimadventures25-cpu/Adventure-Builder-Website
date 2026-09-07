@@ -365,3 +365,24 @@ body[data-page="outdoor-skills"] .abok-tabs button[aria-selected="true"]::after{
 .abok-camera-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.abok-camera-btn{border:1px solid #d9dfdb;background:#fff;color:#26302b;border-radius:10px;padding:10px 14px;font:inherit;font-weight:800;cursor:pointer}.abok-camera-btn.primary{background:#202b25;color:#fff;border-color:#202b25}
 .abok-camera-workspace{grid-column:1/-1;display:grid;grid-template-columns:minmax(220px,.75fr) minmax(300px,1.25fr);gap:22px;padding-top:18px;border-top:1px solid #edf0ee}.abok-camera-workspace[hidden]{display:none!important}.abok-camera-preview img{display:block;width:100%;max-height:360px;object-fit:contain;background:#f5f7f5;border-radius:12px}.abok-camera-result{display:grid;gap:10px;align-content:start}.abok-camera-result h3{margin:0}.abok-camera-result label{display:grid;gap:5px;font-weight:750}.abok-camera-result input,.abok-camera-result select{width:100%;border:1px solid #ccd5cf;border-radius:9px;padding:10px 11px;background:#fff;font:inherit}.abok-camera-safety{margin:0;padding:9px 0;border-bottom:1px solid #ecefec;color:#6a5142}.abok-camera-matches{display:grid;gap:8px}.abok-camera-match{display:flex;justify-content:space-between;gap:14px;align-items:center;text-align:left;border:1px solid #e0e5e2;background:#fff;border-radius:10px;padding:10px 12px;cursor:pointer}.abok-camera-match span{color:#66706a;font-size:.84rem}.abok-camera-empty{color:#626a66;font-size:.9rem}
 @media(max-width:760px){body[data-page="outdoor-skills"] .abok-tabs{justify-content:flex-start}.abok-smart-camera{grid-template-columns:1fr}.abok-camera-actions{justify-content:flex-start}.abok-camera-workspace{grid-template-columns:1fr}}
+
+
+/* W81 — Outdoor Skills multi-page structure */
+body[data-page="outdoor-skills"] .abok-landing-intro{max-width:920px;margin:0 auto;text-align:center;display:block;padding-bottom:18px}
+body[data-page="outdoor-skills"] .abok-landing-intro .abok-page-intro-copy{max-width:820px;margin:auto}
+.abok-landing-notice{max-width:900px;margin:0 auto 24px;text-align:center;grid-template-columns:auto 1fr}
+.abok-guide-launcher{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:8px 0 28px}
+.abok-guide-launcher a{--guide:#e8751a;text-decoration:none;color:#171a18;border-top:3px solid var(--guide);border-bottom:1px solid #e6e9e7;padding:16px 10px 15px;display:flex;flex-direction:column;gap:5px;min-width:0;transition:.18s ease}
+.abok-guide-launcher a:hover{transform:translateY(-2px);background:#fafbfa}.abok-guide-launcher span{font-weight:850;color:var(--guide);font-size:1rem}.abok-guide-launcher small{color:#66706a;line-height:1.35}
+.abok-guide-launcher .foraging{--guide:#2f8a4b}.abok-guide-launcher .knots{--guide:#3977b8}.abok-guide-launcher .nature{--guide:#567c3d}.abok-guide-launcher .fishing{--guide:#287da8}
+body[data-page="outdoor-skills"] .abok-smart-camera{margin-top:4px;padding:20px 0 0;border-top:1px solid #e5e9e6;border-bottom:0}
+body[data-outdoor-section] .abok-shell{padding-top:20px}
+.abok-subpage-top{display:flex;align-items:center;gap:24px;border-bottom:1px solid #e4e8e5;padding-bottom:12px;margin-bottom:18px;min-width:0}
+.abok-back-guides{flex:0 0 auto;text-decoration:none;color:#222;font-weight:800;font-size:.9rem}.abok-back-guides:hover{text-decoration:underline}
+.abok-subpage-nav{display:flex;align-items:center;gap:20px;overflow-x:auto;white-space:nowrap;scrollbar-width:thin;margin-left:auto}
+.abok-subpage-nav a{--guide:#e8751a;text-decoration:none;color:#68716c;font-size:.84rem;font-weight:760;padding:8px 0 7px;border-bottom:2px solid transparent}
+.abok-subpage-nav a.foraging{--guide:#2f8a4b}.abok-subpage-nav a.knots{--guide:#3977b8}.abok-subpage-nav a.nature{--guide:#567c3d}.abok-subpage-nav a.fishing{--guide:#287da8}.abok-subpage-nav a.active{color:var(--guide);border-color:var(--guide)}
+body[data-outdoor-section] .abok-panel{padding-top:0!important;margin-top:0!important}
+body[data-outdoor-section] .section-heading{margin-top:0!important;padding-top:4px!important}
+@media(max-width:980px){.abok-guide-launcher{grid-template-columns:repeat(2,minmax(0,1fr))}.abok-subpage-top{align-items:flex-start;flex-direction:column;gap:8px}.abok-subpage-nav{width:100%;margin-left:0}}
+@media(max-width:600px){.abok-guide-launcher{grid-template-columns:1fr}.abok-guide-launcher a{padding:13px 6px}.abok-subpage-nav{gap:16px}}
