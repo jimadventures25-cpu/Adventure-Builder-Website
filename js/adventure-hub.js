@@ -17,5 +17,7 @@ $('[data-dialog-close]')?.addEventListener('click',()=>$("[data-adventure-dialog
 function render(){nextCard();stats();journeyRows();plannedRows();const done=store.completed();window.AdventureHubMap?.draw(done);$('[data-map-status]').textContent=done.length?`${done.length} completed adventure${done.length===1?'':'s'} on your world map.`:'Complete an adventure in Adventure Builder and its journey can appear here.'}
 const mapHost=document.getElementById('adventure-hub-map');if(mapHost)window.AdventureHubMap?.init(mapHost,store.completed());
 window.addEventListener('adventurebuilder:journey-completed',e=>{if(!e.detail)return;store.add({...e.detail,status:'completed'});render()});
+window.addEventListener('adventurebuilder:shared-plans-changed',()=>render());
+window.addEventListener('adventurebuilder:shared-sync-status',()=>render());
 render();
 })();
