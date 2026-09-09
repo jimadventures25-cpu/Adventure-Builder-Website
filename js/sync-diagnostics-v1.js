@@ -9,9 +9,11 @@ function localPlans(){try{const v=JSON.parse(localStorage.getItem(KEY)||'[]');re
 function redactId(id){if(!id)return '(none)';const s=String(id);return s.length>12?s.slice(0,8)+'…'+s.slice(-4):s;}
 function reportLine(label,value,kind=''){return `<div class="row ${kind}"><b>${esc(label)}</b><span>${esc(value)}</span></div>`}
 async function client(){
-  const cfg=window.COASTAL_CONFIG||{};
+  if(window.ADVENTURE_BUILDER_AUTH?.client) return window.ADVENTURE_BUILDER_AUTH.client;
+  if(window.ADVENTURE_BUILDER_AUTH_SERVICE?.client) return window.ADVENTURE_BUILDER_AUTH_SERVICE.client;
+  const cfg=window.ADVENTURE_BUILDER_CONFIG||window.COASTAL_CONFIG||{};
   if(!window.supabase?.createClient) throw new Error('Supabase library did not load.');
-  if(!cfg.SUPABASE_URL||!cfg.SUPABASE_PUBLISHABLE_KEY) throw new Error('Supabase config is missing URL or publishable key.');
+  if(!cfg.SUPABASE_URL||!cfg.SUPABASE_PUBLISHABLE_KEY) throw new Error('Adventure Builder Supabase config is missing URL or publishable key.');
   return window.supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storage:window.localStorage}});
 }
 async function run(){

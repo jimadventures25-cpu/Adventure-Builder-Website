@@ -51,10 +51,11 @@
       if (i < 3) await wait(100);
       else break;
     }
-    if (!window.supabase?.createClient || !window.COASTAL_CONFIG?.SUPABASE_URL || !window.COASTAL_CONFIG?.SUPABASE_PUBLISHABLE_KEY) return null;
+    const cfg = window.ADVENTURE_BUILDER_CONFIG || window.COASTAL_CONFIG;
+    if (!window.supabase?.createClient || !cfg?.SUPABASE_URL || !cfg?.SUPABASE_PUBLISHABLE_KEY) return null;
     client = window.supabase.createClient(
-      window.COASTAL_CONFIG.SUPABASE_URL,
-      window.COASTAL_CONFIG.SUPABASE_PUBLISHABLE_KEY,
+      cfg.SUPABASE_URL,
+      cfg.SUPABASE_PUBLISHABLE_KEY,
       { auth: { persistSession:true, autoRefreshToken:true, detectSessionInUrl:true } }
     );
     return client;
@@ -126,10 +127,14 @@
   }
 
   window.AdventureBuilderSharedAdventures = {
-    version: '1.1.0', key: KEY, event: EVENT,
+    version: '1.2.0', key: KEY, event: EVENT,
     getPlans: () => sortPlans(readLocal()), normalise, writeLocal, syncPlans, savePlan, deletePlan
   };
 
+  window.addEventListener('adventurebuilder:auth', e => {
+    if (e.detail?.client) client = e.detail.client;
+    if (e.detail?.user) syncPlans().catch(() => writeLocal(readLocal(), 'auth-sync-failed'));
+  });
   window.addEventListener('storage', e => { if (e.key === KEY) window.dispatchEvent(new CustomEvent(EVENT, { detail:{ source:'storage', plans:sortPlans(readLocal()) } })); });
   const start = () => syncPlans().catch(() => writeLocal(readLocal(), 'sync-failed'));
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once:true }); else start();
