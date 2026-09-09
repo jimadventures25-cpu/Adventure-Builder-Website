@@ -94,7 +94,7 @@
 
       // Push local-only/newer plans after the cloud read, so a website-created plan can never be overwritten by an empty device.
       if (combined.length) {
-        const payload = combined.map(p => ({ user_id:user.id, plan_id:p.id, title:p.name, plan_data:p, updated_at:p.updatedAt }));
+        const payload = combined.map(p => ({ id:p.id, user_id:user.id, plan_id:p.id, title:p.name, plan_data:p, updated_at:p.updatedAt }));
         const { error: upsertError } = await c.from('adventure_plans').upsert(payload, { onConflict:'plan_id' });
         if (upsertError) { status(false, `Plans loaded, but cloud update failed: ${upsertError.message}`, 'upsert-error'); return combined; }
       }
@@ -112,7 +112,7 @@
     const { data: authData } = await c.auth.getUser();
     const user = authData?.user;
     if (!user) return p;
-    const { error } = await c.from('adventure_plans').upsert({ user_id:user.id, plan_id:p.id, title:p.name, plan_data:p, updated_at:p.updatedAt }, { onConflict:'plan_id' });
+    const { error } = await c.from('adventure_plans').upsert({ id:p.id, user_id:user.id, plan_id:p.id, title:p.name, plan_data:p, updated_at:p.updatedAt }, { onConflict:'plan_id' });
     if (error) throw error;
     return p;
   }
@@ -127,7 +127,7 @@
   }
 
   window.AdventureBuilderSharedAdventures = {
-    version: '1.3.0', key: KEY, event: EVENT,
+    version: '1.4.0', key: KEY, event: EVENT,
     getPlans: () => sortPlans(readLocal()), normalise, writeLocal, syncPlans, savePlan, deletePlan
   };
 
