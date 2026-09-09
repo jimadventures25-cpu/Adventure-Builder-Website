@@ -26,21 +26,23 @@
     schemaVersion: Math.max(1, Number(plan.schemaVersion) || 1)
   });
   const sortPlans = rows => rows.map(normalise).sort((a,b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
+  function logicalSignature(raw = {}) {
+    const p = normalise(raw);
+    const stops = (p.stops || []).map(s => ({ name:String(s?.name || '').trim().toLowerCase(), type:String(s?.type || 'Stop').trim().toLowerCase() }));
+    return JSON.stringify({ name:p.name.trim().toLowerCase(), start:p.start.trim().toLowerCase(), destination:p.destination.trim().toLowerCase(), tripType:p.tripType, routeStyle:p.routeStyle, days:p.days, date:p.date, notes:p.notes.trim(), avoid:p.avoid, stops, status:p.status });
+  }
+  function dedupeExact(rows = []) {
+    const keep = new Map(); const duplicates = [];
+    sortPlans(rows).forEach(p => { const sig = logicalSignature(p); if (!keep.has(sig)) keep.set(sig,p); else duplicates.push(p.id); });
+    return { plans:sortPlans([...keep.values()]), duplicateIds:duplicates };
+  }
   function writeLocal(rows, source='local') {
     const plans = sortPlans(rows);
     localStorage.setItem(KEY, JSON.stringify(plans));
     window.dispatchEvent(new CustomEvent(EVENT, { detail: { source, plans } }));
     return plans;
   }
-  function merge(localRows, cloudRows) {
-    const map = new Map();
-    [...localRows, ...cloudRows].forEach(raw => {
-      const p = normalise(raw);
-      const old = map.get(p.id);
-      if (!old || String(p.updatedAt) >= String(old.updatedAt)) map.set(p.id, p);
-    });
-    return sortPlans([...map.values()]);
-  }
+  function merge(localRows, cloudRows) { return dedupeExact([...(localRows || []), ...(cloudRows || [])]).plans; }
   const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
   async function getClient() {
     if (client) return client;
@@ -74,7 +76,7 @@
   async function syncPlans() {
     if (syncing) return syncing;
     syncing = (async () => {
-      const local = sortPlans(readLocal());
+      const local = dedupeExact(readLocal()).plans;
       const c = await getClient();
       if (!c) { status(false, 'Cloud connection is not ready. Your plans on this device are safe.', 'no-client'); return writeLocal(local, 'local-only'); }
       let user;
@@ -91,30 +93,32 @@
       const cloud = (data || []).map(row => normalise({ ...row.plan_data, id:row.plan_id, name:row.title || row.plan_data?.name, updatedAt:row.updated_at }));
       const combined = merge(local, cloud);
       writeLocal(combined, 'cloud-merge');
-
-      // Push local-only/newer plans after the cloud read, so a website-created plan can never be overwritten by an empty device.
       if (combined.length) {
         const payload = combined.map(p => ({ id:p.id, user_id:user.id, plan_id:p.id, title:p.name, plan_data:p, updated_at:p.updatedAt }));
         const { error: upsertError } = await c.from('adventure_plans').upsert(payload, { onConflict:'plan_id' });
         if (upsertError) { status(false, `Plans loaded, but cloud update failed: ${upsertError.message}`, 'upsert-error'); return combined; }
       }
-      status(true, `${combined.length} shared adventure plan${combined.length===1?'':'s'} synced for this account.`, 'ok');
+      const keepBySignature = new Map(combined.map(p => [logicalSignature(p), p.id]));
+      const duplicateCloudIds = cloud.filter(p => keepBySignature.get(logicalSignature(p)) !== p.id).map(p => p.id);
+      if (duplicateCloudIds.length) {
+        const { error: cleanupError } = await c.from('adventure_plans').delete().eq('user_id', user.id).in('plan_id', duplicateCloudIds);
+        if (cleanupError) { status(false, `Plans synced, but duplicate cleanup failed: ${cleanupError.message}`, 'dedupe-error'); return combined; }
+      }
+      status(true, `${combined.length} shared adventure plan${combined.length===1?'':'s'} synced${duplicateCloudIds.length ? `; ${duplicateCloudIds.length} exact duplicate${duplicateCloudIds.length===1?'':'s'} cleaned` : ''}.`, 'ok');
       return combined;
     })().finally(() => { syncing = null; });
     return syncing;
   }
   async function savePlan(raw) {
-    const p = normalise({ ...raw, updatedAt: now() });
-    const rows = readLocal().filter(x => String(x.id) !== p.id);
+    const draft = normalise({ ...raw, updatedAt: now() });
+    const existing = dedupeExact(readLocal()).plans.find(x => logicalSignature(x) === logicalSignature(draft));
+    const p = normalise({ ...draft, id: existing?.id || draft.id, updatedAt: now() });
+    const rows = dedupeExact(readLocal().filter(x => String(x.id) !== p.id)).plans;
     writeLocal([...rows, p], 'save');
-    const c = await getClient();
-    if (!c) return p;
-    const { data: authData } = await c.auth.getUser();
-    const user = authData?.user;
-    if (!user) return p;
+    const c = await getClient(); if (!c) return p;
+    const { data: authData } = await c.auth.getUser(); const user = authData?.user; if (!user) return p;
     const { error } = await c.from('adventure_plans').upsert({ id:p.id, user_id:user.id, plan_id:p.id, title:p.name, plan_data:p, updated_at:p.updatedAt }, { onConflict:'plan_id' });
-    if (error) throw error;
-    return p;
+    if (error) throw error; return p;
   }
   async function deletePlan(id) {
     id = String(id);
@@ -127,8 +131,8 @@
   }
 
   window.AdventureBuilderSharedAdventures = {
-    version: '1.4.0', key: KEY, event: EVENT,
-    getPlans: () => sortPlans(readLocal()), normalise, writeLocal, syncPlans, savePlan, deletePlan
+    version: '1.5.0', key: KEY, event: EVENT,
+    getPlans: () => dedupeExact(readLocal()).plans, normalise, logicalSignature, dedupeExact, writeLocal, syncPlans, savePlan, deletePlan
   };
 
   window.addEventListener('adventurebuilder:auth', e => {
