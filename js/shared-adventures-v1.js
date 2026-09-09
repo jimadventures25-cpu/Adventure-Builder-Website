@@ -41,40 +41,63 @@
     });
     return sortPlans([...map.values()]);
   }
+  const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
   async function getClient() {
     if (client) return client;
-    if (window.COASTAL_CLOUD) return (client = window.COASTAL_CLOUD);
-    if (!window.supabase?.createClient || !window.COASTAL_CONFIG?.SUPABASE_URL) return null;
+    // Prefer the product-wide authenticated client when it is ready.
+    for (let i=0;i<12;i++) {
+      if (window.ADVENTURE_BUILDER_AUTH?.client) return (client = window.ADVENTURE_BUILDER_AUTH.client);
+      if (window.COASTAL_CLOUD) return (client = window.COASTAL_CLOUD);
+      if (i < 3) await wait(100);
+      else break;
+    }
+    if (!window.supabase?.createClient || !window.COASTAL_CONFIG?.SUPABASE_URL || !window.COASTAL_CONFIG?.SUPABASE_PUBLISHABLE_KEY) return null;
     client = window.supabase.createClient(
       window.COASTAL_CONFIG.SUPABASE_URL,
       window.COASTAL_CONFIG.SUPABASE_PUBLISHABLE_KEY,
-      { auth: { persistSession: true, autoRefreshToken: true } }
+      { auth: { persistSession:true, autoRefreshToken:true, detectSessionInUrl:true } }
     );
     return client;
+  }
+  async function currentUser(c) {
+    const { data: sessionData, error: sessionError } = await c.auth.getSession();
+    if (sessionError) throw sessionError;
+    if (sessionData?.session?.user) return sessionData.session.user;
+    const { data: userData, error: userError } = await c.auth.getUser();
+    if (userError) throw userError;
+    return userData?.user || null;
+  }
+  function status(ok, message, code='') {
+    window.dispatchEvent(new CustomEvent('adventurebuilder:shared-sync-status', { detail:{ ok, message, code } }));
   }
   async function syncPlans() {
     if (syncing) return syncing;
     syncing = (async () => {
       const local = sortPlans(readLocal());
       const c = await getClient();
-      if (!c) return writeLocal(local, 'local-only');
-      const { data: authData } = await c.auth.getUser();
-      const user = authData?.user;
-      if (!user) return writeLocal(local, 'signed-out');
-      const { data, error } = await c.from('adventure_plans').select('plan_id,title,plan_data,updated_at').order('updated_at', { ascending: false });
-      if (error) {
-        window.dispatchEvent(new CustomEvent('adventurebuilder:shared-sync-status', { detail: { ok:false, message:error.message } }));
-        return writeLocal(local, 'cloud-error');
-      }
-      const cloud = (data || []).map(row => normalise({ ...row.plan_data, id: row.plan_id, name: row.title || row.plan_data?.name, updatedAt: row.updated_at }));
+      if (!c) { status(false, 'Cloud connection is not ready. Your plans on this device are safe.', 'no-client'); return writeLocal(local, 'local-only'); }
+      let user;
+      try { user = await currentUser(c); } catch (e) { status(false, `Account check failed: ${e.message || 'please sign in again.'}`, 'auth-error'); return writeLocal(local, 'auth-error'); }
+      if (!user) { status(false, 'Sign in to the same Adventure Builder account to sync website and app plans.', 'signed-out'); return writeLocal(local, 'signed-out'); }
+
+      // Pull only this signed-in user's rows. RLS still protects the table as a second layer.
+      const { data, error } = await c.from('adventure_plans')
+        .select('user_id,plan_id,title,plan_data,updated_at')
+        .eq('user_id', user.id)
+        .order('updated_at', { ascending:false });
+      if (error) { status(false, `Plan sync failed: ${error.message}`, 'select-error'); return writeLocal(local, 'cloud-error'); }
+
+      const cloud = (data || []).map(row => normalise({ ...row.plan_data, id:row.plan_id, name:row.title || row.plan_data?.name, updatedAt:row.updated_at }));
       const combined = merge(local, cloud);
       writeLocal(combined, 'cloud-merge');
+
+      // Push local-only/newer plans after the cloud read, so a website-created plan can never be overwritten by an empty device.
       if (combined.length) {
         const payload = combined.map(p => ({ user_id:user.id, plan_id:p.id, title:p.name, plan_data:p, updated_at:p.updatedAt }));
         const { error: upsertError } = await c.from('adventure_plans').upsert(payload, { onConflict:'user_id,plan_id' });
-        if (upsertError) window.dispatchEvent(new CustomEvent('adventurebuilder:shared-sync-status', { detail:{ ok:false, message:upsertError.message } }));
+        if (upsertError) { status(false, `Plans loaded, but cloud update failed: ${upsertError.message}`, 'upsert-error'); return combined; }
       }
-      window.dispatchEvent(new CustomEvent('adventurebuilder:shared-sync-status', { detail:{ ok:true, message:`${combined.length} adventure plan${combined.length===1?'':'s'} available on this device.` } }));
+      status(true, `${combined.length} shared adventure plan${combined.length===1?'':'s'} synced for this account.`, 'ok');
       return combined;
     })().finally(() => { syncing = null; });
     return syncing;
@@ -103,7 +126,7 @@
   }
 
   window.AdventureBuilderSharedAdventures = {
-    version: '1.0.0', key: KEY, event: EVENT,
+    version: '1.1.0', key: KEY, event: EVENT,
     getPlans: () => sortPlans(readLocal()), normalise, writeLocal, syncPlans, savePlan, deletePlan
   };
 
